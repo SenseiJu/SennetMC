@@ -1,0 +1,4 @@
+name: CommsCraft
+main: me.senseiju.commscraft.CommsCraft
+version: ${version}
+api-version: 1.16.3
