@@ -1,0 +1,8 @@
+beta:
+  name: "&e&lBeta"
+  material: BEDROCK
+  rarity: UNIQUE
+  description:
+    - "&7This collectable can only be received"
+    - "&7by players who played during the beta"
+    - "&7testing phase of the server"

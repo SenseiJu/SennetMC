@@ -1,0 +1,9 @@
+PREFIX: "&8&lCommsCraft >"
+
+# Collectables
+COLLECTABLES-CANNOT-FIND-TARGET: "&cCannot find the specified player"
+COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
+COLLECTABLES-TARGET-HAS-COLLECTABLE: "&cTarget already has this collectable"
+COLLECTABLES-TARGET-DOES-NOT-HAVE-COLLECTABLE: "&cTarget does not have this collectable"
+COLLECTABLES-COLLECTABLE-SET: "&aCollectable has been set"
+COLLECTABLES-COLLECTABLE-REMOVED: "&aCollectable has been removed"

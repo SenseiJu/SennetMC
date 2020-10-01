@@ -4,10 +4,9 @@ import com.sun.rowset.CachedRowSetImpl
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.utils.mainScope
+import java.util.*
 
 class Database(plugin: CommsCraft, configPath: String) {
     var source: HikariDataSource
@@ -17,8 +16,8 @@ class Database(plugin: CommsCraft, configPath: String) {
         val config = file.config
         val hikariConfig = HikariConfig()
         hikariConfig.jdbcUrl =
-            "jdbc:mysql://${config.getString("host")}:${config.getInt("port")}/${config.getString("database")}" +
-                    "?autoReconnect=true&allowMultiQueries=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false"
+                "jdbc:mysql://${config.getString("host")}:${config.getInt("port")}/${config.getString("database")}" +
+                        "?autoReconnect=true&allowMultiQueries=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false"
         hikariConfig.username = config.getString("username")
         hikariConfig.password = config.getString("password")
         hikariConfig.connectionTimeout = 8000
@@ -30,43 +29,51 @@ class Database(plugin: CommsCraft, configPath: String) {
     }
 
     private fun createTables() {
-        mainScope.launch {
-            performUpdateQuery("CREATE TABLE IF NOT EXISTS `table_name`(`columns` TEXT);")
-        }
+        updateQuery("CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36));")
+        updateQuery("CREATE TABLE IF NOT EXISTS `collectables`(`uuid` CHAR(36), `collectable_id` TEXT);")
     }
 
-    suspend fun performQuery(q: String, vararg replacements: Any = emptyArray()) : CachedRowSetImpl {
+    suspend fun asyncQuery(q: String, vararg replacements: String = emptyArray()): CachedRowSetImpl {
         return withContext(Dispatchers.IO) {
-            with(source.connection) {
-                val s = prepareStatement(q)
-
-                var i = 1
-                for (replacement in replacements) {
-                    s.setObject(i++, replacement)
-                }
-
-                val set = s.executeQuery()
-
-                val cachedSet = CachedRowSetImpl()
-                cachedSet.populate(set)
-
-                return@with cachedSet
-            }
+            query(q, *replacements)
         }
     }
 
-    suspend fun performUpdateQuery(q: String, vararg replacements: Any = emptyArray()) {
-        withContext(Dispatchers.IO) {
-            with(source.connection) {
-                val s = prepareStatement(q)
+    fun query(q: String, vararg replacements: String = emptyArray()): CachedRowSetImpl {
+        source.connection.use {
+            val s = it.prepareStatement(q)
 
-                var i = 1
-                for (replacement in replacements) {
-                    s.setObject(i++, replacement)
-                }
+            var i = 1
 
-                s.executeUpdate()
+            for (replacement in replacements) {
+                s.setString(i++, replacement)
             }
+
+            val set = s.executeQuery()
+
+            val cachedSet = CachedRowSetImpl()
+            cachedSet.populate(set)
+
+            return cachedSet
+        }
+    }
+
+    suspend fun asyncUpdateQuery(q: String, vararg replacements: String = emptyArray()) {
+        withContext(Dispatchers.IO) {
+            updateQuery(q, *replacements)
+        }
+    }
+
+    fun updateQuery(q: String, vararg replacements: String = emptyArray()) {
+        source.connection.use {
+            val s = it.prepareStatement(q)
+
+            var i = 1
+            for (replacement in replacements) {
+                s.setObject(i++, replacement)
+            }
+
+            s.executeUpdate()
         }
     }
 }
