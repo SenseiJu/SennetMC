@@ -1,0 +1,23 @@
+SMALL:
+  capacity: 1
+  probability: 15
+  low-sell-price: 3
+  max-sell-price: 5
+
+MEDIUM:
+  capacity: 3
+  probability: 7
+  low-sell-price: 6
+  max-sell-price: 9
+  
+LARGE:
+  capacity: 6
+  probability: 3
+  low-sell-price: 13
+  max-sell-price: 18
+  
+OMEGA:
+  capacity: 13
+  probability: 1
+  low-sell-price: 24
+  max-sell-price: 36

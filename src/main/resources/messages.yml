@@ -1,5 +1,9 @@
 PREFIX: "&8&lCommsCraft >"
 
+# Generic messages
+NO-PERMISSION: "&cYou do not have permission to perform this action"
+RELOAD-COMPLETE: "&aReload complete"
+
 # Collectables
 COLLECTABLES-CANNOT-FIND-TARGET: "&cCannot find the specified player"
 COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
@@ -7,3 +11,23 @@ COLLECTABLES-TARGET-HAS-COLLECTABLE: "&cTarget already has this collectable"
 COLLECTABLES-TARGET-DOES-NOT-HAVE-COLLECTABLE: "&cTarget does not have this collectable"
 COLLECTABLES-COLLECTABLE-SET: "&aCollectable has been set"
 COLLECTABLES-COLLECTABLE-REMOVED: "&aCollectable has been removed"
+
+# NPC
+NPC-CANNOT-FIND-NPC-TYPE: "&cCannot find specified NPC type"
+NPC-SPAWN-SUCCESS: "&aSuccessfully spawned &b{npcType}"
+NPC-REMOVE-SUCCESS: "&aSuccessfully removed npc"
+NPC-NO-TARGET-FOUND: "&cNo NPC target found"
+NPC-INVALID-TARGET: "&cThis entity is not a valid NPC"
+
+# Fishmonger NPC
+FISHMONGER-NO-FISH-TO-SELL: "{fishmongerName} &cYou have no fish to sell to me"
+
+# Fishing
+FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continue fishing"
+
+# Speedboat
+SPEEDBOAT-TOGGLE: "&bSpeedboat toggled to {toggle}"
+
+# User
+USER-SAVING-STARTED: "&aSaving user data..."
+USER-SAVING-FINISHED: "&aFinished saving user data"

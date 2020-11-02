@@ -2,31 +2,40 @@ package me.senseiju.commscraft
 
 import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
+import me.senseiju.commscraft.speedboat.events.SpeedboatListener
 import me.senseiju.commscraft.collectables.CollectablesManager
-import me.senseiju.commscraft.collectables.commands.CollectablesCommand
-import me.senseiju.commscraft.collectables.commands.CollectablesRemoveCommand
-import me.senseiju.commscraft.collectables.commands.CollectablesSetCommand
 import me.senseiju.commscraft.datastorage.DataFile
 import me.senseiju.commscraft.datastorage.Database
-import me.senseiju.commscraft.extensions.message
-import me.senseiju.commscraft.utils.ObjectSet
-import org.bukkit.entity.Player
+import me.senseiju.commscraft.extensions.sendConfigMessage
+import me.senseiju.commscraft.fishes.FishManager
+import me.senseiju.commscraft.npcs.NpcManager
+import me.senseiju.commscraft.users.UserManager
 import org.bukkit.plugin.java.JavaPlugin
 
 class CommsCraft : JavaPlugin() {
     val database = Database(this, "database.yml")
 
     val configFile = DataFile(this, "config.yml", true)
-    val collectablesFile = DataFile(this, "collectables.yml", true)
-    private val messagesFile = DataFile(this, "messages.yml", true)
+    val messagesFile = DataFile(this, "messages.yml", true)
 
-    private lateinit var commandManager: CommandManager
+    lateinit var commandManager: CommandManager
     lateinit var collectablesManager: CollectablesManager
+    lateinit var npcManager: NpcManager
+    lateinit var userManager: UserManager
+    lateinit var fishManager: FishManager
 
     override fun onEnable() {
-        collectablesManager = CollectablesManager(this)
+        commandManager = CommandManager(this)
+        commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
 
-        registerCommands()
+        collectablesManager = CollectablesManager(this)
+        npcManager = NpcManager(this)
+        fishManager = FishManager(this)
+        userManager = UserManager(this)
+
+        userManager.fetchUsers()
+
+        SpeedboatListener(this)
     }
 
     override fun onDisable() {
@@ -35,27 +44,18 @@ class CommsCraft : JavaPlugin() {
                 player.closeInventory()
             }
         }
+
+        userManager.saveUsersTask.cancel()
+        userManager.saveUsers()
     }
 
-    private fun registerCommands() {
-        commandManager = CommandManager(this);
+    fun reload() {
+        configFile.reload()
+        messagesFile.reload()
 
-        commandManager.register(CollectablesCommand(this))
-        commandManager.register(CollectablesSetCommand(this))
-        commandManager.register(CollectablesRemoveCommand(this))
-    }
-
-    fun sendMessage(player: Player, messageName: String, prefix: Boolean = true, vararg replacements: ObjectSet = emptyArray()) {
-        var message = messagesFile.config.getString(messageName, "Undefined message for '$messageName'")!!
-
-        for (replacement in replacements) {
-            message = message.replace(replacement.any1.toString(), replacement.any2.toString())
-        }
-
-        if (prefix) {
-            message = "${messagesFile.config.getString("PREFIX", "&8&lCommsCraft >")} $message"
-        }
-
-        player.message(message)
+        collectablesManager.reload()
+        npcManager.reload()
+        fishManager.reload()
+        userManager.reload()
     }
 }

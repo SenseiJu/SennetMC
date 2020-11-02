@@ -5,15 +5,15 @@ import org.bukkit.configuration.file.YamlConfiguration
 import java.io.File
 
 class DataFile(private val plugin: CommsCraft, private val path: String, private val hasDefault: Boolean = false) {
-    private var file: File = File("${plugin.dataFolder}/${path}")
+    private lateinit var file: File
 
     lateinit var config: YamlConfiguration
 
-    init {
-        load()
-    }
+    init { reload() }
 
-    fun load() {
+    fun reload() {
+        file = File("${plugin.dataFolder}/${path}")
+
         if (!file.exists()) {
             plugin.dataFolder.mkdirs()
             if (hasDefault) {

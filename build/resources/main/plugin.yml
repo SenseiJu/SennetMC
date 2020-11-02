@@ -2,3 +2,8 @@ name: CommsCraft
 main: me.senseiju.commscraft.CommsCraft
 version: 0.0.0
 api-version: 1.16
+
+depend:
+  - Citizens
+  - PlaceholderAPI
+  - ProtocolLib

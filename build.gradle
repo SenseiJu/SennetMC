@@ -11,6 +11,9 @@ repositories {
     mavenLocal()
     maven { url "https://papermc.io/repo/repository/maven-public/" }
     maven { url "https://repo.citizensnpcs.co/" }
+    maven { url "https://jitpack.io" }
+    maven { url "https://repo.extendedclip.com/content/repositories/placeholderapi/" }
+    maven { url "https://repo.dmulloy2.net/nexus/repository/public/" }
 }
 
 dependencies {
@@ -22,6 +25,10 @@ dependencies {
     implementation "me.mattstudios.utils:matt-framework-gui:2.0.2"
     implementation "me.mattstudios.utils:matt-framework:1.4"
     implementation "net.citizensnpcs:citizens:2.0.27-SNAPSHOT"
+    implementation "net.luckperms:api:5.1"
+    implementation "com.github.MilkBowl:VaultAPI:1.7"
+    compileOnly "me.clip:placeholderapi:2.10.9"
+    compileOnly "com.comphenix.protocol:ProtocolLib:4.5.0"
 
     implementation "com.zaxxer:HikariCP:3.4.5"
 }
