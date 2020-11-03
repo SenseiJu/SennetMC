@@ -4,10 +4,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import me.mattstudios.mf.base.CommandManager
-import me.mattstudios.mf.base.ParameterHandler
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.fishes.FishCaughtTableName
 import me.senseiju.commscraft.users.events.PlayerJoinListener
 import me.senseiju.commscraft.users.placeholders.UserPlaceholderExpansion
 import me.senseiju.commscraft.users.tasks.SaveUsersTask
@@ -38,34 +36,32 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
         val userSet = plugin.database.query("SELECT * FROM `users`;")
         while (userSet.next()) {
             val uuid = UUID.fromString(userSet.getString("uuid"))
-            val maxFishCapacity = userSet.getInt("max_fish_capacity")
-            val fishCaughtMap = plugin.fishManager.fetchPlayersFishCaught(FishCaughtTableName.FISH_CAUGHT, uuid)
-            val totalFishCaughtMap = plugin.fishManager.fetchPlayersFishCaught(FishCaughtTableName.TOTAL_FISH_CAUGHT, uuid)
+            val maxFishCapacity = userSet.getInt("fish_capacity_upgrades")
+            val speedboatUpgrades = userSet.getInt("speedboat_upgrades")
+            val fishCaughtMap = plugin.fishManager.fetchPlayersFishCaught(uuid)
 
-            userMap[uuid] = User(uuid, maxFishCapacity, fishCaughtMap, totalFishCaughtMap)
+            userMap[uuid] = User(uuid, fishCaughtMap, maxFishCapacity, speedboatUpgrades)
         }
     }
 
     fun saveUsers() {
         for ((uuid, user) in userMap) {
-            plugin.database.updateQuery("UPDATE `users` SET `max_fish_capacity`=? WHERE `uuid`=?",
-                    user.maxFishCapacity, uuid.toString())
-            plugin.fishManager.updatePlayersFishCaught(FishCaughtTableName.FISH_CAUGHT, uuid, user.currentFishCaught)
-            plugin.fishManager.updatePlayersFishCaught(FishCaughtTableName.TOTAL_FISH_CAUGHT, uuid, user.totalFishCaught)
+            plugin.database.updateQuery("UPDATE `users` SET `fish_capacity_upgrades`=?, `speedboat_upgrades`=? WHERE `uuid`=?",
+                    user.fishCapacityUpgrades, user.speedboatUpgrades, uuid.toString())
+            plugin.fishManager.updatePlayersFishCaught(uuid, user.fishCaught)
         }
     }
 
     fun createNewUser(uuid: UUID) {
         if (!userMap.containsKey(uuid)) {
-            val user = User(uuid, configFile.config.getInt("starting-fish-capacity", 30),
-                    plugin.fishManager.createEmptyFishCaughtMap(), plugin.fishManager.createEmptyFishCaughtMap())
+            val user = User(uuid, plugin.fishManager.createEmptyFishCaughtMap())
             userMap[uuid] = user
 
             defaultScope.launch {
                 withContext(Dispatchers.IO) {
-                    plugin.database.asyncUpdateQuery("INSERT INTO `users`(`uuid`, `max_fish_capacity`) VALUES(?,?);",
-                            uuid.toString(), user.maxFishCapacity)
-                    plugin.fishManager.insertPlayersFishCaught(uuid);
+                    plugin.database.asyncUpdateQuery("INSERT INTO `users`(`uuid`, `fish_capacity_upgrades`, `speedboat_upgrades`) " +
+                            "VALUES(?,?,?);", uuid.toString(), user.fishCapacityUpgrades, user.speedboatUpgrades)
+                    plugin.fishManager.insertPlayersFishCaught(uuid)
                 }
             }
         }

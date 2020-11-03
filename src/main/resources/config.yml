@@ -1,5 +1,6 @@
 user-save-interval: 120
 
-speedboat-speed-multiplier: 1.02
+speedboat-speed-upgrade-increment: 0.001
 
-starting-fish-capacity: 30
+fishes-starting-fish-capacity: 30
+fishes-upgrade-increment: 5

@@ -5,7 +5,8 @@ import me.senseiju.commscraft.datastorage.DataFile
 import org.bukkit.plugin.java.JavaPlugin
 
 enum class NpcType(path: String) {
-    FISHMONGER("npc/fishmonger.yml");
+    FISHMONGER("npc/fishmonger.yml"),
+    MERCHANT("npc/merchant.yml");
 
     val dataFile = DataFile(JavaPlugin.getPlugin(CommsCraft::class.java), path, true)
 }

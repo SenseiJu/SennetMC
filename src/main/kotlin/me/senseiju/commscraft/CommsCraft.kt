@@ -4,6 +4,7 @@ import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
 import me.senseiju.commscraft.speedboat.events.SpeedboatListener
 import me.senseiju.commscraft.collectables.CollectablesManager
+import me.senseiju.commscraft.commands.ReloadCommand
 import me.senseiju.commscraft.datastorage.DataFile
 import me.senseiju.commscraft.datastorage.Database
 import me.senseiju.commscraft.extensions.sendConfigMessage
@@ -27,6 +28,7 @@ class CommsCraft : JavaPlugin() {
     override fun onEnable() {
         commandManager = CommandManager(this)
         commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
+        commandManager.register(ReloadCommand(this))
 
         collectablesManager = CollectablesManager(this)
         npcManager = NpcManager(this)
@@ -46,7 +48,6 @@ class CommsCraft : JavaPlugin() {
         }
 
         userManager.saveUsersTask.cancel()
-        userManager.saveUsers()
     }
 
     fun reload() {

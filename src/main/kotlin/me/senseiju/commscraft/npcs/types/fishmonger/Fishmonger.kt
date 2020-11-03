@@ -3,21 +3,16 @@ package me.senseiju.commscraft.npcs.types.fishmonger
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.sendConfigMessage
-import me.senseiju.commscraft.fishes.FishType
-import me.senseiju.commscraft.npcs.types.BaseNpc
+import me.senseiju.commscraft.npcs.BaseNpc
 import me.senseiju.commscraft.npcs.types.NpcType
 import me.senseiju.commscraft.utils.ObjectSet
 import net.citizensnpcs.api.CitizensAPI
 import net.citizensnpcs.api.event.NPCRightClickEvent
-import net.citizensnpcs.api.npc.NPC
-import net.citizensnpcs.npc.skin.Skin
-import net.citizensnpcs.npc.skin.SkinnableEntity
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Location
 import org.bukkit.Sound
 import org.bukkit.entity.EntityType
 import org.bukkit.event.EventHandler
-import java.lang.Math.round
 
 class Fishmonger(private val plugin: CommsCraft) : BaseNpc {
     private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
@@ -45,11 +40,11 @@ class Fishmonger(private val plugin: CommsCraft) : BaseNpc {
         val user = plugin.userManager.userMap[e.clicker.uniqueId] ?: return
 
         var totalSellPrice = 0.0
-        for ((fishType, amount) in user.currentFishCaught) {
-            val sellPrice = fishType.selectRandomSellPrice() * amount
+        for ((fishType, map) in user.fishCaught) {
+            val sellPrice = fishType.selectRandomSellPrice() * map.getOrDefault("current", 0)
             totalSellPrice += "%.2f".format(sellPrice).toDouble()
 
-            user.currentFishCaught[fishType] = 0
+            map["current"] = 0
         }
         econ?.depositPlayer(e.clicker, totalSellPrice)
 

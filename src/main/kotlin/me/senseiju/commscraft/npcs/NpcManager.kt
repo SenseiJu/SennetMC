@@ -8,17 +8,18 @@ import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.npcs.commands.RemoveNpcCommand
 import me.senseiju.commscraft.npcs.commands.SpawnNpcCommand
-import me.senseiju.commscraft.npcs.types.BaseNpc
 import me.senseiju.commscraft.npcs.types.NpcType
 import me.senseiju.commscraft.npcs.types.NpcType.FISHMONGER
+import me.senseiju.commscraft.npcs.types.NpcType.MERCHANT
 import me.senseiju.commscraft.npcs.types.fishmonger.Fishmonger
-import org.bukkit.plugin.PluginManager
+import me.senseiju.commscraft.npcs.types.merchant.Merchant
 
 class NpcManager(private val plugin: CommsCraft) : BaseManager {
     val npcMap = HashMap<NpcType, BaseNpc>()
 
     init {
         npcMap[FISHMONGER] = Fishmonger(plugin)
+        npcMap[MERCHANT] = Merchant(plugin)
 
         registerCommandParameters(plugin.commandManager.parameterHandler)
         registerCommands(plugin.commandManager)

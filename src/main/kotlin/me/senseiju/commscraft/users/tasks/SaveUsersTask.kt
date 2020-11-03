@@ -13,6 +13,16 @@ class SaveUsersTask(private val plugin: CommsCraft, private val userManager: Use
     }
 
     override fun run() {
+        save()
+    }
+
+    override fun cancel() {
+        super.cancel()
+
+        save()
+    }
+
+    private fun save() {
         plugin.server.consoleSender.sendConfigMessage("USER-SAVING-STARTED")
 
         userManager.saveUsers()

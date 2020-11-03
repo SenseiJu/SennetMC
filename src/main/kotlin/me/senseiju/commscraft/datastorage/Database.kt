@@ -28,12 +28,11 @@ class Database(plugin: CommsCraft, configPath: String) {
     }
 
     private fun createTables() {
-        updateQuery("CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36) NOT NULL, `max_fish_capacity` INT, UNIQUE(`uuid`));")
+        updateQuery("CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36) NOT NULL, `fish_capacity_upgrades` INT, " +
+                "`speedboat_upgrades` INT, UNIQUE(`uuid`));")
 
-        updateQuery("CREATE TABLE IF NOT EXISTS `fish_caught`(`uuid` CHAR(36) NOT NULL, `fish_type` CHAR(255) NOT NULL, `amount` INT, " +
-                "UNIQUE KEY `key_uuid_fish_type`(`uuid`, `fish_type`));")
-        updateQuery("CREATE TABLE IF NOT EXISTS `total_fish_caught`(`uuid` CHAR(36) NOT NULL, `fish_type` CHAR(255) NOT NULL, " +
-                "`amount` INT, UNIQUE KEY `key_uuid_fish_type`(`uuid`, `fish_type`));")
+        updateQuery("CREATE TABLE IF NOT EXISTS `fish_caught`(`uuid` CHAR(36) NOT NULL, `fish_type` CHAR(255) NOT NULL, " +
+                "`current` INT, `total` INT, UNIQUE KEY `key_uuid_fish_type`(`uuid`, `fish_type`));")
 
         updateQuery("CREATE TABLE IF NOT EXISTS `collectables`(`uuid` CHAR(36) NOT NULL, `collectable_id` CHAR(255) NOT NULL, " +
                 "UNIQUE KEY `key_uuid_collectable_id`(`uuid`, `collectable_id`));")

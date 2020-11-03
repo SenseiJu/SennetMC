@@ -6,6 +6,7 @@ import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.fishes.events.PlayerFishingListener
 import java.util.*
+import kotlin.collections.HashMap
 
 class FishManager(private val plugin: CommsCraft) : BaseManager {
 
@@ -22,37 +23,47 @@ class FishManager(private val plugin: CommsCraft) : BaseManager {
         FishType.dataFile.reload()
     }
 
-    fun fetchPlayersFishCaught(tableName: FishCaughtTableName, uuid: UUID) : EnumMap<FishType, Int> {
-        val set = plugin.database.query("SELECT * FROM `{tableName}` WHERE `uuid`=?;"
-                .replace("{tableName}", tableName.toString()), uuid.toString())
+    fun fetchPlayersFishCaught(uuid: UUID): EnumMap<FishType, HashMap<String, Int>> {
+        val set = plugin.database.query("SELECT * FROM `fish_caught` WHERE `uuid`=?;", uuid.toString())
 
-        val map: EnumMap<FishType, Int> = EnumMap(FishType::class.java)
+        val fishCaught: EnumMap<FishType, HashMap<String, Int>> = createEmptyFishCaughtMap()
         while (set.next()) {
-            map[FishType.valueOf(set.getString("fish_type"))] = set.getInt("amount")
+            val fishType = FishType.valueOf(set.getString("fish_type"))
+            val map = fishCaught[fishType]
+
+            map?.set("current", map.getOrDefault("current", 0).plus(set.getInt("current")))
+            map?.set("total", map.getOrDefault("total", 0).plus(set.getInt("total")))
         }
 
-        return map
+        return fishCaught
     }
 
-    fun updatePlayersFishCaught(tableName: FishCaughtTableName, uuid: UUID, fishCaughtMap: EnumMap<FishType, Int>) {
-        for ((fishType, amount) in fishCaughtMap) {
-            plugin.database.updateQuery("UPDATE `{tableName}` SET `amount`=? WHERE `uuid`=? AND `fish_type`=?"
-                    .replace("{tableName}", tableName.toString()), amount, uuid.toString(), fishType.toString())
+    fun updatePlayersFishCaught(uuid: UUID, fishCaughtMap: EnumMap<FishType, HashMap<String, Int>>) {
+        for ((fishType, map) in fishCaughtMap) {
+            plugin.database.updateQuery("UPDATE `fish_caught` SET `current`=?, `total`=? WHERE `uuid`=? AND `fish_type`=?",
+                    map.getOrDefault("current", 0),  map.getOrDefault("total", 0), uuid.toString(),
+                    fishType.toString())
         }
     }
 
     suspend fun insertPlayersFishCaught(uuid: UUID) {
-        for (tableName in FishCaughtTableName.values()) {
-            for (fishType in FishType.values()) {
-                plugin.database.asyncUpdateQuery("INSERT INTO `{tableName}`(`uuid`, `fish_type`, `amount`) VALUES(?,?,?);"
-                        .replace("{tableName}", tableName.toString()), uuid.toString(), fishType.toString(), 0)
-            }
+        for (fishType in FishType.values()) {
+            plugin.database.asyncUpdateQuery("INSERT INTO `fish_caught`(`uuid`, `fish_type`, `current`, `total`) " +
+                    "VALUES(?,?,?,?);", uuid.toString(), fishType.toString(), 0, 0)
         }
     }
 
-    fun createEmptyFishCaughtMap() : EnumMap<FishType, Int> {
-        val map: EnumMap<FishType, Int> = EnumMap(FishType::class.java)
-        FishType.values().forEach { map[it] = 0 }
+    fun createEmptyFishCaughtMap(): EnumMap<FishType, HashMap<String, Int>> {
+        val map: EnumMap<FishType, HashMap<String, Int>> = EnumMap(FishType::class.java)
+
+        val hashMap: HashMap<String, Int> = HashMap()
+        hashMap["current"] = 0
+        hashMap["total"] = 0
+
+        FishType.values().forEach {
+            map[it] = HashMap(hashMap)
+        }
+
         return map
     }
 }
