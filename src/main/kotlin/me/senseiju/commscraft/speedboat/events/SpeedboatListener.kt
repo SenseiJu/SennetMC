@@ -8,6 +8,7 @@ import com.comphenix.protocol.events.PacketEvent
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.PERMISSION_SPEEDBOAT
 import me.senseiju.commscraft.extensions.sendConfigMessage
+import me.senseiju.commscraft.speedboat.SpeedboatManager
 import me.senseiju.commscraft.utils.ObjectSet
 import org.bukkit.entity.Boat
 import org.bukkit.event.EventHandler
@@ -21,11 +22,11 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 
-class SpeedboatListener(private val plugin: CommsCraft) : Listener {
+class SpeedboatListener(private val plugin: CommsCraft, private val speedboatManager: SpeedboatManager) : Listener {
 
     private val protocolManager = ProtocolLibrary.getProtocolManager()
 
-    private var playerSpeedboatToggle = HashMap<UUID, Boolean>()
+    private var playerSpeedboatToggle = speedboatManager.playerSpeedboatToggle
     private val speedMultiplier = plugin.configFile.config.getDouble("speedboat-speed-multiplier", 1.02)
 
     init {

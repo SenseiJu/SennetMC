@@ -5,7 +5,7 @@ import me.mattstudios.mf.annotations.Default
 import me.mattstudios.mf.annotations.Optional
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.collectables.guis.CollectablesGui
+import me.senseiju.commscraft.collectables.showCollectablesGui
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import org.bukkit.entity.Player
 
@@ -15,13 +15,13 @@ class CollectablesCommand(private val plugin: CommsCraft) : CommandBase() {
     @Default
     fun onCommand(player: Player, @Optional targetName: String?) {
         if (targetName == null) {
-            CollectablesGui.showCollectables(plugin, player)
+            showCollectablesGui(player)
             return
         }
 
         val targetPlayer = plugin.server.getPlayer(targetName)
         if (targetPlayer != null) {
-            CollectablesGui.showCollectables(plugin, player, targetPlayer.uniqueId)
+            showCollectablesGui(player, targetPlayer.uniqueId)
             return
         }
 

@@ -7,7 +7,6 @@ import me.mattstudios.mf.base.CommandManager
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.users.events.PlayerJoinListener
-import me.senseiju.commscraft.users.placeholders.UserPlaceholderExpansion
 import me.senseiju.commscraft.users.tasks.SaveUsersTask
 import me.senseiju.commscraft.utils.defaultScope
 import java.util.*
@@ -21,8 +20,6 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
 
     init {
         registerEvents()
-
-        UserPlaceholderExpansion(plugin, this).register()
     }
 
     override fun registerCommands(cm: CommandManager) {}

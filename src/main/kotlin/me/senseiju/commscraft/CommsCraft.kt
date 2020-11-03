@@ -10,6 +10,7 @@ import me.senseiju.commscraft.datastorage.Database
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.fishes.FishManager
 import me.senseiju.commscraft.npcs.NpcManager
+import me.senseiju.commscraft.speedboat.SpeedboatManager
 import me.senseiju.commscraft.users.UserManager
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -24,6 +25,7 @@ class CommsCraft : JavaPlugin() {
     lateinit var npcManager: NpcManager
     lateinit var userManager: UserManager
     lateinit var fishManager: FishManager
+    lateinit var speedboatManager: SpeedboatManager
 
     override fun onEnable() {
         commandManager = CommandManager(this)
@@ -34,10 +36,11 @@ class CommsCraft : JavaPlugin() {
         npcManager = NpcManager(this)
         fishManager = FishManager(this)
         userManager = UserManager(this)
+        speedboatManager = SpeedboatManager(this)
 
         userManager.fetchUsers()
 
-        SpeedboatListener(this)
+        CommsCraftPlaceholderExpansion(this).register()
     }
 
     override fun onDisable() {
