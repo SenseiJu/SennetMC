@@ -6,7 +6,7 @@ import com.comphenix.protocol.events.ListenerPriority
 import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketEvent
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.PERMISSION_SPEEDBOAT
+import me.senseiju.commscraft.PERMISSION_SPEEDBOAT_USE
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.speedboat.SpeedboatManager
 import me.senseiju.commscraft.utils.ObjectSet
@@ -16,18 +16,15 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.util.Vector
-import java.util.*
-import kotlin.collections.HashMap
 import kotlin.math.cos
 import kotlin.math.sin
 
-
 class SpeedboatListener(private val plugin: CommsCraft, private val speedboatManager: SpeedboatManager) : Listener {
-
     private val protocolManager = ProtocolLibrary.getProtocolManager()
 
     private var playerSpeedboatToggle = speedboatManager.playerSpeedboatToggle
-    private val speedMultiplier = plugin.configFile.config.getDouble("speedboat-speed-multiplier", 1.02)
+    private val userManager = plugin.userManager
+    private val speedIncrement = plugin.configFile.config.getDouble("speedboat-speed-upgrade-increment", 0.001)
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)
@@ -42,7 +39,7 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
                 PacketType.Play.Client.STEER_VEHICLE
         ) {
             override fun onPacketReceiving(e: PacketEvent) {
-                if (e.player.vehicle !is Boat || !e.player.hasPermission(PERMISSION_SPEEDBOAT)) return
+                if (e.player.vehicle !is Boat || !e.player.hasPermission(PERMISSION_SPEEDBOAT_USE)) return
 
                 if (!playerSpeedboatToggle.containsKey(e.player.uniqueId)) {
                     playerSpeedboatToggle[e.player.uniqueId] = false
@@ -51,6 +48,8 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
                 if (!playerSpeedboatToggle[e.player.uniqueId]!!) return
 
                 if (e.packet.float.read(1) > 0) {
+                    val user = userManager.userMap[e.player.uniqueId] ?: return
+
                     val boatEntity = e.player.vehicle as Boat
 
                     val pitch: Double = (boatEntity.location.pitch + 90) * Math.PI / 180
@@ -60,7 +59,7 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
 
                     val vector = Vector(x, 0.0, y)
 
-                    boatEntity.velocity = vector.multiply(speedMultiplier)
+                    boatEntity.velocity = vector.multiply(1 + (user.speedboatUpgrades * speedIncrement))
                 }
             }
         })
@@ -70,7 +69,7 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
     fun onSpeedboatToggle(e: PlayerInteractEvent) {
         if (e.hand == EquipmentSlot.OFF_HAND
             || e.player.vehicle !is Boat
-            || !e.player.hasPermission(PERMISSION_SPEEDBOAT)
+            || !e.player.hasPermission(PERMISSION_SPEEDBOAT_USE)
         ) return
         
         if (!playerSpeedboatToggle.containsKey(e.player.uniqueId)) {

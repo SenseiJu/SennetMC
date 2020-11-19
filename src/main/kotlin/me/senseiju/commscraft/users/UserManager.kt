@@ -22,7 +22,9 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
         registerEvents()
     }
 
-    override fun registerCommands(cm: CommandManager) {}
+    override fun registerCommands(cm: CommandManager) {
+    }
+
     override fun registerEvents() {
         PlayerJoinListener(plugin, this)
     }
@@ -43,7 +45,7 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
 
     fun saveUsers() {
         for ((uuid, user) in userMap) {
-            plugin.database.updateQuery("UPDATE `users` SET `fish_capacity_upgrades`=?, `speedboat_upgrades`=? WHERE `uuid`=?",
+            plugin.database.updateQuery("UPDATE `users` SET `fish_capacity_upgrades`=?, `speedboat_upgrades`=? WHERE `uuid`=?;",
                     user.fishCapacityUpgrades, user.speedboatUpgrades, uuid.toString())
             plugin.fishManager.updatePlayersFishCaught(uuid, user.fishCaught)
         }

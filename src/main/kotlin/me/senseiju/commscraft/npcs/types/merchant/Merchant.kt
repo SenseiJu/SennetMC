@@ -9,6 +9,7 @@ import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Location
 import org.bukkit.entity.EntityType
+import org.bukkit.event.EventHandler
 
 class Merchant(private val plugin: CommsCraft) : BaseNpc {
     private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
@@ -27,11 +28,12 @@ class Merchant(private val plugin: CommsCraft) : BaseNpc {
         npc.spawn(location)
     }
 
+    @EventHandler
     override fun onNpcRightClick(e: NPCRightClickEvent) {
         if (e.npc.name != npcName) {
             return
         }
 
-
+        showMerchantUpgradeGui(e.clicker)
     }
 }

@@ -1,6 +1,7 @@
 package me.senseiju.commscraft.extensions
 
 import me.mattstudios.mfgui.gui.components.ItemBuilder
+import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.mattstudios.mfgui.gui.guis.PaginatedGui
 import org.bukkit.Material
@@ -20,6 +21,14 @@ fun defaultPaginatedGuiTemplate(row: Int, pageSize: Int, name: String) : Paginat
     gui.filler.fillBottom(ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE)
             .setName("")
             .asGuiItem())
+
+    return gui
+}
+
+fun defaultGuiTemplate(row: Int, name: String) : Gui {
+    val gui = Gui(row, name.color())
+
+    gui.setDefaultClickAction { it.isCancelled = true }
 
     return gui
 }
