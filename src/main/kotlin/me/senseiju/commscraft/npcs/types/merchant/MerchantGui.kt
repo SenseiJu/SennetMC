@@ -18,7 +18,6 @@ import org.bukkit.plugin.java.JavaPlugin
 import kotlin.math.pow
 
 private val plugin = JavaPlugin.getPlugin(CommsCraft::class.java)
-private val config = plugin.configFile.config
 private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
 
 const val COST_GROWTH_RATE = 1.15
@@ -36,6 +35,8 @@ fun showMerchantUpgradeGui(player: Player) {
 }
 
 private fun createFishingCapacityUpgradeGuiItem(user: User) : GuiItem {
+    val config = plugin.configFile.config
+
     val currentUpgrades = user.fishCapacityUpgrades
     val upgradeIncrement = config.getInt("fishes-upgrade-increment", 5)
     val upgradeMax = config.getInt("fishes-upgrade-max", 20)
@@ -71,8 +72,10 @@ private fun createFishingCapacityUpgradeGuiItem(user: User) : GuiItem {
 }
 
 private fun createSpeedboatSpeedUpgradeGuiItem(user: User) : GuiItem {
+    val config = plugin.configFile.config
+
     val currentUpgrades = user.speedboatUpgrades
-    val upgradeIncrement = config.getDouble("speedboat-speed-upgrade-increment", 0.001)
+    val upgradeIncrement = config.getDouble("speedboat-speed-upgrade-increment", 0.01)
     val upgradeMax = config.getInt("speedboat-speed-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(config.getDouble("speedboat-speed-upgrade-starting-cost", 300.0),
             currentUpgrades)

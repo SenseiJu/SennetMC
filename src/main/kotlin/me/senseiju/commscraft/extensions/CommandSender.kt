@@ -5,8 +5,6 @@ import me.senseiju.commscraft.utils.ObjectSet
 import org.bukkit.command.CommandSender
 import org.bukkit.plugin.java.JavaPlugin
 
-private val config = JavaPlugin.getPlugin(CommsCraft::class.java).messagesFile.config
-
 fun CommandSender.message(s: String) {
     this.sendMessage(s.color())
 }
@@ -24,6 +22,8 @@ fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true,
 }
 
 fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true, isStringList: Boolean = false, vararg replacements: ObjectSet = emptyArray()) {
+    val config = JavaPlugin.getPlugin(CommsCraft::class.java).messagesFile.config
+
     if (config.isString(messageName)) {
         var message = config.getString(messageName, "Undefined message for '$messageName'")!!
 

@@ -15,6 +15,7 @@ import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.utils.defaultScope
 import org.bukkit.entity.Player
 import java.util.*
+import javax.sql.rowset.RowSetProvider
 
 class CollectablesManager(private val plugin: CommsCraft) : BaseManager {
 

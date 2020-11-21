@@ -16,6 +16,8 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.util.Vector
+import java.util.*
+import kotlin.collections.HashMap
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -23,8 +25,10 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
     private val protocolManager = ProtocolLibrary.getProtocolManager()
 
     private var playerSpeedboatToggle = speedboatManager.playerSpeedboatToggle
+    private val playerSpeedboatCurrentVector = HashMap<UUID, Vector>()
+
     private val userManager = plugin.userManager
-    private val speedIncrement = plugin.configFile.config.getDouble("speedboat-speed-upgrade-increment", 0.001)
+    private var speedIncrement = plugin.configFile.config.getDouble("speedboat-speed-upgrade-increment", 0.01)
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)
@@ -59,8 +63,23 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
 
                     val vector = Vector(x, 0.0, y)
 
-                    boatEntity.velocity = vector.multiply(1 + (user.speedboatUpgrades * speedIncrement))
+                    boatEntity.velocity = vector.multiply(0.3 + (user.speedboatUpgrades * speedIncrement))
+
+                    playerSpeedboatCurrentVector[e.player.uniqueId] = vector
+
+                    return
                 }
+                val boatEntity = e.player.vehicle as Boat
+
+                if (playerSpeedboatCurrentVector.getOrPut(e.player.uniqueId, { Vector() }).length() < 0.01) {
+                    playerSpeedboatCurrentVector[e.player.uniqueId] = Vector()
+                    boatEntity.velocity = Vector()
+                    return
+                }
+
+                playerSpeedboatCurrentVector[e.player.uniqueId] = playerSpeedboatCurrentVector[e.player.uniqueId]!!.multiply(0.9)
+
+                boatEntity.velocity = playerSpeedboatCurrentVector[e.player.uniqueId]!!
             }
         })
     }
@@ -80,5 +99,9 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
 
         val toggle = if (playerSpeedboatToggle[e.player.uniqueId]!!) "&a&lTrue" else "&c&lFalse"
         e.player.sendConfigMessage("SPEEDBOAT-TOGGLE", ObjectSet("{toggle}", toggle))
+    }
+
+    fun reload() {
+        speedIncrement = plugin.configFile.config.getDouble("speedboat-speed-upgrade-increment", 0.01)
     }
 }

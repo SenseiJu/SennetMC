@@ -1,11 +1,12 @@
 package me.senseiju.commscraft.datastorage
 
-import com.sun.rowset.CachedRowSetImpl
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.senseiju.commscraft.CommsCraft
+import javax.sql.rowset.CachedRowSet
+import javax.sql.rowset.RowSetProvider
 
 class Database(plugin: CommsCraft, configPath: String) {
     private var source: HikariDataSource
@@ -38,13 +39,13 @@ class Database(plugin: CommsCraft, configPath: String) {
                 "UNIQUE KEY `key_uuid_collectable_id`(`uuid`, `collectable_id`));")
     }
 
-    suspend fun asyncQuery(q: String, vararg replacements: Any = emptyArray()): CachedRowSetImpl {
+    suspend fun asyncQuery(q: String, vararg replacements: Any = emptyArray()): CachedRowSet {
         return withContext(Dispatchers.IO) {
             query(q, *replacements)
         }
     }
 
-    fun query(q: String, vararg replacements: Any = emptyArray()): CachedRowSetImpl {
+    fun query(q: String, vararg replacements: Any = emptyArray()): CachedRowSet {
         source.connection.use {
             val s = it.prepareStatement(q)
 
@@ -56,7 +57,7 @@ class Database(plugin: CommsCraft, configPath: String) {
 
             val set = s.executeQuery()
 
-            val cachedSet = CachedRowSetImpl()
+            val cachedSet = RowSetProvider.newFactory().createCachedRowSet()
             cachedSet.populate(set)
 
             return cachedSet

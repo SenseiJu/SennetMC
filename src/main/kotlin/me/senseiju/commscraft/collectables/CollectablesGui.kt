@@ -15,10 +15,11 @@ import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 
 private val plugin = JavaPlugin.getPlugin(CommsCraft::class.java)
-private val collectablesConfig = plugin.collectablesManager.collectablesFile.config
 
 fun showCollectablesGui(player: Player, uuid: UUID = player.uniqueId) {
     defaultScope.launch {
+        val collectablesConfig = plugin.collectablesManager.collectablesFile.config
+
         val gui = defaultPaginatedGuiTemplate(6, 45, "&c&lCollectables")
 
         val set = plugin.database.asyncQuery("SELECT `collectable_id` FROM `collectables` WHERE `uuid`=?;",
@@ -35,6 +36,8 @@ fun showCollectablesGui(player: Player, uuid: UUID = player.uniqueId) {
 
 fun showCollectablesListGui(player: Player) {
     defaultScope.launch {
+        val collectablesConfig = plugin.collectablesManager.collectablesFile.config
+
         val gui = defaultPaginatedGuiTemplate(6, 45, "&c&lCollectables")
 
         for (collectableId in collectablesConfig.getKeys(false)) {
