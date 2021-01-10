@@ -6,7 +6,7 @@ import kotlinx.coroutines.withContext
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.users.events.PlayerJoinListener
+import me.senseiju.commscraft.users.listeners.PlayerJoinListener
 import me.senseiju.commscraft.users.tasks.SaveUsersTask
 import me.senseiju.commscraft.utils.defaultScope
 import java.util.*

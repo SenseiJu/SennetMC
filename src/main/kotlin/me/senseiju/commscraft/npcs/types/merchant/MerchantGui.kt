@@ -3,7 +3,6 @@ package me.senseiju.commscraft.npcs.types.merchant
 import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.components.GuiAction
 import me.mattstudios.mfgui.gui.components.ItemBuilder
-import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color

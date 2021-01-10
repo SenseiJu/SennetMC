@@ -3,7 +3,7 @@ package me.senseiju.commscraft.speedboat
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.speedboat.events.SpeedboatListener
+import me.senseiju.commscraft.speedboat.listeners.SpeedboatListener
 import java.util.*
 import kotlin.collections.HashMap
 

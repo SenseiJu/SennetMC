@@ -1,7 +1,10 @@
 name: CommsCraft
-main: me.senseiju.commscraft.CommsCraft
-version: 0.0.0
+author: SenseiJu
+
+version: 1.0.0
 api-version: 1.16
+
+main: me.senseiju.commscraft.CommsCraft
 
 depend:
   - Citizens

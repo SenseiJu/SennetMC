@@ -1,4 +1,4 @@
-package me.senseiju.commscraft.fishes.events
+package me.senseiju.commscraft.fishes.listeners
 
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color
@@ -18,7 +18,7 @@ class PlayerFishingListener(private val plugin: CommsCraft) : Listener {
     }
 
     @EventHandler
-    fun onPlayerFishEvent(e: PlayerFishEvent) {
+    private fun onPlayerFishEvent(e: PlayerFishEvent) {
         val user = plugin.userManager.userMap[e.player.uniqueId] ?: return
 
         if (e.state == PlayerFishEvent.State.FISHING) onCast(e, user)

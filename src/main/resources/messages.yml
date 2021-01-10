@@ -9,6 +9,7 @@ COLLECTABLES-CANNOT-FIND-TARGET: "&cCannot find the specified player"
 COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
 COLLECTABLES-TARGET-HAS-COLLECTABLE: "&cTarget already has this collectable"
 COLLECTABLES-TARGET-DOES-NOT-HAVE-COLLECTABLE: "&cTarget does not have this collectable"
+COLLECTABLES-TARGET-COLLECTABLE-SET: "&aYou have just unlocked the {collectableName} collectable"
 COLLECTABLES-COLLECTABLE-SET: "&aCollectable has been set"
 COLLECTABLES-COLLECTABLE-REMOVED: "&aCollectable has been removed"
 
@@ -18,6 +19,7 @@ NPC-SPAWN-SUCCESS: "&aSuccessfully spawned &b{npcType}"
 NPC-REMOVE-SUCCESS: "&aSuccessfully removed npc"
 NPC-NO-TARGET-FOUND: "&cNo NPC target found"
 NPC-INVALID-TARGET: "&cThis entity is not a valid NPC"
+NPC-NOT-COMMSCRAFT: "&cThis NPC is not handled by CommsCraft"
 
 # Fishmonger NPC
 FISHMONGER-NO-FISH-TO-SELL: "{fishmongerName} &cYou have no fish to sell to me"

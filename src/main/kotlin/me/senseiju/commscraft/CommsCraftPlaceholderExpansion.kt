@@ -5,10 +5,15 @@ import me.senseiju.commscraft.users.calculateMaxFishCapacity
 import me.senseiju.commscraft.users.calculateSpeedboatSpeedMultiplier
 import org.bukkit.entity.Player
 
-open class CommsCraftPlaceholderExpansion(private val plugin: CommsCraft) : PlaceholderExpansion() {
+class CommsCraftPlaceholderExpansion(private val plugin: CommsCraft) : PlaceholderExpansion() {
 
     private val userManager = plugin.userManager
     private val speedboatManager = plugin.speedboatManager
+    private val collectablesManager = plugin.collectablesManager
+
+    init {
+        register()
+    }
 
     override fun canRegister(): Boolean {
         return true
@@ -42,6 +47,8 @@ open class CommsCraftPlaceholderExpansion(private val plugin: CommsCraft) : Plac
                 if (speedboatManager.playerSpeedboatToggle.getOrDefault(player.uniqueId, false)) "&a&lTrue" else "&c&lFalse"
             "user_speedboat_speed_multiplier" ->
                 userManager.userMap[player.uniqueId]?.speedboatUpgrades?.let { calculateSpeedboatSpeedMultiplier(it).toString() }
+            "user_collectables_collected" ->
+                collectablesManager.collectablesCollected.getOrDefault(player.uniqueId, 0).toString()
             else -> null
         }
     }

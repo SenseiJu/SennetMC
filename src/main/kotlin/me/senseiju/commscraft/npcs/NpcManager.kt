@@ -29,7 +29,7 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
         registerCommandParameters(cm.parameterHandler)
 
         cm.register(SpawnNpcCommand(plugin, this))
-        cm.register(RemoveNpcCommand(plugin, this))
+        cm.register(RemoveNpcCommand())
     }
 
     private fun registerCommandParameters(ph: ParameterHandler) {

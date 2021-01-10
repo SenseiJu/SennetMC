@@ -6,3 +6,24 @@ beta:
     - "&7This collectable can only be received"
     - "&7by players who played during the beta"
     - "&7testing phase of the server"
+1char:
+  name: "&c&l1C"
+  material: NETHERITE_INGOT
+  rarity : UNIQUE
+  description:
+    - "&7WOW! You are one of a handful of people"
+    - "&7who have a 1 char name GG!"
+2char:
+  name: "&a&l2C"
+  material: EMERALD
+  rarity: UNIQUE
+  description:
+    - "&72 char name, that's pretty pog if I"
+    - "&7am being honest. Well played!"
+3char:
+  name: "&b&l3C"
+  material: DIAMOND
+  rarity: UNIQUE
+  description:
+    - "&7There are only 50,653 possible 3"
+    - "&7char names, and somehow you have one."

@@ -1,10 +1,9 @@
 package me.senseiju.commscraft.fishes
 
 import me.mattstudios.mf.base.CommandManager
-import me.mattstudios.mf.base.ParameterHandler
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.fishes.events.PlayerFishingListener
+import me.senseiju.commscraft.fishes.listeners.PlayerFishingListener
 import java.util.*
 import kotlin.collections.HashMap
 

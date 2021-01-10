@@ -27,6 +27,6 @@ class CollectablesRemoveCommand(private val plugin: CommsCraft, private val coll
             return
         }
 
-        collectablesManager.removeCollectable(player, targetPlayer.uniqueId, collectableId)
+        collectablesManager.removeCollectable(targetPlayer.uniqueId, collectableId, player)
     }
 }

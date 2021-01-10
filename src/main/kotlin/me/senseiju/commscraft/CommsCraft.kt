@@ -2,7 +2,6 @@ package me.senseiju.commscraft
 
 import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
-import me.senseiju.commscraft.speedboat.events.SpeedboatListener
 import me.senseiju.commscraft.collectables.CollectablesManager
 import me.senseiju.commscraft.commands.ReloadCommand
 import me.senseiju.commscraft.datastorage.DataFile
@@ -40,7 +39,7 @@ class CommsCraft : JavaPlugin() {
 
         userManager.fetchUsers()
 
-        CommsCraftPlaceholderExpansion(this).register()
+        CommsCraftPlaceholderExpansion(this)
     }
 
     override fun onDisable() {

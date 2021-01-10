@@ -25,6 +25,6 @@ class CollectablesSetCommand(private val plugin: CommsCraft, private val collect
             return
         }
 
-        collectablesManager.addCollectable(player, targetPlayer.uniqueId, collectableId)
+        collectablesManager.addCollectable(targetPlayer.uniqueId, collectableId, player)
     }
 }

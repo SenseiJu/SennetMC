@@ -1,4 +1,4 @@
-package me.senseiju.commscraft.speedboat.events
+package me.senseiju.commscraft.speedboat.listeners
 
 import com.comphenix.protocol.PacketType
 import com.comphenix.protocol.ProtocolLibrary
@@ -85,7 +85,7 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
     }
 
     @EventHandler
-    fun onSpeedboatToggle(e: PlayerInteractEvent) {
+    private fun onSpeedboatToggle(e: PlayerInteractEvent) {
         if (e.hand == EquipmentSlot.OFF_HAND
             || e.player.vehicle !is Boat
             || !e.player.hasPermission(PERMISSION_SPEEDBOAT_USE)
