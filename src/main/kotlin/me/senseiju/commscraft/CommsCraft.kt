@@ -4,8 +4,10 @@ import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
 import me.senseiju.commscraft.collectables.CollectablesManager
 import me.senseiju.commscraft.commands.ReloadCommand
+import me.senseiju.commscraft.crates.CratesManager
 import me.senseiju.commscraft.datastorage.DataFile
 import me.senseiju.commscraft.datastorage.Database
+import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.fishes.FishManager
 import me.senseiju.commscraft.npcs.NpcManager
@@ -25,6 +27,7 @@ class CommsCraft : JavaPlugin() {
     lateinit var userManager: UserManager
     lateinit var fishManager: FishManager
     lateinit var speedboatManager: SpeedboatManager
+    lateinit var cratesManager: CratesManager
 
     override fun onEnable() {
         commandManager = CommandManager(this)
@@ -36,8 +39,7 @@ class CommsCraft : JavaPlugin() {
         fishManager = FishManager(this)
         userManager = UserManager(this)
         speedboatManager = SpeedboatManager(this)
-
-        userManager.fetchUsers()
+        cratesManager = CratesManager(this)
 
         CommsCraftPlaceholderExpansion(this)
     }
@@ -50,6 +52,8 @@ class CommsCraft : JavaPlugin() {
         }
 
         userManager.saveUsersTask.cancel()
+
+        kickAllPlayers()
     }
 
     fun reload() {
@@ -60,5 +64,12 @@ class CommsCraft : JavaPlugin() {
         npcManager.reload()
         fishManager.reload()
         userManager.reload()
+        cratesManager.reload()
+    }
+
+    private fun kickAllPlayers() {
+        server.onlinePlayers.forEach {
+            it.kickPlayer("&8&lCommsCraft &bis currently reloading...".color())
+        }
     }
 }

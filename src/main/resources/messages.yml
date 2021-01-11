@@ -3,13 +3,13 @@ PREFIX: "&8&lCommsCraft >"
 # Generic messages
 NO-PERMISSION: "&cYou do not have permission to perform this action"
 RELOAD-COMPLETE: "&aReload complete"
+CANNOT-FIND-TARGET: "&cCannot find the specified player"
 
 # Collectables
-COLLECTABLES-CANNOT-FIND-TARGET: "&cCannot find the specified player"
 COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
 COLLECTABLES-TARGET-HAS-COLLECTABLE: "&cTarget already has this collectable"
 COLLECTABLES-TARGET-DOES-NOT-HAVE-COLLECTABLE: "&cTarget does not have this collectable"
-COLLECTABLES-TARGET-COLLECTABLE-SET: "&aYou have just unlocked the {collectableName} collectable"
+COLLECTABLES-TARGET-COLLECTABLE-SET: "&aYou have just unlocked the &7'{collectableName}&7' &acollectable"
 COLLECTABLES-COLLECTABLE-SET: "&aCollectable has been set"
 COLLECTABLES-COLLECTABLE-REMOVED: "&aCollectable has been removed"
 
@@ -29,6 +29,10 @@ FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continu
 
 # Speedboat
 SPEEDBOAT-TOGGLE: "&bSpeedboat toggled to {toggle}"
+
+# Crates
+CRATES-CANNOT-FIND-CRATE: "&cCannot find the specified crate"
+CRATES-INVALID-AMOUNT: "&cInvalid amount of crates specified"
 
 # User
 USER-SAVING-STARTED: "&aSaving user data..."

@@ -1,0 +1,20 @@
+# {player} the player
+
+description:
+  - ""
+  - "&d&lRight-click &7to open the crate"
+  - ""
+  - "&b&lRewards"
+  - "{rewards}"
+
+crates:
+  t1:
+    name: "&e&lTier I"
+    crates-required-before-upgrade: 4
+    upgraded-crate-id: "NULL"
+    rewards:
+      - name: "reward"
+        probability: 1
+        commands:
+        - "say opening t1 crate"
+

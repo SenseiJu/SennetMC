@@ -71,5 +71,10 @@
       <option name="name" value="maven6" />
       <option name="url" value="https://repo.comphenix.net/content/repositories/releases/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven" />
+      <option name="name" value="maven" />
+      <option name="url" value="https://repo.codemc.org/repository/maven-public/" />
+    </remote-repository>
   </component>
 </project>

@@ -25,6 +25,6 @@ class CollectablesCommand(private val plugin: CommsCraft) : CommandBase() {
             return
         }
 
-        player.sendConfigMessage("COLLECTABLES-CANNOT-FIND-TARGET")
+        player.sendConfigMessage("CANNOT-FIND-TARGET")
     }
 }

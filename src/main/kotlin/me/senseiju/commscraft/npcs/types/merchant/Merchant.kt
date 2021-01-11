@@ -27,8 +27,8 @@ class Merchant(plugin: CommsCraft) : BaseNpc {
         val npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, NPC_TYPE.npcName)
         npc.name = NPC_TYPE.npcName
         npc.isProtected = true
-        npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent("commscraft_merchant", SKIN_SIGNATURE, SKIN_TEXTURE)
-        npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.HAND, ItemStack(Material.GOLD_BLOCK))
+        npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
+        npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.HAND, ItemStack(Material.EMERALD))
         npc.spawn(location)
     }
 

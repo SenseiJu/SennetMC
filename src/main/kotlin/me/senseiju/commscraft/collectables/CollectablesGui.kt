@@ -52,6 +52,7 @@ fun showCollectablesListGui(player: Player) {
 
 private fun createCollectableGuiItem(collectableSection: ConfigurationSection) : GuiItem {
     val material = Material.matchMaterial(collectableSection.getString("material", "BEDROCK")!!)!!
+    val glow = collectableSection.getBoolean("glow", false)!!
     val name = collectableSection.getString("name", "NAME NOT FOUND")!!
     val rarity = Rarity.valueOf(collectableSection.getString("rarity", "COMMON")!!)
     val description = collectableSection.getStringList("description")
@@ -66,5 +67,6 @@ private fun createCollectableGuiItem(collectableSection: ConfigurationSection) :
     return ItemBuilder.from(material)
             .setName(name.color())
             .setLore(lore.color())
+            .glow(glow)
             .asGuiItem()
 }

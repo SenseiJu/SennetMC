@@ -9,10 +9,11 @@ import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.npcs.commands.RemoveNpcCommand
 import me.senseiju.commscraft.npcs.commands.SpawnNpcCommand
 import me.senseiju.commscraft.npcs.types.NpcType
-import me.senseiju.commscraft.npcs.types.NpcType.FISHMONGER
-import me.senseiju.commscraft.npcs.types.NpcType.MERCHANT
+import me.senseiju.commscraft.npcs.types.NpcType.*
 import me.senseiju.commscraft.npcs.types.fishmonger.Fishmonger
 import me.senseiju.commscraft.npcs.types.merchant.Merchant
+import me.senseiju.commscraft.npcs.types.sailor.Sailor
+import kotlin.math.pow
 
 class NpcManager(private val plugin: CommsCraft) : BaseManager {
     val npcMap = HashMap<NpcType, BaseNpc>()
@@ -20,6 +21,7 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
     init {
         npcMap[FISHMONGER] = Fishmonger(plugin)
         npcMap[MERCHANT] = Merchant(plugin)
+        npcMap[SAILOR] = Sailor(plugin)
 
         registerCommandParameters(plugin.commandManager.parameterHandler)
         registerCommands(plugin.commandManager)
@@ -43,7 +45,12 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
     }
 
     override fun registerEvents() {}
+
     override fun reload() {
         NpcType.values().forEach { it.dataFile.reload() }
     }
+}
+
+fun calculateNextUpgradeCost(baseCost: Double, currentUpgrades: Int, growthRate: Double = 1.15) : Double {
+    return "%.2f".format(baseCost * growthRate.pow(currentUpgrades)).toDouble()
 }

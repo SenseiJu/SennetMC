@@ -14,6 +14,7 @@ import me.senseiju.commscraft.datastorage.DataFile
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.utils.ObjectSet
 import me.senseiju.commscraft.utils.defaultScope
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import java.util.*
 
@@ -45,21 +46,21 @@ class CollectablesManager(private val plugin: CommsCraft) : BaseManager {
         collectablesFile.reload()
     }
 
-    fun addCollectable(targetUUID: UUID, collectableId: String, player: Player? = null) {
+    fun addCollectable(targetUUID: UUID, collectableId: String, sender: CommandSender? = null) {
         defaultScope.launch {
             val set = plugin.database.asyncQuery("SELECT COUNT(*) AS `count` FROM `collectables` WHERE `uuid`=? AND `collectable_id`=?;",
                     targetUUID.toString(), collectableId)
             set.next()
 
             if (set.getInt("count") > 0) {
-                player?.sendConfigMessage("COLLECTABLES-TARGET-HAS-COLLECTABLE")
+                sender?.sendConfigMessage("COLLECTABLES-TARGET-HAS-COLLECTABLE")
                 return@launch
             }
 
             plugin.database.asyncUpdateQuery("INSERT INTO `collectables` VALUES(?,?);",
                     targetUUID.toString(), collectableId)
 
-            player?.sendConfigMessage("COLLECTABLES-COLLECTABLE-SET")
+            sender?.sendConfigMessage("COLLECTABLES-COLLECTABLE-SET")
             plugin.server.getPlayer(targetUUID)?.sendConfigMessage("COLLECTABLES-TARGET-COLLECTABLE-SET",
                 ObjectSet("{collectableName}", collectablesFile.config.getString("${collectableId}.name")!!))
 
@@ -67,20 +68,20 @@ class CollectablesManager(private val plugin: CommsCraft) : BaseManager {
         }
     }
 
-    fun removeCollectable(targetUUID: UUID, collectableId: String, player: Player? = null) {
+    fun removeCollectable(targetUUID: UUID, collectableId: String, sender: CommandSender? = null) {
         defaultScope.launch {
             val set = plugin.database.asyncQuery("SELECT COUNT(*) AS `count` FROM `collectables` WHERE `uuid`=? AND `collectable_id`=?;",
                     targetUUID.toString(), collectableId)
             set.next()
 
             if (set.getInt("count") == 0) {
-                player?.sendConfigMessage("COLLECTABLES-TARGET-DOES-NOT-HAVE-COLLECTABLE")
+                sender?.sendConfigMessage("COLLECTABLES-TARGET-DOES-NOT-HAVE-COLLECTABLE")
                 return@launch
             }
 
             plugin.database.asyncUpdateQuery("DELETE FROM `collectables` WHERE `uuid`=? AND `collectable_id`=?;",
                     targetUUID.toString(), collectableId)
-            player?.sendConfigMessage("COLLECTABLES-COLLECTABLE-REMOVED")
+            sender?.sendConfigMessage("COLLECTABLES-COLLECTABLE-REMOVED")
         }
     }
 }

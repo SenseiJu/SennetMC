@@ -8,7 +8,8 @@ import org.bukkit.plugin.java.JavaPlugin
 
 enum class NpcType(path: String, npcName: String) {
     FISHMONGER("npc/fishmonger.yml", "&3&lFishmonger Freddy"),
-    MERCHANT("npc/merchant.yml", "&6&lMerchant Manny");
+    MERCHANT("npc/merchant.yml", "&6&lMerchant Manny"),
+    SAILOR("npc/sailor.yml", "&b&lSailor Sally");
 
     val dataFile = DataFile(JavaPlugin.getPlugin(CommsCraft::class.java), path, true)
     val npcName = npcName.color()

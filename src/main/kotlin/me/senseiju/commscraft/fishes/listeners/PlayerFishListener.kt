@@ -11,7 +11,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerFishEvent
 
-class PlayerFishingListener(private val plugin: CommsCraft) : Listener {
+class PlayerFishListener(private val plugin: CommsCraft) : Listener {
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)

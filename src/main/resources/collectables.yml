@@ -1,6 +1,7 @@
 beta:
   name: "&e&lBeta"
   material: BEDROCK
+  glow: TRUE
   rarity: UNIQUE
   description:
     - "&7This collectable can only be received"
@@ -9,6 +10,7 @@ beta:
 1char:
   name: "&c&l1C"
   material: NETHERITE_INGOT
+  glow: TRUE
   rarity : UNIQUE
   description:
     - "&7WOW! You are one of a handful of people"
@@ -16,6 +18,7 @@ beta:
 2char:
   name: "&a&l2C"
   material: EMERALD
+  glow: TRUE
   rarity: UNIQUE
   description:
     - "&72 char name, that's pretty pog if I"
@@ -23,6 +26,7 @@ beta:
 3char:
   name: "&b&l3C"
   material: DIAMOND
+  glow: TRUE
   rarity: UNIQUE
   description:
     - "&7There are only 50,653 possible 3"

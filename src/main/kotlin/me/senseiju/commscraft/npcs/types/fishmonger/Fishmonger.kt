@@ -34,7 +34,7 @@ class Fishmonger(private val plugin: CommsCraft) : BaseNpc {
         val npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, NPC_TYPE.npcName)
         npc.name = NPC_TYPE.npcName
         npc.isProtected = true
-        npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent("commscraft_fishmonger", SKIN_SIGNATURE, SKIN_TEXTURE)
+        npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
         npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.HAND, ItemStack(Material.FISHING_ROD))
         npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.OFF_HAND, ItemStack(Material.TROPICAL_FISH_BUCKET))
         npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.BOOTS, ItemStack(Material.LEATHER_BOOTS))
@@ -50,11 +50,12 @@ class Fishmonger(private val plugin: CommsCraft) : BaseNpc {
         val user = plugin.userManager.userMap[e.clicker.uniqueId] ?: return
 
         var totalSellPrice = 0.0
-        for ((fishType, map) in user.fishCaught) {
-            val sellPrice = fishType.selectRandomSellPrice() * map.getOrDefault("current", 0)
+        for ((fishType, fishCaughtData) in user.fishCaught) {
+            val sellPrice = fishType.selectRandomSellPrice() * fishCaughtData.current
+
             totalSellPrice += "%.2f".format(sellPrice).toDouble()
 
-            map["current"] = 0
+            fishCaughtData.current = 0
         }
         econ?.depositPlayer(e.clicker, totalSellPrice)
 

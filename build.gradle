@@ -9,6 +9,7 @@ version "1.0.0"
 repositories {
     mavenCentral()
     mavenLocal()
+    maven { url 'https://repo.codemc.org/repository/maven-public/' }
     maven { url "https://papermc.io/repo/repository/maven-public/" }
     maven { url "https://repo.citizensnpcs.co/" }
     maven { url "https://jitpack.io" }
@@ -23,6 +24,7 @@ dependencies {
 
     implementation "me.mattstudios.utils:matt-framework-gui:2.0.2"
     implementation "me.mattstudios.utils:matt-framework:1.4"
+    implementation "de.tr7zw:item-nbt-api:2.7.1"
 
     compileOnly "com.destroystokyo.paper:paper-api:1.16.4-R0.1-SNAPSHOT"
     compileOnly "net.citizensnpcs:citizens:2.0.27-SNAPSHOT"
@@ -37,8 +39,9 @@ dependencies {
 shadowJar {
     archiveFileName.set("CommsCraft.jar")
 
-    relocate "me.mattstudios.mfgui", "me.senseiju.inventoryrefund.shaded.mfgui"
-    relocate "me.mattstudios.mf", "me.senseiju.inventoryrefund.shaded.mf"
+    relocate "me.mattstudios.mfgui", "me.senseiju.commscraft.shaded.mfgui"
+    relocate "me.mattstudios.mf", "me.senseiju.commscraft.shaded.mf"
+    relocate "de.tr7zw.changeme.nbtapi", "me.senseiju.commscraft.shaded.nbtapi"
 
     minimize()
 }
