@@ -28,7 +28,7 @@ class CratesGiveCommand(private val plugin: CommsCraft, private val cratesManage
             return
         }
 
-        if (!cratesManager.cratesFile.config.getKeys(false).contains(crateId)) {
+        if (!cratesManager.cratesMap.containsKey(crateId)) {
             sender.sendConfigMessage("CRATES-CANNOT-FIND-CRATE")
             return
         }

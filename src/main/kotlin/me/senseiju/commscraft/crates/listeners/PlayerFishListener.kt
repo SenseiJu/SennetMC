@@ -1,17 +1,13 @@
 package me.senseiju.commscraft.crates.listeners
 
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.extensions.color
-import me.senseiju.commscraft.extensions.sendConfigMessage
-import me.senseiju.commscraft.fishes.FishType
-import me.senseiju.commscraft.users.User
-import me.senseiju.commscraft.users.calculateMaxFishCapacity
-import org.bukkit.Sound
+import me.senseiju.commscraft.crates.CratesManager
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerFishEvent
+import kotlin.random.Random
 
-class PlayerFishListener(private val plugin: CommsCraft) : Listener {
+class PlayerFishListener(private val plugin: CommsCraft, private val cratesManager: CratesManager) : Listener {
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)
@@ -22,22 +18,18 @@ class PlayerFishListener(private val plugin: CommsCraft) : Listener {
         val user = plugin.userManager.userMap[e.player.uniqueId] ?: return
 
         if (e.state == PlayerFishEvent.State.FISHING) onCast(e)
-        else if (e.state == PlayerFishEvent.State.CAUGHT_FISH) onFishCaught(e, user)
+        else if (e.state == PlayerFishEvent.State.CAUGHT_FISH) onFishCaught(e)
     }
 
     private fun onCast(e: PlayerFishEvent) {
         if (e.isCancelled) return
     }
 
-    private fun onFishCaught(e: PlayerFishEvent, user: User) {
-        val fishType = FishType.selectRandomType()
-        user.addToCurrentFish(fishType, 1)
+    private fun onFishCaught(e: PlayerFishEvent) {
+        val random = Random.nextDouble(0.0, 1.0)
+        if (random > cratesManager.cratesFile.config.getDouble("chance-to-receive-crates", 0.1)) return
 
-        e.player.sendTitle("&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
-                "&6+${fishType.capacity()} capacity".color(), 10, 40, 10)
-        e.player.playSound(e.player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
-
-        e.expToDrop = 0
-        e.caught?.remove()
+        cratesManager.selectRandomCrate().giveRandomNumberOfCrates(e.player)
+        cratesManager.combineCrates(e.player)
     }
 }

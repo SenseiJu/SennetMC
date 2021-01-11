@@ -1,5 +1,5 @@
-# {player} the player
-
+crates-required-before-upgrade: 4
+chance-to-receive-crates: 0.1
 description:
   - ""
   - "&d&lRight-click &7to open the crate"
@@ -10,11 +10,22 @@ description:
 crates:
   t1:
     name: "&e&lTier I"
-    crates-required-before-upgrade: 4
-    upgraded-crate-id: "NULL"
+    probability-per-cast: 5
+    max-crates-per-cast: 4
+    upgraded-crate-id: "t2"
     rewards:
       - name: "reward"
         probability: 1
         commands:
         - "say opening t1 crate"
+  t2:
+    name: "&e&lTier II"
+    probability-per-cast: 2
+    max-crates-per-cast: 2
+    upgraded-crate-id: "NULL"
+    rewards:
+      - name: "reward"
+        probability: 1
+        commands:
+        - "say opening t2 crate"
 

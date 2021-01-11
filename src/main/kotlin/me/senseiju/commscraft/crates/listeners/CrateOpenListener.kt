@@ -6,7 +6,6 @@ import me.senseiju.commscraft.crates.CratesManager
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 
@@ -26,6 +25,8 @@ class CrateOpenListener(private val plugin: CommsCraft, private val cratesManage
 
         val crateId = nbtItem.getString("crate-id")
 
-        cratesManager.cratesMap[crateId]?.selectReward()?.executeCommands(e.player)
+        cratesManager.cratesMap[crateId]?.selectRandomReward()?.executeCommands(e.player)
+
+        e.player.inventory.itemInMainHand.amount = e.player.inventory.itemInMainHand.amount - 1
     }
 }

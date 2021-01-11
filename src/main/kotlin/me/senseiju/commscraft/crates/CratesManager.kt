@@ -1,11 +1,18 @@
 package me.senseiju.commscraft.crates
 
+import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
+import me.senseiju.commscraft.crates.commands.CombineCratesCommand
 import me.senseiju.commscraft.crates.commands.CratesGiveCommand
 import me.senseiju.commscraft.crates.listeners.CrateOpenListener
+import me.senseiju.commscraft.crates.listeners.PlayerFishListener
 import me.senseiju.commscraft.datastorage.DataFile
+import me.senseiju.commscraft.extensions.addItemOrDropNaturally
+import org.bukkit.Material
+import org.bukkit.entity.Player
+import kotlin.random.Random
 
 class CratesManager(private val plugin: CommsCraft) : BaseManager {
 
@@ -22,10 +29,12 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
     
     override fun registerCommands(cm: CommandManager) {
         cm.register(CratesGiveCommand(plugin, this))
+        cm.register(CombineCratesCommand(plugin, this))
     }
 
     override fun registerEvents() {
         CrateOpenListener(plugin, this)
+        PlayerFishListener(plugin, this)
     }
 
     override fun reload() {
@@ -33,23 +42,76 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
 
         loadCrates()
     }
+
+    fun selectRandomCrate() : Crate {
+        val random = Random.nextInt(1, calculateCrateProbabilityRange())
+        var index = 0
+        val cratesList = cratesMap.values.toList()
+        var probabilityCount = cratesList[index].probabilityPerCast
+        while (true) {
+            if (random <= probabilityCount) {
+                return cratesList[index]
+            }
+            probabilityCount += cratesList[++index].probabilityPerCast
+        }
+    }
+
+    fun combineCrates(player: Player) {
+        val currentCrates = HashMap<String, Int>()
+        player.inventory.contents.forEach loop@ {
+            if (it == null || it.type != Material.CHEST) return@loop
+
+            val nbtItem = NBTItem(it)
+            if (!nbtItem.hasKey("crate-id")) return@loop
+
+            val crateId = nbtItem.getString("crate-id")
+            if (!cratesMap.containsKey(crateId)
+                || cratesMap[crateId]?.upgradeId.equals("null", true)) return@loop
+
+            if (currentCrates.containsKey(crateId)) {
+                currentCrates[crateId]?.plus(it.amount)
+            } else {
+                currentCrates[crateId] = it.amount
+            }
+
+            it.amount = 0
+        }
+
+        currentCrates.forEach {
+            val crate = cratesMap[it.key]
+            val upgradedCrate = cratesMap[crate?.upgradeId]
+
+            crate?.giveCrate(player, it.value % cratesFile.config.getInt("crates-required-before-upgrade", 4))
+            upgradedCrate?.giveCrate(player, it.value / cratesFile.config.getInt("crates-required-before-upgrade", 4))
+        }
+    }
+
+    private fun calculateCrateProbabilityRange() : Int {
+        var range = 1
+        cratesMap.forEach { range += it.value.probabilityPerCast }
+        return range
+    }
     
     private fun loadCrates() {
         val newCratesMap = HashMap<String, Crate>()
 
-        cratesFile.config.getConfigurationSection("crates")?.getKeys(false)?.forEach loop@ {
-            val section = cratesFile.config.getConfigurationSection(it)
+        val cratesSection = cratesFile.config.getConfigurationSection("crates")
+        cratesSection?.getKeys(false)?.forEach loop@ {
+            val section = cratesSection.getConfigurationSection(it)
             if (section == null) {
                 println("ERROR: Failed to parse a crate")
                 return@loop
             }
-            val crate = Crate(it,
+            val crate = Crate(
+                it,
                 section.getString("name", "NO-NAME-SET")!!,
                 cratesFile.config.getStringList("description"),
-                section.getInt("crates-required-before-upgrade", 4),
-                section.getString("upgraded-crate-id"))
+                section.getString("upgraded-crate-id", "NULL")!!,
+                section.getInt("probability-per-cast", 0),
+                section.getInt("max-crates-per-cast", 0)
+            )
 
-            loadRewards(crate)
+            loadRewards(crate, section.getMapList("rewards"))
 
             newCratesMap[it] = crate
         }
@@ -57,15 +119,9 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
         cratesMap = newCratesMap
     }
 
-    private fun loadRewards(crate: Crate) {
+    private fun loadRewards(crate: Crate, rewardsMapList: List<Map<*, *>>) {
         val newRewardsList = ArrayList<Reward>()
 
-        val section = cratesFile.config.getConfigurationSection(crate.id)
-        if (section == null) {
-            println("ERROR: Failed to parse a crates rewards")
-            return
-        }
-        val rewardsMapList = section.getMapList("rewards")
         rewardsMapList.forEach {
             newRewardsList.add(Reward(it["name"] as String, it["probability"] as Int, it["commands"] as List<String>))
         }

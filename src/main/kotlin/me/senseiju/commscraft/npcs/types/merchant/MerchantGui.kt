@@ -3,6 +3,7 @@ package me.senseiju.commscraft.npcs.types.merchant
 import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.components.GuiAction
 import me.mattstudios.mfgui.gui.components.ItemBuilder
+import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color
@@ -24,13 +25,13 @@ fun showMerchantUpgradeGui(player: Player) {
         val user = plugin.userManager.userMap[player.uniqueId]!!
         val gui = defaultGuiTemplate(3, "&6&lMerchant")
 
-        gui.setItem(2, 5, createFishingCapacityUpgradeGuiItem(user))
+        gui.setItem(2, 5, createFishingCapacityUpgradeGuiItem(gui, user))
 
         plugin.server.scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
 }
 
-private fun createFishingCapacityUpgradeGuiItem(user: User) : GuiItem {
+private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val config = plugin.configFile.config
 
     val currentUpgrades = user.fishCapacityUpgrades
@@ -63,6 +64,8 @@ private fun createFishingCapacityUpgradeGuiItem(user: User) : GuiItem {
             user.fishCapacityUpgrades += 1
             player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
 
-            showMerchantUpgradeGui(player)
+            gui.updateItem(e.slot, createFishingCapacityUpgradeGuiItem(gui, user))
+
+            //showMerchantUpgradeGui(player)
         })
 }
