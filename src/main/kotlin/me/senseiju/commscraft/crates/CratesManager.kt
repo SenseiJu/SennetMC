@@ -6,7 +6,7 @@ import me.mattstudios.mf.base.CompletionHandler
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.crates.commands.CombineCratesCommand
-import me.senseiju.commscraft.crates.commands.CratesGiveCommand
+import me.senseiju.commscraft.crates.commands.CratesCommand
 import me.senseiju.commscraft.crates.listeners.CrateOpenListener
 import me.senseiju.commscraft.crates.listeners.PlayerFishListener
 import me.senseiju.commscraft.datastorage.DataFile
@@ -32,7 +32,7 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
     override fun registerCommands(cm: CommandManager) {
         registerCommandCompletions(cm.completionHandler)
 
-        cm.register(CratesGiveCommand(plugin, this))
+        cm.register(CratesCommand(plugin, this))
         cm.register(CombineCratesCommand(this))
     }
 

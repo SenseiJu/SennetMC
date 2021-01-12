@@ -4,10 +4,9 @@ import org.bukkit.Location
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.PlayerInventory
 
-fun PlayerInventory.addItemOrDropNaturally(item: ItemStack, location: Location) {
-    if (this.firstEmpty() == -1) {
-        location.world.dropItemNaturally(location, item)
-    } else {
-        this.addItem(item)
+fun PlayerInventory.addItemOrDropNaturally(location: Location, item: ItemStack) {
+    val remaining = this.addItem(item)
+    if (remaining.isNotEmpty()) {
+        remaining.values.forEach {  location.world.dropItemNaturally(location, it) }
     }
 }

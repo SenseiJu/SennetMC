@@ -1,13 +1,11 @@
 package me.senseiju.commscraft.collectables
 
 import me.mattstudios.mf.base.CommandManager
+import me.mattstudios.mf.base.CompletionHandler
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.Rarity
 import me.senseiju.commscraft.collectables.commands.CollectablesCommand
-import me.senseiju.commscraft.collectables.commands.CollectablesListCommand
-import me.senseiju.commscraft.collectables.commands.CollectablesRemoveCommand
-import me.senseiju.commscraft.collectables.commands.CollectablesSetCommand
 import me.senseiju.commscraft.collectables.listeners.PlayerJoinListener
 import me.senseiju.commscraft.datastorage.DataFile
 import me.senseiju.commscraft.extensions.sendConfigMessage
@@ -33,10 +31,13 @@ class CollectablesManager(private val plugin: CommsCraft) : BaseManager {
     }
 
     override fun registerCommands(cm: CommandManager) {
-        cm.register(CollectablesCommand(plugin))
-        cm.register(CollectablesListCommand())
-        cm.register(CollectablesSetCommand(plugin, this))
-        cm.register(CollectablesRemoveCommand(plugin, this))
+        registerCommandCompletions(cm.completionHandler)
+
+        cm.register(CollectablesCommand(plugin, this))
+    }
+
+    private fun registerCommandCompletions(ch: CompletionHandler) {
+        ch.register("#collectableId") { collectables.keys.toList() }
     }
 
     override fun registerEvents() {

@@ -15,7 +15,7 @@ class Crate(private val id: String, val name: String, description: List<String>,
     private val item = createItemStack(description)
 
     fun giveCrate(player: Player, amount: Int = 1) {
-        player.inventory.addItemOrDropNaturally(item.clone().asQuantity(amount), player.location)
+        player.inventory.addItemOrDropNaturally(player.location, item.clone().asQuantity(amount))
     }
 
     fun giveRandomNumberOfCrates(player: Player) {
