@@ -9,7 +9,7 @@ import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 
-class CrateOpenListener(private val plugin: CommsCraft, private val cratesManager: CratesManager) : Listener {
+class CrateOpenListener(plugin: CommsCraft, private val cratesManager: CratesManager) : Listener {
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)

@@ -10,14 +10,14 @@ import me.senseiju.commscraft.crates.commands.CratesCommand
 import me.senseiju.commscraft.crates.listeners.CrateOpenListener
 import me.senseiju.commscraft.crates.listeners.PlayerFishListener
 import me.senseiju.commscraft.datastorage.DataFile
+import me.senseiju.commscraft.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import kotlin.random.Random
 
 class CratesManager(private val plugin: CommsCraft) : BaseManager {
 
-    var cratesFile = DataFile(plugin, "crates.yml", true)
-        private set
+    val cratesFile = DataFile(plugin, "crates.yml", true)
 
     var cratesMap = HashMap<String, Crate>()
         private set
@@ -51,18 +51,7 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
         loadCrates()
     }
 
-    fun selectRandomCrate() : Crate {
-        val random = Random.nextInt(1, calculateCrateProbabilityRange())
-        var index = 0
-        val cratesList = cratesMap.values.toList()
-        var probabilityCount = cratesList[index].probabilityPerCast
-        while (true) {
-            if (random <= probabilityCount) {
-                return cratesList[index]
-            }
-            probabilityCount += cratesList[++index].probabilityPerCast
-        }
-    }
+    fun selectRandomCrate() : Crate = probabilityChance(cratesMap.values.map { it to it.probabilityPerCast }.toMap())
 
     fun combineCrates(player: Player) {
         val currentCrates = HashMap<String, Int>()

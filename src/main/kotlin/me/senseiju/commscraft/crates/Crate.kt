@@ -4,6 +4,8 @@ import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.commscraft.extensions.addItemOrDropNaturally
 import me.senseiju.commscraft.extensions.color
+import me.senseiju.commscraft.utils.percentChance
+import me.senseiju.commscraft.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -27,17 +29,7 @@ class Crate(private val id: String, val name: String, description: List<String>,
         return Random.nextInt(1, maxCratesPerCast + 1)
     }
 
-    fun selectRandomReward() : Reward {
-        val random = Random.nextInt(1, calculateProbabilityRange())
-        var index = 0
-        var probabilityCount = rewards[index].probability
-        while (true) {
-            if (random <= probabilityCount) {
-                return rewards[index]
-            }
-            probabilityCount += rewards[++index].probability
-        }
-    }
+    fun selectRandomReward() : Reward = probabilityChance(rewards.map { it to it.probability }.toMap())
 
     private fun calculateProbabilityRange() : Int {
         var range = 1

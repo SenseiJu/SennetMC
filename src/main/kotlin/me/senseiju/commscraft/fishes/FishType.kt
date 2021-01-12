@@ -2,6 +2,7 @@ package me.senseiju.commscraft.fishes
 
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.datastorage.DataFile
+import me.senseiju.commscraft.utils.probabilityChance
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.random.Random
 
@@ -19,16 +20,7 @@ enum class FishType {
             for (type in values()) {
                 probabilityRange += type.probability()
             }
-
-            val random = Random.nextInt(1, probabilityRange)
-            var index = 0
-            var probabilityCount = values()[index].probability()
-            while (true) {
-                if (random <= probabilityCount) {
-                    return values()[index]
-                }
-                probabilityCount += values()[++index].probability()
-            }
+            return probabilityChance(values().map { it to it.probability() }.toMap())
         }
     }
 
