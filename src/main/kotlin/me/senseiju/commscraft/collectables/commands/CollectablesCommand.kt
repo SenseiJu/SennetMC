@@ -15,16 +15,18 @@ class CollectablesCommand(private val plugin: CommsCraft) : CommandBase() {
     @Default
     fun onCommand(player: Player, @Optional targetName: String?) {
         if (targetName == null) {
-            showCollectablesGui(player)
+            val user = plugin.userManager.userMap[player.uniqueId] ?: return
+            showCollectablesGui(player, user)
             return
         }
 
         val targetPlayer = plugin.server.getPlayer(targetName)
-        if (targetPlayer != null) {
-            showCollectablesGui(player, targetPlayer.uniqueId)
+        if (targetPlayer == null) {
+            player.sendConfigMessage("CANNOT-FIND-TARGET")
             return
         }
 
-        player.sendConfigMessage("CANNOT-FIND-TARGET")
+        val user = plugin.userManager.userMap[player.uniqueId] ?: return
+        showCollectablesGui(player, user)
     }
 }

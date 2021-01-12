@@ -9,7 +9,6 @@ class CommsCraftPlaceholderExpansion(private val plugin: CommsCraft) : Placehold
 
     private val userManager = plugin.userManager
     private val speedboatManager = plugin.speedboatManager
-    private val collectablesManager = plugin.collectablesManager
 
     init {
         register()
@@ -38,17 +37,18 @@ class CommsCraftPlaceholderExpansion(private val plugin: CommsCraft) : Placehold
     override fun onPlaceholderRequest(player: Player?, params: String): String? {
         if (player == null) return ""
 
+        val user = userManager.userMap[player.uniqueId] ?: return null
         return when (params) {
             "user_current_fish_capacity" ->
-                userManager.userMap[player.uniqueId]?.currentFishCaughtCapacity().toString()
+                user.currentFishCaughtCapacity().toString()
             "user_max_fish_capacity" ->
-                userManager.userMap[player.uniqueId]?.fishCapacityUpgrades?.let { calculateMaxFishCapacity(it).toString() }
+                calculateMaxFishCapacity(user.fishCapacityUpgrades).toString()
             "user_speedboat_current_toggle" ->
                 if (speedboatManager.playerSpeedboatToggle.getOrDefault(player.uniqueId, false)) "&a&lTrue" else "&c&lFalse"
             "user_speedboat_speed_multiplier" ->
-                userManager.userMap[player.uniqueId]?.speedboatUpgrades?.let { calculateSpeedboatSpeedMultiplier(it).toString() }
+                calculateSpeedboatSpeedMultiplier(user.speedboatUpgrades).toString()
             "user_collectables_collected" ->
-                collectablesManager.collectablesCollected.getOrDefault(player.uniqueId, 0).toString()
+                user.collectables.size.toString()
             else -> null
         }
     }

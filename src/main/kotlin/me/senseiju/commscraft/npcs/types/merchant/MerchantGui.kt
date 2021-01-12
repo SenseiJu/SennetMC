@@ -65,7 +65,5 @@ private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem 
             player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
 
             gui.updateItem(e.slot, createFishingCapacityUpgradeGuiItem(gui, user))
-
-            //showMerchantUpgradeGui(player)
         })
 }

@@ -7,7 +7,6 @@ import me.mattstudios.mf.annotations.Permission
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.PERMISSION_NPC_SPAWN
-import me.senseiju.commscraft.collectables.CollectablesManager
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.npcs.NpcManager
 import me.senseiju.commscraft.npcs.types.NpcType

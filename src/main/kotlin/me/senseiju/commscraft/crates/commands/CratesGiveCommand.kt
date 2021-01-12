@@ -12,7 +12,7 @@ import me.senseiju.commscraft.extensions.sendConfigMessage
 import org.bukkit.command.CommandSender
 
 @Command("CratesGive")
-class CratesGiveCommand(private val plugin: CommsCraft, private val cratesManager: CratesManager) : CommandBase() {
+class CratesGiveCommand(private val plugin: CommsCraft, private val cratesManager: CratesManager) : CommandBase(){
 
     @Default
     @Permission(PERMISSION_CRATES_GIVE)
@@ -35,6 +35,5 @@ class CratesGiveCommand(private val plugin: CommsCraft, private val cratesManage
 
         if (amount != null) cratesManager.cratesMap[crateId]?.giveCrate(targetPlayer, amount)
         else cratesManager.cratesMap[crateId]?.giveCrate(targetPlayer)
-
     }
 }

@@ -1,7 +1,6 @@
 package me.senseiju.commscraft.commands
 
 import me.mattstudios.mf.annotations.Command
-import me.mattstudios.mf.annotations.Default
 import me.mattstudios.mf.annotations.Permission
 import me.mattstudios.mf.annotations.SubCommand
 import me.mattstudios.mf.base.CommandBase

@@ -3,9 +3,10 @@ package me.senseiju.commscraft.users
 import me.senseiju.commscraft.fishes.FishCaughtData
 import me.senseiju.commscraft.fishes.FishType
 import java.util.*
-import kotlin.collections.HashMap
+import kotlin.collections.ArrayList
 
 data class User(val uuid: UUID,
+                val collectables: ArrayList<String> = ArrayList(),
                 val fishCaught: EnumMap<FishType, FishCaughtData> = EnumMap(FishType::class.java),
                 var fishCapacityUpgrades: Int = 0,
                 var speedboatUpgrades: Int = 0) {

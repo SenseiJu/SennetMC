@@ -30,9 +30,7 @@ class CommsCraft : JavaPlugin() {
     lateinit var cratesManager: CratesManager
 
     override fun onEnable() {
-        commandManager = CommandManager(this)
-        commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
-        commandManager.register(ReloadCommand(this))
+        setupCommands()
 
         collectablesManager = CollectablesManager(this)
         npcManager = NpcManager(this)
@@ -71,5 +69,11 @@ class CommsCraft : JavaPlugin() {
         server.onlinePlayers.forEach {
             it.kickPlayer("&8&lCommsCraft &bis currently reloading...".color())
         }
+    }
+
+    private fun setupCommands() {
+        commandManager = CommandManager(this)
+        commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
+        commandManager.register(ReloadCommand(this))
     }
 }

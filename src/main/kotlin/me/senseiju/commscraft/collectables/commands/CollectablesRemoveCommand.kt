@@ -9,7 +9,6 @@ import me.senseiju.commscraft.PERMISSION_COLLECTABLES_REMOVE
 import me.senseiju.commscraft.collectables.CollectablesManager
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 
 @Command("CollectablesRemove")
 class CollectablesRemoveCommand(private val plugin: CommsCraft, private val collectablesManager: CollectablesManager) : CommandBase() {

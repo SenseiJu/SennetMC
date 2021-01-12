@@ -43,9 +43,10 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
         if (!set.next()) return
 
         userMap[uuid] = User(uuid,
-            plugin.fishManager.fetchPlayersFishCaught(uuid),
-            set.getInt("fish_capacity_upgrades"),
-            set.getInt("speedboat_upgrades"))
+                plugin.collectablesManager.fetchCollectables(uuid),
+                plugin.fishManager.fetchFishCaught(uuid),
+                set.getInt("fish_capacity_upgrades"),
+                set.getInt("speedboat_upgrades"))
     }
 
     fun saveUsers() {
@@ -56,11 +57,10 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
                 uuid.toString(), user.fishCapacityUpgrades, user.speedboatUpgrades,
                 user.fishCapacityUpgrades, user.speedboatUpgrades)
 
-            plugin.fishManager.updatePlayersFishCaught(uuid, user.fishCaught)
+            plugin.fishManager.updateFishCaught(uuid, user.fishCaught)
+            plugin.collectablesManager.updateCollectables(uuid, user.collectables)
         }
     }
 
-    fun createNewUser(uuid: UUID) {
-        userMap[uuid] = User(uuid)
-    }
+    fun createNewUser(uuid: UUID) { userMap[uuid] = User(uuid) }
 }

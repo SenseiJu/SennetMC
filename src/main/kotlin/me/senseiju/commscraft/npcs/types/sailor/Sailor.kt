@@ -3,7 +3,6 @@ package me.senseiju.commscraft.npcs.types.sailor
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.npcs.BaseNpc
 import me.senseiju.commscraft.npcs.types.NpcType
-import me.senseiju.commscraft.npcs.types.merchant.showMerchantUpgradeGui
 import net.citizensnpcs.api.CitizensAPI
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment

@@ -21,8 +21,8 @@ class FishManager(private val plugin: CommsCraft) : BaseManager {
         FishType.dataFile.reload()
     }
 
-    fun fetchPlayersFishCaught(uuid: UUID): EnumMap<FishType, FishCaughtData> {
-        val set = plugin.database.query("SELECT * FROM `fish_caught` WHERE `uuid`=?;", uuid.toString())
+    suspend fun fetchFishCaught(uuid: UUID) : EnumMap<FishType, FishCaughtData> {
+        val set = plugin.database.asyncQuery("SELECT * FROM `fish_caught` WHERE `uuid`=?;", uuid.toString())
 
         val fishCaught: EnumMap<FishType, FishCaughtData> = EnumMap(FishType::class.java)
         while (set.next()) {
@@ -33,7 +33,7 @@ class FishManager(private val plugin: CommsCraft) : BaseManager {
         return fishCaught
     }
 
-    fun updatePlayersFishCaught(uuid: UUID, fishCaughtMap: EnumMap<FishType, FishCaughtData>) {
+    fun updateFishCaught(uuid: UUID, fishCaughtMap: EnumMap<FishType, FishCaughtData>) {
         for ((fishType, fishCaughtData) in fishCaughtMap) {
             val q = "INSERT INTO `fish_caught`(`uuid`, `fish_type`, `current`, `total`) VALUES(?,?,?,?) " +
                     "ON DUPLICATE KEY UPDATE `fish_type`=?, `current`=?, `total`=?;"

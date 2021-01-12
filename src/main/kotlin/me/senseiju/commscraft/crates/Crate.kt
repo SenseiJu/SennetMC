@@ -9,13 +9,13 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
-class Crate(private val id: String, val name: String, private val description: List<String>, val upgradeId: String = "NULL",
-    val probabilityPerCast: Int = 0, private val maxCratesPerCast: Int = 0) {
+class Crate(private val id: String, val name: String, description: List<String>, val upgradeId: String = "NULL",
+            private val rewards: List<Reward>, val probabilityPerCast: Int = 0, private val maxCratesPerCast: Int = 0) {
 
-    var rewards = ArrayList<Reward>()
+    private val item = createItemStack(description)
 
     fun giveCrate(player: Player, amount: Int = 1) {
-        player.inventory.addItemOrDropNaturally(createCrateItemStack(description).asQuantity(amount), player.location)
+        player.inventory.addItemOrDropNaturally(item.clone().asQuantity(amount), player.location)
     }
 
     fun giveRandomNumberOfCrates(player: Player) {
@@ -45,12 +45,12 @@ class Crate(private val id: String, val name: String, private val description: L
         return range
     }
 
-    private fun createCrateItemStack(description: List<String>) : ItemStack {
+    private fun createItemStack(description: List<String>) : ItemStack {
         val descriptionFormatted = ArrayList<String>()
-        description.forEach loop@ { descriptionLine ->
+        description.forEach { descriptionLine ->
             if (!descriptionLine.contains("{rewards}")) {
                 descriptionFormatted.add(descriptionLine)
-                return@loop
+                return@forEach
             }
             rewards.forEach { reward ->
                 descriptionFormatted.add("&7- ${reward.name.color()}")

@@ -2,7 +2,6 @@ package me.senseiju.commscraft.extensions
 
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.Gui
-import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.mattstudios.mfgui.gui.guis.PaginatedGui
 import org.bukkit.Material
 

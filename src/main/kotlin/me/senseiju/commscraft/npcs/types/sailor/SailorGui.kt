@@ -3,13 +3,13 @@ package me.senseiju.commscraft.npcs.types.sailor
 import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.components.GuiAction
 import me.mattstudios.mfgui.gui.components.ItemBuilder
+import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.defaultGuiTemplate
 import me.senseiju.commscraft.npcs.calculateNextUpgradeCost
 import me.senseiju.commscraft.npcs.types.NpcType
-import me.senseiju.commscraft.npcs.types.merchant.showMerchantUpgradeGui
 import me.senseiju.commscraft.users.User
 import me.senseiju.commscraft.utils.defaultScope
 import net.milkbowl.vault.economy.Economy
@@ -28,13 +28,13 @@ fun showSailorUpgradeGui(player: Player) {
         val user = plugin.userManager.userMap[player.uniqueId]!!
         val gui = defaultGuiTemplate(3, NPC_TYPE.npcName)
 
-        gui.setItem(2, 5, createSpeedboatSpeedUpgradeGuiItem(user))
+        gui.setItem(2, 5, createSpeedboatSpeedUpgradeGuiItem(gui, user))
 
         plugin.server.scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
 }
 
-private fun createSpeedboatSpeedUpgradeGuiItem(user: User) : GuiItem {
+private fun createSpeedboatSpeedUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val config = plugin.configFile.config
 
     val currentUpgrades = user.speedboatUpgrades
@@ -67,6 +67,6 @@ private fun createSpeedboatSpeedUpgradeGuiItem(user: User) : GuiItem {
                 user.speedboatUpgrades += 1
                 player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
 
-                showSailorUpgradeGui(player)
+                gui.updateItem(e.slot, createSpeedboatSpeedUpgradeGuiItem(gui, user))
             })
 }

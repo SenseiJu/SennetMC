@@ -1,13 +1,14 @@
 package me.senseiju.commscraft.collectables.commands
 
-import me.mattstudios.mf.annotations.*
+import me.mattstudios.mf.annotations.Command
+import me.mattstudios.mf.annotations.Default
+import me.mattstudios.mf.annotations.Permission
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.PERMISSION_COLLECTABLES_SET
 import me.senseiju.commscraft.collectables.CollectablesManager
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.Player
 
 @Command("CollectablesSet")
 class CollectablesSetCommand(private val plugin: CommsCraft, private val collectablesManager: CollectablesManager) : CommandBase() {
