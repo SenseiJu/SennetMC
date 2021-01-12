@@ -67,6 +67,7 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
     fun combineCrates(player: Player) {
         val currentCrates = HashMap<String, Int>()
         player.inventory.contents.forEach {
+            @Suppress("SENSELESS_COMPARISON")
             if (it == null || it.type != Material.CHEST) return@forEach
 
             val nbtItem = NBTItem(it)
@@ -125,6 +126,7 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
         val newRewardsList = ArrayList<Reward>()
 
         rewardsMapList.forEach {
+            @Suppress("UNCHECKED_CAST")
             newRewardsList.add(Reward(it["name"] as String, it["probability"] as Int, it["commands"] as List<String>))
         }
 
