@@ -30,7 +30,8 @@ class Database(plugin: CommsCraft, configPath: String) {
 
     private fun createTables() {
         updateQuery("CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36) NOT NULL, `fish_capacity_upgrades` INT, " +
-                "`speedboat_upgrades` INT, UNIQUE(`uuid`));")
+                "`speedboat_speed_upgrades` INT, `treasure_finder_upgrades` INT, `discovery_upgrades` INT, `crate_master_upgrades` INT, " +
+                "`negotiate_upgrades` INT, `player_speed_upgrades` INT, UNIQUE(`uuid`));")
 
         updateQuery("CREATE TABLE IF NOT EXISTS `fish_caught`(`uuid` CHAR(36) NOT NULL, `fish_type` CHAR(255) NOT NULL, " +
                 "`current` INT, `total` INT, UNIQUE KEY `key_uuid_fish_type`(`uuid`, `fish_type`));")
@@ -81,7 +82,9 @@ class Database(plugin: CommsCraft, configPath: String) {
 
             try {
                 s.executeUpdate()
-            } catch (ex: Exception) {}
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
         }
     }
 }

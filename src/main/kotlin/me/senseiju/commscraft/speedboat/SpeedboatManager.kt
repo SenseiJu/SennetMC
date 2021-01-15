@@ -9,7 +9,7 @@ import kotlin.collections.HashMap
 
 class SpeedboatManager(private val plugin: CommsCraft) : BaseManager {
 
-    var playerSpeedboatToggle = HashMap<UUID, Boolean>()
+    val playerSpeedboatToggle = HashMap<UUID, Boolean>()
 
     init {
         registerEvents()

@@ -6,7 +6,7 @@ import org.bukkit.plugin.java.JavaPlugin
 
 private val plugin = JavaPlugin.getPlugin(CommsCraft::class.java)
 
-class Reward(val name: String, val probability: Int, private val commands: List<String> = emptyList()) {
+class Reward(val name: String, val probability: Double, private val commands: List<String> = emptyList()) {
 
     fun executeCommands(player: Player) {
         for (command in commands) {

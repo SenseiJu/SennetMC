@@ -5,24 +5,14 @@ import me.senseiju.commscraft.fishes.FishType
 import java.util.*
 import kotlin.collections.ArrayList
 
-data class User(val uuid: UUID,
-                val collectables: ArrayList<String> = ArrayList(),
-                val fishCaught: EnumMap<FishType, FishCaughtData> = EnumMap(FishType::class.java),
-                var fishCapacityUpgrades: Int = 0,
-                var speedboatUpgrades: Int = 0) {
+class User(val uuid: UUID,
+           val collectables: ArrayList<String> = ArrayList(),
+           val fishCaught: EnumMap<FishType, FishCaughtData> = EnumMap(FishType::class.java),
+           val upgrades: EnumMap<Upgrade, Int> = EnumMap(Upgrade::class.java)) {
 
-    fun addToCurrentFish(fishType: FishType, amount: Int) {
-        if (!fishCaught.containsKey(fishType)) {
-            fishCaught[fishType] = FishCaughtData(amount, amount)
-            return
-        }
+    val currentFishCaughtCapacity get() = fishCaught.entries.sumBy { it.key.capacity() * it.value.current }
 
-        fishCaught[fishType]?.plus(amount)
-    }
+    fun incrementUpgrade(upgrade: Upgrade, amount: Int = 1) { upgrades.merge(upgrade, amount, Int::plus) }
 
-    fun currentFishCaughtCapacity() : Int {
-        var capacity = 0
-        fishCaught.entries.forEach { capacity += (it.key.capacity() * it.value.current) }
-        return capacity
-    }
+    fun addToCurrentFish(fishType: FishType, amount: Int) { fishCaught.computeIfAbsent(fishType) { FishCaughtData() }.plus(amount) }
 }

@@ -4,7 +4,6 @@ import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.commscraft.extensions.addItemOrDropNaturally
 import me.senseiju.commscraft.extensions.color
-import me.senseiju.commscraft.utils.percentChance
 import me.senseiju.commscraft.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -12,7 +11,7 @@ import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
 class Crate(private val id: String, val name: String, description: List<String>, val upgradeId: String = "NULL",
-            private val rewards: List<Reward>, val probabilityPerCast: Int = 0, private val maxCratesPerCast: Int = 0) {
+            private val rewards: List<Reward>, val probabilityPerCast: Double = 0.0, private val maxCratesPerCast: Int = 0) {
 
     private val item = createItemStack(description)
 
@@ -30,12 +29,6 @@ class Crate(private val id: String, val name: String, description: List<String>,
     }
 
     fun selectRandomReward() : Reward = probabilityChance(rewards.map { it to it.probability }.toMap())
-
-    private fun calculateProbabilityRange() : Int {
-        var range = 1
-        rewards.forEach { range += it.probability }
-        return range
-    }
 
     private fun createItemStack(description: List<String>) : ItemStack {
         val descriptionFormatted = ArrayList<String>()

@@ -8,9 +8,11 @@ import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.npcs.commands.RemoveNpcCommand
 import me.senseiju.commscraft.npcs.commands.SpawnNpcCommand
+import me.senseiju.commscraft.npcs.events.NpcClickEvent
 import me.senseiju.commscraft.npcs.types.NpcType
 import me.senseiju.commscraft.npcs.types.NpcType.*
 import me.senseiju.commscraft.npcs.types.fishmonger.Fishmonger
+import me.senseiju.commscraft.npcs.types.looter.Looter
 import me.senseiju.commscraft.npcs.types.merchant.Merchant
 import me.senseiju.commscraft.npcs.types.sailor.Sailor
 import kotlin.math.pow
@@ -20,9 +22,11 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
 
     init {
         npcMap[FISHMONGER] = Fishmonger(plugin)
-        npcMap[MERCHANT] = Merchant(plugin)
-        npcMap[SAILOR] = Sailor(plugin)
+        npcMap[MERCHANT] = Merchant()
+        npcMap[SAILOR] = Sailor()
+        npcMap[LOOTER] = Looter()
 
+        registerEvents()
         registerCommandParameters(plugin.commandManager.parameterHandler)
         registerCommands(plugin.commandManager)
     }
@@ -44,7 +48,9 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
         })
     }
 
-    override fun registerEvents() {}
+    override fun registerEvents() {
+        NpcClickEvent(plugin, this)
+    }
 
     override fun reload() {
         NpcType.values().forEach { it.dataFile.reload() }

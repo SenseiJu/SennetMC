@@ -6,7 +6,6 @@ import me.senseiju.commscraft.utils.percentChance
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerFishEvent
-import kotlin.random.Random
 
 class PlayerFishListener(plugin: CommsCraft, private val cratesManager: CratesManager) : Listener {
 
@@ -16,12 +15,7 @@ class PlayerFishListener(plugin: CommsCraft, private val cratesManager: CratesMa
 
     @EventHandler
     private fun onPlayerFishEvent(e: PlayerFishEvent) {
-        if (e.state == PlayerFishEvent.State.FISHING) onCast(e)
-        else if (e.state == PlayerFishEvent.State.CAUGHT_FISH) onFishCaught(e)
-    }
-
-    private fun onCast(e: PlayerFishEvent) {
-        if (e.isCancelled) return
+        if (e.state == PlayerFishEvent.State.CAUGHT_FISH) onFishCaught(e)
     }
 
     private fun onFishCaught(e: PlayerFishEvent) {

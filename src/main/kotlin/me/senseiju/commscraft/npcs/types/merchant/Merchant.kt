@@ -1,7 +1,7 @@
 package me.senseiju.commscraft.npcs.types.merchant
 
-import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.npcs.BaseNpc
+import me.senseiju.commscraft.npcs.createBasicNpc
 import me.senseiju.commscraft.npcs.types.NpcType
 import net.citizensnpcs.api.CitizensAPI
 import net.citizensnpcs.api.event.NPCRightClickEvent
@@ -10,7 +10,6 @@ import net.citizensnpcs.trait.SkinTrait
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.EntityType
-import org.bukkit.event.EventHandler
 import org.bukkit.inventory.ItemStack
 
 private const val SKIN_TEXTURE = "eyJ0aW1lc3RhbXAiOjE1ODgwMjIwMTYzODMsInByb2ZpbGVJZCI6IjE5MjUyMWI0ZWZkYjQyNWM4OTMxZjAyYTg0OTZlMTFiIiwicHJvZmlsZU5hbWUiOiJTZXJpYWxpemFibGUiLCJzaWduYXR1cmVSZXF1aXJlZCI6dHJ1ZSwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzU0OTY5ZDU1NDY0NmVmNWE5NGRlNDcyODBlYTY3ZTJkYzMwNmM3YTA5YTQwMjE5MDMzNDQyMGRhYTA2YzM2MDYifX19"
@@ -18,26 +17,20 @@ private const val SKIN_SIGNATURE = "feoHGYSz08NXIy5oUlhcThrahCagolldnojlpTqPYqFx
 
 private val NPC_TYPE = NpcType.MERCHANT
 
-class Merchant(plugin: CommsCraft) : BaseNpc {
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
+class Merchant : BaseNpc {
 
     override fun spawnNpc(location: Location) {
-        val npc = CitizensAPI.getNPCRegistry().createNPC(EntityType.PLAYER, NPC_TYPE.npcName)
-        npc.name = NPC_TYPE.npcName
-        npc.isProtected = true
+        val npc = createBasicNpc(NPC_TYPE)
         npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
         npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.HAND, ItemStack(Material.EMERALD))
         npc.spawn(location)
     }
 
-    @EventHandler
     override fun onNpcRightClick(e: NPCRightClickEvent) {
         if (e.npc.name != NPC_TYPE.npcName) {
             return
         }
 
-        showMerchantUpgradeGui(e.clicker)
+        showMerchantGui(e.clicker)
     }
 }

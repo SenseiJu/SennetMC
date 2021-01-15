@@ -1,29 +1,31 @@
 package me.senseiju.commscraft.npcs.types.merchant
 
 import kotlinx.coroutines.launch
-import me.mattstudios.mfgui.gui.components.GuiAction
-import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.defaultGuiTemplate
 import me.senseiju.commscraft.npcs.calculateNextUpgradeCost
+import me.senseiju.commscraft.npcs.types.NpcType
+import me.senseiju.commscraft.npcs.updateUpgradeGuiItem
+import me.senseiju.commscraft.users.Upgrade
 import me.senseiju.commscraft.users.User
 import me.senseiju.commscraft.utils.defaultScope
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Material
-import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+
+private val NPC_TYPE = NpcType.MERCHANT
+private val NPC_CONFIG = NPC_TYPE.dataFile.config
 
 private val plugin = JavaPlugin.getPlugin(CommsCraft::class.java)
 private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
 
-fun showMerchantUpgradeGui(player: Player) {
+fun showMerchantGui(player: Player) {
     defaultScope.launch {
         val user = plugin.userManager.userMap[player.uniqueId]!!
-        val gui = defaultGuiTemplate(3, "&6&lMerchant")
+        val gui = defaultGuiTemplate(3, NPC_TYPE.npcName)
 
         gui.setItem(2, 5, createFishingCapacityUpgradeGuiItem(gui, user))
 
@@ -32,12 +34,10 @@ fun showMerchantUpgradeGui(player: Player) {
 }
 
 private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
-    val config = plugin.configFile.config
-
-    val currentUpgrades = user.fishCapacityUpgrades
-    val upgradeIncrement = config.getInt("fishes-upgrade-increment", 5)
-    val upgradeMax = config.getInt("fishes-upgrade-max", 20)
-    val upgradeCost = calculateNextUpgradeCost(config.getDouble("fishes-upgrade-starting-cost", 300.0),
+    val currentUpgrades = user.upgrades.computeIfAbsent(Upgrade.FISH_CAPACITY) { 0 }
+    val upgradeIncrement = NPC_CONFIG.getInt("fishing-capacity-upgrade-increment", 5)
+    val upgradeMax = NPC_CONFIG.getInt("fishing-capacity-upgrade-max", 20)
+    val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("fishing-capacity-upgrade-starting-cost", 300.0),
             currentUpgrades)
 
     val lore = ArrayList<String>()
@@ -48,22 +48,6 @@ private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem 
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return ItemBuilder.from(Material.CHEST)
-        .setName("&b&lFishing capacity".color())
-        .setLore(lore.color())
-        .asGuiItem(GuiAction { e ->
-            if (e.whoClicked !is Player || econ == null || user.fishCapacityUpgrades >= upgradeMax) return@GuiAction
-
-            val player = e.whoClicked as Player
-            if (!econ.has(player, upgradeCost)) {
-                player.playSound(player.location, Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f)
-                return@GuiAction
-            }
-
-            econ.withdrawPlayer(player, upgradeCost)
-            user.fishCapacityUpgrades += 1
-            player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
-
-            gui.updateItem(e.slot, createFishingCapacityUpgradeGuiItem(gui, user))
-        })
+    return updateUpgradeGuiItem(gui, Material.CHEST, "&b&lFishing capacity", user, upgradeCost, upgradeMax, lore,
+            Upgrade.FISH_CAPACITY) { createFishingCapacityUpgradeGuiItem(gui, user) }
 }

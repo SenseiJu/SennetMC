@@ -16,11 +16,11 @@ enum class FishType {
         val dataFile = DataFile(JavaPlugin.getPlugin(CommsCraft::class.java), "fishes.yml", true)
 
         fun selectRandomType() : FishType {
-            var probabilityRange = 1
+            var probabilityRange = 1.0
             for (type in values()) {
                 probabilityRange += type.probability()
             }
-            return probabilityChance(values().map { it to it.probability() }.toMap())
+            return probabilityChance(values().associateWith { it.probability() })
         }
     }
 
@@ -28,15 +28,15 @@ enum class FishType {
         return dataFile.config.getInt("${this}.capacity", 1)
     }
 
-    fun probability() : Int {
-        return dataFile.config.getInt("${this}.probability", 1)
+    fun probability() : Double {
+        return dataFile.config.getDouble("${this}.probability", 1.0)
     }
 
-    fun lowSellPrice() : Double {
+    private fun lowSellPrice() : Double {
         return dataFile.config.getDouble("${this}.low-sell-price", 1.0)
     }
 
-    fun maxSellPrice() : Double {
+    private fun maxSellPrice() : Double {
         return dataFile.config.getDouble("${this}.max-sell-price", 2.0)
     }
 

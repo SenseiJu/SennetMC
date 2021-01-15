@@ -13,7 +13,7 @@ import me.senseiju.commscraft.datastorage.DataFile
 import me.senseiju.commscraft.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player
-import kotlin.random.Random
+import java.util.zip.DeflaterOutputStream
 
 class CratesManager(private val plugin: CommsCraft) : BaseManager {
 
@@ -81,12 +81,6 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
         }
     }
 
-    private fun calculateCrateProbabilityRange() : Int {
-        var range = 1
-        cratesMap.forEach { range += it.value.probabilityPerCast }
-        return range
-    }
-    
     private fun loadCrates() {
         val newCratesMap = HashMap<String, Crate>()
 
@@ -102,21 +96,22 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
             val name = section.getString("name", "NO-NAME-SET")!!
             val upgradeId = section.getString("upgraded-crate-id", "NULL")!!
             val rewards = loadRewards(section.getMapList("rewards"))
-            val probabilityPerCast = section.getInt("probability-per-cast", 0)
+            val probabilityPerCast = section.getDouble("probability-per-cast", 0.0)
             val maxCratesPerCast = section.getInt("max-crates-per-cast", 0)
 
-            newCratesMap[it] = Crate(it, name, description, upgradeId, rewards,probabilityPerCast, maxCratesPerCast)
+            newCratesMap[it] = Crate(it, name, description, upgradeId, rewards, probabilityPerCast, maxCratesPerCast)
         }
 
         cratesMap = newCratesMap
     }
 
+    @Suppress("UNCHECKED_CAST")
     private fun loadRewards(rewardsMapList: List<Map<*, *>>) : List<Reward> {
         val newRewardsList = ArrayList<Reward>()
 
         rewardsMapList.forEach {
-            @Suppress("UNCHECKED_CAST")
-            newRewardsList.add(Reward(it["name"] as String, it["probability"] as Int, it["commands"] as List<String>))
+            val probability = if (it["probability"] is Int) it["probability"] as Int else it["probability"] as Double
+            newRewardsList.add(Reward(it["name"] as String, probability.toDouble(), it["commands"] as List<String>))
         }
 
         return newRewardsList

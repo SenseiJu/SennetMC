@@ -9,6 +9,7 @@ import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.PERMISSION_SPEEDBOAT_USE
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.speedboat.SpeedboatManager
+import me.senseiju.commscraft.users.Upgrade
 import me.senseiju.commscraft.utils.ObjectSet
 import org.bukkit.entity.Boat
 import org.bukkit.event.EventHandler
@@ -21,7 +22,7 @@ import kotlin.collections.HashMap
 import kotlin.math.cos
 import kotlin.math.sin
 
-class SpeedboatListener(private val plugin: CommsCraft, private val speedboatManager: SpeedboatManager) : Listener {
+class SpeedboatListener(private val plugin: CommsCraft, speedboatManager: SpeedboatManager) : Listener {
     private val protocolManager = ProtocolLibrary.getProtocolManager()
 
     private var playerSpeedboatToggle = speedboatManager.playerSpeedboatToggle
@@ -63,7 +64,7 @@ class SpeedboatListener(private val plugin: CommsCraft, private val speedboatMan
 
                     val vector = Vector(x, 0.0, y)
 
-                    boatEntity.velocity = vector.multiply(0.3 + (user.speedboatUpgrades * speedIncrement))
+                    boatEntity.velocity = vector.multiply(0.3 + (user.upgrades.getOrDefault(Upgrade.SPEEDBOAT_SPEED, 0) * speedIncrement))
 
                     playerSpeedboatCurrentVector[e.player.uniqueId] = vector
 

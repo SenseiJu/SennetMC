@@ -1,6 +1,7 @@
 package me.senseiju.commscraft
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
+import me.senseiju.commscraft.users.Upgrade
 import me.senseiju.commscraft.users.calculateMaxFishCapacity
 import me.senseiju.commscraft.users.calculateSpeedboatSpeedMultiplier
 import org.bukkit.entity.Player
@@ -40,13 +41,13 @@ class CommsCraftPlaceholderExpansion(private val plugin: CommsCraft) : Placehold
         val user = userManager.userMap[player.uniqueId] ?: return null
         return when (params) {
             "user_current_fish_capacity" ->
-                user.currentFishCaughtCapacity().toString()
+                user.currentFishCaughtCapacity.toString()
             "user_max_fish_capacity" ->
-                calculateMaxFishCapacity(user.fishCapacityUpgrades).toString()
+                calculateMaxFishCapacity(user.upgrades.getOrDefault(Upgrade.FISH_CAPACITY, 0)).toString()
             "user_speedboat_current_toggle" ->
                 if (speedboatManager.playerSpeedboatToggle.getOrDefault(player.uniqueId, false)) "&a&lTrue" else "&c&lFalse"
             "user_speedboat_speed_multiplier" ->
-                calculateSpeedboatSpeedMultiplier(user.speedboatUpgrades).toString()
+                calculateSpeedboatSpeedMultiplier(user.upgrades.getOrDefault(Upgrade.SPEEDBOAT_SPEED, 0)).toString()
             "user_collectables_collected" ->
                 user.collectables.size.toString()
             else -> null

@@ -4,6 +4,7 @@ import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.fishes.FishType
+import me.senseiju.commscraft.users.Upgrade
 import me.senseiju.commscraft.users.User
 import me.senseiju.commscraft.users.calculateMaxFishCapacity
 import org.bukkit.Sound
@@ -21,12 +22,15 @@ class PlayerFishListener(private val plugin: CommsCraft) : Listener {
     private fun onPlayerFishEvent(e: PlayerFishEvent) {
         val user = plugin.userManager.userMap[e.player.uniqueId] ?: return
 
-        if (e.state == PlayerFishEvent.State.FISHING) onCast(e, user)
-        else if (e.state == PlayerFishEvent.State.CAUGHT_FISH) onFishCaught(e, user)
+        when (e.state) {
+            PlayerFishEvent.State.FISHING -> onCast(e, user)
+            PlayerFishEvent.State.CAUGHT_FISH -> onFishCaught(e, user)
+            else -> return
+        }
     }
 
     private fun onCast(e: PlayerFishEvent, user: User) {
-        if (user.currentFishCaughtCapacity() >= calculateMaxFishCapacity(user.fishCapacityUpgrades)) {
+        if (user.currentFishCaughtCapacity >= calculateMaxFishCapacity(user.upgrades.getOrDefault(Upgrade.FISH_CAPACITY, 0))) {
             e.player.sendConfigMessage("FISHING-MAX-FISH-CAPACITY-REACHED")
             e.isCancelled = true
         }
