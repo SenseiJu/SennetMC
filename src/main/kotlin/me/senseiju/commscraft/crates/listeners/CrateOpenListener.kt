@@ -17,15 +17,10 @@ class CrateOpenListener(plugin: CommsCraft, private val cratesManager: CratesMan
 
     @EventHandler
     private fun onPlayerRightClickCrate(e: PlayerInteractEvent) {
-        if (!e.action.name.contains("RIGHT_CLICK") || e.item == null || e.material != Material.CHEST
-            || e.hand == EquipmentSlot.OFF_HAND) return
+        if (cratesManager.isItemCrate(e.item!!) || e.item == null || !e.action.name.contains("RIGHT_CLICK")
+                || e.hand == EquipmentSlot.OFF_HAND) return
 
-        val nbtItem = NBTItem(e.item)
-        if (!nbtItem.hasKey("crate-id")) return
-
-        val crateId = nbtItem.getString("crate-id")
-
-        cratesManager.cratesMap[crateId]?.selectRandomReward()?.executeCommands(e.player)
+        cratesManager.getCrateFromItem(e.item!!)?.selectRandomReward()?.executeCommands(e.player)
 
         e.player.inventory.itemInMainHand.amount = e.player.inventory.itemInMainHand.amount - 1
     }

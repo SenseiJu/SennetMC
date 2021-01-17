@@ -8,11 +8,13 @@ import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.crates.commands.CombineCratesCommand
 import me.senseiju.commscraft.crates.commands.CratesCommand
 import me.senseiju.commscraft.crates.listeners.CrateOpenListener
+import me.senseiju.commscraft.crates.listeners.CratePlaceListener
 import me.senseiju.commscraft.crates.listeners.PlayerFishListener
 import me.senseiju.commscraft.datastorage.DataFile
 import me.senseiju.commscraft.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 import java.util.zip.DeflaterOutputStream
 
 class CratesManager(private val plugin: CommsCraft) : BaseManager {
@@ -28,7 +30,7 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
         registerCommands(plugin.commandManager)
         registerEvents()
     }
-    
+
     override fun registerCommands(cm: CommandManager) {
         registerCommandCompletions(cm.completionHandler)
 
@@ -42,6 +44,7 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
 
     override fun registerEvents() {
         CrateOpenListener(plugin, this)
+        CratePlaceListener(plugin, this)
         PlayerFishListener(plugin, this)
     }
 
@@ -51,7 +54,13 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
         loadCrates()
     }
 
-    fun selectRandomCrate() : Crate = probabilityChance(cratesMap.values.map { it to it.probabilityPerCast }.toMap())
+    fun isItemCrate(itemStack: ItemStack): Boolean {
+        return itemStack.type == Material.CHEST && NBTItem(itemStack).hasKey("crate-id")
+    }
+
+    fun getCrateFromItem(itemStack: ItemStack): Crate? = cratesMap[NBTItem(itemStack).getString("crate-id")]
+
+    fun selectRandomCrate(): Crate = probabilityChance(cratesMap.values.map { it to it.probabilityPerCast }.toMap())
 
     fun combineCrates(player: Player) {
         val currentCrates = HashMap<String, Int>()
@@ -106,7 +115,7 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun loadRewards(rewardsMapList: List<Map<*, *>>) : List<Reward> {
+    private fun loadRewards(rewardsMapList: List<Map<*, *>>): List<Reward> {
         val newRewardsList = ArrayList<Reward>()
 
         rewardsMapList.forEach {
