@@ -82,7 +82,7 @@ class CollectablesCommand(private val plugin: CommsCraft, private val collectabl
     fun completionForSetSubCommand(args: List<String>, sender: CommandSender) : List<String> {
         return when(args.size) {
             0 -> return plugin.server.onlinePlayers.map { it.name }
-            1 -> return plugin.server.onlinePlayers.map { it.name }.filter { it.startsWith(args[0]) }
+            1 -> return plugin.server.onlinePlayers.map { it.name }.filter { it.startsWith(args[0], true) }
             2 -> {
                 val player = plugin.server.getPlayer(args[0]) ?: return emptyList()
                 val user = plugin.userManager.userMap[player.uniqueId] ?: return emptyList()

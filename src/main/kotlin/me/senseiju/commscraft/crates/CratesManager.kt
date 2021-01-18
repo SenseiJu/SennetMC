@@ -8,14 +8,12 @@ import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.crates.commands.CombineCratesCommand
 import me.senseiju.commscraft.crates.commands.CratesCommand
 import me.senseiju.commscraft.crates.listeners.CrateOpenListener
-import me.senseiju.commscraft.crates.listeners.CratePlaceListener
 import me.senseiju.commscraft.crates.listeners.PlayerFishListener
 import me.senseiju.commscraft.datastorage.DataFile
 import me.senseiju.commscraft.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import java.util.zip.DeflaterOutputStream
 
 class CratesManager(private val plugin: CommsCraft) : BaseManager {
 
@@ -44,7 +42,6 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
 
     override fun registerEvents() {
         CrateOpenListener(plugin, this)
-        CratePlaceListener(plugin, this)
         PlayerFishListener(plugin, this)
     }
 

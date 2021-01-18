@@ -4,7 +4,7 @@ import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.fishes.FishType
-import me.senseiju.commscraft.users.Upgrade
+import me.senseiju.commscraft.upgrades.Upgrade
 import me.senseiju.commscraft.users.User
 import me.senseiju.commscraft.users.calculateMaxFishCapacity
 import org.bukkit.Sound

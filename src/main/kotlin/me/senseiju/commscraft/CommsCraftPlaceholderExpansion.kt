@@ -1,7 +1,7 @@
 package me.senseiju.commscraft
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion
-import me.senseiju.commscraft.users.Upgrade
+import me.senseiju.commscraft.upgrades.Upgrade
 import me.senseiju.commscraft.users.calculateMaxFishCapacity
 import me.senseiju.commscraft.users.calculateSpeedboatSpeedMultiplier
 import org.bukkit.entity.Player

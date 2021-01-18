@@ -5,6 +5,8 @@ import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import me.senseiju.commscraft.CommsCraft
+import me.senseiju.commscraft.settings.Setting
+import me.senseiju.commscraft.upgrades.Upgrade
 import javax.sql.rowset.CachedRowSet
 import javax.sql.rowset.RowSetProvider
 
@@ -29,9 +31,18 @@ class Database(plugin: CommsCraft, configPath: String) {
     }
 
     private fun createTables() {
-        updateQuery("CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36) NOT NULL, `fish_capacity_upgrades` INT, " +
-                "`speedboat_speed_upgrades` INT, `treasure_finder_upgrades` INT, `discovery_upgrades` INT, `crate_master_upgrades` INT, " +
-                "`negotiate_upgrades` INT, `player_speed_upgrades` INT, UNIQUE(`uuid`));")
+        updateQuery("CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36) NOT NULL);")
+
+        updateQuery("CREATE TABLE IF NOT EXISTS `settings`(`uuid` CHAR(36) NOT NULL, " +
+                "`${Setting.TOGGLE_AUTO_CRATE_COMBINING.databaseField}` TINYINT, " +
+                "UNIQUE(`uuid`));")
+
+        updateQuery("CREATE TABLE IF NOT EXISTS `upgrades`(`uuid` CHAR(36) NOT NULL, " +
+                "`${Upgrade.FISH_CAPACITY.databaseField}` INT, `${Upgrade.SPEEDBOAT_SPEED.databaseField}` INT, " +
+                "`${Upgrade.TREASURE_FINDER.databaseField}` INT, `${Upgrade.DISCOVERY.databaseField}` INT, " +
+                "`${Upgrade.CRATE_MASTER.databaseField}` INT, `${Upgrade.NEGOTIATE.databaseField}` INT, " +
+                "`${Upgrade.PLAYER_SPEED.databaseField}` INT, " +
+                "UNIQUE(`uuid`));")
 
         updateQuery("CREATE TABLE IF NOT EXISTS `fish_caught`(`uuid` CHAR(36) NOT NULL, `fish_type` CHAR(255) NOT NULL, " +
                 "`current` INT, `total` INT, UNIQUE KEY `key_uuid_fish_type`(`uuid`, `fish_type`));")

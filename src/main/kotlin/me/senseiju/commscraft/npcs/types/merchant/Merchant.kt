@@ -3,13 +3,12 @@ package me.senseiju.commscraft.npcs.types.merchant
 import me.senseiju.commscraft.npcs.BaseNpc
 import me.senseiju.commscraft.npcs.createBasicNpc
 import me.senseiju.commscraft.npcs.types.NpcType
-import net.citizensnpcs.api.CitizensAPI
+import me.senseiju.commscraft.npcs.types.merchant.gui.showMerchantGui
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
 import org.bukkit.Location
 import org.bukkit.Material
-import org.bukkit.entity.EntityType
 import org.bukkit.inventory.ItemStack
 
 private const val SKIN_TEXTURE = "eyJ0aW1lc3RhbXAiOjE1ODgwMjIwMTYzODMsInByb2ZpbGVJZCI6IjE5MjUyMWI0ZWZkYjQyNWM4OTMxZjAyYTg0OTZlMTFiIiwicHJvZmlsZU5hbWUiOiJTZXJpYWxpemFibGUiLCJzaWduYXR1cmVSZXF1aXJlZCI6dHJ1ZSwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzU0OTY5ZDU1NDY0NmVmNWE5NGRlNDcyODBlYTY3ZTJkYzMwNmM3YTA5YTQwMjE5MDMzNDQyMGRhYTA2YzM2MDYifX19"

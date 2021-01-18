@@ -8,8 +8,9 @@ import com.comphenix.protocol.events.PacketEvent
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.PERMISSION_SPEEDBOAT_USE
 import me.senseiju.commscraft.extensions.sendConfigMessage
+import me.senseiju.commscraft.extensions.string
 import me.senseiju.commscraft.speedboat.SpeedboatManager
-import me.senseiju.commscraft.users.Upgrade
+import me.senseiju.commscraft.upgrades.Upgrade
 import me.senseiju.commscraft.utils.ObjectSet
 import org.bukkit.entity.Boat
 import org.bukkit.event.EventHandler
@@ -98,8 +99,8 @@ class SpeedboatListener(private val plugin: CommsCraft, speedboatManager: Speedb
 
         playerSpeedboatToggle[e.player.uniqueId] = !playerSpeedboatToggle[e.player.uniqueId]!!
 
-        val toggle = if (playerSpeedboatToggle[e.player.uniqueId]!!) "&a&lTrue" else "&c&lFalse"
-        e.player.sendConfigMessage("SPEEDBOAT-TOGGLE", ObjectSet("{toggle}", toggle))
+        e.player.sendConfigMessage("SPEEDBOAT-TOGGLE",
+                ObjectSet("{toggle}", playerSpeedboatToggle[e.player.uniqueId]!!.string))
     }
 
     fun reload() {

@@ -6,7 +6,7 @@ import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color
-import me.senseiju.commscraft.users.Upgrade
+import me.senseiju.commscraft.upgrades.Upgrade
 import me.senseiju.commscraft.users.User
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Material

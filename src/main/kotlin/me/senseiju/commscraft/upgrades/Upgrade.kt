@@ -1,4 +1,4 @@
-package me.senseiju.commscraft.users
+package me.senseiju.commscraft.upgrades
 
 import java.util.*
 import javax.sql.rowset.CachedRowSet

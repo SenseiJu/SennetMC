@@ -1,8 +1,6 @@
 package me.senseiju.commscraft.users
 
-import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.npcs.types.NpcType
-import org.bukkit.plugin.java.JavaPlugin
 
 private val MERCHANT_CONFIG = NpcType.MERCHANT.dataFile.config
 private val SAILOR_CONFIG = NpcType.SAILOR.dataFile.config
