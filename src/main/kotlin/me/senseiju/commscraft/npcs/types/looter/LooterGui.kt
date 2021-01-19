@@ -1,4 +1,4 @@
-package me.senseiju.commscraft.npcs.types.looter.gui
+package me.senseiju.commscraft.npcs.types.looter
 
 import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.guis.Gui
@@ -15,7 +15,7 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
-private val NPC_TYPE = NpcType.MERCHANT
+private val NPC_TYPE = NpcType.LOOTER
 private val NPC_CONFIG = NPC_TYPE.dataFile.config
 
 private val plugin = JavaPlugin.getPlugin(CommsCraft::class.java)
@@ -34,7 +34,7 @@ fun showLooterGui(player: Player) {
 }
 
 private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
-    val currentUpgrades = user.upgrades.computeIfAbsent(Upgrade.TREASURE_FINDER) { 0 }
+    val currentUpgrades = user.getUpgrade(Upgrade.TREASURE_FINDER)
     val upgradeIncrement = NPC_CONFIG.getDouble("treasure-finder-upgrade-increment", 0.01)
     val upgradeMax = NPC_CONFIG.getInt("treasure-finder-upgrade-max", 50)
     val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("treasure-finder-upgrade-starting-cost", 300.0),
@@ -53,7 +53,7 @@ private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
 }
 
 private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
-    val currentUpgrades = user.upgrades.computeIfAbsent(Upgrade.DISCOVERY) { 0 }
+    val currentUpgrades = user.getUpgrade(Upgrade.DISCOVERY)
     val upgradeIncrement = NPC_CONFIG.getDouble("discovery-upgrade-increment", 0.01)
     val upgradeMax = NPC_CONFIG.getInt("discovery-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("discovery-upgrade-starting-cost", 300.0),
@@ -72,7 +72,7 @@ private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
 }
 
 private fun createCrateMasterUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
-    val currentUpgrades = user.upgrades.computeIfAbsent(Upgrade.CRATE_MASTER) { 0 }
+    val currentUpgrades = user.getUpgrade(Upgrade.CRATE_MASTER)
     val upgradeIncrement = NPC_CONFIG.getDouble("crate-master-upgrade-increment", 0.25)
     val upgradeMax = NPC_CONFIG.getInt("crate-master-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("crate-master-upgrade-starting-cost", 300.0),

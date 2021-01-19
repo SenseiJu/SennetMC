@@ -40,8 +40,9 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
         userMap[uuid] = User(uuid,
                 plugin.collectablesManager.fetchCollectables(uuid),
                 plugin.fishManager.fetchFishCaught(uuid),
-                plugin.upgradesManager.fetchUpgrades(uuid))
-                plugin.settingsManager.fetchSettings(uuid)
+                plugin.upgradesManager.fetchUpgrades(uuid),
+                plugin.settingsManager.fetchSettings(uuid),
+                plugin.modelsManager.fetchModels(uuid))
     }
 
     fun saveUsers() {
@@ -50,6 +51,7 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
             plugin.collectablesManager.updateCollectables(uuid, user.collectables)
             plugin.upgradesManager.updateUpgrades(uuid, user.upgrades)
             plugin.settingsManager.updateSettings(uuid, user.settings)
+            plugin.modelsManager.updateModels(uuid, user.models)
         }
     }
 

@@ -33,6 +33,9 @@ class Database(plugin: CommsCraft, configPath: String) {
     private fun createTables() {
         updateQuery("CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36) NOT NULL);")
 
+        updateQuery("CREATE TABLE IF NOT EXISTS `models`(`uuid` CHAR(36) NOT NULL, `model_type` CHAR(255) NOT NULL, " +
+                "`model_data` INT NOT NULL, UNIQUE KEY `key_uuid_model`(`uuid`, `model_type`, `model_data`));")
+
         updateQuery("CREATE TABLE IF NOT EXISTS `settings`(`uuid` CHAR(36) NOT NULL, " +
                 "`${Setting.TOGGLE_AUTO_CRATE_COMBINING.databaseField}` TINYINT, " +
                 "UNIQUE(`uuid`));")

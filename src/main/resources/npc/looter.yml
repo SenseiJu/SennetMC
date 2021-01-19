@@ -2,3 +2,11 @@ treasure-finder-upgrade-increment: 0.01
 treasure-finder-upgrade-max: 50
 treasure-finder-upgrade-starting-cost: 300
 
+discovery-upgrade-increment: 0.01
+discovery-upgrade-max: 50
+discovery-upgrade-starting-cost: 300
+
+crate-master-upgrade-increment: 0.01
+crate-master-upgrade-max: 50
+crate-master-upgrade-starting-cost: 300
+

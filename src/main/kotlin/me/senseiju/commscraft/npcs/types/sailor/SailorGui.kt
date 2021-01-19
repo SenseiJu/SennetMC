@@ -32,7 +32,7 @@ fun showSailorGui(player: Player) {
 }
 
 private fun createSpeedboatSpeedUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
-    val currentUpgrades = user.upgrades.computeIfAbsent(Upgrade.SPEEDBOAT_SPEED) { 0 }
+    val currentUpgrades = user.getUpgrade(Upgrade.SPEEDBOAT_SPEED)
     val upgradeIncrement = NPC_CONFIG.getDouble("speedboat-speed-upgrade-increment", 0.01)
     val upgradeMax = NPC_CONFIG.getInt("speedboat-speed-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("speedboat-speed-upgrade-starting-cost", 300.0),

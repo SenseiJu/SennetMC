@@ -35,9 +35,6 @@ class SaveUsersTask(private val plugin: CommsCraft, private val userManager: Use
     }
 
     private fun cleanupUsers() {
-        val onlineUUIDs = HashSet<UUID>()
-        plugin.server.onlinePlayers.forEach { onlineUUIDs.add(it.uniqueId) }
-
-        userManager.userMap.keys.forEach { if (!onlineUUIDs.contains(it)) userManager.userMap.remove(it) }
+        userManager.userMap.keys.toTypedArray().forEach { if (!plugin.server.getOfflinePlayer(it).isOnline) userManager.userMap.remove(it) }
     }
 }

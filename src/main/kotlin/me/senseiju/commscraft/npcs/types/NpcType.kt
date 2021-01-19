@@ -10,7 +10,8 @@ enum class NpcType(fileName: String, npcName: String) {
     FISHMONGER("fishmonger.yml", "&3&lFishmonger Freddy"),
     MERCHANT("merchant.yml", "&6&lMerchant Manny"),
     SAILOR("sailor.yml", "&b&lSailor Sally"),
-    LOOTER("looter.yml", "&d&lLooter Lincoln");
+    LOOTER("looter.yml", "&d&lLooter Lincoln"),
+    DESIGNER("designer.yml", "&e&lDesigner Darren");
 
     val dataFile = DataFile(JavaPlugin.getPlugin(CommsCraft::class.java), "npc/$fileName", true)
     val npcName = npcName.color()
@@ -19,7 +20,7 @@ enum class NpcType(fileName: String, npcName: String) {
         fun isNpc(npc: NPC): Boolean {
             if (!npc.data().has("npc-type")) return false
 
-            return values().contains(npc.data().get("npc-type"))
+            return values().contains(valueOf(npc.data().get("npc-type")))
         }
     }
 }

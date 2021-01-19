@@ -46,7 +46,7 @@ private fun toggleableSettingGuiItem(gui: Gui, user: User, material: Material, n
                                      setting: Setting, callback: Callback) : GuiItem {
     val loreWithToggle = ArrayList<String>(lore)
     loreWithToggle.add("")
-    loreWithToggle.add("&b&oCurrent setting: ${user.settings.getOrDefault(setting, setting.default).string}")
+    loreWithToggle.add("&b&oCurrent setting: ${user.getSetting(setting).string}")
 
     return ItemBuilder.from(material)
             .setName(name.color())

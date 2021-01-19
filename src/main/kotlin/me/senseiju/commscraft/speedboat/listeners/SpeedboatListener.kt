@@ -65,7 +65,7 @@ class SpeedboatListener(private val plugin: CommsCraft, speedboatManager: Speedb
 
                     val vector = Vector(x, 0.0, y)
 
-                    boatEntity.velocity = vector.multiply(0.3 + (user.upgrades.getOrDefault(Upgrade.SPEEDBOAT_SPEED, 0) * speedIncrement))
+                    boatEntity.velocity = vector.multiply(0.3 + (user.getUpgrade(Upgrade.SPEEDBOAT_SPEED) * speedIncrement))
 
                     playerSpeedboatCurrentVector[e.player.uniqueId] = vector
 

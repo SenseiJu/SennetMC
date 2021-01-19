@@ -11,6 +11,7 @@ import me.senseiju.commscraft.npcs.commands.SpawnNpcCommand
 import me.senseiju.commscraft.npcs.events.NpcClickEvent
 import me.senseiju.commscraft.npcs.types.NpcType
 import me.senseiju.commscraft.npcs.types.NpcType.*
+import me.senseiju.commscraft.npcs.types.designer.Designer
 import me.senseiju.commscraft.npcs.types.fishmonger.Fishmonger
 import me.senseiju.commscraft.npcs.types.looter.Looter
 import me.senseiju.commscraft.npcs.types.merchant.Merchant
@@ -25,6 +26,7 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
         npcMap[MERCHANT] = Merchant()
         npcMap[SAILOR] = Sailor()
         npcMap[LOOTER] = Looter()
+        npcMap[DESIGNER] = Designer()
 
         registerEvents()
         registerCommandParameters(plugin.commandManager.parameterHandler)
@@ -55,8 +57,4 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
     override fun reload() {
         NpcType.values().forEach { it.dataFile.reload() }
     }
-}
-
-fun calculateNextUpgradeCost(baseCost: Double, currentUpgrades: Int, growthRate: Double = 1.15) : Double {
-    return "%.2f".format(baseCost * growthRate.pow(currentUpgrades)).toDouble()
 }

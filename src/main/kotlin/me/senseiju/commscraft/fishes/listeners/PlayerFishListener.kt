@@ -30,7 +30,7 @@ class PlayerFishListener(private val plugin: CommsCraft) : Listener {
     }
 
     private fun onCast(e: PlayerFishEvent, user: User) {
-        if (user.currentFishCaughtCapacity >= calculateMaxFishCapacity(user.upgrades.getOrDefault(Upgrade.FISH_CAPACITY, 0))) {
+        if (user.currentFishCaughtCapacity >= calculateMaxFishCapacity(user.getUpgrade(Upgrade.FISH_CAPACITY))) {
             e.player.sendConfigMessage("FISHING-MAX-FISH-CAPACITY-REACHED")
             e.isCancelled = true
         }

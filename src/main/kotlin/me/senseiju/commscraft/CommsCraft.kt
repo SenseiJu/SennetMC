@@ -3,6 +3,8 @@ package me.senseiju.commscraft
 import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
 import me.senseiju.commscraft.collectables.CollectablesManager
+import me.senseiju.commscraft.models.commands.HatCommand
+import me.senseiju.commscraft.models.commands.ModelCommand
 import me.senseiju.commscraft.commands.ReloadCommand
 import me.senseiju.commscraft.crates.CratesManager
 import me.senseiju.commscraft.datastorage.DataFile
@@ -10,6 +12,7 @@ import me.senseiju.commscraft.datastorage.Database
 import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.fishes.FishManager
+import me.senseiju.commscraft.models.ModelsManager
 import me.senseiju.commscraft.npcs.NpcManager
 import me.senseiju.commscraft.settings.SettingsManager
 import me.senseiju.commscraft.speedboat.SpeedboatManager
@@ -32,6 +35,7 @@ class CommsCraft : JavaPlugin() {
     lateinit var cratesManager: CratesManager
     lateinit var upgradesManager: UpgradesManager
     lateinit var settingsManager: SettingsManager
+    lateinit var modelsManager: ModelsManager
 
     override fun onEnable() {
         setupCommands()
@@ -44,6 +48,7 @@ class CommsCraft : JavaPlugin() {
         cratesManager = CratesManager(this)
         upgradesManager = UpgradesManager(this)
         settingsManager = SettingsManager(this)
+        modelsManager = ModelsManager(this)
 
         CommsCraftPlaceholderExpansion(this)
     }
@@ -81,5 +86,6 @@ class CommsCraft : JavaPlugin() {
         commandManager = CommandManager(this)
         commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
         commandManager.register(ReloadCommand(this))
+        commandManager.register(HatCommand(this))
     }
 }

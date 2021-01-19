@@ -24,11 +24,5 @@ class Sailor : BaseNpc {
         npc.spawn(location)
     }
 
-    override fun onNpcRightClick(e: NPCRightClickEvent) {
-        if (e.npc.name != NPC_TYPE.npcName) {
-            return
-        }
-
-        showSailorGui(e.clicker)
-    }
+    override fun onNpcRightClick(e: NPCRightClickEvent) { showSailorGui(e.clicker) }
 }

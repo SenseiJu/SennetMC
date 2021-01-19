@@ -1,0 +1,10 @@
+# By default, all hats made will use the 'minecraft:bedrock' item
+# to store the models and make them viewable
+HELMET:
+  100: "&b&lDeep Sea Diver Helmet"
+  200: "&b&lTV"
+  300: "&b&lFisherman's Hat"
+  400: "&b&lKasa Straw Hat"
+
+FISHING_ROD:
+  100: "&d&lStick Rod"

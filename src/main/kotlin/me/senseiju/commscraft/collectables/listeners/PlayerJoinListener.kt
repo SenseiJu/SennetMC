@@ -18,7 +18,7 @@ class PlayerJoinListener(plugin: CommsCraft, private val collectablesManager: Co
 
         val collectableId = if (nameLength <= 3) "${nameLength}char" else null
 
-        if (collectableId != null && collectablesManager.collectablesFile.config.getKeys(false).contains(collectableId)) {
+        if (collectableId != null && !collectablesManager.collectables.containsKey(collectableId)) {
             collectablesManager.addCollectable(e.player.uniqueId, collectableId)
         }
     }

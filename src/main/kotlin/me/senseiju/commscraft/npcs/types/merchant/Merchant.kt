@@ -3,7 +3,6 @@ package me.senseiju.commscraft.npcs.types.merchant
 import me.senseiju.commscraft.npcs.BaseNpc
 import me.senseiju.commscraft.npcs.createBasicNpc
 import me.senseiju.commscraft.npcs.types.NpcType
-import me.senseiju.commscraft.npcs.types.merchant.gui.showMerchantGui
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
@@ -25,11 +24,5 @@ class Merchant : BaseNpc {
         npc.spawn(location)
     }
 
-    override fun onNpcRightClick(e: NPCRightClickEvent) {
-        if (e.npc.name != NPC_TYPE.npcName) {
-            return
-        }
-
-        showMerchantGui(e.clicker)
-    }
+    override fun onNpcRightClick(e: NPCRightClickEvent) { showMerchantGui(e.clicker) }
 }

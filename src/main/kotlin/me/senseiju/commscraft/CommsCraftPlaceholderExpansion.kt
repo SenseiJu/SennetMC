@@ -43,11 +43,11 @@ class CommsCraftPlaceholderExpansion(private val plugin: CommsCraft) : Placehold
             "user_current_fish_capacity" ->
                 user.currentFishCaughtCapacity.toString()
             "user_max_fish_capacity" ->
-                calculateMaxFishCapacity(user.upgrades.getOrDefault(Upgrade.FISH_CAPACITY, 0)).toString()
+                calculateMaxFishCapacity(user.getUpgrade(Upgrade.FISH_CAPACITY)).toString()
             "user_speedboat_current_toggle" ->
                 if (speedboatManager.playerSpeedboatToggle.getOrDefault(player.uniqueId, false)) "&a&lTrue" else "&c&lFalse"
             "user_speedboat_speed_multiplier" ->
-                calculateSpeedboatSpeedMultiplier(user.upgrades.getOrDefault(Upgrade.SPEEDBOAT_SPEED, 0)).toString()
+                calculateSpeedboatSpeedMultiplier(user.getUpgrade(Upgrade.SPEEDBOAT_SPEED)).toString()
             "user_collectables_collected" ->
                 user.collectables.size.toString()
             else -> null

@@ -20,7 +20,7 @@ import kotlin.collections.HashMap
 
 class CollectablesManager(private val plugin: CommsCraft) : BaseManager {
 
-    val collectablesFile = DataFile(plugin, "collectables.yml", true)
+    private val collectablesFile = DataFile(plugin, "collectables.yml", true)
 
     var collectables = HashMap<String, Collectable>()
         private set

@@ -4,6 +4,7 @@ import me.senseiju.commscraft.npcs.types.NpcType
 import net.citizensnpcs.api.CitizensAPI
 import net.citizensnpcs.api.npc.NPC
 import org.bukkit.entity.EntityType
+import kotlin.math.pow
 
 private val REGISTRY = CitizensAPI.getNPCRegistry()
 
@@ -14,4 +15,8 @@ fun createBasicNpc(npcType: NpcType) : NPC {
     npc.isProtected = true
 
     return npc
+}
+
+fun calculateNextUpgradeCost(baseCost: Double, currentUpgrades: Int, growthRate: Double = 1.15) : Double {
+    return "%.2f".format(baseCost * growthRate.pow(currentUpgrades)).toDouble()
 }

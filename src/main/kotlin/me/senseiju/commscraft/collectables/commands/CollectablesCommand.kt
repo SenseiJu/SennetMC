@@ -20,15 +20,14 @@ class CollectablesCommand(private val plugin: CommsCraft, private val collectabl
 
     @Default
     fun onCommand(player: Player) {
-        onShowSubCommand(player, null)
+        onShowSubCommand(player, player)
     }
 
     @SubCommand("show")
     fun onShowSubCommand(sender: Player, @Optional @Completion("#players") targetPlayer: Player?) {
         defaultScope.launch {
             if (targetPlayer == null) {
-                val user = plugin.userManager.userMap[sender.uniqueId] ?: return@launch
-                showCollectablesGui(sender, user)
+                sender.sendConfigMessage("CANNOT-FIND-TARGET")
                 return@launch
             }
 
@@ -51,7 +50,7 @@ class CollectablesCommand(private val plugin: CommsCraft, private val collectabl
                 return@launch
             }
 
-            if (!collectablesManager.collectablesFile.config.getKeys(false).contains(collectableId)) {
+            if (!collectablesManager.collectables.containsKey(collectableId)) {
                 sender.sendConfigMessage("COLLECTABLES-CANNOT-FIND-COLLECTABLE")
                 return@launch
             }
@@ -69,7 +68,7 @@ class CollectablesCommand(private val plugin: CommsCraft, private val collectabl
                 return@launch
             }
 
-            if (!collectablesManager.collectablesFile.config.getKeys(false).contains(collectableId)) {
+            if (!collectablesManager.collectables.containsKey(collectableId)) {
                 sender.sendConfigMessage("COLLECTABLES-CANNOT-FIND-COLLECTABLE")
                 return@launch
             }
@@ -81,14 +80,14 @@ class CollectablesCommand(private val plugin: CommsCraft, private val collectabl
     @CompleteFor("set")
     fun completionForSetSubCommand(args: List<String>, sender: CommandSender) : List<String> {
         return when(args.size) {
-            0 -> return plugin.server.onlinePlayers.map { it.name }
-            1 -> return plugin.server.onlinePlayers.map { it.name }.filter { it.startsWith(args[0], true) }
+            0 -> plugin.server.onlinePlayers.map { it.name }
+            1 -> plugin.server.onlinePlayers.map { it.name }.filter { it.startsWith(args[0], true) }
             2 -> {
                 val player = plugin.server.getPlayer(args[0]) ?: return emptyList()
                 val user = plugin.userManager.userMap[player.uniqueId] ?: return emptyList()
 
                 collectablesManager.collectables.keys.minus(user.collectables).toList()
-            }
+                }
             else -> emptyList()
         }
     }
@@ -96,8 +95,8 @@ class CollectablesCommand(private val plugin: CommsCraft, private val collectabl
     @CompleteFor("remove")
     fun completionForRemoveSubCommand(args: List<String>, sender: CommandSender) : List<String> {
         return when(args.size) {
-            0 -> return plugin.server.onlinePlayers.map { it.name }
-            1 -> return plugin.server.onlinePlayers.map { it.name }.filter { it.startsWith(args[0], true) }
+            0 -> plugin.server.onlinePlayers.map { it.name }
+            1 -> plugin.server.onlinePlayers.map { it.name }.filter { it.startsWith(args[0], true) }
             2 -> {
                 val player = plugin.server.getPlayer(args[0]) ?: return emptyList()
                 val user = plugin.userManager.userMap[player.uniqueId] ?: return emptyList()
