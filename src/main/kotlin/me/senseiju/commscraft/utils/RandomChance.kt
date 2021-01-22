@@ -10,11 +10,10 @@ fun <T> probabilityChance(objectProbabilities: Map<T, Double>) : T {
 
     objectProbabilities.forEach { (obj, probability) ->
         count += probability
-        println(count)
         if (random <= count) {
             return obj
         }
     }
 
-    return objectProbabilities.keys.last()
+    return objectProbabilities.keys.first()
 }

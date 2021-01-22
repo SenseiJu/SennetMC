@@ -4,6 +4,7 @@ import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.fishes.FishType
+import me.senseiju.commscraft.settings.Setting
 import me.senseiju.commscraft.upgrades.Upgrade
 import me.senseiju.commscraft.users.User
 import me.senseiju.commscraft.users.calculateMaxFishCapacity
@@ -40,8 +41,10 @@ class PlayerFishListener(private val plugin: CommsCraft) : Listener {
         val fishType = FishType.selectRandomType()
         user.addToCurrentFish(fishType, 1)
 
-        e.player.sendTitle("&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
-            "&6+${fishType.capacity()} capacity".color(), 10, 40, 10)
+        if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_MESSAGE)) {
+            e.player.sendTitle("&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
+                    "&6+${fishType.capacity()} capacity".color(), 10, 40, 10)
+        }
         e.player.playSound(e.player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
 
         e.expToDrop = 0

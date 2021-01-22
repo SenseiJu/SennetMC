@@ -13,7 +13,8 @@ class User(val uuid: UUID,
            val fishCaught: EnumMap<FishType, FishCaughtData> = EnumMap(FishType::class.java),
            val upgrades: EnumMap<Upgrade, Int> = EnumMap(Upgrade::class.java),
            val settings: EnumMap<Setting, Boolean> = EnumMap(Setting::class.java),
-           val models: EnumMap<ModelType, ArrayList<Int>> = EnumMap(ModelType::class.java)) {
+           val models: EnumMap<ModelType, ArrayList<Int>> = EnumMap(ModelType::class.java),
+           val activeModels: EnumMap<ModelType, Int> = EnumMap(ModelType::class.java)) {
 
     val currentFishCaughtCapacity get() = fishCaught.entries.sumBy { it.key.capacity() * it.value.current }
 

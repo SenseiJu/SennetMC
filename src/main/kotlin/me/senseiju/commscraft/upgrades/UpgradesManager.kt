@@ -5,17 +5,6 @@ import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
 import java.util.*
 
-private val UPDATE_QUERY = "INSERT INTO `upgrades`(`uuid`, " +
-        "`${Upgrade.FISH_CAPACITY.databaseField}`, `${Upgrade.SPEEDBOAT_SPEED.databaseField}`, " +
-        "`${Upgrade.TREASURE_FINDER.databaseField}`, `${Upgrade.DISCOVERY.databaseField}`, " +
-        "`${Upgrade.CRATE_MASTER.databaseField}`, `${Upgrade.NEGOTIATE.databaseField}`, " +
-        "`${Upgrade.PLAYER_SPEED.databaseField}`) VALUES(?,?,?,?,?,?,?,?)" +
-        "ON DUPLICATE KEY UPDATE " +
-        "`${Upgrade.FISH_CAPACITY.databaseField}`=?, `${Upgrade.SPEEDBOAT_SPEED.databaseField}`=?, " +
-        "`${Upgrade.TREASURE_FINDER.databaseField}`=?, `${Upgrade.DISCOVERY.databaseField}`=?, " +
-        "`${Upgrade.CRATE_MASTER.databaseField}`=?, `${Upgrade.NEGOTIATE.databaseField}`=?, " +
-        "`${Upgrade.PLAYER_SPEED.databaseField}`=?;"
-
 private const val SELECT_QUERY = "SELECT * FROM `upgrades` WHERE `uuid`=?;"
 
 class UpgradesManager(private val plugin: CommsCraft) : BaseManager {
@@ -43,6 +32,6 @@ class UpgradesManager(private val plugin: CommsCraft) : BaseManager {
     fun updateUpgrades(uuid: UUID, upgradesMap: EnumMap<Upgrade, Int>) {
         val upgrades = Upgrade.values().map { upgradesMap.getOrDefault(it, 0) }.toTypedArray()
 
-        plugin.database.updateQuery(UPDATE_QUERY, uuid.toString(), *upgrades, *upgrades)
+        plugin.database.updateQuery(Upgrade.buildUpdateDatabaseQuery(), uuid.toString(), *upgrades, *upgrades)
     }
 }

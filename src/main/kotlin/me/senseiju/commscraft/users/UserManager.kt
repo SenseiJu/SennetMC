@@ -3,8 +3,8 @@ package me.senseiju.commscraft.users
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.users.listeners.PlayerJoinEvent
-import me.senseiju.commscraft.users.listeners.PlayerPreLoginEvent
+import me.senseiju.commscraft.users.listeners.PlayerJoinListener
+import me.senseiju.commscraft.users.listeners.PlayerPreLoginListener
 import me.senseiju.commscraft.users.tasks.SaveUsersTask
 import java.util.*
 import kotlin.collections.HashMap
@@ -22,8 +22,8 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
     }
 
     override fun registerEvents() {
-        PlayerPreLoginEvent(plugin, this)
-        PlayerJoinEvent(plugin, this)
+        PlayerPreLoginListener(plugin, this)
+        PlayerJoinListener(plugin, this)
     }
 
     override fun reload() {}
@@ -42,7 +42,8 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
                 plugin.fishManager.fetchFishCaught(uuid),
                 plugin.upgradesManager.fetchUpgrades(uuid),
                 plugin.settingsManager.fetchSettings(uuid),
-                plugin.modelsManager.fetchModels(uuid))
+                plugin.modelsManager.fetchModels(uuid),
+                plugin.modelsManager.fetchActiveModels(uuid))
     }
 
     fun saveUsers() {
@@ -52,6 +53,7 @@ class UserManager(private val plugin: CommsCraft) : BaseManager {
             plugin.upgradesManager.updateUpgrades(uuid, user.upgrades)
             plugin.settingsManager.updateSettings(uuid, user.settings)
             plugin.modelsManager.updateModels(uuid, user.models)
+            plugin.modelsManager.updateActiveModels(uuid, user.activeModels)
         }
     }
 

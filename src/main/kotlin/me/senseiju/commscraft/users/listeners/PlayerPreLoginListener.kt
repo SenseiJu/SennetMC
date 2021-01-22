@@ -9,7 +9,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 
-class PlayerPreLoginEvent(plugin: CommsCraft, private val userManager: UserManager) : Listener {
+class PlayerPreLoginListener(plugin: CommsCraft, private val userManager: UserManager) : Listener {
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)

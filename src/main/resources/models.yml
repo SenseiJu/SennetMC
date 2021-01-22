@@ -1,10 +1,26 @@
-# By default, all hats made will use the 'minecraft:bedrock' item
-# to store the models and make them viewable
+# Materials for model types
+#
+# HELMET: BEDROCK
+# FISHING_ROD: FISHING_ROD
+# BACKPACK: OBSIDIAN
+
 HELMET:
   100: "&b&lDeep Sea Diver Helmet"
-  200: "&b&lTV"
-  300: "&b&lFisherman's Hat"
+  200: "&b&lFisherman's Hat"
+  300: "&b&lMonkey on Head"
   400: "&b&lKasa Straw Hat"
+  500: "&b&lTop Hat"
+  600: "&b&lTV"
+  700: "&b&lSnapback"
+  800: "&b&lSupreme Headband"
+  900: "&b&lBrown Moose Antlers"
+  1000: "&b&lWhite Moose Antlers"
+  1100: "&b&lUshanka"
 
 FISHING_ROD:
   100: "&d&lStick Rod"
+
+BACKPACK:
+  100: "&b&lQuiver"
+  200: "&b&lKatana"
+  300: "&b&lScuba Tank"

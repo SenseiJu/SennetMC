@@ -19,11 +19,8 @@ class Crate(private val id: String, val name: String, description: List<String>,
         player.inventory.addItemOrDropNaturally(player.location, item.clone().asQuantity(amount))
     }
 
-    fun giveRandomNumberOfCrates(player: Player) {
-        giveCrate(player, generateRandomNumberOfCrates())
-    }
 
-    private fun generateRandomNumberOfCrates() : Int {
+    fun generateRandomNumberOfCrates() : Int {
         if (maxCratesPerCast <= 0) return 0
         return Random.nextInt(1, maxCratesPerCast + 1)
     }

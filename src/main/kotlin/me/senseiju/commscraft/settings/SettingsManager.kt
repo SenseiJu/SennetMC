@@ -7,10 +7,6 @@ import me.senseiju.commscraft.extensions.int
 import me.senseiju.commscraft.settings.commands.SettingsCommand
 import java.util.*
 
-private val UPDATE_QUERY =
-        "INSERT INTO `settings`(`uuid`, `${Setting.TOGGLE_AUTO_CRATE_COMBINING.databaseField}`) VALUES(?,?)" +
-        "ON DUPLICATE KEY UPDATE `${Setting.TOGGLE_AUTO_CRATE_COMBINING.databaseField}`=?;"
-
 private const val SELECT_QUERY = "SELECT * FROM `settings` WHERE `uuid`=?;"
 
 class SettingsManager(private val plugin: CommsCraft) : BaseManager {
@@ -39,6 +35,6 @@ class SettingsManager(private val plugin: CommsCraft) : BaseManager {
     fun updateSettings(uuid: UUID, settingsMap: EnumMap<Setting, Boolean>) {
         val settings = Setting.values().map { (settingsMap.getOrDefault(it, it.default)).int }.toTypedArray()
 
-        plugin.database.updateQuery(UPDATE_QUERY, uuid.toString(), *settings, *settings)
+        plugin.database.updateQuery(Setting.buildUpdateDatabaseQuery(), uuid.toString(), *settings, *settings)
     }
 }

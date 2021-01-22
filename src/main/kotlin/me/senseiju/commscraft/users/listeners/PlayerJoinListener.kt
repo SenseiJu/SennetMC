@@ -8,7 +8,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 
-class PlayerJoinEvent(plugin: CommsCraft, private val userManager: UserManager) : Listener {
+class PlayerJoinListener(plugin: CommsCraft, private val userManager: UserManager) : Listener {
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)

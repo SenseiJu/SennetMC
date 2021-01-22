@@ -18,7 +18,7 @@ fun defaultPaginatedGuiTemplate(row: Int, pageSize: Int, name: String) : Paginat
             .asGuiItem { gui.next() })
 
     gui.filler.fillBottom(ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE)
-            .setName("")
+            .setName(" ")
             .asGuiItem())
 
     return gui

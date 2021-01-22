@@ -26,7 +26,9 @@ fun showSettingsGui(player: Player, user: User) {
                 .setName(" ")
                 .asGuiItem())
 
-        gui.addItem(toggleAutoCombiningCrates(gui, user))
+        gui.addItem(toggleAutoCombiningCrates(gui, user),
+                toggleFishCaughtMessage(gui, user))
+
 
         scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
@@ -40,6 +42,16 @@ private fun toggleAutoCombiningCrates(gui: Gui, user: User) : GuiItem {
 
     return toggleableSettingGuiItem(gui, user, Material.CHEST, "&b&lAuto combining crates", lore,
             Setting.TOGGLE_AUTO_CRATE_COMBINING) { toggleAutoCombiningCrates(gui, user) }
+}
+
+private fun toggleFishCaughtMessage(gui: Gui, user: User) : GuiItem {
+    val lore = ArrayList<String>()
+    lore.add("")
+    lore.add("&7Toggle whether or not the title message")
+    lore.add("&7when catching a fish should be shown")
+
+    return toggleableSettingGuiItem(gui, user, Material.FISHING_ROD, "&b&lFish caught message", lore,
+            Setting.TOGGLE_FISH_CAUGHT_MESSAGE) { toggleFishCaughtMessage(gui, user) }
 }
 
 private fun toggleableSettingGuiItem(gui: Gui, user: User, material: Material, name: String, lore: List<String>,

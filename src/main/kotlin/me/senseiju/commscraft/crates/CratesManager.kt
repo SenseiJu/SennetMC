@@ -57,7 +57,8 @@ class CratesManager(private val plugin: CommsCraft) : BaseManager {
 
     fun getCrateFromItem(itemStack: ItemStack): Crate? = cratesMap[NBTItem(itemStack).getString("crate-id")]
 
-    fun selectRandomCrate(): Crate = probabilityChance(cratesMap.values.map { it to it.probabilityPerCast }.toMap())
+    fun selectRandomCrate(increasedProbability: Double = 0.0): Crate =
+            probabilityChance(cratesMap.values.map { it to (it.probabilityPerCast + increasedProbability) }.toMap())
 
     fun combineCrates(player: Player) {
         val currentCrates = HashMap<String, Int>()

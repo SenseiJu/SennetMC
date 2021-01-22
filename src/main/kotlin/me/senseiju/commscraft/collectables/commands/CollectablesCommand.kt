@@ -50,11 +50,6 @@ class CollectablesCommand(private val plugin: CommsCraft, private val collectabl
                 return@launch
             }
 
-            if (!collectablesManager.collectables.containsKey(collectableId)) {
-                sender.sendConfigMessage("COLLECTABLES-CANNOT-FIND-COLLECTABLE")
-                return@launch
-            }
-
             collectablesManager.addCollectable(targetPlayer.uniqueId, collectableId, sender)
         }
     }
@@ -65,11 +60,6 @@ class CollectablesCommand(private val plugin: CommsCraft, private val collectabl
         defaultScope.launch {
             if (targetPlayer == null) {
                 sender.sendConfigMessage("CANNOT-FIND-TARGET")
-                return@launch
-            }
-
-            if (!collectablesManager.collectables.containsKey(collectableId)) {
-                sender.sendConfigMessage("COLLECTABLES-CANNOT-FIND-COLLECTABLE")
                 return@launch
             }
 

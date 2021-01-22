@@ -41,7 +41,7 @@ private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem 
     val lore = ArrayList<String>()
     lore.add("")
     lore.add("&7Increase your fishing capacity! Each upgrade")
-    lore.add("&7increments your boat speed by &e$upgradeIncrement")
+    lore.add("&7increments your capacity by &e$upgradeIncrement")
     lore.add("")
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")

@@ -12,10 +12,14 @@ import me.senseiju.commscraft.datastorage.Database
 import me.senseiju.commscraft.extensions.color
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.fishes.FishManager
+import me.senseiju.commscraft.models.ModelType
 import me.senseiju.commscraft.models.ModelsManager
+import me.senseiju.commscraft.models.removeModelArmorStandPassenger
 import me.senseiju.commscraft.npcs.NpcManager
+import me.senseiju.commscraft.settings.Setting
 import me.senseiju.commscraft.settings.SettingsManager
 import me.senseiju.commscraft.speedboat.SpeedboatManager
+import me.senseiju.commscraft.upgrades.Upgrade
 import me.senseiju.commscraft.upgrades.UpgradesManager
 import me.senseiju.commscraft.users.UserManager
 import org.bukkit.plugin.java.JavaPlugin
@@ -54,15 +58,17 @@ class CommsCraft : JavaPlugin() {
     }
 
     override fun onDisable() {
-        for (player in server.onlinePlayers) {
-            if (player.openInventory.topInventory.holder is BaseGui) {
-                player.closeInventory()
+        server.onlinePlayers.forEach {
+            if (it.openInventory.topInventory.holder is BaseGui) {
+                it.closeInventory()
             }
+
+            removeModelArmorStandPassenger(it, ModelType.BACKPACK)
+
+            it.kickPlayer("&8&lCommsCraft &bis currently reloading...".color())
         }
 
         userManager.saveUsersTask.cancel()
-
-        kickAllPlayers()
     }
 
     fun reload() {
@@ -74,18 +80,13 @@ class CommsCraft : JavaPlugin() {
         fishManager.reload()
         userManager.reload()
         cratesManager.reload()
-    }
-
-    private fun kickAllPlayers() {
-        server.onlinePlayers.forEach {
-            it.kickPlayer("&8&lCommsCraft &bis currently reloading...".color())
-        }
+        settingsManager.reload()
+        modelsManager.reload()
     }
 
     private fun setupCommands() {
         commandManager = CommandManager(this)
         commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
         commandManager.register(ReloadCommand(this))
-        commandManager.register(HatCommand(this))
     }
 }

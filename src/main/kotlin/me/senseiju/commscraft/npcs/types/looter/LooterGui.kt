@@ -73,15 +73,14 @@ private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
 
 private fun createCrateMasterUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.CRATE_MASTER)
-    val upgradeIncrement = NPC_CONFIG.getDouble("crate-master-upgrade-increment", 0.25)
     val upgradeMax = NPC_CONFIG.getInt("crate-master-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("crate-master-upgrade-starting-cost", 300.0),
             currentUpgrades)
 
     val lore = ArrayList<String>()
     lore.add("")
-    lore.add("&7Increase the chance of getting higher tier crates on")
-    lore.add("&7a successful cast by a probability of &e$upgradeIncrement")
+    lore.add("&7Increase the chance of getting higher tier")
+    lore.add("&7crates on a successful cast")
     lore.add("")
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")

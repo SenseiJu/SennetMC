@@ -36,16 +36,12 @@ class Database(plugin: CommsCraft, configPath: String) {
         updateQuery("CREATE TABLE IF NOT EXISTS `models`(`uuid` CHAR(36) NOT NULL, `model_type` CHAR(255) NOT NULL, " +
                 "`model_data` INT NOT NULL, UNIQUE KEY `key_uuid_model`(`uuid`, `model_type`, `model_data`));")
 
-        updateQuery("CREATE TABLE IF NOT EXISTS `settings`(`uuid` CHAR(36) NOT NULL, " +
-                "`${Setting.TOGGLE_AUTO_CRATE_COMBINING.databaseField}` TINYINT, " +
-                "UNIQUE(`uuid`));")
+        updateQuery("CREATE TABLE IF NOT EXISTS `active_models`(`uuid` CHAR(36) NOT NULL, `model_type` CHAR(255) NOT NULL, " +
+                "`model_data` INT NOT NULL, UNIQUE KEY `key_uuid_model_type`(`uuid`, `model_type`));")
 
-        updateQuery("CREATE TABLE IF NOT EXISTS `upgrades`(`uuid` CHAR(36) NOT NULL, " +
-                "`${Upgrade.FISH_CAPACITY.databaseField}` INT, `${Upgrade.SPEEDBOAT_SPEED.databaseField}` INT, " +
-                "`${Upgrade.TREASURE_FINDER.databaseField}` INT, `${Upgrade.DISCOVERY.databaseField}` INT, " +
-                "`${Upgrade.CRATE_MASTER.databaseField}` INT, `${Upgrade.NEGOTIATE.databaseField}` INT, " +
-                "`${Upgrade.PLAYER_SPEED.databaseField}` INT, " +
-                "UNIQUE(`uuid`));")
+        updateQuery(Setting.buildCreateDatabaseQuery())
+
+        updateQuery(Upgrade.buildCreateDatabaseQuery())
 
         updateQuery("CREATE TABLE IF NOT EXISTS `fish_caught`(`uuid` CHAR(36) NOT NULL, `fish_type` CHAR(255) NOT NULL, " +
                 "`current` INT, `total` INT, UNIQUE KEY `key_uuid_fish_type`(`uuid`, `fish_type`));")
@@ -61,14 +57,12 @@ class Database(plugin: CommsCraft, configPath: String) {
     }
 
     fun query(q: String, vararg replacements: Any = emptyArray()): CachedRowSet {
-        source.connection.use {
-            val s = it.prepareStatement(q)
+        source.connection.use { conn ->
+            val s = conn.prepareStatement(q)
 
             var i = 1
 
-            for (replacement in replacements) {
-                s.setObject(i++, replacement)
-            }
+            replacements.forEach { replacement -> s.setObject(i++, replacement) }
 
             val set = s.executeQuery()
 
@@ -86,13 +80,12 @@ class Database(plugin: CommsCraft, configPath: String) {
     }
 
     fun updateQuery(q: String, vararg replacements: Any = emptyArray()) {
-        source.connection.use {
-            val s = it.prepareStatement(q)
+        source.connection.use { conn ->
+            val s = conn.prepareStatement(q)
 
             var i = 1
-            for (replacement in replacements) {
-                s.setObject(i++, replacement)
-            }
+
+            replacements.forEach { replacement -> s.setObject(i++, replacement) }
 
             try {
                 s.executeUpdate()

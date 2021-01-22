@@ -8,7 +8,7 @@ import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.npcs.commands.RemoveNpcCommand
 import me.senseiju.commscraft.npcs.commands.SpawnNpcCommand
-import me.senseiju.commscraft.npcs.events.NpcClickEvent
+import me.senseiju.commscraft.npcs.listeners.NpcClickListener
 import me.senseiju.commscraft.npcs.types.NpcType
 import me.senseiju.commscraft.npcs.types.NpcType.*
 import me.senseiju.commscraft.npcs.types.designer.Designer
@@ -16,7 +16,6 @@ import me.senseiju.commscraft.npcs.types.fishmonger.Fishmonger
 import me.senseiju.commscraft.npcs.types.looter.Looter
 import me.senseiju.commscraft.npcs.types.merchant.Merchant
 import me.senseiju.commscraft.npcs.types.sailor.Sailor
-import kotlin.math.pow
 
 class NpcManager(private val plugin: CommsCraft) : BaseManager {
     val npcMap = HashMap<NpcType, BaseNpc>()
@@ -51,7 +50,7 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
     }
 
     override fun registerEvents() {
-        NpcClickEvent(plugin, this)
+        NpcClickListener(plugin, this)
     }
 
     override fun reload() {

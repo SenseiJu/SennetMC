@@ -34,6 +34,15 @@ SPEEDBOAT-TOGGLE: "&bSpeedboat toggled to {toggle}"
 CRATES-CANNOT-FIND-CRATE: "&cCannot find the specified crate"
 CRATES-INVALID-AMOUNT: "&cInvalid amount of crates specified"
 
+# Models
+MODELS-INVALID-MODEL-TYPE: "&cInvalid model type specified"
+MODELS-CANNOT-FIND-MODEL: "&cCannot find the specified model"
+MODELS-TARGET-HAS-MODEL: "&cTarget already has this model"
+MODELS-TARGET-DOES-NOT-HAVE-MODEL: "&cTarget does not have this model"
+MODELS-TARGET-MODEL-SET: "&aYou have just unlocked the &7'{modelName}&7' &amodel"
+MODELS-MODEL-SET: "&aModel has been set"
+MODELS-MODEL-REMOVED: "&aModel has been removed"
+
 # User
 USER-SAVING-STARTED: "&aSaving user data..."
 USER-SAVING-FINISHED: "&aFinished saving user data"
