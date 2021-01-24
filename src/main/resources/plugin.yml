@@ -1,10 +1,10 @@
-name: CommsCraft
+name: SennetMC
 author: SenseiJu
 
 version: ${version}
 api-version: 1.16
 
-main: me.senseiju.commscraft.CommsCraft
+main: me.senseiju.sennetmc.SennetMC
 
 depend:
   - Citizens

@@ -35,18 +35,18 @@ dependencies {
 }
 
 shadowJar {
-    archiveFileName.set("CommsCraft.jar")
+    archiveFileName.set("SennetMC.jar")
 
-    relocate "me.mattstudios.mfgui", "me.senseiju.commscraft.shaded.mfgui"
-    relocate "me.mattstudios.mf", "me.senseiju.commscraft.shaded.mf"
-    relocate "de.tr7zw.changeme.nbtapi", "me.senseiju.commscraft.shaded.nbtapi"
+    relocate "me.mattstudios.mfgui", "me.senseiju.sennetmc.shaded.mfgui"
+    relocate "me.mattstudios.mf", "me.senseiju.sennetmc.shaded.mf"
+    relocate "de.tr7zw.changeme.nbtapi", "me.senseiju.sennetmc.shaded.nbtapi"
 
     minimize()
 }
 
 task copyJarToServer(type: Copy) {
     from shadowJar
-    into "D:/Servers/Minecraft/CommsCraft/plugins/update"
+    into "D:/Servers/Minecraft/SennetMC/plugins/update"
 }
 
 processResources {
