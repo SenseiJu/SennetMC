@@ -33,7 +33,7 @@ class HelmetListener(plugin: SennetMC, modelsManager: ModelsManager) : Listener 
     @EventHandler
     private fun onPlayerSpawn(e: PlayerPostRespawnEvent) {
         val user = users[e.player.uniqueId] ?: return
-        val model = models[ModelType.HELMET]?.get(user.activeModels[ModelType.HELMET]) ?: return
+        val model = models[ModelType.HAT]?.get(user.activeModels[ModelType.HAT]) ?: return
 
         e.player.inventory.helmet = model.itemStack
     }

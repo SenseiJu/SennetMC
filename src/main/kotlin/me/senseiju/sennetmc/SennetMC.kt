@@ -11,7 +11,7 @@ import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishManager
 import me.senseiju.sennetmc.models.ModelsManager
-import me.senseiju.sennetmc.models.removeBackpackModel
+import me.senseiju.sennetmc.models.removeBackpackModelArmorStand
 import me.senseiju.sennetmc.npcs.NpcManager
 import me.senseiju.sennetmc.settings.SettingsManager
 import me.senseiju.sennetmc.speedboat.SpeedboatManager
@@ -58,7 +58,7 @@ class SennetMC : JavaPlugin() {
                 it.closeInventory()
             }
 
-            removeBackpackModel(it)
+            removeBackpackModelArmorStand(it)
 
             it.kickPlayer(messagesFile.config.getString("RELOADING", "&8&lSennetMC &bis currently reloading...")?.color())
         }

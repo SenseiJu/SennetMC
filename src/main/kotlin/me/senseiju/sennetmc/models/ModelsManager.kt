@@ -14,6 +14,7 @@ import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.models.commands.HatCommand
 import me.senseiju.sennetmc.models.commands.ModelCommand
 import me.senseiju.sennetmc.models.listeners.BackpackListener
+import me.senseiju.sennetmc.models.listeners.FishingRodListener
 import me.senseiju.sennetmc.models.listeners.HelmetListener
 import me.senseiju.sennetmc.models.listeners.SleeveListener
 import me.senseiju.sennetmc.utils.ObjectSet
@@ -49,7 +50,9 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
     override fun registerEvents() {
         HelmetListener(plugin, this)
         SleeveListener(plugin, this)
+        FishingRodListener(plugin)
         BackpackListener(plugin)
+
     }
 
     private fun registerCommandParameters(ph: ParameterHandler) {

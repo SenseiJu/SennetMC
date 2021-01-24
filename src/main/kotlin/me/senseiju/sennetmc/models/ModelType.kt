@@ -7,7 +7,7 @@ import javax.sql.rowset.CachedRowSet
 import kotlin.collections.ArrayList
 
 enum class ModelType(val material: Material) {
-    HELMET(Material.BEDROCK),
+    HAT(Material.BEDROCK),
     FISHING_ROD(Material.FISHING_ROD),
     BACKPACK(Material.OBSIDIAN),
     SLEEVE(Material.STONE);

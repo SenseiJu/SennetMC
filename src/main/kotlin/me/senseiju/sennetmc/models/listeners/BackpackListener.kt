@@ -9,11 +9,14 @@ import org.bukkit.entity.Player
 import org.bukkit.entity.Pose
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.Action
 import org.bukkit.event.entity.EntityPoseChangeEvent
 import org.bukkit.event.entity.PlayerDeathEvent
+import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.inventory.EquipmentSlot
 import org.spigotmc.event.entity.EntityDismountEvent
 import java.util.*
 import kotlin.collections.HashMap
@@ -37,8 +40,8 @@ class BackpackListener(private val plugin: SennetMC) : Listener {
                 return@Runnable
             }
 
-            applyBackpackModel(e.player, user)
-        }, 20L)
+            applyBackpackModelArmorStand(e.player, user)
+        }, 10L)
     }
 
     @EventHandler
@@ -55,12 +58,12 @@ class BackpackListener(private val plugin: SennetMC) : Listener {
     private fun onPlayerSpawn(e: PlayerPostRespawnEvent) {
         val user = users[e.player.uniqueId] ?: return
 
-        applyBackpackModel(e.player, user)
+        applyBackpackModelArmorStand(e.player, user)
     }
 
     @EventHandler
     private fun onPlayerQuit(e: PlayerQuitEvent) {
-        removeBackpackModel(e.player)
+        removeBackpackModelArmorStand(e.player)
     }
 
     @EventHandler
@@ -95,10 +98,19 @@ class BackpackListener(private val plugin: SennetMC) : Listener {
 
                 val user = users[player.uniqueId] ?: return
 
-                applyBackpackModel(player, user)
+                applyBackpackModelArmorStand(player, user)
             }
 
-            else -> removeBackpackModel(player)
+            else -> removeBackpackModelArmorStand(player)
+        }
+    }
+
+    @EventHandler
+    private fun onPlayerInteract(e: PlayerInteractEvent) {
+        if (e.hand == EquipmentSlot.OFF_HAND && e.action == Action.RIGHT_CLICK_BLOCK) {
+            if (e.item != null && ModelType.isItemModel(e.item!!)) {
+                e.isCancelled = true
+            }
         }
     }
 }

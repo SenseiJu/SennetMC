@@ -2,7 +2,6 @@ package me.senseiju.sennetmc.models
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.users.User
-import org.bukkit.Sound
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType
@@ -12,9 +11,12 @@ import org.bukkit.plugin.java.JavaPlugin
 
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
 private val models = plugin.modelsManager.models
-private val backpack = ModelType.BACKPACK
 
-fun applyBackpackModel(player: Player, user: User) {
+private val backpack = ModelType.BACKPACK
+private val hat = ModelType.HAT
+private val sleeve = ModelType.SLEEVE
+
+fun applyBackpackModelArmorStand(player: Player, user: User) {
     val stand = player.location.world.spawnEntity(player.location, EntityType.ARMOR_STAND) as ArmorStand
 
     stand.isInvisible = true
@@ -27,10 +29,20 @@ fun applyBackpackModel(player: Player, user: User) {
     player.addPassenger(stand)
 }
 
-fun removeBackpackModel(player: Player) {
+fun removeBackpackModelArmorStand(player: Player) {
     player.passengers.forEach {
         if (isPassengerBackpackModel(it)) {
             it.remove()
+            return
+        }
+    }
+}
+
+fun removeBackpackModel(player: Player) {
+    player.passengers.forEach {
+        if (isPassengerBackpackModel(it)) {
+            it as ArmorStand
+            it.equipment?.helmet = null
             return
         }
     }
@@ -45,4 +57,24 @@ fun isPassengerBackpackModel(entity: Entity) : Boolean {
         }
     }
     return false
+}
+
+fun applyHatModel(player: Player, user: User) {
+    player.inventory.helmet = models[hat]?.get(user.activeModels[hat])?.itemStack
+}
+
+fun removeHatModel(player: Player) {
+    player.inventory.helmet = null
+}
+
+fun applySleeveModel(player: Player, user: User) {
+    player.inventory.setItemInOffHand(models[sleeve]?.get(user.activeModels[sleeve])?.itemStack)
+}
+
+fun removeSleeveModel(player: Player) {
+    player.inventory.setItemInOffHand(null)
+}
+
+fun removeFishingRodModel(player: Player) {
+    TODO()
 }

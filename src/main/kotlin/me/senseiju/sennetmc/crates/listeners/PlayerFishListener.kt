@@ -20,27 +20,6 @@ class PlayerFishListener(plugin: SennetMC, private val cratesManager: CratesMana
     }
 
     @EventHandler
-    private fun onPlayerFishEvent2(e: PlayerFishEvent) {
-        if (!e.player.inventory.itemInMainHand.itemMeta.hasCustomModelData()) {
-            return
-        }
-
-        if (e.state == PlayerFishEvent.State.REEL_IN) {
-            val item = e.player.inventory.itemInMainHand
-            val meta = item.itemMeta
-            meta.setCustomModelData(meta.customModelData - 1)
-            item.itemMeta = meta
-            e.player.inventory.setItemInMainHand(item)
-        } else {
-            val item = e.player.inventory.itemInMainHand
-            val meta = item.itemMeta
-            meta.setCustomModelData(meta.customModelData + 1)
-            item.itemMeta = meta
-            e.player.inventory.setItemInMainHand(item)
-        }
-    }
-
-    @EventHandler
     private fun onPlayerFishEvent(e: PlayerFishEvent) {
         if (e.state != PlayerFishEvent.State.CAUGHT_FISH) {
             return
