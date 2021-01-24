@@ -9,7 +9,8 @@ import kotlin.collections.ArrayList
 enum class ModelType(val material: Material) {
     HELMET(Material.BEDROCK),
     FISHING_ROD(Material.FISHING_ROD),
-    BACKPACK(Material.OBSIDIAN);
+    BACKPACK(Material.OBSIDIAN),
+    SLEEVE(Material.STONE);
 
     companion object {
         fun modelsFromSet(set: CachedRowSet) : EnumMap<ModelType, ArrayList<Int>> {

@@ -21,6 +21,7 @@ HELMET:
   1400: "&b&lBobble Hat"
   1500: "&b&lBeanie"
   1600: "&b&lTraffic Cone"
+  1700: "&b&lThug Life Glasses"
 
 FISHING_ROD:
   100: "&d&lStick Rod"
@@ -31,3 +32,8 @@ BACKPACK:
   300: "&b&lScuba Tank"
   400: "&b&lAdventurer's Backpack"
   500: "&b&lBlue Demon Wings"
+  600: "&b&lAcoustic Guitar"
+  700: "&b&lShark Fin"
+
+SLEEVE:
+  100: "&b&lMegatron Shield"

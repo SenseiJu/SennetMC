@@ -2,6 +2,7 @@ package me.senseiju.sennetmc.models
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.users.User
+import org.bukkit.Sound
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Entity
 import org.bukkit.entity.EntityType

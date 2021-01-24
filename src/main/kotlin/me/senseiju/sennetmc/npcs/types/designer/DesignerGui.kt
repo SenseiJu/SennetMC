@@ -28,13 +28,17 @@ fun showDesignerGui(player: Player) {
         val user = plugin.userManager.userMap[player.uniqueId] ?: return@launch
         val gui = defaultGuiTemplate(3, npcType.npcName)
 
-        gui.setItem(2, 4, ItemBuilder.from(Material.LEATHER_HELMET)
+        gui.setItem(2, 3, ItemBuilder.from(Material.LEATHER_HELMET)
                 .setName("&b&lHelmets".color())
                 .asGuiItem { showModelTypeGui(player, user, ModelType.HELMET) })
 
-        gui.setItem(2, 6, ItemBuilder.from(Material.LEATHER_CHESTPLATE)
+        gui.setItem(2, 5, ItemBuilder.from(Material.LEATHER_CHESTPLATE)
                 .setName("&b&lBackpacks".color())
                 .asGuiItem { showModelTypeGui(player, user, ModelType.BACKPACK) })
+
+        gui.setItem(2, 7, ItemBuilder.from(Material.WOODEN_SWORD)
+                .setName("&b&lSleeves".color())
+                .asGuiItem { showModelTypeGui(player, user, ModelType.SLEEVE) })
 
         scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
@@ -55,6 +59,7 @@ private fun showModelTypeGui(player: Player, user: User, modelType: ModelType) {
                             when (modelType) {
                                 ModelType.HELMET -> equipHelmetModel(player, user, model)
                                 ModelType.BACKPACK -> equipBackpackModel(player, user, model)
+                                ModelType.SLEEVE -> equipSleeveModel(player, user, model)
                             }
                         })
             }
@@ -81,5 +86,12 @@ private fun equipHelmetModel(player: Player, user: User, model: Model) {
     user.activeModels[model.modelType] = model.modelData
 
     player.inventory.helmet = model.itemStack
+    player.playSound(player.location, Sound.BLOCK_CHAIN_PLACE, 1.0f, 1.0f)
+}
+
+private fun equipSleeveModel(player: Player, user: User, model: Model) {
+    user.activeModels[model.modelType] = model.modelData
+
+    player.inventory.setItemInOffHand(model.itemStack)
     player.playSound(player.location, Sound.BLOCK_CHAIN_PLACE, 1.0f, 1.0f)
 }
