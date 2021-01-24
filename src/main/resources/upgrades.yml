@@ -1,0 +1,47 @@
+#
+# Fishmonger NPC
+#
+fishing-capacity-starting-capacity: 30
+fishing-capacity_upgrade-starting-cost: 500.0
+fishing-capacity-upgrade-increment: 5
+fishing-capacity-upgrade-max: 20
+
+feast-upgrade-random-player-chance: 0.8
+feast-upgrade-starting-cost: 500.0
+feast-upgrade-increment: 0.01
+feast-upgrade-max: 20
+
+# Ensure (bait increment * bait max) is never above 600
+bait-upgrade-starting-cost: 500.0
+bait-upgrade-increment: 10
+bait-upgrade-max: 20
+
+negotiate-upgrade-starting-cost: 500.0
+negotiate-upgrade-increment: 0.01
+negotiate-upgrade-max: 20
+
+deuce-upgrade-starting-cost: 500.0
+deuce-upgrade-increment: 0.01
+deuce-upgrade-max: 20
+
+#
+# Looter NPC
+#
+treasure-finder-upgrade-increment: 0.01
+treasure-finder-upgrade-max: 50
+treasure-finder-upgrade-starting-cost: 300
+
+discovery-upgrade-increment: 0.01
+discovery-upgrade-max: 50
+discovery-upgrade-starting-cost: 300
+
+crate-master-upgrade-increment: 0.4
+crate-master-upgrade-max: 50
+crate-master-upgrade-starting-cost: 300
+
+#
+# Sailor NPC
+#
+speedboat-speed-upgrade-increment: 0.03
+speedboat-speed-upgrade-starting-cost: 300.0
+speedboat-speed-upgrade-max: 20

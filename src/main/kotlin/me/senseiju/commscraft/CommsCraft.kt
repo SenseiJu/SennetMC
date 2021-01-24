@@ -3,8 +3,6 @@ package me.senseiju.commscraft
 import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
 import me.senseiju.commscraft.collectables.CollectablesManager
-import me.senseiju.commscraft.models.commands.HatCommand
-import me.senseiju.commscraft.models.commands.ModelCommand
 import me.senseiju.commscraft.commands.ReloadCommand
 import me.senseiju.commscraft.crates.CratesManager
 import me.senseiju.commscraft.datastorage.DataFile
@@ -14,12 +12,10 @@ import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.fishes.FishManager
 import me.senseiju.commscraft.models.ModelType
 import me.senseiju.commscraft.models.ModelsManager
-import me.senseiju.commscraft.models.removeModelArmorStandPassenger
+import me.senseiju.commscraft.models.removeBackpackModel
 import me.senseiju.commscraft.npcs.NpcManager
-import me.senseiju.commscraft.settings.Setting
 import me.senseiju.commscraft.settings.SettingsManager
 import me.senseiju.commscraft.speedboat.SpeedboatManager
-import me.senseiju.commscraft.upgrades.Upgrade
 import me.senseiju.commscraft.upgrades.UpgradesManager
 import me.senseiju.commscraft.users.UserManager
 import org.bukkit.plugin.java.JavaPlugin
@@ -44,15 +40,15 @@ class CommsCraft : JavaPlugin() {
     override fun onEnable() {
         setupCommands()
 
+        userManager = UserManager(this)
+        modelsManager = ModelsManager(this)
+        upgradesManager = UpgradesManager(this)
         collectablesManager = CollectablesManager(this)
         npcManager = NpcManager(this)
         fishManager = FishManager(this)
-        userManager = UserManager(this)
         speedboatManager = SpeedboatManager(this)
         cratesManager = CratesManager(this)
-        upgradesManager = UpgradesManager(this)
         settingsManager = SettingsManager(this)
-        modelsManager = ModelsManager(this)
 
         CommsCraftPlaceholderExpansion(this)
     }
@@ -63,7 +59,7 @@ class CommsCraft : JavaPlugin() {
                 it.closeInventory()
             }
 
-            removeModelArmorStandPassenger(it, ModelType.BACKPACK)
+            removeBackpackModel(it)
 
             it.kickPlayer("&8&lCommsCraft &bis currently reloading...".color())
         }
@@ -75,6 +71,7 @@ class CommsCraft : JavaPlugin() {
         configFile.reload()
         messagesFile.reload()
 
+        upgradesManager.reload()
         collectablesManager.reload()
         npcManager.reload()
         fishManager.reload()

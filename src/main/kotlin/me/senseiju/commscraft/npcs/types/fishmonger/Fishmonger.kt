@@ -1,19 +1,13 @@
 package me.senseiju.commscraft.npcs.types.fishmonger
 
-import me.senseiju.commscraft.CommsCraft
-import me.senseiju.commscraft.extensions.color
-import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.npcs.BaseNpc
 import me.senseiju.commscraft.npcs.createBasicNpc
 import me.senseiju.commscraft.npcs.types.NpcType
-import me.senseiju.commscraft.utils.ObjectSet
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
-import net.milkbowl.vault.economy.Economy
 import org.bukkit.Location
 import org.bukkit.Material
-import org.bukkit.Sound
 import org.bukkit.inventory.ItemStack
 
 private const val SKIN_TEXTURE = "ewogICJ0aW1lc3RhbXAiIDogMTYwOTMwNDIxOTQwMywKICAicHJvZmlsZUlkIiA6ICJkMGI4MjE1OThmMTE0NzI1ODBmNmNiZTliOGUxYmU3MCIsCiAgInByb2ZpbGVOYW1lIiA6ICJqYmFydHl5IiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzQzMGMzOGU1ZjQ2MDRjZmJmZTlhMzZhMTVlYWQzMjNiZjBmNTMzOTFmMzk2NDBmYWIzMGVhYmQ3OGI1ODk5MzciCiAgICB9CiAgfQp9"
@@ -21,8 +15,7 @@ private const val SKIN_SIGNATURE = "WfIR1SfvLWiiah5JwzO5J8QkPdru+JC5Fto7gD6XKvNn
 
 private val NPC_TYPE = NpcType.FISHMONGER
 
-class Fishmonger(private val plugin: CommsCraft) : BaseNpc {
-    private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
+class Fishmonger : BaseNpc {
 
     override fun spawnNpc(location: Location) {
         val npc = createBasicNpc(NPC_TYPE)
@@ -33,30 +26,5 @@ class Fishmonger(private val plugin: CommsCraft) : BaseNpc {
         npc.spawn(location)
     }
 
-    override fun onNpcRightClick(e: NPCRightClickEvent) {
-        if (e.npc.name != NPC_TYPE.npcName) {
-            return
-        }
-
-        val user = plugin.userManager.userMap[e.clicker.uniqueId] ?: return
-
-        var totalSellPrice = 0.0
-        for ((fishType, fishCaughtData) in user.fishCaught) {
-            val sellPrice = fishType.selectRandomSellPrice() * fishCaughtData.current
-
-            totalSellPrice += "%.2f".format(sellPrice).toDouble()
-
-            fishCaughtData.current = 0
-        }
-
-        econ?.depositPlayer(e.clicker, totalSellPrice)
-
-        if (totalSellPrice > 0) {
-            e.clicker.sendTitle("&b&lSold for $${totalSellPrice}".color(), null, 20, 60, 20)
-            e.clicker.playSound(e.clicker.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
-        } else {
-            e.clicker.sendConfigMessage("FISHMONGER-NO-FISH-TO-SELL", false,
-                    ObjectSet("{fishmongerName}", e.npc.name))
-        }
-    }
+    override fun onNpcRightClick(e: NPCRightClickEvent) { showFishmongerGui(e.clicker) }
 }

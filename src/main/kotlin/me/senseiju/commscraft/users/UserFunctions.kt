@@ -1,15 +1,16 @@
 package me.senseiju.commscraft.users
 
-import me.senseiju.commscraft.npcs.types.NpcType
+import me.senseiju.commscraft.CommsCraft
+import org.bukkit.plugin.java.JavaPlugin
 
-private val MERCHANT_CONFIG = NpcType.MERCHANT.dataFile.config
-private val SAILOR_CONFIG = NpcType.SAILOR.dataFile.config
+private val plugin = JavaPlugin.getPlugin(CommsCraft::class.java)
+private val upgradesFile = plugin.upgradesManager.upgradesFile
 
 fun calculateMaxFishCapacity(upgrades: Int) : Int {
-    return MERCHANT_CONFIG.getInt("fishing_capacity-starting-capacity", 30) +
-            (MERCHANT_CONFIG.getInt("fishing-capacity-upgrade-increment", 5) * upgrades)
+    return upgradesFile.config.getInt("fishing_capacity-starting-capacity", 30) +
+            (upgradesFile.config.getInt("fishing-capacity-upgrade-increment", 5) * upgrades)
 }
 
 fun calculateSpeedboatSpeedMultiplier(upgrades: Int) : Double {
-    return (SAILOR_CONFIG.getDouble("speedboat-speed-upgrade-increment", 0.03) * upgrades) + 1
+    return (upgradesFile.config.getDouble("speedboat-speed-upgrade-increment", 0.03) * upgrades) + 1
 }

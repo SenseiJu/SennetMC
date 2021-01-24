@@ -10,8 +10,6 @@ import me.senseiju.commscraft.models.ModelsManager
 import me.senseiju.commscraft.utils.defaultScope
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.ArmorStand
-import org.bukkit.entity.EntityType
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 

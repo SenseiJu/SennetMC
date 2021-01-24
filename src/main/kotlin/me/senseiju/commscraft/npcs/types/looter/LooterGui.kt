@@ -15,15 +15,14 @@ import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
-private val NPC_TYPE = NpcType.LOOTER
-private val NPC_CONFIG = NPC_TYPE.dataFile.config
-
+private val npcType = NpcType.LOOTER
 private val plugin = JavaPlugin.getPlugin(CommsCraft::class.java)
+private val upgradesFile = plugin.upgradesManager.upgradesFile
 
 fun showLooterGui(player: Player) {
     defaultScope.launch {
         val user = plugin.userManager.userMap[player.uniqueId]!!
-        val gui = defaultGuiTemplate(3, NPC_TYPE.npcName)
+        val gui = defaultGuiTemplate(3, npcType.npcName)
 
         gui.setItem(2, 3, createTreasureFinderUpgradeGuiItem(gui, user))
         gui.setItem(2, 5, createDiscoveryUpgradeGuiItem(gui, user))
@@ -35,9 +34,9 @@ fun showLooterGui(player: Player) {
 
 private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.TREASURE_FINDER)
-    val upgradeIncrement = NPC_CONFIG.getDouble("treasure-finder-upgrade-increment", 0.01)
-    val upgradeMax = NPC_CONFIG.getInt("treasure-finder-upgrade-max", 50)
-    val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("treasure-finder-upgrade-starting-cost", 300.0),
+    val upgradeIncrement = upgradesFile.config.getDouble("treasure-finder-upgrade-increment", 0.01)
+    val upgradeMax = upgradesFile.config.getInt("treasure-finder-upgrade-max", 50)
+    val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("treasure-finder-upgrade-starting-cost", 300.0),
             currentUpgrades)
 
     val lore = ArrayList<String>()
@@ -54,9 +53,9 @@ private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
 
 private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.DISCOVERY)
-    val upgradeIncrement = NPC_CONFIG.getDouble("discovery-upgrade-increment", 0.01)
-    val upgradeMax = NPC_CONFIG.getInt("discovery-upgrade-max", 20)
-    val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("discovery-upgrade-starting-cost", 300.0),
+    val upgradeIncrement = upgradesFile.config.getDouble("discovery-upgrade-increment", 0.01)
+    val upgradeMax = upgradesFile.config.getInt("discovery-upgrade-max", 20)
+    val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("discovery-upgrade-starting-cost", 300.0),
             currentUpgrades)
 
     val lore = ArrayList<String>()
@@ -73,8 +72,8 @@ private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
 
 private fun createCrateMasterUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.CRATE_MASTER)
-    val upgradeMax = NPC_CONFIG.getInt("crate-master-upgrade-max", 20)
-    val upgradeCost = calculateNextUpgradeCost(NPC_CONFIG.getDouble("crate-master-upgrade-starting-cost", 300.0),
+    val upgradeMax = upgradesFile.config.getInt("crate-master-upgrade-max", 20)
+    val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("crate-master-upgrade-starting-cost", 300.0),
             currentUpgrades)
 
     val lore = ArrayList<String>()

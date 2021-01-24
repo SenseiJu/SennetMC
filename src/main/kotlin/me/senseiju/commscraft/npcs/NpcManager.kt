@@ -21,8 +21,8 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
     val npcMap = HashMap<NpcType, BaseNpc>()
 
     init {
-        npcMap[FISHMONGER] = Fishmonger(plugin)
-        npcMap[MERCHANT] = Merchant()
+        npcMap[FISHMONGER] = Fishmonger()
+        npcMap[MERCHANT] = Merchant(plugin)
         npcMap[SAILOR] = Sailor()
         npcMap[LOOTER] = Looter()
         npcMap[DESIGNER] = Designer()
@@ -54,6 +54,5 @@ class NpcManager(private val plugin: CommsCraft) : BaseManager {
     }
 
     override fun reload() {
-        NpcType.values().forEach { it.dataFile.reload() }
     }
 }

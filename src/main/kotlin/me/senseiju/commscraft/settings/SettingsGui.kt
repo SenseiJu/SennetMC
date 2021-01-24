@@ -27,8 +27,8 @@ fun showSettingsGui(player: Player, user: User) {
                 .asGuiItem())
 
         gui.addItem(toggleAutoCombiningCrates(gui, user),
-                toggleFishCaughtMessage(gui, user))
-
+            toggleFishCaughtMessage(gui, user),
+            toggleFishCaughtSound(gui, user))
 
         scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
@@ -37,8 +37,8 @@ fun showSettingsGui(player: Player, user: User) {
 private fun toggleAutoCombiningCrates(gui: Gui, user: User) : GuiItem {
     val lore = ArrayList<String>()
     lore.add("")
-    lore.add("&7Toggle whether or not crates should")
-    lore.add("&7automatically be combined when fished up")
+    lore.add("&7Toggle if crates should automatically")
+    lore.add("&7be combined when successfully fished up")
 
     return toggleableSettingGuiItem(gui, user, Material.CHEST, "&b&lAuto combining crates", lore,
             Setting.TOGGLE_AUTO_CRATE_COMBINING) { toggleAutoCombiningCrates(gui, user) }
@@ -47,11 +47,21 @@ private fun toggleAutoCombiningCrates(gui: Gui, user: User) : GuiItem {
 private fun toggleFishCaughtMessage(gui: Gui, user: User) : GuiItem {
     val lore = ArrayList<String>()
     lore.add("")
-    lore.add("&7Toggle whether or not the title message")
-    lore.add("&7when catching a fish should be shown")
+    lore.add("&7Toggle if the title message when")
+    lore.add("&7catching a fish should be shown")
 
     return toggleableSettingGuiItem(gui, user, Material.FISHING_ROD, "&b&lFish caught message", lore,
             Setting.TOGGLE_FISH_CAUGHT_MESSAGE) { toggleFishCaughtMessage(gui, user) }
+}
+
+private fun toggleFishCaughtSound(gui: Gui, user: User) : GuiItem {
+    val lore = ArrayList<String>()
+    lore.add("")
+    lore.add("&7Toggle if the sound when catching")
+    lore.add("&7a fish should be played")
+
+    return toggleableSettingGuiItem(gui, user, Material.FISHING_ROD, "&b&lFish caught sound", lore,
+            Setting.TOGGLE_FISH_CAUGHT_SOUND) { toggleFishCaughtSound(gui, user) }
 }
 
 private fun toggleableSettingGuiItem(gui: Gui, user: User, material: Material, name: String, lore: List<String>,

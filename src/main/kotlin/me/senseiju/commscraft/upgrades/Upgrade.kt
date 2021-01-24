@@ -1,6 +1,5 @@
 package me.senseiju.commscraft.upgrades
 
-import me.senseiju.commscraft.settings.Setting
 import java.util.*
 import javax.sql.rowset.CachedRowSet
 
@@ -11,7 +10,10 @@ enum class Upgrade(val databaseField: String, private val databaseFieldType: Str
     DISCOVERY("discovery_upgrades", "INT"),
     CRATE_MASTER("crate_master_upgrades", "INT"),
     NEGOTIATE("negotiate_upgrades", "INT"),
-    PLAYER_SPEED("player_speed_upgrades", "INT");
+    BAIT("bait_upgrades", "INT"),
+    DEUCE("deuce_upgrades", "INT"),
+    PLAYER_SPEED("player_speed_upgrades", "INT"),
+    FEAST("feast_upgrades", "INT");
 
     companion object {
         private val queryValues = "?,".repeat(values().size).removeSuffix(",")

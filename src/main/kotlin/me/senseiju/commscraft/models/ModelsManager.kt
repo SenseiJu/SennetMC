@@ -14,14 +14,11 @@ import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.models.commands.HatCommand
 import me.senseiju.commscraft.models.commands.ModelCommand
 import me.senseiju.commscraft.models.listeners.BackpackListener
-import me.senseiju.commscraft.models.listeners.UnequipHelmetModelListener
+import me.senseiju.commscraft.models.listeners.HelmetListener
+import me.senseiju.commscraft.models.listeners.SleeveListener
 import me.senseiju.commscraft.utils.ObjectSet
 import me.senseiju.commscraft.utils.defaultScope
 import org.bukkit.command.CommandSender
-import org.bukkit.entity.ArmorStand
-import org.bukkit.entity.Entity
-import org.bukkit.entity.EntityType
-import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import java.util.*
 import kotlin.collections.ArrayList
@@ -36,10 +33,10 @@ class ModelsManager(private val plugin: CommsCraft) : BaseManager {
         private set
 
     init {
+        loadModels()
+
         registerCommands(plugin.commandManager)
         registerEvents()
-
-        loadModels()
     }
 
     override fun registerCommands(cm: CommandManager) {
@@ -50,9 +47,9 @@ class ModelsManager(private val plugin: CommsCraft) : BaseManager {
     }
 
     override fun registerEvents() {
-        UnequipHelmetModelListener(plugin)
-
-        BackpackListener(plugin, this)
+        HelmetListener(plugin, this)
+        SleeveListener(plugin, this)
+        BackpackListener(plugin)
     }
 
     private fun registerCommandParameters(ph: ParameterHandler) {

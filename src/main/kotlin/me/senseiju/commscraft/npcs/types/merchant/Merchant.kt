@@ -1,13 +1,21 @@
 package me.senseiju.commscraft.npcs.types.merchant
 
+import me.senseiju.commscraft.CommsCraft
+import me.senseiju.commscraft.extensions.color
+import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.npcs.BaseNpc
 import me.senseiju.commscraft.npcs.createBasicNpc
 import me.senseiju.commscraft.npcs.types.NpcType
+import me.senseiju.commscraft.upgrades.Upgrade
+import me.senseiju.commscraft.users.User
+import me.senseiju.commscraft.utils.ObjectSet
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
+import net.milkbowl.vault.economy.Economy
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.inventory.ItemStack
 
 private const val SKIN_TEXTURE = "eyJ0aW1lc3RhbXAiOjE1ODgwMjIwMTYzODMsInByb2ZpbGVJZCI6IjE5MjUyMWI0ZWZkYjQyNWM4OTMxZjAyYTg0OTZlMTFiIiwicHJvZmlsZU5hbWUiOiJTZXJpYWxpemFibGUiLCJzaWduYXR1cmVSZXF1aXJlZCI6dHJ1ZSwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzU0OTY5ZDU1NDY0NmVmNWE5NGRlNDcyODBlYTY3ZTJkYzMwNmM3YTA5YTQwMjE5MDMzNDQyMGRhYTA2YzM2MDYifX19"
@@ -15,7 +23,10 @@ private const val SKIN_SIGNATURE = "feoHGYSz08NXIy5oUlhcThrahCagolldnojlpTqPYqFx
 
 private val NPC_TYPE = NpcType.MERCHANT
 
-class Merchant : BaseNpc {
+class Merchant(private val plugin: CommsCraft) : BaseNpc {
+
+    private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
+    private val upgradesFile = plugin.upgradesManager.upgradesFile
 
     override fun spawnNpc(location: Location) {
         val npc = createBasicNpc(NPC_TYPE)
@@ -24,5 +35,39 @@ class Merchant : BaseNpc {
         npc.spawn(location)
     }
 
-    override fun onNpcRightClick(e: NPCRightClickEvent) { showMerchantGui(e.clicker) }
+    override fun onNpcRightClick(e: NPCRightClickEvent) {
+        val user = plugin.userManager.userMap[e.clicker.uniqueId] ?: return
+        val multiplier = 1 + getNegotiateMultiplier(user)
+        val totalSellPrice = calculateSellPrice(user, multiplier)
+
+        econ?.depositPlayer(e.clicker, totalSellPrice)
+
+        if (totalSellPrice > 0) {
+            e.clicker.sendTitle("&b&lSold for $${totalSellPrice}".color(), "&6x$multiplier multiplier".color(), 20, 60, 20)
+            e.clicker.playSound(e.clicker.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
+        } else {
+            e.clicker.sendConfigMessage("MERCHANT-NO-FISH-TO-SELL", false,
+                ObjectSet("{merchantName}", e.npc.name)
+            )
+        }
+    }
+
+    private fun calculateSellPrice(user: User, multiplier: Double) : Double {
+        var totalSellPrice = 0.0
+        for ((fishType, fishCaughtData) in user.fishCaught) {
+            val sellPrice = fishType.selectRandomSellPrice() * fishCaughtData.current
+
+            totalSellPrice += "%.2f".format(sellPrice).toDouble()
+
+            fishCaughtData.current = 0
+        }
+        totalSellPrice *= multiplier
+
+        return totalSellPrice
+    }
+
+    private fun getNegotiateMultiplier(user: User) : Double {
+        return user.getUpgrade(Upgrade.NEGOTIATE)
+            .times(upgradesFile.config.getDouble("negotiate-upgrade-increment", 0.05))
+    }
 }

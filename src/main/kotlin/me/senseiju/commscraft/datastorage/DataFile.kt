@@ -8,6 +8,7 @@ class DataFile(private val plugin: CommsCraft, private val path: String, private
     private lateinit var file: File
 
     lateinit var config: YamlConfiguration
+        private set
 
     init { reload() }
 

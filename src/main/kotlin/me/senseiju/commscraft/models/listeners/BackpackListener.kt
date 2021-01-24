@@ -18,9 +18,9 @@ import org.spigotmc.event.entity.EntityDismountEvent
 import java.util.*
 import kotlin.collections.HashMap
 
-class BackpackListener(private val plugin: CommsCraft, private val modelsManager: ModelsManager) : Listener {
+class BackpackListener(private val plugin: CommsCraft) : Listener {
 
-    private val userManager = plugin.userManager
+    private val users = plugin.userManager.userMap
 
     val map = HashMap<UUID, ArmorStand>()
 
@@ -30,15 +30,21 @@ class BackpackListener(private val plugin: CommsCraft, private val modelsManager
 
     @EventHandler
     private fun onPlayerJoin(e: PlayerJoinEvent) {
-        val user = userManager.userMap[e.player.uniqueId] ?: return
+        val user = users[e.player.uniqueId] ?: return
 
-        applyModelArmorStandPassenger(e.player, user, ModelType.BACKPACK)
+        plugin.server.scheduler.runTaskLater(plugin, Runnable {
+            if (!e.player.isOnline) {
+                return@Runnable
+            }
+
+            applyBackpackModel(e.player, user)
+        }, 20L)
     }
 
     @EventHandler
     private fun onPlayerDeath(e: PlayerDeathEvent) {
         e.entity.passengers.forEach {
-            if (isPassengerModelArmorStand(it, ModelType.BACKPACK)) {
+            if (isPassengerBackpackModel(it)) {
                 it.remove()
                 return
             }
@@ -47,20 +53,20 @@ class BackpackListener(private val plugin: CommsCraft, private val modelsManager
 
     @EventHandler
     private fun onPlayerSpawn(e: PlayerPostRespawnEvent) {
-        val user = userManager.userMap[e.player.uniqueId] ?: return
+        val user = users[e.player.uniqueId] ?: return
 
-        applyModelArmorStandPassenger(e.player, user, ModelType.BACKPACK)
+        applyBackpackModel(e.player, user)
     }
 
     @EventHandler
     private fun onPlayerQuit(e: PlayerQuitEvent) {
-        removeModelArmorStandPassenger(e.player, ModelType.BACKPACK)
+        removeBackpackModel(e.player)
     }
 
     @EventHandler
     private fun onPlayerMove(e: PlayerMoveEvent) {
         e.player.passengers.forEach {
-            if (isPassengerModelArmorStand(it, ModelType.BACKPACK)) {
+            if (isPassengerBackpackModel(it)) {
                 it.setRotation(e.player.eyeLocation.yaw, e.player.eyeLocation.pitch)
             }
         }
@@ -69,7 +75,7 @@ class BackpackListener(private val plugin: CommsCraft, private val modelsManager
     @EventHandler
     private fun onModelArmorStandDismount(e: EntityDismountEvent) {
         if (e.dismounted is Player && (e.dismounted.pose == Pose.STANDING || e.dismounted.pose == Pose.SNEAKING)
-                && isPassengerModelArmorStand(e.entity, ModelType.BACKPACK)) {
+                && isPassengerBackpackModel(e.entity)) {
             e.isCancelled = true
         }
     }
@@ -82,17 +88,17 @@ class BackpackListener(private val plugin: CommsCraft, private val modelsManager
         when (e.pose) {
             Pose.STANDING, Pose.SNEAKING -> {
                 player.passengers.forEach {
-                    if (isPassengerModelArmorStand(it, ModelType.BACKPACK)) {
+                    if (isPassengerBackpackModel(it)) {
                         return
                     }
                 }
 
-                val user = userManager.userMap[player.uniqueId] ?: return
+                val user = users[player.uniqueId] ?: return
 
-                applyModelArmorStandPassenger(player, user, ModelType.BACKPACK)
+                applyBackpackModel(player, user)
             }
 
-            else -> removeModelArmorStandPassenger(player, ModelType.BACKPACK)
+            else -> removeBackpackModel(player)
         }
     }
 }

@@ -3,11 +3,14 @@ package me.senseiju.commscraft.upgrades
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.commscraft.BaseManager
 import me.senseiju.commscraft.CommsCraft
+import me.senseiju.commscraft.datastorage.DataFile
 import java.util.*
 
 private const val SELECT_QUERY = "SELECT * FROM `upgrades` WHERE `uuid`=?;"
 
 class UpgradesManager(private val plugin: CommsCraft) : BaseManager {
+
+    val upgradesFile = DataFile(plugin, "upgrades.yml", true)
 
     init {
         registerCommands(plugin.commandManager)
@@ -21,6 +24,7 @@ class UpgradesManager(private val plugin: CommsCraft) : BaseManager {
     }
 
     override fun reload() {
+        upgradesFile.reload()
     }
 
     suspend fun fetchUpgrades(uuid: UUID) : EnumMap<Upgrade, Int> {

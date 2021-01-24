@@ -16,9 +16,10 @@ class User(val uuid: UUID,
            val models: EnumMap<ModelType, ArrayList<Int>> = EnumMap(ModelType::class.java),
            val activeModels: EnumMap<ModelType, Int> = EnumMap(ModelType::class.java)) {
 
-    val currentFishCaughtCapacity get() = fishCaught.entries.sumBy { it.key.capacity() * it.value.current }
+    val currentFishCaughtCapacity
+        get() = fishCaught.entries.sumBy { it.key.capacity() * it.value.current }
 
-    fun addToCurrentFish(fishType: FishType, amount: Int) { fishCaught.computeIfAbsent(fishType) { FishCaughtData() }.plus(amount) }
+    fun addToCurrentFish(fishType: FishType, amount: Int = 1) { fishCaught.computeIfAbsent(fishType) { FishCaughtData() }.plus(amount) }
 
     fun toggleSetting(setting: Setting) { settings[setting] = !getSetting(setting) }
 

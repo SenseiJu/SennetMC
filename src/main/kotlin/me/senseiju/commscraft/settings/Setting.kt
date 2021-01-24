@@ -5,6 +5,7 @@ import javax.sql.rowset.CachedRowSet
 
 enum class Setting(val databaseField: String, private val databaseFieldType: String, val default: Boolean) {
     TOGGLE_AUTO_CRATE_COMBINING("toggle_auto_crate_combining", "TINYINT", true),
+    TOGGLE_FISH_CAUGHT_SOUND("toggle_fish_caught_sound", "TINYINT", true),
     TOGGLE_FISH_CAUGHT_MESSAGE("toggle_fish_caught_message", "TINYINT",true);
 
     companion object {

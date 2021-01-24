@@ -8,12 +8,18 @@ import me.senseiju.commscraft.settings.Setting
 import me.senseiju.commscraft.upgrades.Upgrade
 import me.senseiju.commscraft.users.User
 import me.senseiju.commscraft.users.calculateMaxFishCapacity
+import me.senseiju.commscraft.utils.percentChance
 import org.bukkit.Sound
+import org.bukkit.entity.FishHook
+import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerFishEvent
 
-class PlayerFishListener(private val plugin: CommsCraft) : Listener {
+class PlayerFishListener(plugin: CommsCraft) : Listener {
+
+    private val users = plugin.userManager.userMap
+    private val upgradesFile = plugin.upgradesManager.upgradesFile
 
     init {
         plugin.server.pluginManager.registerEvents(this, plugin)
@@ -21,7 +27,7 @@ class PlayerFishListener(private val plugin: CommsCraft) : Listener {
 
     @EventHandler
     private fun onPlayerFishEvent(e: PlayerFishEvent) {
-        val user = plugin.userManager.userMap[e.player.uniqueId] ?: return
+        val user = users[e.player.uniqueId] ?: return
 
         when (e.state) {
             PlayerFishEvent.State.FISHING -> onCast(e, user)
@@ -35,19 +41,83 @@ class PlayerFishListener(private val plugin: CommsCraft) : Listener {
             e.player.sendConfigMessage("FISHING-MAX-FISH-CAPACITY-REACHED")
             e.isCancelled = true
         }
+
+        applyBaitUpgrade(user, e.hook)
     }
 
     private fun onFishCaught(e: PlayerFishEvent, user: User) {
         val fishType = FishType.selectRandomType()
-        user.addToCurrentFish(fishType, 1)
 
-        if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_MESSAGE)) {
-            e.player.sendTitle("&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
-                    "&6+${fishType.capacity()} capacity".color(), 10, 40, 10)
+        if (shouldPlayerReceiveDoubleFish(user)) {
+            user.addToCurrentFish(fishType, 2)
+            e.player.sendConfigMessage("UPGRADES-DEUCE-PROCED", false)
+        } else {
+            user.addToCurrentFish(fishType)
         }
-        e.player.playSound(e.player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
+
+        if (shouldNearbyPlayersReceiveFish(user)) {
+            giveNearbyPlayersFish(e.player, fishType)
+
+            e.player.sendConfigMessage("UPGRADES-FEAST-PROCED", false)
+        }
+
+        sendCaughtFishMessage(user, e.player, fishType)
 
         e.expToDrop = 0
         e.caught?.remove()
+    }
+
+    private fun applyBaitUpgrade(user: User, hook: FishHook) {
+        val baitUpgrade = user.getUpgrade(Upgrade.BAIT) * upgradesFile.config.getInt("bait-upgrade-increment", 10)
+
+        if (baitUpgrade > 100) {
+            hook.minWaitTime = 0
+        } else {
+            hook.minWaitTime = hook.minWaitTime - baitUpgrade
+        }
+        hook.maxWaitTime = hook.maxWaitTime - baitUpgrade
+    }
+
+
+    private fun shouldPlayerReceiveDoubleFish(user: User) : Boolean {
+        val deuceChance = user.getUpgrade(Upgrade.DEUCE)
+            .times(upgradesFile.config.getDouble("deuce-upgrade-increment", 0.01))
+
+        return percentChance(deuceChance)
+    }
+
+    private fun shouldNearbyPlayersReceiveFish(user: User) : Boolean {
+        val feastChance = user.getUpgrade(Upgrade.FEAST)
+            .times(upgradesFile.config.getDouble("feast-upgrade-increment", 0.01))
+
+        return percentChance(feastChance)
+    }
+
+    private fun giveNearbyPlayersFish(player: Player, fishType: FishType) {
+        player.location.getNearbyPlayers(10.0).forEach {
+            if (it.uniqueId == player.uniqueId) {
+                return@forEach
+            }
+
+            if (!percentChance(upgradesFile.config.getDouble("feast-upgrade-random-player-chance", 0.8))) {
+                return@forEach
+            }
+
+            val otherUser = users[it.uniqueId] ?: return@forEach
+            otherUser.addToCurrentFish(fishType)
+
+            it.sendConfigMessage("UPGRADES-FEAST-PROCED", false)
+        }
+    }
+
+    private fun sendCaughtFishMessage(user: User, player: Player, fishType: FishType) {
+        if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_MESSAGE)) {
+            player.sendTitle("&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
+                "&6+${fishType.capacity()} capacity".color(), 10, 40, 10)
+        }
+
+        if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_SOUND)) {
+            player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
+        }
     }
 }

@@ -1,6 +1,5 @@
 package me.senseiju.commscraft.npcs.types.designer
 
-import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.npcs.BaseNpc
 import me.senseiju.commscraft.npcs.createBasicNpc
 import me.senseiju.commscraft.npcs.types.NpcType

@@ -21,11 +21,15 @@ NPC-NO-TARGET-FOUND: "&cNo NPC target found"
 NPC-INVALID-TARGET: "&cThis entity is not a valid NPC"
 NPC-NOT-COMMSCRAFT: "&cThis NPC is not handled by CommsCraft"
 
-# Fishmonger NPC
-FISHMONGER-NO-FISH-TO-SELL: "{fishmongerName} &cYou have no fish to sell to me"
+# Merchant NPC
+MERCHANT-NO-FISH-TO-SELL: "{merchantName} &cYou have no fish to sell to me"
 
 # Fishing
 FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continue fishing"
+
+# Upgrades
+UPGRADES-FEAST-PROCED: "&a&l** FEAST **"
+UPGRADES-DEUCE-PROCED: "&d&l** DEUCE **"
 
 # Speedboat
 SPEEDBOAT-TOGGLE: "&bSpeedboat toggled to {toggle}"

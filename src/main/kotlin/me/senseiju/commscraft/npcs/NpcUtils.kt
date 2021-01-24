@@ -3,6 +3,7 @@ package me.senseiju.commscraft.npcs
 import me.senseiju.commscraft.npcs.types.NpcType
 import net.citizensnpcs.api.CitizensAPI
 import net.citizensnpcs.api.npc.NPC
+import net.citizensnpcs.trait.LookClose
 import org.bukkit.entity.EntityType
 import kotlin.math.pow
 
@@ -13,6 +14,7 @@ fun createBasicNpc(npcType: NpcType) : NPC {
     npc.data().setPersistent("npc-type", npcType.name)
     npc.name = npcType.npcName
     npc.isProtected = true
+    npc.getOrAddTrait(LookClose::class.java).lookClose(true)
 
     return npc
 }

@@ -4,8 +4,6 @@ import me.senseiju.commscraft.CommsCraft
 import me.senseiju.commscraft.extensions.sendConfigMessage
 import me.senseiju.commscraft.users.UserManager
 import org.bukkit.scheduler.BukkitRunnable
-import java.util.*
-import kotlin.collections.HashSet
 
 class SaveUsersTask(private val plugin: CommsCraft, private val userManager: UserManager) : BukkitRunnable() {
     private val interval = plugin.configFile.config.getLong("user-save-interval", 120) * 20
