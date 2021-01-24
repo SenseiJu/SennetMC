@@ -34,7 +34,6 @@ fun showLooterGui(player: Player) {
 
 private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.TREASURE_FINDER)
-    val upgradeIncrement = upgradesFile.config.getDouble("treasure-finder-upgrade-increment", 0.01)
     val upgradeMax = upgradesFile.config.getInt("treasure-finder-upgrade-max", 50)
     val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("treasure-finder-upgrade-starting-cost", 300.0),
             currentUpgrades)
@@ -42,7 +41,7 @@ private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val lore = ArrayList<String>()
     lore.add("")
     lore.add("&7Increase the chance of getting double crates")
-    lore.add("&7during a successful cast by &e$upgradeIncrement")
+    lore.add("&7during a successful cast")
     lore.add("")
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
@@ -53,7 +52,6 @@ private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
 
 private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.DISCOVERY)
-    val upgradeIncrement = upgradesFile.config.getDouble("discovery-upgrade-increment", 0.01)
     val upgradeMax = upgradesFile.config.getInt("discovery-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("discovery-upgrade-starting-cost", 300.0),
             currentUpgrades)
@@ -61,7 +59,7 @@ private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val lore = ArrayList<String>()
     lore.add("")
     lore.add("&7Increase the chance of successfully finding a")
-    lore.add("&7crate when fishing by &e$upgradeIncrement")
+    lore.add("&7crate when fishing")
     lore.add("")
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")

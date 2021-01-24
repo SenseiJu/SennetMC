@@ -36,7 +36,6 @@ fun showFishmongerGui(player: Player) {
 
 private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.FISH_CAPACITY)
-    val upgradeIncrement = upgradesFile.config.getInt("fishing-capacity-upgrade-increment", 5)
     val upgradeMax = upgradesFile.config.getInt("fishing-capacity-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("fishing-capacity-upgrade-starting-cost", 300.0),
@@ -44,8 +43,7 @@ private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem 
 
     val lore = ArrayList<String>()
     lore.add("")
-    lore.add("&7Increase your fishing capacity! Each upgrade")
-    lore.add("&7increments your capacity by &e$upgradeIncrement")
+    lore.add("&7Increase your fishing capacity")
     lore.add("")
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
