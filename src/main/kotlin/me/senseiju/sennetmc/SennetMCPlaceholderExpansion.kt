@@ -24,7 +24,7 @@ class SennetMCPlaceholderExpansion(private val plugin: SennetMC) : PlaceholderEx
     }
 
     override fun getIdentifier(): String {
-        return "commscraft"
+        return "sennetmc"
     }
 
     override fun getAuthor(): String {
