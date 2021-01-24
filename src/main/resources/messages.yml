@@ -2,6 +2,7 @@ PREFIX: "&8&lSennetMC >"
 
 # Generic messages
 NO-PERMISSION: "&cYou do not have permission to perform this action"
+RELOADING: "&8&lSennetMC &bis currently reloading..."
 RELOAD-COMPLETE: "&aReload complete"
 CANNOT-FIND-TARGET: "&cCannot find the specified player"
 

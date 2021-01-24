@@ -60,7 +60,7 @@ class SennetMC : JavaPlugin() {
 
             removeBackpackModel(it)
 
-            it.kickPlayer("&8&lCommsCraft &bis currently reloading...".color())
+            it.kickPlayer(messagesFile.config.getString("RELOADING", "&8&lSennetMC &bis currently reloading...")?.color())
         }
 
         userManager.saveUsersTask.cancel()
