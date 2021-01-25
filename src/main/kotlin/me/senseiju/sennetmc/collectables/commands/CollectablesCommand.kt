@@ -67,7 +67,6 @@ class CollectablesCommand(private val plugin: SennetMC, private val collectables
         }
     }
 
-    @Suppress("UNUSED")
     @CompleteFor("set")
     fun completionForSetSubCommand(args: List<String>, sender: CommandSender) : List<String> {
         return when(args.size) {

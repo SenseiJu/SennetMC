@@ -3,6 +3,7 @@ package me.senseiju.sennetmc.fishes
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
+import me.senseiju.sennetmc.fishes.listeners.PlayerCaughtFishListener
 import me.senseiju.sennetmc.fishes.listeners.PlayerFishListener
 import java.util.*
 
@@ -15,6 +16,7 @@ class FishManager(private val plugin: SennetMC) : BaseManager {
     override fun registerCommands(cm: CommandManager) {}
     override fun registerEvents() {
         PlayerFishListener(plugin)
+        PlayerCaughtFishListener(plugin)
     }
 
     override fun reload() {

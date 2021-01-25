@@ -62,9 +62,10 @@ class CratesManager(private val plugin: SennetMC) : BaseManager {
 
     fun combineCrates(player: Player) {
         val currentCrates = HashMap<String, Int>()
-        player.inventory.contents.forEach {
-            @Suppress("SENSELESS_COMPARISON")
-            if (it == null || it.type != Material.CHEST) return@forEach
+
+        @Suppress("UselessCallOnCollection")
+        player.inventory.contents.filterNotNull().forEach {
+            if (it.type != Material.CHEST) return@forEach
 
             val nbtItem = NBTItem(it)
             if (!nbtItem.hasKey("crate-id")) return@forEach

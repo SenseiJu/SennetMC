@@ -1,0 +1,6 @@
+FISH_RACE:
+  length: 120
+  number-of-winners: 5
+  winner-commands:
+    - "collectables set {player} fishraceevent"
+    - "crates give {player} t2 5"

@@ -49,7 +49,7 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
 
     override fun registerEvents() {
         HelmetListener(plugin, this)
-        SleeveListener(plugin, this)
+        SleeveListener(plugin)
         FishingRodListener(plugin)
         BackpackListener(plugin)
 

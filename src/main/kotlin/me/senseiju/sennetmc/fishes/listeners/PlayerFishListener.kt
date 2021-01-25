@@ -4,6 +4,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishType
+import me.senseiju.sennetmc.fishes.events.PlayerCaughtFishEvent
 import me.senseiju.sennetmc.settings.Setting
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
@@ -16,7 +17,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerFishEvent
 
-class PlayerFishListener(plugin: SennetMC) : Listener {
+class PlayerFishListener(private val plugin: SennetMC) : Listener {
 
     private val users = plugin.userManager.userMap
     private val upgradesFile = plugin.upgradesManager.upgradesFile
@@ -47,21 +48,9 @@ class PlayerFishListener(plugin: SennetMC) : Listener {
 
     private fun onFishCaught(e: PlayerFishEvent, user: User) {
         val fishType = FishType.selectRandomType()
+        val event = PlayerCaughtFishEvent(e.player, user, fishType)
 
-        if (shouldPlayerReceiveDoubleFish(user)) {
-            user.addToCurrentFish(fishType, 2)
-            e.player.sendConfigMessage("UPGRADES-DEUCE-PROCED", false)
-        } else {
-            user.addToCurrentFish(fishType)
-        }
-
-        if (shouldNearbyPlayersReceiveFish(user)) {
-            giveNearbyPlayersFish(e.player, fishType)
-
-            e.player.sendConfigMessage("UPGRADES-FEAST-PROCED", false)
-        }
-
-        sendCaughtFishMessage(user, e.player, fishType)
+        plugin.server.pluginManager.callEvent(event)
 
         e.expToDrop = 0
         e.caught?.remove()
@@ -76,48 +65,5 @@ class PlayerFishListener(plugin: SennetMC) : Listener {
             hook.minWaitTime = hook.minWaitTime - baitUpgrade
         }
         hook.maxWaitTime = hook.maxWaitTime - baitUpgrade
-    }
-
-
-    private fun shouldPlayerReceiveDoubleFish(user: User) : Boolean {
-        val deuceChance = user.getUpgrade(Upgrade.DEUCE)
-            .times(upgradesFile.config.getDouble("deuce-upgrade-increment", 0.01))
-
-        return percentChance(deuceChance)
-    }
-
-    private fun shouldNearbyPlayersReceiveFish(user: User) : Boolean {
-        val feastChance = user.getUpgrade(Upgrade.FEAST)
-            .times(upgradesFile.config.getDouble("feast-upgrade-increment", 0.01))
-
-        return percentChance(feastChance)
-    }
-
-    private fun giveNearbyPlayersFish(player: Player, fishType: FishType) {
-        player.location.getNearbyPlayers(10.0).forEach {
-            if (it.uniqueId == player.uniqueId) {
-                return@forEach
-            }
-
-            if (!percentChance(upgradesFile.config.getDouble("feast-upgrade-random-player-chance", 0.8))) {
-                return@forEach
-            }
-
-            val otherUser = users[it.uniqueId] ?: return@forEach
-            otherUser.addToCurrentFish(fishType)
-
-            it.sendConfigMessage("UPGRADES-FEAST-PROCED", false)
-        }
-    }
-
-    private fun sendCaughtFishMessage(user: User, player: Player, fishType: FishType) {
-        if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_MESSAGE)) {
-            player.sendTitle("&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
-                "&6+${fishType.capacity()} capacity".color(), 10, 40, 10)
-        }
-
-        if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_SOUND)) {
-            player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
-        }
     }
 }

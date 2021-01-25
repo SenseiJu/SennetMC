@@ -3,7 +3,7 @@ package me.senseiju.sennetmc.npcs.types.merchant
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.npcs.BaseNpc
+import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.upgrades.Upgrade
@@ -57,13 +57,13 @@ class Merchant(private val plugin: SennetMC) : BaseNpc {
         for ((fishType, fishCaughtData) in user.fishCaught) {
             val sellPrice = fishType.selectRandomSellPrice() * fishCaughtData.current
 
-            totalSellPrice += "%.2f".format(sellPrice).toDouble()
+            totalSellPrice += sellPrice
 
             fishCaughtData.current = 0
         }
         totalSellPrice *= multiplier
 
-        return totalSellPrice
+        return "%.2f".format(totalSellPrice).toDouble()
     }
 
     private fun getNegotiateMultiplier(user: User) : Double {

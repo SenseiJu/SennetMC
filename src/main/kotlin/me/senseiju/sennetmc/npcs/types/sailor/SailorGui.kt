@@ -38,6 +38,8 @@ private fun createSpeedboatSpeedUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
 
     val lore = ArrayList<String>()
     lore.add("")
+    lore.add("&c&lREQUIRES A RANK")
+    lore.add("")
     lore.add("&7Increase your boats speed when toggling")
     lore.add("&7to speedboat mode")
     lore.add("")

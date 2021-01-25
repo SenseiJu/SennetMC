@@ -7,6 +7,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.defaultGuiTemplate
 import me.senseiju.sennetmc.extensions.defaultPaginatedGuiTemplate
+import me.senseiju.sennetmc.extensions.setCustomModelData
 import me.senseiju.sennetmc.models.*
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.users.User
@@ -40,6 +41,8 @@ fun showDesignerGui(player: Player) {
 private fun showModelTypeGui(player: Player, user: User, modelType: ModelType) {
     defaultScope.launch {
         val gui = defaultPaginatedGuiTemplate(6, 45, npcType.npcName)
+
+        gui.setCloseGuiAction { showDesignerGui(player) }
 
         gui.setItem(6, 9, ItemBuilder.from(Material.BARRIER)
             .setName("&c&lClear current model".color())
@@ -88,6 +91,13 @@ private fun clearModelSelection(player: Player, user: User, modelType: ModelType
 
 private fun equipFishingRodModel(player: Player, user: User, model: Model) {
     user.activeModels[model.modelType] = model.modelData
+
+    @Suppress("UselessCallOnCollection")
+    player.inventory.contents.filterNotNull().forEach {
+        if (it.type == Material.FISHING_ROD) {
+            it.setCustomModelData(model.modelData)
+        }
+    }
 }
 
 private fun equipBackpackModel(player: Player, user: User, model: Model) {

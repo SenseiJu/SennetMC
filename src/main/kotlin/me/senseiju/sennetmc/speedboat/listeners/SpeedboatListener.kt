@@ -5,6 +5,7 @@ import com.comphenix.protocol.ProtocolLibrary
 import com.comphenix.protocol.events.ListenerPriority
 import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketEvent
+import com.destroystokyo.paper.event.player.PlayerJumpEvent
 import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.driver
@@ -16,6 +17,7 @@ import me.senseiju.sennetmc.utils.ObjectSet
 import org.bukkit.entity.Boat
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.block.Action
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 import org.bukkit.util.Vector
@@ -91,25 +93,6 @@ class SpeedboatListener(private val plugin: SennetMC, speedboatManager: Speedboa
                 boatEntity.velocity = playerSpeedboatCurrentVector[e.player.uniqueId]!!
             }
         })
-    }
-
-    @EventHandler
-    private fun onSpeedboatToggle(e: PlayerInteractEvent) {
-        if (e.hand == EquipmentSlot.OFF_HAND
-                || e.player.vehicle !is Boat
-                || !e.player.hasPermission(PERMISSION_SPEEDBOAT_USE)
-                || (e.player.vehicle as Boat).driver?.uniqueId != e.player.uniqueId) {
-                    return
-        }
-        
-        if (!playerSpeedboatToggle.containsKey(e.player.uniqueId)) {
-            playerSpeedboatToggle[e.player.uniqueId] = false
-        }
-
-        playerSpeedboatToggle[e.player.uniqueId] = !playerSpeedboatToggle[e.player.uniqueId]!!
-
-        e.player.sendConfigMessage("SPEEDBOAT-TOGGLE",
-                ObjectSet("{toggle}", playerSpeedboatToggle[e.player.uniqueId]!!.string))
     }
 
     fun reload() {

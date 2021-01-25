@@ -1,4 +1,4 @@
-package me.senseiju.sennetmc.npcs
+package me.senseiju.sennetmc.npcs.types
 
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import org.bukkit.Location

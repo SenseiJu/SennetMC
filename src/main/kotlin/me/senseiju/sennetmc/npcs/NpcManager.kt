@@ -9,6 +9,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.commands.RemoveNpcCommand
 import me.senseiju.sennetmc.npcs.commands.SpawnNpcCommand
 import me.senseiju.sennetmc.npcs.listeners.NpcClickListener
+import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.NpcType.*
 import me.senseiju.sennetmc.npcs.types.designer.Designer

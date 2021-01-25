@@ -38,6 +38,7 @@ SPEEDBOAT-TOGGLE: "&bSpeedboat toggled to {toggle}"
 # Crates
 CRATES-CANNOT-FIND-CRATE: "&cCannot find the specified crate"
 CRATES-INVALID-AMOUNT: "&cInvalid amount of crates specified"
+CRATES-REWARD: "{crateName} &8&l> {rewardName}"
 
 # Models
 MODELS-INVALID-MODEL-TYPE: "&cInvalid model type specified"
@@ -51,3 +52,7 @@ MODELS-MODEL-REMOVED: "&aModel has been removed"
 # User
 USER-SAVING-STARTED: "&aSaving user data..."
 USER-SAVING-FINISHED: "&aFinished saving user data"
+
+# Events
+EVENTS-LOSER: "{eventName} &8&l> &cYou did not win any rewards from the event"
+EVENTS-WINNER: "{eventName} &8&l> &aYou won rewards from the event"

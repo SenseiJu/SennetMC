@@ -2,9 +2,9 @@ crates-required-before-upgrade: 4
 chance-to-receive-crates: 0.1
 description:
   - ""
-  - "&d&lRight-click &7to open the crate"
+  - "&7Right-click to open the crate"
   - ""
-  - "&b&lRewards"
+  - "&f&lRewards"
   - "{rewards}"
 
 crates:
@@ -14,18 +14,35 @@ crates:
     max-crates-per-cast: 4
     upgraded-crate-id: "t2"
     rewards:
-      - name: "reward"
+      - name: "&a&l$10"
+        probability: 30
+        commands:
+          - "eco give {player} 10"
+      - name: "&d&lStick Fishing Rod Model"
+        probability: 3
+        commands:
+          - "model set {player} FISHING_ROD 100"
+      - name: "&d&lFisherman's Hat Model"
+        probability: 3
+        commands:
+          - "model set {player} HAT 200"
+      - name: "&6&lT1 Collectable"
         probability: 1
         commands:
-        - "say opening t1 crate"
+          - "collectables set {player} t1"
+
   t2:
     name: "&e&lTier II"
     probability-per-cast: 2
     max-crates-per-cast: 2
     upgraded-crate-id: "NULL"
     rewards:
+      - name: "&d&l$50"
+        probability: 10
+        commands:
+          - "eco give {player} 50"
       - name: "reward"
         probability: 1
         commands:
-        - "say opening t2 crate"
+          - "say opening t2 crate"
 

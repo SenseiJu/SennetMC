@@ -7,6 +7,7 @@ import me.senseiju.sennetmc.commands.ReloadCommand
 import me.senseiju.sennetmc.crates.CratesManager
 import me.senseiju.sennetmc.datastorage.DataFile
 import me.senseiju.sennetmc.datastorage.Database
+import me.senseiju.sennetmc.events.EventsManager
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishManager
@@ -35,6 +36,7 @@ class SennetMC : JavaPlugin() {
     lateinit var upgradesManager: UpgradesManager
     lateinit var settingsManager: SettingsManager
     lateinit var modelsManager: ModelsManager
+    lateinit var eventsManager: EventsManager
 
     override fun onEnable() {
         setupCommands()
@@ -48,6 +50,7 @@ class SennetMC : JavaPlugin() {
         speedboatManager = SpeedboatManager(this)
         cratesManager = CratesManager(this)
         settingsManager = SettingsManager(this)
+        eventsManager = EventsManager(this)
 
         SennetMCPlaceholderExpansion(this)
     }
@@ -78,6 +81,7 @@ class SennetMC : JavaPlugin() {
         cratesManager.reload()
         settingsManager.reload()
         modelsManager.reload()
+        eventsManager.reload()
     }
 
     private fun setupCommands() {

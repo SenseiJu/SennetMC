@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc.npcs.types.sailor
 
-import me.senseiju.sennetmc.npcs.BaseNpc
+import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import net.citizensnpcs.api.event.NPCRightClickEvent

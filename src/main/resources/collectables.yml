@@ -31,3 +31,15 @@ beta:
   description:
     - "&7There are only 50,653 possible 3"
     - "&7char names, and somehow you have one."
+t1:
+  name: "&e&lT1"
+  material: CHEST
+  rarity: COMMON
+  description:
+    - "&7Received by opening Tier I crates"
+fishraceevent:
+  name: "&b&lFish race event"
+  material: COOKED_COD
+  rarity: UNCOMMON
+  description:
+    - "&7Received by winning the fish race event"
