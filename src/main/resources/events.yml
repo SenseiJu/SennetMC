@@ -1,6 +1,16 @@
+event-period: 1800
+
 FISH_RACE:
   length: 120
+  how-to-play:
+    - "║ &eCatch as many fish as possible within"
+    - "║ &ethe time limit to win rewards!"
   number-of-winners: 5
   winner-commands:
     - "collectables set {player} fishraceevent"
     - "crates give {player} t2 5"
+SHIPWRECK:
+  length: 120
+  how-to-play:
+    - "║ &eCatching fish will increase the amount"
+    - "║ &eof crates you will earn"

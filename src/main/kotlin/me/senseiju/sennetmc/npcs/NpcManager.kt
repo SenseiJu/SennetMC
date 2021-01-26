@@ -22,32 +22,27 @@ class NpcManager(private val plugin: SennetMC) : BaseManager {
     val npcMap = HashMap<NpcType, BaseNpc>()
 
     init {
+        registerCommands(plugin.commandManager)
+        registerEvents()
+
         npcMap[FISHMONGER] = Fishmonger()
         npcMap[MERCHANT] = Merchant(plugin)
         npcMap[SAILOR] = Sailor()
         npcMap[LOOTER] = Looter()
         npcMap[DESIGNER] = Designer()
-
-        registerEvents()
-        registerCommandParameters(plugin.commandManager.parameterHandler)
-        registerCommands(plugin.commandManager)
     }
 
     override fun registerCommands(cm: CommandManager) {
-        registerCommandParameters(cm.parameterHandler)
-
-        cm.register(SpawnNpcCommand(plugin, this))
-        cm.register(RemoveNpcCommand())
-    }
-
-    private fun registerCommandParameters(ph: ParameterHandler) {
-        ph.register(NpcType::class.java, ParameterResolver { argument ->
+        cm.parameterHandler.register(NpcType::class.java, ParameterResolver { argument ->
             try {
                 return@ParameterResolver TypeResult(NpcType.valueOf(argument.toString().toUpperCase()), argument)
             } catch (ex: IllegalArgumentException) {
                 return@ParameterResolver TypeResult(argument)
             }
         })
+
+        cm.register(SpawnNpcCommand(plugin, this))
+        cm.register(RemoveNpcCommand())
     }
 
     override fun registerEvents() {

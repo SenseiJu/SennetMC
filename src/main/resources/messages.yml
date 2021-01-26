@@ -1,4 +1,4 @@
-PREFIX: "&8&lSennetMC >"
+PREFIX: "&8&lSennetMC »"
 
 # Generic messages
 NO-PERMISSION: "&cYou do not have permission to perform this action"
@@ -38,7 +38,8 @@ SPEEDBOAT-TOGGLE: "&bSpeedboat toggled to {toggle}"
 # Crates
 CRATES-CANNOT-FIND-CRATE: "&cCannot find the specified crate"
 CRATES-INVALID-AMOUNT: "&cInvalid amount of crates specified"
-CRATES-REWARD: "{crateName} &8&l> {rewardName}"
+CRATES-REWARD: "{crateName} &8&l» {rewardName}"
+CRATES-GIVE-SUCCESS: "&aSuccessfully gave crates to {player}"
 
 # Models
 MODELS-INVALID-MODEL-TYPE: "&cInvalid model type specified"
@@ -54,5 +55,16 @@ USER-SAVING-STARTED: "&aSaving user data..."
 USER-SAVING-FINISHED: "&aFinished saving user data"
 
 # Events
-EVENTS-LOSER: "{eventName} &8&l> &cYou did not win any rewards from the event"
-EVENTS-WINNER: "{eventName} &8&l> &aYou won rewards from the event"
+EVENTS-STARTED:
+  - "╔═ #c313d6&lEvent started"
+  - "║"
+  - "║ {eventName}"
+  - "║"
+  - "{eventHowToPlay}"
+  - "╚═"
+EVENTS-ENDED:
+  - "╠═ {eventName} #c313d6&levent ended"
+EVENTS-INVALID-EVENT-TYPE: "&cInvalid event type entered"
+EVENTS-CURRENTLY-ACTIVE: "&cAn event is already active"
+EVENTS-LOSER: "{eventName} &8&l» &cYou did not win any rewards from the event"
+EVENTS-WINNER: "{eventName} &8&l» &aYou won rewards from the event"

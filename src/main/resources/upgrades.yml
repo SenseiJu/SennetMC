@@ -1,9 +1,9 @@
 #
 # Fishmonger NPC
 #
-fishing-capacity-starting-capacity: 30
+fishing-capacity-starting-capacity: 100
 fishing-capacity_upgrade-starting-cost: 500.0
-fishing-capacity-upgrade-increment: 5
+fishing-capacity-upgrade-increment: 15
 fishing-capacity-upgrade-max: 20
 
 feast-upgrade-random-player-chance: 0.8

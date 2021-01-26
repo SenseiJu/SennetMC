@@ -5,6 +5,8 @@ import me.senseiju.sennetmc.utils.ObjectSet
 import org.bukkit.command.CommandSender
 import org.bukkit.plugin.java.JavaPlugin
 
+private val messagesFile = JavaPlugin.getPlugin(SennetMC::class.java).messagesFile
+
 fun CommandSender.message(s: String) {
     this.sendMessage(s.color())
 }
@@ -14,15 +16,11 @@ fun CommandSender.message(list: List<String>) {
 }
 
 fun CommandSender.sendConfigMessage(messageName: String, vararg replacements: ObjectSet = emptyArray()) {
-    this.sendConfigMessage(messageName, prefix = true, isStringList = false, replacements = replacements)
+    this.sendConfigMessage(messageName, prefix = true, replacements = replacements)
 }
 
 fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true, vararg replacements: ObjectSet = emptyArray()) {
-    this.sendConfigMessage(messageName, prefix = prefix, isStringList = false, replacements = replacements)
-}
-
-fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true, isStringList: Boolean = false, vararg replacements: ObjectSet = emptyArray()) {
-    val config = JavaPlugin.getPlugin(SennetMC::class.java).messagesFile.config
+    val config = messagesFile.config
 
     if (config.isString(messageName)) {
         var message = config.getString(messageName, "Undefined message for '$messageName'")!!
@@ -32,7 +30,7 @@ fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true,
         }
 
         if (prefix) {
-            message = "${config.getString("PREFIX", "&8&lSennetMC >")} $message"
+            message = "${config.getString("PREFIX", "&8&lSennetMC »")} $message"
         }
 
         this.message(message)
@@ -47,7 +45,7 @@ fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true,
             }
 
             if (prefix) {
-                line = "${config.getString("PREFIX", "&8&lSennetMC >")} $line"
+                line = "${config.getString("PREFIX", "&8&lSennetMC »")} $line"
             }
             messagesToSend.add(line)
         }

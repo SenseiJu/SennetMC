@@ -28,7 +28,8 @@ fun showSettingsGui(player: Player, user: User) {
 
         gui.addItem(toggleAutoCombiningCrates(gui, user),
             toggleFishCaughtMessage(gui, user),
-            toggleFishCaughtSound(gui, user))
+            toggleFishCaughtSound(gui, user),
+            toggleNotifyEventMessages(gui, user))
 
         scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
@@ -62,6 +63,16 @@ private fun toggleFishCaughtSound(gui: Gui, user: User) : GuiItem {
 
     return toggleableSettingGuiItem(gui, user, Material.FISHING_ROD, "&b&lFish caught sound", lore,
             Setting.TOGGLE_FISH_CAUGHT_SOUND) { toggleFishCaughtSound(gui, user) }
+}
+
+private fun toggleNotifyEventMessages(gui: Gui, user: User) : GuiItem {
+    val lore = ArrayList<String>()
+    lore.add("")
+    lore.add("&7Toggle if a message should be displayed")
+    lore.add("&7when an event starts or finishes")
+
+    return toggleableSettingGuiItem(gui, user, Material.DRAGON_EGG, "&b&lNotify event messages", lore,
+            Setting.TOGGLE_NOTIFY_EVENT_MESSAGES) { toggleNotifyEventMessages(gui, user) }
 }
 
 private fun toggleableSettingGuiItem(gui: Gui, user: User, material: Material, name: String, lore: List<String>,

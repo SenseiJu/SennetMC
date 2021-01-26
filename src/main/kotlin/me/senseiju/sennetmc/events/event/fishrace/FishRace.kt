@@ -25,7 +25,9 @@ class FishRace(private val plugin: SennetMC, eventsManager: EventsManager) : Bas
     }
 
     override fun finish() {
-        super.finish()
+        if (playersFishCaught.isEmpty()) {
+            return
+        }
 
         val sortedPlayersFishCaught = playersFishCaught.toList().sortedByDescending { (_, value) -> value }.toMap()
 

@@ -37,6 +37,12 @@ t1:
   rarity: COMMON
   description:
     - "&7Received by opening Tier I crates"
+shipwreckevent:
+  name: "&b&lShipwreck event"
+  material: OAK_BOAT
+  rarity: COMMON
+  description:
+    - "&7Received when participating in the shipwreck event"
 fishraceevent:
   name: "&b&lFish race event"
   material: COOKED_COD

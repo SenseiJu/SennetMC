@@ -8,19 +8,25 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.crates.commands.CombineCratesCommand
 import me.senseiju.sennetmc.crates.commands.CratesCommand
 import me.senseiju.sennetmc.crates.listeners.CrateOpenListener
-import me.senseiju.sennetmc.crates.listeners.PlayerFishListener
+import me.senseiju.sennetmc.crates.listeners.PlayerCaughtFishListener
 import me.senseiju.sennetmc.datastorage.DataFile
+import me.senseiju.sennetmc.fishes.events.PlayerCaughtFishEvent
+import me.senseiju.sennetmc.settings.Setting
+import me.senseiju.sennetmc.upgrades.Upgrade
+import me.senseiju.sennetmc.users.User
+import me.senseiju.sennetmc.utils.percentChance
 import me.senseiju.sennetmc.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class CratesManager(private val plugin: SennetMC) : BaseManager {
-
-    val cratesFile = DataFile(plugin, "crates.yml", true)
-
+    private val cratesFile = DataFile(plugin, "crates.yml", true)
     var cratesMap = HashMap<String, Crate>()
         private set
+
+    private val users = plugin.userManager.userMap
+    private val upgradesFile = plugin.upgradesManager.upgradesFile
 
     init {
         loadCrates()
@@ -42,7 +48,7 @@ class CratesManager(private val plugin: SennetMC) : BaseManager {
 
     override fun registerEvents() {
         CrateOpenListener(plugin, this)
-        PlayerFishListener(plugin, this)
+        PlayerCaughtFishListener(plugin, this)
     }
 
     override fun reload() {
@@ -123,5 +129,41 @@ class CratesManager(private val plugin: SennetMC) : BaseManager {
         }
 
         return newRewardsList
+    }
+
+    fun handleCratesOnFish(player: Player) {
+        val user = users[player.uniqueId] ?: return
+
+        if (!shouldPlayerReceiveCrates(user)) {
+            return
+        }
+
+        val crate = selectRandomCrate(getPlayerCrateMasterProbabilityIncrease(user))
+        val amount = crate.generateRandomNumberOfCrates()
+
+        if (shouldPlayerReceiveDoubleCrates(user)) {
+            crate.giveCrate(player, amount * 2)
+        } else {
+            crate.giveCrate(player, amount)
+        }
+    }
+
+    private fun getPlayerCrateMasterProbabilityIncrease(user: User) : Double {
+        return user.getUpgrade(Upgrade.CRATE_MASTER) * upgradesFile.config.getDouble("crate-master-upgrade-increment", 0.4)
+    }
+
+    private fun shouldPlayerReceiveCrates(user: User) : Boolean {
+        val baseChance = cratesFile.config.getDouble("chance-to-receive-crates", 0.1)
+        val discoveryChance = user.getUpgrade(Upgrade.DISCOVERY)
+                .times(upgradesFile.config.getDouble("discovery-upgrade-increment", 0.01))
+
+        return percentChance(baseChance + discoveryChance)
+    }
+
+    private fun shouldPlayerReceiveDoubleCrates(user: User) : Boolean {
+        val treasureFinderChance = user.getUpgrade(Upgrade.TREASURE_FINDER)
+                .times(upgradesFile.config.getDouble("treasure-finder-upgrade-increment", 0.01))
+
+        return percentChance(treasureFinderChance)
     }
 }
