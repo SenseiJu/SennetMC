@@ -5,6 +5,7 @@ import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.calculateMaxFishCapacity
 import me.senseiju.sennetmc.users.calculateSpeedboatSpeedMultiplier
 import org.bukkit.entity.Player
+import org.bukkit.event.entity.EntityDamageEvent
 
 class SennetMCPlaceholderExpansion(private val plugin: SennetMC) : PlaceholderExpansion() {
 

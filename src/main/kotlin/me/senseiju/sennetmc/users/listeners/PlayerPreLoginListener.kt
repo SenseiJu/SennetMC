@@ -24,7 +24,6 @@ class PlayerPreLoginListener(plugin: SennetMC, private val userManager: UserMana
 
             if (userManager.doesUserExist(e.uniqueId)) userManager.fetchUser(e.uniqueId)
             else userManager.createNewUser(e.uniqueId)
-
         }
     }
 }

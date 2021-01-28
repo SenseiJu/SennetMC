@@ -1,5 +1,6 @@
 package me.senseiju.sennetmc.npcs.types.designer
 
+import com.comphenix.protocol.ProtocolLibrary
 import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.GuiItem
@@ -9,6 +10,9 @@ import me.senseiju.sennetmc.extensions.defaultGuiTemplate
 import me.senseiju.sennetmc.extensions.defaultPaginatedGuiTemplate
 import me.senseiju.sennetmc.extensions.setCustomModelData
 import me.senseiju.sennetmc.models.*
+import me.senseiju.sennetmc.models.listeners.playerPassengers
+import me.senseiju.sennetmc.models.packetwrappers.WrapperPlayServerMount
+import me.senseiju.sennetmc.models.packetwrappers.updateModelArmorStand
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.defaultScope
@@ -103,14 +107,10 @@ private fun equipFishingRodModel(player: Player, user: User, model: Model) {
 private fun equipBackpackModel(player: Player, user: User, model: Model) {
     user.activeModels[model.modelType] = model.modelData
 
-    player.passengers.forEach {
-        if (isPassengerBackpackModel(it)) {
-            it as ArmorStand
-            it.equipment?.helmet = model.itemStack
-            player.playSound(player.location, Sound.BLOCK_CHAIN_PLACE, 1.0f, 1.0f)
-            return
-        }
-    }
+    val modelArmorStand = playerPassengers[player.uniqueId] ?: return
+    modelArmorStand.equipment?.helmet = model.itemStack
+
+    updateModelArmorStand(player, modelArmorStand)
 }
 
 private fun equipHelmetModel(player: Player, user: User, model: Model) {

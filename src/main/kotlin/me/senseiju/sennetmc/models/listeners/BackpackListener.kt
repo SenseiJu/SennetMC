@@ -1,5 +1,8 @@
 package me.senseiju.sennetmc.models.listeners
 
+import com.comphenix.protocol.PacketType
+import com.comphenix.protocol.ProtocolLibrary
+import com.comphenix.protocol.events.PacketContainer
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.models.*
@@ -12,18 +15,19 @@ import org.bukkit.event.Listener
 import org.bukkit.event.block.Action
 import org.bukkit.event.entity.EntityPoseChangeEvent
 import org.bukkit.event.entity.PlayerDeathEvent
-import org.bukkit.event.player.PlayerInteractEvent
-import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.event.player.PlayerMoveEvent
-import org.bukkit.event.player.PlayerQuitEvent
+import org.bukkit.event.player.*
 import org.bukkit.inventory.EquipmentSlot
+import org.bukkit.metadata.FixedMetadataValue
 import org.spigotmc.event.entity.EntityDismountEvent
 import java.util.*
 import kotlin.collections.HashMap
 
-class BackpackListener(private val plugin: SennetMC) : Listener {
-
+class BackpackListener(private val plugin: SennetMC, modelsManager: ModelsManager) : Listener {
+    private val protocolManager = ProtocolLibrary.getProtocolManager()
     private val users = plugin.userManager.userMap
+    private val models = modelsManager.models
+
+    private val playerPassengers = HashMap<UUID, ArmorStand>()
 
     val map = HashMap<UUID, ArmorStand>()
 

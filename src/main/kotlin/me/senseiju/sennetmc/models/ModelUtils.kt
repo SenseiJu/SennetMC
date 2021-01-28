@@ -2,6 +2,8 @@ package me.senseiju.sennetmc.models
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.setCustomModelData
+import me.senseiju.sennetmc.models.listeners.playerPassengers
+import me.senseiju.sennetmc.models.packetwrappers.updateModelArmorStand
 import me.senseiju.sennetmc.users.User
 import org.bukkit.Material
 import org.bukkit.entity.ArmorStand
@@ -42,13 +44,10 @@ fun removeBackpackModelArmorStand(player: Player) {
 }
 
 fun removeBackpackModel(player: Player) {
-    player.passengers.forEach {
-        if (isPassengerBackpackModel(it)) {
-            it as ArmorStand
-            it.equipment?.helmet = null
-            return
-        }
-    }
+    val modelArmorStand = playerPassengers[player.uniqueId] ?: return
+    modelArmorStand.equipment?.helmet = null
+
+    updateModelArmorStand(player, modelArmorStand)
 }
 
 fun isPassengerBackpackModel(entity: Entity) : Boolean {

@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc
 
-private const val PERMISSION_PREFIX = "commscraft."
+private const val PERMISSION_PREFIX = "sennetmc."
 
 /*
  * Generic permissions

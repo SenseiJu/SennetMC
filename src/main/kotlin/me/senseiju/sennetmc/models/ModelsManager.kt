@@ -13,10 +13,7 @@ import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.models.commands.HatCommand
 import me.senseiju.sennetmc.models.commands.ModelCommand
-import me.senseiju.sennetmc.models.listeners.BackpackListener
-import me.senseiju.sennetmc.models.listeners.FishingRodListener
-import me.senseiju.sennetmc.models.listeners.HelmetListener
-import me.senseiju.sennetmc.models.listeners.SleeveListener
+import me.senseiju.sennetmc.models.listeners.*
 import me.senseiju.sennetmc.utils.ObjectSet
 import me.senseiju.sennetmc.utils.defaultScope
 import org.bukkit.command.CommandSender
@@ -51,7 +48,8 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
         HelmetListener(plugin, this)
         SleeveListener(plugin)
         FishingRodListener(plugin)
-        BackpackListener(plugin)
+        //BackpackListener(plugin, this)
+        BackpackPacketListener(plugin, this)
 
     }
 

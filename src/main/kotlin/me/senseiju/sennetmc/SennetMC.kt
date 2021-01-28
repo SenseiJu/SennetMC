@@ -12,6 +12,7 @@ import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishManager
 import me.senseiju.sennetmc.models.ModelsManager
+import me.senseiju.sennetmc.models.listeners.playerPassengers
 import me.senseiju.sennetmc.models.removeBackpackModelArmorStand
 import me.senseiju.sennetmc.npcs.NpcManager
 import me.senseiju.sennetmc.settings.SettingsManager
@@ -61,9 +62,9 @@ class SennetMC : JavaPlugin() {
                 it.closeInventory()
             }
 
-            removeBackpackModelArmorStand(it)
+            playerPassengers.forEach { (_, stand) -> stand.remove() }
 
-            it.kickPlayer(messagesFile.config.getString("RELOADING", "&8&lSennetMC &bis currently reloading...")?.color())
+            it.kickPlayer(messagesFile.config.getString("RELOADING", "#914ef5&lSennetMC &bis currently reloading...")?.color())
         }
 
         userManager.saveUsersTask.cancel()

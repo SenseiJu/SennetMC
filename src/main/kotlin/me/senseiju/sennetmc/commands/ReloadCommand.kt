@@ -9,7 +9,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.sendConfigMessage
 import org.bukkit.command.CommandSender
 
-@Command("CommsCraft")
+@Command("SennetMC")
 class ReloadCommand(private val plugin: SennetMC) : CommandBase() {
 
     @SubCommand("Reload")
