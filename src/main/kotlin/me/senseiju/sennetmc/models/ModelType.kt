@@ -10,7 +10,7 @@ enum class ModelType(val material: Material) {
     HAT(Material.BEDROCK),
     FISHING_ROD(Material.FISHING_ROD),
     BACKPACK(Material.OBSIDIAN),
-    SLEEVE(Material.STONE);
+    SLEEVE(Material.BLAZE_POWDER);
 
     companion object {
         fun modelsFromSet(set: CachedRowSet) : EnumMap<ModelType, ArrayList<Int>> {
