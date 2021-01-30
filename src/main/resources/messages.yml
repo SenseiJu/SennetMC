@@ -5,6 +5,8 @@ NO-PERMISSION: "&cYou do not have permission to perform this action"
 RELOADING: "&8&lSennetMC &bis currently reloading..."
 RELOAD-COMPLETE: "&aReload complete"
 CANNOT-FIND-TARGET: "&cCannot find the specified player"
+DISCORD-LINK: "&b&ehttps://discord.sennetmc.com"
+BUYCRAFT-LINK: "&b&ehttps://shop.sennetmc.com"
 
 # Collectables
 COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
@@ -24,6 +26,12 @@ NPC-NOT-COMMSCRAFT: "&cThis NPC is not handled by CommsCraft"
 
 # Merchant NPC
 MERCHANT-NO-FISH-TO-SELL: "{merchantName} &cYou have no fish to sell to me"
+
+# Captain NPC
+CAPTAIN-FAILED-TELEPORT-SAME-LOCATION: "{captainName} &cYou are already at this location"
+CAPTAIN-TELEPORT-DESTINATION: "{captainName} &aWe have arrived at {destinationName}"
+CAPTAIN-SPAWN-POINT-SET: "&aSpawn point has been set"
+CAPTAIN-INVALID-WARP-NAME: "&cInvalid warp name entered"
 
 # Fishing
 FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continue fishing"

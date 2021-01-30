@@ -1,0 +1,9 @@
+captain-warps:
+  spawn:
+    name: "&b&lSpawn"
+    slot: 11
+    material: GRASS_BLOCK
+  lake:
+    name: "&b&lEnchanted Lake"
+    slot: 15
+    material: LAPIS_BLOCK

@@ -94,9 +94,7 @@ class BackpackPacketListener(private val plugin: SennetMC, modelsManager: Models
     private fun onPlayerMove(e: PlayerMoveEvent) {
         val modelArmorStand = playerPassengers[e.player.uniqueId] ?: return
 
-        if (e.from.chunk.x != e.to.chunk.x || e.from.chunk.z != e.to.chunk.z) {
-            modelArmorStand.teleport(e.player)
-        }
+        modelArmorStand.teleport(e.player.location.add(0.0, 1.2, 0.0))
 
         mountModelArmorStand(e.player, modelArmorStand)
         rotateModelArmorStand(e.player, modelArmorStand)

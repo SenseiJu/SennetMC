@@ -3,6 +3,8 @@ package me.senseiju.sennetmc
 import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
 import me.senseiju.sennetmc.collectables.CollectablesManager
+import me.senseiju.sennetmc.commands.BuyCommand
+import me.senseiju.sennetmc.commands.DiscordCommand
 import me.senseiju.sennetmc.commands.ReloadCommand
 import me.senseiju.sennetmc.crates.CratesManager
 import me.senseiju.sennetmc.datastorage.DataFile
@@ -26,6 +28,7 @@ class SennetMC : JavaPlugin() {
 
     val configFile = DataFile(this, "config.yml", true)
     val messagesFile = DataFile(this, "messages.yml", true)
+    val warpsFile = DataFile(this, "warps.yml", true)
 
     lateinit var commandManager: CommandManager
     lateinit var collectablesManager: CollectablesManager
@@ -73,6 +76,7 @@ class SennetMC : JavaPlugin() {
     fun reload() {
         configFile.reload()
         messagesFile.reload()
+        warpsFile.reload()
 
         upgradesManager.reload()
         collectablesManager.reload()
@@ -89,5 +93,7 @@ class SennetMC : JavaPlugin() {
         commandManager = CommandManager(this)
         commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
         commandManager.register(ReloadCommand(this))
+        commandManager.register(DiscordCommand())
+        commandManager.register(BuyCommand())
     }
 }

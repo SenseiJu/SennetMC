@@ -58,7 +58,7 @@ private fun showModelTypeGui(player: Player, user: User, modelType: ModelType) {
             if (models.containsKey(it)) {
                 val model = models.getValue(it)
                 gui.addItem(ItemBuilder.from(model.itemStack.clone())
-                        .setLore("", "&7Click to select".color())
+                        .setLore("&7Model data: $it".color(), "", "&7Click to select".color())
                         .asGuiItem {
                             when (modelType) {
                                 ModelType.HAT -> equipHelmetModel(player, user, model)
@@ -76,7 +76,7 @@ private fun showModelTypeGui(player: Player, user: User, modelType: ModelType) {
 
 private fun createModelGuiItem(player: Player, user: User, modelType: ModelType, name: String) : GuiItem {
     val activeModel = modelsManager.models[modelType]?.get(user.activeModels[modelType])
-    return ItemBuilder.from(activeModel?.itemStack ?: ItemStack(Material.BARRIER))
+    return ItemBuilder.from(activeModel?.itemStack?.clone() ?: ItemStack(Material.BARRIER))
         .setName(name.color())
         .setLore("", "&7Click to select a different model".color())
         .asGuiItem { showModelTypeGui(player, user, modelType) }

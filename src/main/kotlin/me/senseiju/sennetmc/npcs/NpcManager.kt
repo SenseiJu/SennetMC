@@ -12,6 +12,7 @@ import me.senseiju.sennetmc.npcs.listeners.NpcClickListener
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.NpcType.*
+import me.senseiju.sennetmc.npcs.types.captain.Captain
 import me.senseiju.sennetmc.npcs.types.designer.Designer
 import me.senseiju.sennetmc.npcs.types.fishmonger.Fishmonger
 import me.senseiju.sennetmc.npcs.types.looter.Looter
@@ -30,6 +31,7 @@ class NpcManager(private val plugin: SennetMC) : BaseManager {
         npcMap[SAILOR] = Sailor()
         npcMap[LOOTER] = Looter()
         npcMap[DESIGNER] = Designer()
+        npcMap[CAPTAIN] = Captain(plugin)
     }
 
     override fun registerCommands(cm: CommandManager) {
