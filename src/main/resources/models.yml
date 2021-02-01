@@ -23,10 +23,20 @@ HAT:
   1600: "&b&lTraffic Cone"
   1700: "&b&lThug Life Glasses"
   1800: "&b&lPlague Doctor"
+  1000000: "&b&lTest Model 1"
+  1000001: "&b&lTest Model 2"
+  1000002: "&b&lTest Model 3"
+  1000003: "&b&lTest Model 4"
+  1000004: "&b&lTest Model 5"
 
 FISHING_ROD:
   100: "&d&lStick Rod"
   200: "&b&lKatana Rod"
+  1000000: "&b&lTest Model 1"
+  1000001: "&b&lTest Model 2"
+  1000002: "&b&lTest Model 3"
+  1000003: "&b&lTest Model 4"
+  1000004: "&b&lTest Model 5"
 
 BACKPACK:
   100: "&b&lQuiver"
@@ -41,7 +51,19 @@ BACKPACK:
   900: "&b&lOriginal Skateboard"
   901: "&b&lCracked Lava Skateboard"
   902: "&b&lCheckered Skateboard"
+  1000000: "&b&lTest Model 1"
+  1000001: "&b&lTest Model 2"
+  1000002: "&b&lTest Model 3"
+  1000003: "&b&lTest Model 4"
+  1000004: "&b&lTest Model 5"
 
 SLEEVE:
   100: "&b&lMegatron Shield"
   200: "&b&lTek Arm"
+  300: "&b&lBlack Briefcase"
+  301: "&b&lBrown Briefcase"
+  1000000: "&b&lTest Model 1"
+  1000001: "&b&lTest Model 2"
+  1000002: "&b&lTest Model 3"
+  1000003: "&b&lTest Model 4"
+  1000004: "&b&lTest Model 5"

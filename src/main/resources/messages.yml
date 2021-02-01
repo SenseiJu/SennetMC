@@ -42,6 +42,8 @@ UPGRADES-DEUCE-PROCED: "&d&l** DEUCE **"
 
 # Speedboat
 SPEEDBOAT-TOGGLE: "&bSpeedboat toggled to {toggle}"
+SPEEDBOAT-MUST-BE-IN-WATER: "&cYou must be in water to spawn a boat"
+SPEEDBOAT-NOT-YOUR-BOAT: "&cThis is not your boat, use /boat"
 
 # Crates
 CRATES-CANNOT-FIND-CRATE: "&cCannot find the specified crate"
@@ -64,9 +66,8 @@ USER-SAVING-FINISHED: "&aFinished saving user data"
 
 # Events
 EVENTS-STARTED:
-  - "╔═ #c313d6&lEvent started"
-  - "║"
-  - "║ {eventName}"
+  - "╔═"
+  - "║ {eventName} event"
   - "║"
   - "{eventHowToPlay}"
   - "╚═"

@@ -1,7 +1,5 @@
 package me.senseiju.sennetmc.models.listeners
 
-import com.comphenix.protocol.ProtocolLibrary
-import com.comphenix.protocol.ProtocolManager
 import com.destroystokyo.paper.event.player.PlayerPostRespawnEvent
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.models.*
@@ -95,6 +93,7 @@ class BackpackPacketListener(private val plugin: SennetMC, modelsManager: Models
         val modelArmorStand = playerPassengers[e.player.uniqueId] ?: return
 
         modelArmorStand.teleport(e.player.location.add(0.0, 1.2, 0.0))
+
 
         mountModelArmorStand(e.player, modelArmorStand)
         rotateModelArmorStand(e.player, modelArmorStand)

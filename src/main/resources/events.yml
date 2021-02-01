@@ -1,4 +1,4 @@
-event-period: 1800
+event-period: 600
 
 FISH_RACE:
   length: 120

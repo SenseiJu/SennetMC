@@ -10,22 +10,20 @@ description:
 crates:
   t1:
     name: "&e&lTier I"
-    probability-per-cast: 5
-    max-crates-per-cast: 4
+    probability-per-cast: 6
+    max-crates-per-cast: 5
     upgraded-crate-id: "t2"
     rewards:
       - name: "&a&l$10"
         probability: 30
         commands:
           - "eco give {player} 10"
-      - name: "&d&lStick Fishing Rod Model"
-        probability: 3
-        commands:
-          - "model set {player} FISHING_ROD 100"
-      - name: "&d&lFisherman's Hat Model"
+
+      - name: "&d&lFisherman's Hat"
         probability: 3
         commands:
           - "model set {player} HAT 200"
+
       - name: "&6&lT1 Collectable"
         probability: 1
         commands:
@@ -33,16 +31,94 @@ crates:
 
   t2:
     name: "&e&lTier II"
-    probability-per-cast: 2
-    max-crates-per-cast: 2
-    upgraded-crate-id: "NULL"
+    probability-per-cast: 3
+    max-crates-per-cast: 4
+    upgraded-crate-id: "t3"
     rewards:
       - name: "&d&l$50"
-        probability: 10
+        probability: 30
         commands:
           - "eco give {player} 50"
-      - name: "reward"
+
+      - name: "&d&lStick Fishing Rod"
+        probability: 3
+        commands:
+          - "model set {player} FISHING_ROD 100"
+
+      - name: "&d&lThug Life Glasses"
+        probability: 3
+        commands:
+          - "model set {player} HAT 1700"
+
+      - name: "&6&lT2 Collectable"
         probability: 1
         commands:
-          - "say opening t2 crate"
+          - "collectables set {player} t2"
 
+  t3:
+    name: "&e&lTier III"
+    probability-per-cast: 0
+    max-crates-per-cast: 3
+    upgraded-crate-id: "t4"
+    rewards:
+      - name: "&d&l$300"
+        probability: 30
+        commands:
+          - "eco give {player} 300"
+
+      - name: "&d&lShark Fin Backpack"
+        probability: 3
+        commands:
+          - "model set {player} BACKPACK 700"
+
+      - name: "&6&lT3 Collectable"
+        probability: 1
+        commands:
+          - "collectables set {player} t3"
+
+  t4:
+    name: "&e&lTier IV"
+    probability-per-cast: -5
+    max-crates-per-cast: 2
+    upgraded-crate-id: "t5"
+    rewards:
+      - name: "&d&l$1500"
+        probability: 30
+        commands:
+          - "eco give {player} 1500"
+
+      - name: "&d&lKasa Straw Hat"
+        probability: 3
+        commands:
+          - "model set {player} HAT 400"
+
+      - name: "&6&lT4 Collectable"
+        probability: 1
+        commands:
+          - "collectables set {player} t4"
+
+  t5:
+    name: "&e&lTier V"
+    probability-per-cast: -10
+    max-crates-per-cast: 1
+    upgraded-crate-id: "NULL"
+    rewards:
+      - name: "&d&l$7500"
+        probability: 30
+        commands:
+          - "eco give {player} 7500"
+
+      - name: "&d&lKatana Backpack"
+        probability: 3
+        commands:
+          - "model set {player} BACKPACK 200"
+
+      - name: "&d&lKatana Rod"
+        probability: 3
+        commands:
+          - "model set {player} FISHING_ROD 200"
+
+      - name: "&6&lT5 Collectable"
+        probability: 1
+        commands:
+          - "collectables set {player} t5"

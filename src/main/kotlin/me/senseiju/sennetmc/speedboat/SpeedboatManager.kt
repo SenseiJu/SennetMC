@@ -3,6 +3,7 @@ package me.senseiju.sennetmc.speedboat
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
+import me.senseiju.sennetmc.speedboat.commands.BoatCommand
 import me.senseiju.sennetmc.speedboat.commands.ToggleSpeedboatCommand
 import me.senseiju.sennetmc.speedboat.listeners.SpeedboatListener
 import java.util.*
@@ -19,6 +20,7 @@ class SpeedboatManager(private val plugin: SennetMC) : BaseManager {
 
     override fun registerCommands(cm: CommandManager) {
         cm.register(ToggleSpeedboatCommand(this))
+        cm.register(BoatCommand())
     }
 
     override fun registerEvents() {
@@ -26,7 +28,7 @@ class SpeedboatManager(private val plugin: SennetMC) : BaseManager {
     }
 
     override fun reload() {
-        TODO("Not yet implemented")
+
     }
 
 }

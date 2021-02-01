@@ -93,7 +93,7 @@ class SennetMC : JavaPlugin() {
         commandManager = CommandManager(this)
         commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
         commandManager.register(ReloadCommand(this))
-        commandManager.register(DiscordCommand())
-        commandManager.register(BuyCommand())
+        //commandManager.register(DiscordCommand())
+        //commandManager.register(BuyCommand())
     }
 }

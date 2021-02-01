@@ -8,10 +8,15 @@ import com.comphenix.protocol.events.PacketEvent
 import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.driver
+import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.speedboat.SpeedboatManager
 import me.senseiju.sennetmc.upgrades.Upgrade
 import org.bukkit.entity.Boat
+import org.bukkit.entity.EntityType
+import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.vehicle.VehicleEnterEvent
+import org.bukkit.event.vehicle.VehicleExitEvent
 import org.bukkit.util.Vector
 import java.util.*
 import kotlin.collections.HashMap
@@ -21,7 +26,7 @@ import kotlin.math.sin
 class SpeedboatListener(private val plugin: SennetMC, speedboatManager: SpeedboatManager) : Listener {
     private val protocolManager = ProtocolLibrary.getProtocolManager()
 
-    private var playerSpeedboatToggle = speedboatManager.playerSpeedboatToggle
+    private val playerSpeedboatToggle = speedboatManager.playerSpeedboatToggle
     private val playerSpeedboatCurrentVector = HashMap<UUID, Vector>()
 
     private val userManager = plugin.userManager
@@ -85,6 +90,17 @@ class SpeedboatListener(private val plugin: SennetMC, speedboatManager: Speedboa
                 boatEntity.velocity = playerSpeedboatCurrentVector[e.player.uniqueId]!!
             }
         })
+    }
+
+    @EventHandler
+    private fun onBoatExit(e: VehicleExitEvent) {
+        if (e.exited.type != EntityType.PLAYER || e.vehicle.type != EntityType.BOAT) {
+            return
+        }
+
+        if (e.vehicle.passengers.size == 1) {
+            e.vehicle.remove()
+        }
     }
 
     fun reload() {

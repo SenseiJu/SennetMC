@@ -1,5 +1,6 @@
 package me.senseiju.sennetmc.users.listeners
 
+import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.models.listeners.playerPassengers
@@ -21,7 +22,12 @@ class PlayerJoinListener(plugin: SennetMC, private val userManager: UserManager)
     private fun onPlayerJoin(e: PlayerJoinEvent) {
         if (userManager.userMap.containsKey(e.player.uniqueId)) {
             if (!e.player.inventory.contains(Material.FISHING_ROD)) {
-                e.player.inventory.addItem(ItemStack(Material.FISHING_ROD))
+                val rod = ItemStack(Material.FISHING_ROD)
+                val rodMeta = rod.itemMeta
+                rodMeta.isUnbreakable = true
+                rod.itemMeta = rodMeta
+
+                e.player.inventory.addItem(rod)
             }
             return
         }

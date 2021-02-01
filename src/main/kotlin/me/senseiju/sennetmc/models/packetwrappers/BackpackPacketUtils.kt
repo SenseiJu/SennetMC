@@ -1,7 +1,9 @@
 package me.senseiju.sennetmc.models.packetwrappers
 
 import com.comphenix.protocol.ProtocolLibrary
+import kotlinx.coroutines.launch
 import me.senseiju.sennetmc.SennetMC
+import me.senseiju.sennetmc.utils.defaultScope
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -17,28 +19,36 @@ fun updateModelArmorStand(player: Player, modelArmorStand: ArmorStand) {
 }
 
 fun mountModelArmorStand(player: Player, modelArmorStand: ArmorStand) {
-    val mountPacket = WrapperPlayServerMount()
-    mountPacket.entityID = player.entityId
-    mountPacket.setPassengers(listOf(modelArmorStand))
-    mountPacket.broadcastPacket()
+    defaultScope.launch {
+        val mountPacket = WrapperPlayServerMount()
+        mountPacket.entityID = player.entityId
+        mountPacket.setPassengers(listOf(modelArmorStand))
+        mountPacket.broadcastPacket()
+    }
 }
 
 fun mountOtherModeArmorStand(player: Player, otherPlayerEntityId: Int, modelArmorStand: ArmorStand) {
-    val othersMountPacket = WrapperPlayServerMount()
-    othersMountPacket.entityID = otherPlayerEntityId
-    othersMountPacket.setPassengers(listOf(modelArmorStand))
-    othersMountPacket.sendPacket(player)
+    defaultScope.launch {
+        val othersMountPacket = WrapperPlayServerMount()
+        othersMountPacket.entityID = otherPlayerEntityId
+        othersMountPacket.setPassengers(listOf(modelArmorStand))
+        othersMountPacket.sendPacket(player)
+    }
 }
 
 fun rotateModelArmorStand(player: Player, modelArmorStand: ArmorStand) {
-    val rotateArmorStandModelPacket = WrapperPlayServerEntityHeadRotation()
-    rotateArmorStandModelPacket.entityID = modelArmorStand.entityId
-    rotateArmorStandModelPacket.headYaw = (player.eyeLocation.yaw * 256.0f / 360.0f).toInt().toByte()
-    rotateArmorStandModelPacket.broadcastPacket()
+    defaultScope.launch {
+        val rotateArmorStandModelPacket = WrapperPlayServerEntityHeadRotation()
+        rotateArmorStandModelPacket.entityID = modelArmorStand.entityId
+        rotateArmorStandModelPacket.headYaw = (player.eyeLocation.yaw * 256.0f / 360.0f).toInt().toByte()
+        rotateArmorStandModelPacket.broadcastPacket()
+    }
 }
 
 fun destroyModelArmorStand(modelArmorStand: ArmorStand) {
-    val destroyArmorStandModelPacket = WrapperPlayServerEntityDestroy()
-    destroyArmorStandModelPacket.setEntityIds(IntArray(1) { modelArmorStand.entityId })
-    destroyArmorStandModelPacket.broadcastPacket()
+    defaultScope.launch {
+        val destroyArmorStandModelPacket = WrapperPlayServerEntityDestroy()
+        destroyArmorStandModelPacket.setEntityIds(IntArray(1) { modelArmorStand.entityId })
+        destroyArmorStandModelPacket.broadcastPacket()
+    }
 }

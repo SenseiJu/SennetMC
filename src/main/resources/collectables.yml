@@ -37,6 +37,30 @@ t1:
   rarity: COMMON
   description:
     - "&7Received by opening Tier I crates"
+t2:
+  name: "&e&lT2"
+  material: CHEST
+  rarity: COMMON
+  description:
+    - "&7Received by opening Tier II crates"
+t3:
+  name: "&e&lT3"
+  material: CHEST
+  rarity: COMMON
+  description:
+    - "&7Received by opening Tier III crates"
+t4:
+  name: "&e&lT4"
+  material: CHEST
+  rarity: UNCOMMON
+  description:
+    - "&7Received by opening Tier IV crates"
+t5:
+  name: "&e&lT5"
+  material: CHEST
+  rarity: UNCOMMON
+  description:
+    - "&7Received by opening Tier V crates"
 shipwreckevent:
   name: "&b&lShipwreck event"
   material: OAK_BOAT

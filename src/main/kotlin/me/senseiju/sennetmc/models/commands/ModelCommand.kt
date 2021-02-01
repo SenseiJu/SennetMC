@@ -42,6 +42,23 @@ class ModelCommand(private val plugin: SennetMC, private val modelsManager: Mode
         player.inventory.addItem(item)
     }
 
+    @SubCommand("setall")
+    @Permission(PERMISSION_MODELS_SET)
+    fun onSetAllSubCommand(sender: CommandSender, targetPlayer: Player?) {
+        defaultScope.launch {
+            if (targetPlayer == null) {
+                sender.sendConfigMessage("CANNOT-FIND-TARGET")
+                return@launch
+            }
+
+            modelsManager.models.forEach { (modelType, modelDataMap) ->
+                modelDataMap.forEach {
+                    modelsManager.addModel(targetPlayer.uniqueId, modelType, it.key, sender)
+                }
+            }
+        }
+    }
+
     @SubCommand("set")
     @Permission(PERMISSION_MODELS_SET)
     fun onSetSubCommand(sender: CommandSender, targetPlayer: Player?, modelType: ModelType?, modelData: Int?) {
