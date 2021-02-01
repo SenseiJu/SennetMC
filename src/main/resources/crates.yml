@@ -35,7 +35,7 @@ crates:
     max-crates-per-cast: 4
     upgraded-crate-id: "t3"
     rewards:
-      - name: "&d&l$50"
+      - name: "&a&l$50"
         probability: 30
         commands:
           - "eco give {player} 50"
@@ -61,7 +61,7 @@ crates:
     max-crates-per-cast: 3
     upgraded-crate-id: "t4"
     rewards:
-      - name: "&d&l$300"
+      - name: "&a&l$300"
         probability: 30
         commands:
           - "eco give {player} 300"
@@ -82,7 +82,7 @@ crates:
     max-crates-per-cast: 2
     upgraded-crate-id: "t5"
     rewards:
-      - name: "&d&l$1500"
+      - name: "&a&l$1500"
         probability: 30
         commands:
           - "eco give {player} 1500"
@@ -103,7 +103,7 @@ crates:
     max-crates-per-cast: 1
     upgraded-crate-id: "NULL"
     rewards:
-      - name: "&d&l$7500"
+      - name: "&a&l$7500"
         probability: 30
         commands:
           - "eco give {player} 7500"
