@@ -10,7 +10,6 @@ import me.senseiju.sennetmc.npcs.types.designer.showDesignerGui
 import org.bukkit.entity.Player
 
 @Command("Cosmetics")
-@Alias("Cosmetic")
 class CosmeticsCommand : CommandBase() {
 
     @Default
