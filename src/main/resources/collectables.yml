@@ -62,14 +62,32 @@ t5:
   description:
     - "&7Received by opening Tier V crates"
 shipwreckevent:
-  name: "&b&lShipwreck event"
+  name: "&b&lShipwreck Event"
   material: OAK_BOAT
   rarity: COMMON
   description:
     - "&7Received when participating in the shipwreck event"
 fishraceevent:
-  name: "&b&lFish race event"
+  name: "&b&lFish Race Event"
   material: COOKED_COD
   rarity: UNCOMMON
   description:
     - "&7Received by winning the fish race event"
+sub:
+  name: "#3deb1a&lSub rank"
+  material: IRON_BLOCK
+  rarity: LEGENDARY
+  description:
+    - "&7Received by purchasing the #3deb1a&lSub &7rank"
+sub+:
+  name: "#16f2e7&lSub+ rank"
+  material: GOLD_BLOCK
+  rarity: LEGENDARY
+  description:
+    - "&7Received by purchasing the #16f2e7&lSub+ &7rank"
+sub++:
+  name: "#f218e0&lSub++ rank"
+  material: DIAMOND_BLOCK
+  rarity: LEGENDARY
+  description:
+    - "&7Received by purchasing the #f218e0&lSub++ &7rank"

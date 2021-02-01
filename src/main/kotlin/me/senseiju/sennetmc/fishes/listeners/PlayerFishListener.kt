@@ -60,6 +60,11 @@ class PlayerFishListener(private val plugin: SennetMC) : Listener {
         } else {
             hook.minWaitTime = hook.minWaitTime - baitUpgrade
         }
-        hook.maxWaitTime = hook.maxWaitTime - baitUpgrade
+
+        if (hook.maxWaitTime - baitUpgrade <= 100) {
+            hook.maxWaitTime = 100
+        } else {
+            hook.maxWaitTime = hook.maxWaitTime - baitUpgrade
+        }
     }
 }

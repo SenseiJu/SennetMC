@@ -11,7 +11,7 @@ feast-upgrade-starting-cost: 500.0
 feast-upgrade-increment: 0.01
 feast-upgrade-max: 20
 
-# Ensure (bait increment * bait max) is never above 600
+# Default max time is 500 ticks (Minimum 100 on max ticks)
 bait-upgrade-starting-cost: 500.0
 bait-upgrade-increment: 20
 bait-upgrade-max: 20
