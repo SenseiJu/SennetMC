@@ -34,6 +34,8 @@ class BoatCommand : CommandBase() {
         }
 
         val boat = player.world.spawnEntity(currentBlock.location, EntityType.BOAT)
+        boat.location.yaw = player.location.yaw
+        boat.location.pitch = player.location.pitch
         boat.addPassenger(player)
     }
 
