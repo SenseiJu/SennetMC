@@ -11,6 +11,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.datastorage.DataFile
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.models.commands.CosmeticsCommand
 import me.senseiju.sennetmc.models.commands.HatCommand
 import me.senseiju.sennetmc.models.commands.ModelCommand
 import me.senseiju.sennetmc.models.listeners.*
@@ -38,10 +39,17 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
     }
 
     override fun registerCommands(cm: CommandManager) {
-        registerCommandParameters(cm.parameterHandler)
+        cm.parameterHandler.register(ModelType::class.java, ParameterResolver { argument ->
+            try {
+                return@ParameterResolver TypeResult(ModelType.valueOf(argument.toString().toUpperCase()), argument)
+            } catch (ex: IllegalArgumentException) {
+                return@ParameterResolver TypeResult(argument)
+            }
+        })
 
         cm.register(ModelCommand(plugin, this))
         cm.register(HatCommand(plugin))
+        cm.register(CosmeticsCommand())
     }
 
     override fun registerEvents() {
@@ -51,16 +59,6 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
         //BackpackListener(plugin, this)
         BackpackPacketListener(plugin, this)
 
-    }
-
-    private fun registerCommandParameters(ph: ParameterHandler) {
-        ph.register(ModelType::class.java, ParameterResolver { argument ->
-            try {
-                return@ParameterResolver TypeResult(ModelType.valueOf(argument.toString().toUpperCase()), argument)
-            } catch (ex: IllegalArgumentException) {
-                return@ParameterResolver TypeResult(argument)
-            }
-        })
     }
 
     override fun reload() {

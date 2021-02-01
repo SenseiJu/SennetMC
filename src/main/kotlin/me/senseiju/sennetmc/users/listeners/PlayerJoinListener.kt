@@ -1,16 +1,14 @@
 package me.senseiju.sennetmc.users.listeners
 
-import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.color
-import me.senseiju.sennetmc.models.listeners.playerPassengers
 import me.senseiju.sennetmc.users.UserManager
+import me.senseiju.sennetmc.users.giveFishingRod
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
-import org.bukkit.inventory.ItemStack
 
 class PlayerJoinListener(plugin: SennetMC, private val userManager: UserManager) : Listener {
 
@@ -22,12 +20,7 @@ class PlayerJoinListener(plugin: SennetMC, private val userManager: UserManager)
     private fun onPlayerJoin(e: PlayerJoinEvent) {
         if (userManager.userMap.containsKey(e.player.uniqueId)) {
             if (!e.player.inventory.contains(Material.FISHING_ROD)) {
-                val rod = ItemStack(Material.FISHING_ROD)
-                val rodMeta = rod.itemMeta
-                rodMeta.isUnbreakable = true
-                rod.itemMeta = rodMeta
-
-                e.player.inventory.addItem(rod)
+                giveFishingRod(e.player)
             }
             return
         }
