@@ -1,8 +1,10 @@
 package me.senseiju.sennetmc.npcs.types.fishmonger
 
+import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
+import me.senseiju.sennetmc.npcs.types.fishmonger.commands.FishmongerCommand
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
@@ -15,7 +17,11 @@ private const val SKIN_SIGNATURE = "WfIR1SfvLWiiah5JwzO5J8QkPdru+JC5Fto7gD6XKvNn
 
 private val NPC_TYPE = NpcType.FISHMONGER
 
-class Fishmonger : BaseNpc {
+class Fishmonger(plugin: SennetMC) : BaseNpc {
+
+    init {
+        plugin.commandManager.register(FishmongerCommand())
+    }
 
     override fun spawnNpc(location: Location) {
         val npc = createBasicNpc(NPC_TYPE)

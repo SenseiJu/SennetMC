@@ -2,7 +2,6 @@ package me.senseiju.sennetmc.models
 
 import kotlinx.coroutines.launch
 import me.mattstudios.mf.base.CommandManager
-import me.mattstudios.mf.base.ParameterHandler
 import me.mattstudios.mf.base.components.ParameterResolver
 import me.mattstudios.mf.base.components.TypeResult
 import me.mattstudios.mfgui.gui.components.ItemBuilder
@@ -11,7 +10,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.datastorage.DataFile
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.models.commands.CosmeticsCommand
+import me.senseiju.sennetmc.npcs.types.designer.commands.CosmeticsCommand
 import me.senseiju.sennetmc.models.commands.HatCommand
 import me.senseiju.sennetmc.models.commands.ModelCommand
 import me.senseiju.sennetmc.models.listeners.*
@@ -49,7 +48,6 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
 
         cm.register(ModelCommand(plugin, this))
         cm.register(HatCommand(plugin))
-        cm.register(CosmeticsCommand())
     }
 
     override fun registerEvents() {

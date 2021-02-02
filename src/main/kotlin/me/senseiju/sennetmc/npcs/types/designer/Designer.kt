@@ -1,8 +1,10 @@
 package me.senseiju.sennetmc.npcs.types.designer
 
+import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
+import me.senseiju.sennetmc.npcs.types.designer.commands.CosmeticsCommand
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
@@ -15,7 +17,12 @@ private const val SKIN_SIGNATURE = "kK1hmM7mb3kKsFgI0TLQO05jl5mHLMci94mA4oZkX/HI
 
 private val NPC_TYPE = NpcType.DESIGNER
 
-class Designer : BaseNpc {
+class Designer(plugin: SennetMC) : BaseNpc {
+
+    init {
+        plugin.commandManager.register(CosmeticsCommand())
+    }
+
     override fun spawnNpc(location: Location) {
         val npc = createBasicNpc(NPC_TYPE)
 

@@ -26,11 +26,11 @@ class NpcManager(private val plugin: SennetMC) : BaseManager {
         registerCommands(plugin.commandManager)
         registerEvents()
 
-        npcMap[FISHMONGER] = Fishmonger()
+        npcMap[FISHMONGER] = Fishmonger(plugin)
         npcMap[MERCHANT] = Merchant(plugin)
         npcMap[SAILOR] = Sailor()
-        npcMap[LOOTER] = Looter()
-        npcMap[DESIGNER] = Designer()
+        npcMap[LOOTER] = Looter(plugin)
+        npcMap[DESIGNER] = Designer(plugin)
         npcMap[CAPTAIN] = Captain(plugin)
     }
 

@@ -6,6 +6,8 @@ import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
+import me.senseiju.sennetmc.npcs.types.fishmonger.commands.FishmongerCommand
+import me.senseiju.sennetmc.npcs.types.merchant.commands.SellCommand
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.ObjectSet
@@ -16,6 +18,7 @@ import net.milkbowl.vault.economy.Economy
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 private const val SKIN_TEXTURE = "eyJ0aW1lc3RhbXAiOjE1ODgwMjIwMTYzODMsInByb2ZpbGVJZCI6IjE5MjUyMWI0ZWZkYjQyNWM4OTMxZjAyYTg0OTZlMTFiIiwicHJvZmlsZU5hbWUiOiJTZXJpYWxpemFibGUiLCJzaWduYXR1cmVSZXF1aXJlZCI6dHJ1ZSwidGV4dHVyZXMiOnsiU0tJTiI6eyJ1cmwiOiJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlLzU0OTY5ZDU1NDY0NmVmNWE5NGRlNDcyODBlYTY3ZTJkYzMwNmM3YTA5YTQwMjE5MDMzNDQyMGRhYTA2YzM2MDYifX19"
@@ -24,6 +27,10 @@ private const val SKIN_SIGNATURE = "feoHGYSz08NXIy5oUlhcThrahCagolldnojlpTqPYqFx
 private val NPC_TYPE = NpcType.MERCHANT
 
 class Merchant(private val plugin: SennetMC) : BaseNpc {
+
+    init {
+        plugin.commandManager.register(SellCommand(this))
+    }
 
     private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
     private val upgradesFile = plugin.upgradesManager.upgradesFile
@@ -36,18 +43,22 @@ class Merchant(private val plugin: SennetMC) : BaseNpc {
     }
 
     override fun onNpcRightClick(e: NPCRightClickEvent) {
-        val user = plugin.userManager.userMap[e.clicker.uniqueId] ?: return
+        sellPlayersFish(e.clicker)
+    }
+
+    fun sellPlayersFish(player: Player) {
+        val user = plugin.userManager.userMap[player.uniqueId] ?: return
         val multiplier = 1 + getNegotiateMultiplier(user)
         val totalSellPrice = calculateSellPrice(user, multiplier)
 
-        econ?.depositPlayer(e.clicker, totalSellPrice)
+        econ?.depositPlayer(player, totalSellPrice)
 
         if (totalSellPrice > 0) {
-            e.clicker.sendTitle("&b&lSold for $${totalSellPrice}".color(), "&6x$multiplier multiplier".color(), 20, 60, 20)
-            e.clicker.playSound(e.clicker.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
+            player.sendTitle("&b&lSold for $${totalSellPrice}".color(), "&6x$multiplier multiplier".color(), 20, 60, 20)
+            player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
         } else {
-            e.clicker.sendConfigMessage("MERCHANT-NO-FISH-TO-SELL", false,
-                ObjectSet("{merchantName}", e.npc.name)
+            player.sendConfigMessage("MERCHANT-NO-FISH-TO-SELL", false,
+                    ObjectSet("{merchantName}", NPC_TYPE.npcName)
             )
         }
     }

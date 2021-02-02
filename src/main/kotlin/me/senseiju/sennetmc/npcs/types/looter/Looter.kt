@@ -1,8 +1,11 @@
 package me.senseiju.sennetmc.npcs.types.looter
 
+import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
+import me.senseiju.sennetmc.npcs.types.fishmonger.commands.FishmongerCommand
+import me.senseiju.sennetmc.npcs.types.looter.commands.LooterCommand
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
@@ -15,7 +18,11 @@ private const val SKIN_SIGNATURE = "lCqjPtxEH73Gmw9n7irDvx1R+t8FyFDHXQ4Im7Pngqow
 
 private val NPC_TYPE = NpcType.LOOTER
 
-class Looter : BaseNpc {
+class Looter(plugin: SennetMC) : BaseNpc {
+
+    init {
+        plugin.commandManager.register(LooterCommand())
+    }
 
     override fun spawnNpc(location: Location) {
         val npc = createBasicNpc(NPC_TYPE)
