@@ -55,7 +55,7 @@ class PlayerFishListener(private val plugin: SennetMC) : Listener {
     private fun applyBaitUpgrade(user: User, hook: FishHook) {
         val baitUpgrade = user.getUpgrade(Upgrade.BAIT) * upgradesFile.config.getInt("bait-upgrade-increment", 10)
 
-        if (baitUpgrade > 100) {
+        if (hook.minWaitTime - baitUpgrade <= 0) {
             hook.minWaitTime = 0
         } else {
             hook.minWaitTime = hook.minWaitTime - baitUpgrade
