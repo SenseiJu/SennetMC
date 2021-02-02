@@ -2,11 +2,16 @@ PREFIX: "#914ef5&lSennetMC »"
 
 # Generic messages
 NO-PERMISSION: "&cYou do not have permission to perform this action"
-RELOADING: "&8&lSennetMC &bis currently reloading..."
+RELOADING: "#914ef5&lSennetMC &bis currently reloading..."
 RELOAD-COMPLETE: "&aReload complete"
 CANNOT-FIND-TARGET: "&cCannot find the specified player"
 DISCORD-LINK: "&b&ehttps://discord.sennetmc.com"
 BUYCRAFT-LINK: "&b&ehttps://shop.sennetmc.com"
+RESOURCE-PACK-DISABLED:
+  - "&d>>>>>>>>>>>>>>>>>>>"
+  - "&cServer resource pack is disabled. To enable,"
+  - "&cedit the server in multiplayer and enable the resource pack"
+  - "&d>>>>>>>>>>>>>>>>>>>"
 
 # Collectables
 COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
