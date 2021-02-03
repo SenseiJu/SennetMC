@@ -36,6 +36,6 @@ class UpgradesManager(private val plugin: SennetMC) : BaseManager {
     fun updateUpgrades(uuid: UUID, upgradesMap: EnumMap<Upgrade, Int>) {
         val upgrades = Upgrade.values().map { upgradesMap.getOrDefault(it, 0) }.toTypedArray()
 
-        plugin.database.updateQuery(Upgrade.buildUpdateDatabaseQuery(), uuid.toString(), *upgrades, *upgrades)
+        plugin.database.updateQuery(Upgrade.buildUpdateQuery(), uuid.toString(), *upgrades, *upgrades)
     }
 }

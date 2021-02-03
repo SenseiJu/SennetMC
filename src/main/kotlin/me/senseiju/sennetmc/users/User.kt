@@ -5,7 +5,10 @@ import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.models.ModelType
 import me.senseiju.sennetmc.settings.Setting
 import me.senseiju.sennetmc.upgrades.Upgrade
+import java.text.DateFormat
+import java.time.Instant
 import java.util.*
+import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class User(val uuid: UUID,
@@ -14,7 +17,8 @@ class User(val uuid: UUID,
            val upgrades: EnumMap<Upgrade, Int> = EnumMap(Upgrade::class.java),
            val settings: EnumMap<Setting, Boolean> = EnumMap(Setting::class.java),
            val models: EnumMap<ModelType, ArrayList<Int>> = EnumMap(ModelType::class.java),
-           val activeModels: EnumMap<ModelType, Int> = EnumMap(ModelType::class.java)) {
+           val activeModels: EnumMap<ModelType, Int> = EnumMap(ModelType::class.java),
+           var dailyRewardLastClaimed: Instant = Instant.ofEpochMilli(0)) {
 
     val currentFishCaughtCapacity
         get() = fishCaught.entries.sumBy { it.key.capacity() * it.value.current }
@@ -28,5 +32,4 @@ class User(val uuid: UUID,
     fun incrementUpgrade(upgrade: Upgrade, amount: Int = 1) { upgrades.merge(upgrade, amount, Int::plus) }
 
     fun getUpgrade(upgrade: Upgrade) : Int = upgrades.computeIfAbsent(upgrade) { 0 }
-
 }

@@ -1,1 +1,14 @@
 user-save-interval: 300
+
+daily-rewards:
+  default:
+    - "crates give {player} t2 1"
+  sub:
+    - "crates give {player} t3 1"
+    - "collectables set {player} sub+"
+  sub+:
+    - "crates give {player} t4 1"
+    - "collectables set {player} sub+"
+  sub++:
+    - "crates give {player} t5 1"
+    - "collectables set {player} sub++"

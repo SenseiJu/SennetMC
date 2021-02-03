@@ -25,10 +25,10 @@ enum class Upgrade(val databaseField: String, private val databaseFieldType: Str
             return values().associateWith { set.getInt(it.databaseField) }.toMap(EnumMap<Upgrade, Int>(Upgrade::class.java))
         }
 
-        fun buildCreateDatabaseQuery(): String =
+        fun buildCreateTableQuery(): String =
                 "CREATE TABLE IF NOT EXISTS `upgrades`(`uuid` CHAR(36) NOT NULL, $queryFieldsWithType, UNIQUE(`uuid`));"
 
-        fun buildUpdateDatabaseQuery() : String =
+        fun buildUpdateQuery() : String =
                 "INSERT INTO `upgrades`(`uuid`, $queryFields) VALUES(?, ${queryValues}) ON DUPLICATE KEY UPDATE $queryFieldsWithParameter;"
     }
 }

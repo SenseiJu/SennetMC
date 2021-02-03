@@ -78,3 +78,7 @@ EVENTS-INVALID-EVENT-TYPE: "&cInvalid event type entered"
 EVENTS-CURRENTLY-ACTIVE: "&cAn event is already active"
 EVENTS-LOSER: "{eventName} &8&l» &cYou did not win any rewards from the event"
 EVENTS-WINNER: "{eventName} &8&l» &aYou won rewards from the event"
+
+# Daily
+DAILY-CLAIMED: "&aYou have claimed your daily rewards"
+DAILY-NOT-READY: "&cYour daily rewards are not ready"

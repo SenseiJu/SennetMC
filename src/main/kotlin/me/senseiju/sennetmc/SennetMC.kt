@@ -3,8 +3,7 @@ package me.senseiju.sennetmc
 import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
 import me.senseiju.sennetmc.collectables.CollectablesManager
-import me.senseiju.sennetmc.commands.BuyCommand
-import me.senseiju.sennetmc.commands.DiscordCommand
+import me.senseiju.sennetmc.commands.DailyCommand
 import me.senseiju.sennetmc.commands.ReloadCommand
 import me.senseiju.sennetmc.commands.ResourcePackCommand
 import me.senseiju.sennetmc.crates.CratesManager
@@ -16,7 +15,6 @@ import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishManager
 import me.senseiju.sennetmc.models.ModelsManager
 import me.senseiju.sennetmc.models.listeners.playerPassengers
-import me.senseiju.sennetmc.models.removeBackpackModelArmorStand
 import me.senseiju.sennetmc.npcs.NpcManager
 import me.senseiju.sennetmc.settings.SettingsManager
 import me.senseiju.sennetmc.speedboat.SpeedboatManager
@@ -44,7 +42,8 @@ class SennetMC : JavaPlugin() {
     lateinit var eventsManager: EventsManager
 
     override fun onEnable() {
-        setupCommands()
+        commandManager = CommandManager(this)
+        commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
 
         userManager = UserManager(this)
         modelsManager = ModelsManager(this)
@@ -58,6 +57,8 @@ class SennetMC : JavaPlugin() {
         eventsManager = EventsManager(this)
 
         SennetMCPlaceholderExpansion(this)
+
+        setupCommands()
     }
 
     override fun onDisable() {
@@ -91,11 +92,9 @@ class SennetMC : JavaPlugin() {
     }
 
     private fun setupCommands() {
-        commandManager = CommandManager(this)
-        commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
         commandManager.register(ReloadCommand(this))
         commandManager.register(ResourcePackCommand())
-        //commandManager.register(DiscordCommand())
+        commandManager.register(DailyCommand(this))
         //commandManager.register(BuyCommand())
     }
 }

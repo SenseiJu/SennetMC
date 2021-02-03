@@ -19,7 +19,7 @@ enum class Setting(val databaseField: String, private val databaseFieldType: Str
             return values().associateWith { set.getBoolean(it.databaseField) }.toMap(EnumMap<Setting, Boolean>(Setting::class.java))
         }
 
-        fun buildCreateDatabaseQuery() : String =
+        fun buildCreateTableQuery() : String =
                 "CREATE TABLE IF NOT EXISTS `settings`(`uuid` CHAR(36) NOT NULL, $queryFieldsWithType, UNIQUE(`uuid`));"
 
 
