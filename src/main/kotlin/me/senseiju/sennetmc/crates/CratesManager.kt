@@ -153,9 +153,9 @@ class CratesManager(private val plugin: SennetMC) : BaseManager {
     }
 
     private fun shouldPlayerReceiveCrates(user: User) : Boolean {
-        val baseChance = cratesFile.config.getDouble("chance-to-receive-crates", 0.1)
+        val baseChance = upgradesFile.config.getDouble("discovery-upgrade-base-chance", 0.3)
         val discoveryChance = user.getUpgrade(Upgrade.DISCOVERY)
-                .times(upgradesFile.config.getDouble("discovery-upgrade-increment", 0.01))
+                .times(upgradesFile.config.getDouble("discovery-upgrade-increment", 0.02))
 
         return percentChance(baseChance + discoveryChance)
     }

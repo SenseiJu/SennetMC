@@ -1,8 +1,8 @@
 #
 # Fishmonger NPC
 #
-fishing-capacity-starting-capacity: 100
-fishing-capacity_upgrade-starting-cost: 500.0
+fishing-capacity-starting-capacity: 40
+fishing-capacity_upgrade-starting-cost: 300.0
 fishing-capacity-upgrade-increment: 15
 fishing-capacity-upgrade-max: 20
 
@@ -12,11 +12,11 @@ feast-upgrade-increment: 0.01
 feast-upgrade-max: 20
 
 # Default max time is 500 ticks (Minimum 100 on max ticks)
-bait-upgrade-starting-cost: 500.0
+bait-upgrade-starting-cost: 300.0
 bait-upgrade-increment: 20
 bait-upgrade-max: 20
 
-negotiate-upgrade-starting-cost: 500.0
+negotiate-upgrade-starting-cost: 450.0
 negotiate-upgrade-increment: 0.1
 negotiate-upgrade-max: 20
 
@@ -29,19 +29,20 @@ deuce-upgrade-max: 20
 #
 treasure-finder-upgrade-increment: 0.02
 treasure-finder-upgrade-max: 30
-treasure-finder-upgrade-starting-cost: 300
+treasure-finder-upgrade-starting-cost: 400
 
+discovery-upgrade-base-chance: 0.3
 discovery-upgrade-increment: 0.02
 discovery-upgrade-max: 25
-discovery-upgrade-starting-cost: 300
+discovery-upgrade-starting-cost: 450
 
 crate-master-upgrade-increment: 1
 crate-master-upgrade-max: 25
-crate-master-upgrade-starting-cost: 300
+crate-master-upgrade-starting-cost: 500
 
 #
 # Sailor NPC
 #
 speedboat-speed-upgrade-increment: 0.05
-speedboat-speed-upgrade-starting-cost: 300.0
+speedboat-speed-upgrade-starting-cost: 200.0
 speedboat-speed-upgrade-max: 20

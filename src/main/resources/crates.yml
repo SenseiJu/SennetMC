@@ -1,5 +1,5 @@
 crates-required-before-upgrade: 4
-chance-to-receive-crates: 0.1
+
 description:
   - ""
   - "&7Right-click to open the crate"
