@@ -10,7 +10,7 @@ private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
 private val upgradesFile = plugin.upgradesManager.upgradesFile
 
 fun calculateMaxFishCapacity(upgrades: Int) : Int {
-    return upgradesFile.config.getInt("fishing_capacity-starting-capacity", 100) +
+    return upgradesFile.config.getInt("fishing-capacity-starting-capacity", 100) +
             (upgradesFile.config.getInt("fishing-capacity-upgrade-increment", 15) * upgrades)
 }
 
