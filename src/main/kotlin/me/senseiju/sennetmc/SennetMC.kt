@@ -6,6 +6,7 @@ import me.senseiju.sennetmc.collectables.CollectablesManager
 import me.senseiju.sennetmc.commands.BuyCommand
 import me.senseiju.sennetmc.commands.DiscordCommand
 import me.senseiju.sennetmc.commands.ReloadCommand
+import me.senseiju.sennetmc.commands.ResourcePackCommand
 import me.senseiju.sennetmc.crates.CratesManager
 import me.senseiju.sennetmc.datastorage.DataFile
 import me.senseiju.sennetmc.datastorage.Database
@@ -93,6 +94,7 @@ class SennetMC : JavaPlugin() {
         commandManager = CommandManager(this)
         commandManager.messageHandler.register("cmd.no.permission") { it.sendConfigMessage("NO-PERMISSION") }
         commandManager.register(ReloadCommand(this))
+        commandManager.register(ResourcePackCommand())
         //commandManager.register(DiscordCommand())
         //commandManager.register(BuyCommand())
     }

@@ -2,7 +2,6 @@ package me.senseiju.sennetmc.users.listeners
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.color
-import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.users.UserManager
 import me.senseiju.sennetmc.users.giveFishingRod
 import org.bukkit.Material
@@ -26,11 +25,6 @@ class PlayerJoinListener(plugin: SennetMC, private val userManager: UserManager)
 
         if (!e.player.inventory.contains(Material.FISHING_ROD)) {
             giveFishingRod(e.player)
-        }
-
-
-        if (!e.player.hasResourcePack()) {
-            e.player.sendConfigMessage("RESOURCE-PACK-DISABLED", false)
         }
     }
 }
