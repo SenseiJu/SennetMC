@@ -15,12 +15,12 @@ crates:
     upgraded-crate-id: "t2"
     rewards:
       - name: "&a&l$10"
-        probability: 30
+        probability: 70
         commands:
           - "eco give {player} 10"
 
       - name: "&d&lFisherman's Hat"
-        probability: 3
+        probability: 4
         commands:
           - "model set {player} HAT 200"
 
@@ -36,17 +36,17 @@ crates:
     upgraded-crate-id: "t3"
     rewards:
       - name: "&a&l$50"
-        probability: 30
+        probability: 70
         commands:
           - "eco give {player} 50"
 
       - name: "&d&lStick Fishing Rod"
-        probability: 3
+        probability: 4
         commands:
           - "model set {player} FISHING_ROD 100"
 
       - name: "&d&lThug Life Glasses"
-        probability: 3
+        probability: 4
         commands:
           - "model set {player} HAT 1700"
 
@@ -62,12 +62,12 @@ crates:
     upgraded-crate-id: "t4"
     rewards:
       - name: "&a&l$300"
-        probability: 30
+        probability: 70
         commands:
           - "eco give {player} 300"
 
       - name: "&d&lShark Fin Backpack"
-        probability: 3
+        probability: 4
         commands:
           - "model set {player} BACKPACK 700"
 
@@ -83,12 +83,12 @@ crates:
     upgraded-crate-id: "t5"
     rewards:
       - name: "&a&l$1500"
-        probability: 30
+        probability: 70
         commands:
           - "eco give {player} 1500"
 
       - name: "&d&lKasa Straw Hat"
-        probability: 3
+        probability: 4
         commands:
           - "model set {player} HAT 400"
 
@@ -104,17 +104,17 @@ crates:
     upgraded-crate-id: "NULL"
     rewards:
       - name: "&a&l$7500"
-        probability: 30
+        probability: 70
         commands:
           - "eco give {player} 7500"
 
       - name: "&d&lKatana Backpack"
-        probability: 3
+        probability: 4
         commands:
           - "model set {player} BACKPACK 200"
 
       - name: "&d&lKatana Rod"
-        probability: 3
+        probability: 4
         commands:
           - "model set {player} FISHING_ROD 200"
 
