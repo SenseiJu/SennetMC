@@ -23,6 +23,8 @@ private const val PERMISSION_NPC_PREFIX = PERMISSION_PREFIX + "npc."
 const val PERMISSION_NPC_SPAWN = PERMISSION_NPC_PREFIX + "spawn"
 const val PERMISSION_NPC_REMOVE = PERMISSION_NPC_PREFIX + "remove"
 
+const val PERMISSION_NPC_CAPTAIN_SET_SPAWN_POINT = PERMISSION_NPC_SPAWN + "setspawnpoint"
+
 /*
  * Speedboats
  */
@@ -52,6 +54,13 @@ const val PERMISSION_MODELS_SET = PERMISSION_MODELS_PREFIX + "set"
 private const val PERMISSION_EVENTS_PREFIX = PERMISSION_PREFIX + "events."
 
 const val PERMISSION_EVENTS_START = PERMISSION_EVENTS_PREFIX + "start"
+
+/*
+ * Arena
+ */
+private const val PERMISSION_ARENA_PREFIX = PERMISSION_PREFIX + "arena."
+
+const val PERMISSION_ARENA_SET_LOCATION = PERMISSION_ARENA_PREFIX + "setlocation"
 
 /*
  * Commands

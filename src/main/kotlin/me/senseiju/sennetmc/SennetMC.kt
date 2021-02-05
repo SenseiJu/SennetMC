@@ -2,6 +2,7 @@ package me.senseiju.sennetmc
 
 import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
+import me.senseiju.sennetmc.arena.ArenaManager
 import me.senseiju.sennetmc.collectables.CollectablesManager
 import me.senseiju.sennetmc.commands.DailyCommand
 import me.senseiju.sennetmc.commands.ReloadCommand
@@ -40,6 +41,7 @@ class SennetMC : JavaPlugin() {
     lateinit var settingsManager: SettingsManager
     lateinit var modelsManager: ModelsManager
     lateinit var eventsManager: EventsManager
+    lateinit var arenaManager: ArenaManager
 
     override fun onEnable() {
         commandManager = CommandManager(this)
@@ -55,6 +57,7 @@ class SennetMC : JavaPlugin() {
         cratesManager = CratesManager(this)
         settingsManager = SettingsManager(this)
         eventsManager = EventsManager(this)
+        arenaManager = ArenaManager(this)
 
         SennetMCPlaceholderExpansion(this)
 
@@ -62,6 +65,8 @@ class SennetMC : JavaPlugin() {
     }
 
     override fun onDisable() {
+        arenaManager.cancelAllMatches()
+
         server.onlinePlayers.forEach {
             if (it.openInventory.topInventory.holder is BaseGui) {
                 it.closeInventory()
@@ -89,6 +94,7 @@ class SennetMC : JavaPlugin() {
         settingsManager.reload()
         modelsManager.reload()
         eventsManager.reload()
+        arenaManager.reload()
     }
 
     private fun setupCommands() {

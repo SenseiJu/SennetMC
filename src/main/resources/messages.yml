@@ -82,3 +82,14 @@ EVENTS-WINNER: "{eventName} &8&l» &aYou won rewards from the event"
 # Daily
 DAILY-CLAIMED: "&aYou have claimed your daily rewards"
 DAILY-NOT-READY: "&cYour daily rewards are not ready"
+
+# Arena
+ARENA-ALREADY-QUEUED: "&cYou are already in the queue or have a request"
+ARENA-TARGET-ALREADY-QUEUED: "&cThe target is already in the queue"
+ARENA-REQUEST-SENT: "&aDuel request sent"
+ARENA-REQUEST-RECEIVED: "&aDuel request from {player}, &e/duel accept &ato accept"
+ARENA-NO-REQUEST: "&cYour have no duel requests"
+ARENA-CANCELLED-REQUEST: "&cYour duel request has been cancelled"
+ARENA-INVALID-LOCATION: "&cInvalid location name"
+ARENA-LOCATION-SET: "&aArena location set"
+ARENA-REQUEST-DENIED: "&cDuel request denied"
