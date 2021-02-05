@@ -73,7 +73,8 @@ private fun defaultClickAction(e: InventoryClickEvent, gui: Gui, player1: Player
         }
     }
 
-    if (e.isShiftClick || e.hotbarButton != -1 || e.click == ClickType.SWAP_OFFHAND || e.currentItem?.type == Material.FISHING_ROD) {
+    if (e.isShiftClick || e.hotbarButton != -1 || e.click == ClickType.SWAP_OFFHAND
+        || e.currentItem?.type == Material.FISHING_ROD || e.currentItem?.type == Material.CHEST) {
         e.isCancelled = true
     }
 }
