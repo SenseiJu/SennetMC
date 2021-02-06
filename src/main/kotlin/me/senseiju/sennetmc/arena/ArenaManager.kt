@@ -74,7 +74,7 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager {
         }
     }
 
-    fun removeRequest(player: Player) {
+    private fun removeRequest(player: Player) {
         if (requests.containsKey(player.uniqueId)) {
             requests.remove(player.uniqueId)
         } else if (requests.inverse().containsKey(player.uniqueId)) {
@@ -94,8 +94,6 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager {
             plugin.server.getPlayer(requests.inverse().remove(player.uniqueId) ?: return)
                 ?.sendConfigMessage("ARENA-CANCELLED-REQUEST")
         }
-
-        println(requests)
     }
 
     fun startNextMatch() {
@@ -108,6 +106,6 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager {
 
         currentMatch = matchQueue.removeFirstOrNull()
 
-        currentMatch?.start(location1, location2)
+        currentMatch?.start(plugin, location1, location2)
     }
 }

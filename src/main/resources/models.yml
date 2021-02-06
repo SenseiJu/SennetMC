@@ -3,6 +3,7 @@
 # HELMET: BEDROCK
 # FISHING_ROD: FISHING_ROD
 # BACKPACK: OBSIDIAN
+# SLEEVES: BLAZE_POWDER
 
 HAT:
   100: "&b&lDeep Sea Diver Helmet"
@@ -23,6 +24,12 @@ HAT:
   1600: "&b&lTraffic Cone"
   1700: "&b&lThug Life Glasses"
   1800: "&b&lPlague Doctor"
+  1900: "&b&lCat Ears"
+  2000: "&b&lHeadband"
+  2001: "&b&lZero Two Headband"
+  2100: "&b&lHood"
+  2200: "&b&lGamer Headphones"
+  2300: "&b&lHalo"
   1000000: "&b&lTest Model 1"
   1000001: "&b&lTest Model 2"
   1000002: "&b&lTest Model 3"
@@ -32,6 +39,7 @@ HAT:
 FISHING_ROD:
   100: "&d&lStick Rod"
   200: "&b&lKatana Rod"
+  300: "&b&lBamboo Rod"
   1000000: "&b&lTest Model 1"
   1000001: "&b&lTest Model 2"
   1000002: "&b&lTest Model 3"
@@ -51,6 +59,8 @@ BACKPACK:
   900: "&b&lOriginal Skateboard"
   901: "&b&lCracked Lava Skateboard"
   902: "&b&lCheckered Skateboard"
+  1000: "&b&lAngel Wings"
+  1100: "&b&lCasual Backpack"
   1000000: "&b&lTest Model 1"
   1000001: "&b&lTest Model 2"
   1000002: "&b&lTest Model 3"

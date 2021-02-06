@@ -9,6 +9,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.collectables.commands.CollectablesCommand
 import me.senseiju.sennetmc.collectables.listeners.PlayerJoinListener
 import me.senseiju.sennetmc.datastorage.DataFile
+import me.senseiju.sennetmc.datastorage.ReplacementSet
 import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.ObjectSet
 import me.senseiju.sennetmc.utils.defaultScope
@@ -131,8 +132,8 @@ class CollectablesManager(private val plugin: SennetMC) : BaseManager {
         plugin.database.updateQuery(deleteQuery, uuid.toString())
 
         val insertQuery = "INSERT INTO `collectables`(`uuid`, `collectable_id`) VALUES(?,?);"
-        collectables.forEach {
-            plugin.database.updateQuery(insertQuery, uuid.toString(), it)
-        }
+        val replacementSets = collectables.map { ReplacementSet(uuid.toString(), it) }.toTypedArray()
+
+        plugin.database.updateBatchQuery(insertQuery, *replacementSets)
     }
 }

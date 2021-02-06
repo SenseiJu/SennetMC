@@ -8,9 +8,9 @@ import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.datastorage.DataFile
+import me.senseiju.sennetmc.datastorage.ReplacementSet
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.npcs.types.designer.commands.CosmeticsCommand
 import me.senseiju.sennetmc.models.commands.HatCommand
 import me.senseiju.sennetmc.models.commands.ModelCommand
 import me.senseiju.sennetmc.models.listeners.*
@@ -146,11 +146,15 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
         plugin.database.updateQuery(deleteQuery, uuid.toString())
 
         val insertQuery = "INSERT INTO `models`(`uuid`, `model_type`, `model_data`) VALUES(?,?,?);"
+        val replacementSets = ArrayList<ReplacementSet>()
+
         models.forEach { (modelType, modelDataList) ->
-            modelDataList.forEach { modelData ->
-                plugin.database.updateQuery(insertQuery, uuid.toString(), modelType.toString(), modelData)
+            modelDataList.map { modelData ->
+                replacementSets.add(ReplacementSet(uuid.toString(), modelType.toString(), modelData))
             }
         }
+
+        plugin.database.updateBatchQuery(insertQuery, *replacementSets.toTypedArray())
     }
 
     private fun createModelItem(modelType: ModelType, modelData: Int, modelName: String) : ItemStack {

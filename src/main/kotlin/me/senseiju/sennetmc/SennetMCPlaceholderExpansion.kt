@@ -11,6 +11,7 @@ class SennetMCPlaceholderExpansion(private val plugin: SennetMC) : PlaceholderEx
 
     private val userManager = plugin.userManager
     private val speedboatManager = plugin.speedboatManager
+    private val arenaManager = plugin.arenaManager
 
     init {
         register()
@@ -51,6 +52,10 @@ class SennetMCPlaceholderExpansion(private val plugin: SennetMC) : PlaceholderEx
                 calculateSpeedboatSpeedMultiplier(user.getUpgrade(Upgrade.SPEEDBOAT_SPEED)).toString()
             "user_collectables_collected" ->
                 user.collectables.size.toString()
+            "arena_player1" ->
+                arenaManager.currentMatch?.player1?.player?.name
+            "arena_player2" ->
+                arenaManager.currentMatch?.player2?.player?.name
             else -> null
         }
     }

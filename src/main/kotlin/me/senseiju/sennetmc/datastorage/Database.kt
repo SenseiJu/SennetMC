@@ -95,4 +95,28 @@ class Database(plugin: SennetMC, configPath: String) {
             }
         }
     }
+
+    fun updateBatchQuery(q: String, vararg replacementSets: ReplacementSet = emptyArray()) {
+        source.connection.use { conn ->
+            val s = conn.prepareStatement(q)
+
+            var i = 1
+
+            replacementSets.forEach { set ->
+                set.replacements.forEach { replacement ->
+                    s.setObject(i++, replacement)
+                }
+
+                s.addBatch()
+
+                i = 1
+            }
+
+            try {
+                s.executeBatch()
+            } catch (ex: Exception) {
+                ex.printStackTrace()
+            }
+        }
+    }
 }

@@ -24,6 +24,7 @@ private val arenaManager = plugin.arenaManager
 private val fillerSlots = listOf(3, 4, 5, 13, 21, 22, 23)
 private val player1WagerSlots = listOf(0, 1, 2, 9, 10, 11, 18, 19, 20)
 private val player2WagerSlots = listOf(6, 7, 8, 15, 16, 17, 24, 25, 26)
+private val acceptedItems = listOf(null, Material.CHEST)
 
 fun showArenaWagerGui(player1: Player, player2: Player) {
     defaultScope.launch {
@@ -73,8 +74,9 @@ private fun defaultClickAction(e: InventoryClickEvent, gui: Gui, player1: Player
         }
     }
 
-    if (e.isShiftClick || e.hotbarButton != -1 || e.click == ClickType.SWAP_OFFHAND
-        || e.currentItem?.type == Material.FISHING_ROD || e.currentItem?.type != Material.CHEST) {
+    if (e.isShiftClick || e.hotbarButton != -1 || e.click == ClickType.SWAP_OFFHAND) {
+        e.isCancelled = true
+    } else if (!acceptedItems.contains(e.currentItem?.type) && !acceptedItems.contains(e.cursor?.type)) {
         e.isCancelled = true
     }
 }

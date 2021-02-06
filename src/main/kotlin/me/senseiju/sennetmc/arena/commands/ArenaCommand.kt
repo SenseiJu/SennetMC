@@ -25,7 +25,7 @@ class ArenaCommand(plugin: SennetMC) : CommandBase() {
             return
         }
 
-        arena.set("arena.$locationName", sender.location.serializeFull())
+        arena.set(locationName, sender.location.serializeFull())
         sender.sendConfigMessage("ARENA-LOCATION-SET")
 
         configFile.save()

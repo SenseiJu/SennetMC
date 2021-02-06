@@ -29,7 +29,7 @@ class RemoveNpcCommand : CommandBase() {
         }
 
         if (!NpcType.isNpc(targetNpc)) {
-            player.sendConfigMessage("NPC-NOT-COMMSCRAFT")
+            player.sendConfigMessage("NPC-NOT-SENNETMC")
             return
         }
 

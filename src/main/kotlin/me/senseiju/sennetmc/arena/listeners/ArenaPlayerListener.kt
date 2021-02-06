@@ -6,6 +6,7 @@ import me.senseiju.sennetmc.extensions.sendConfigMessage
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent
+import org.bukkit.event.player.PlayerMoveEvent
 import org.bukkit.event.player.PlayerQuitEvent
 
 class ArenaPlayerListener(private val plugin: SennetMC, private val arenaManager: ArenaManager) : Listener {
@@ -52,6 +53,15 @@ class ArenaPlayerListener(private val plugin: SennetMC, private val arenaManager
                 arenaManager.currentMatch = null
                 arenaManager.startNextMatch()
             }, 40L)
+        }
+    }
+
+    @EventHandler
+    private fun onPlayerMove(e: PlayerMoveEvent) {
+        val currentMatch = arenaManager.currentMatch ?: return
+
+        if (!currentMatch.pvpEnabled && currentMatch.involvesPlayer(e.player.uniqueId)) {
+            e.isCancelled = true
         }
     }
 }
