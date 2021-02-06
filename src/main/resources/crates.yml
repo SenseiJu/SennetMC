@@ -24,11 +24,6 @@ crates:
         commands:
           - "model set {player} HAT 200"
 
-      - name: "&6&lT1 Collectable"
-        probability: 1
-        commands:
-          - "collectables set {player} t1"
-
   t2:
     name: "&e&lTier II"
     probability-per-cast: 3
@@ -45,15 +40,10 @@ crates:
         commands:
           - "model set {player} FISHING_ROD 100"
 
-      - name: "&d&lThug Life Glasses"
+      - name: "&d&lThug Life Glasses Hat"
         probability: 4
         commands:
           - "model set {player} HAT 1700"
-
-      - name: "&6&lT2 Collectable"
-        probability: 1
-        commands:
-          - "collectables set {player} t2"
 
   t3:
     name: "&e&lTier III"
@@ -71,10 +61,10 @@ crates:
         commands:
           - "model set {player} BACKPACK 700"
 
-      - name: "&6&lT3 Collectable"
-        probability: 1
+      - name: "&d&lCat Ears Hat"
+        probability: 4
         commands:
-          - "collectables set {player} t3"
+          - "model set {player} HAT 1900"
 
   t4:
     name: "&e&lTier IV"
@@ -92,16 +82,16 @@ crates:
         commands:
           - "model set {player} HAT 400"
 
-      - name: "&6&lT4 Collectable"
-        probability: 1
+      - name: "&d&lHeadband Hat"
+        probability: 4
         commands:
-          - "collectables set {player} t4"
+          - "model set {player} HAT 2000"
 
   t5:
     name: "&e&lTier V"
     probability-per-cast: -10
     max-crates-per-cast: 1
-    upgraded-crate-id: "NULL"
+    upgraded-crate-id: "t6"
     rewards:
       - name: "&a&l$7500"
         probability: 100
@@ -118,7 +108,70 @@ crates:
         commands:
           - "model set {player} FISHING_ROD 200"
 
-      - name: "&6&lT5 Collectable"
+  t6:
+    name: "&e&lTier VI"
+    probability-per-cast: -15
+    max-crates-per-cast: 1
+    upgraded-crate-id: "t7"
+    rewards:
+      - name: "&a&l$50000"
+        probability: 100
+        commands:
+          - "eco give {player} 50000"
+
+      - name: "&d&lBlack Briefcase Sleeve"
+        probability: 4
+        commands:
+          - "model set {player} SLEEVE 300"
+
+      - name: "&d&lBamboo Rod"
+        probability: 4
+        commands:
+          - "model set {player} FISHING_ROD 300"
+
+  t7:
+    name: "&e&lTier VII"
+    probability-per-cast: -20
+    max-crates-per-cast: 1
+    upgraded-crate-id: "t8"
+    rewards:
+      - name: "&a&l$250000"
+        probability: 100
+        commands:
+          - "eco give {player} 250000"
+
+      - name: "&d&lBrown Briefcase Sleeve"
+        probability: 4
+        commands:
+          - "model set {player} SLEEVE 301"
+
+      - name: "&d&lHalo Hat"
+        probability: 4
+        commands:
+          - "model set {player} HAT 2300"
+
+      - name: "&6&lCommand /sell [1 Week]"
         probability: 1
         commands:
-          - "collectables set {player} t5"
+          - "lp user {player} permission settemp sennetmc.commands.sell true 1w server=fishing"
+
+  t8:
+    name: "&e&lTier VIII"
+    probability-per-cast: -25
+    max-crates-per-cast: 1
+    upgraded-crate-id: "NULL"
+    rewards:
+      - name: "&a&l$1500000"
+        probability: 100
+        commands:
+          - "eco give {player} 1500000"
+
+      - name: "&d&lHalo Hat"
+        probability: 4
+        commands:
+          - "model set {player} HAT 2300"
+
+      - name: "#3deb1a&lSub &6&lrank [1 Week]"
+        probability: 1
+        commands:
+          - "lp user {player} parent addtemp sub 1w server=fishing"

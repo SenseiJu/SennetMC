@@ -10,7 +10,7 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
-class Crate(private val id: String, val name: String, description: List<String>, val upgradeId: String = "NULL",
+class Crate(val id: String, val name: String, description: List<String>, val upgradeId: String = "NULL",
             private val rewards: List<Reward>, val probabilityPerCast: Double = 0.0, private val maxCratesPerCast: Int = 0) {
 
     private val item = createItemStack(description)
