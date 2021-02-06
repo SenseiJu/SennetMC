@@ -53,9 +53,9 @@ class SennetMCPlaceholderExpansion(private val plugin: SennetMC) : PlaceholderEx
             "user_collectables_collected" ->
                 user.collectables.size.toString()
             "arena_player1" ->
-                arenaManager.currentMatch?.player1?.player?.name
+                arenaManager.currentMatch?.player1?.player?.name ?: "No one"
             "arena_player2" ->
-                arenaManager.currentMatch?.player2?.player?.name
+                arenaManager.currentMatch?.player2?.player?.name ?: "No one"
             else -> null
         }
     }

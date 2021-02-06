@@ -1,4 +1,4 @@
-PREFIX: "#914ef5&lSennetMC »"
+PREFIX: "#914ef5&lSennetMC &8&l»"
 
 # Generic messages
 NO-PERMISSION: "&cYou do not have permission to perform this action"
@@ -95,3 +95,4 @@ ARENA-LOCATION-SET: "&aArena location set"
 ARENA-REQUEST-DENIED: "&cDuel request denied"
 ARENA-WIN: "&aYou won the wager"
 ARENA-LOSE: "&cYou lost the wager"
+ARENA-MATCH-FINISHED: "#de5757&lArena &8&l» &a{winner} &bwon a wager against &c{loser}"

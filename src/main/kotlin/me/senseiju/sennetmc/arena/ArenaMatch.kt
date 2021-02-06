@@ -1,14 +1,13 @@
 package me.senseiju.sennetmc.arena
 
-import com.destroystokyo.paper.Title
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.ObjectSet
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.scheduler.BukkitRunnable
 import java.util.*
 
@@ -19,7 +18,7 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
 
     private var countdown = 5
 
-    fun involvesPlayer(uuid: UUID) : Boolean = player1.uuid == uuid || player2.uuid == uuid
+    fun involvesPlayer(uuid: UUID): Boolean = player1.uuid == uuid || player2.uuid == uuid
 
     fun refundWagers() {
         player1.refundInventoryAndWager()
@@ -40,6 +39,10 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
         } else {
             doWinner(player2, player1)
         }
+
+        winner.server.sendConfigMessage("ARENA-MATCH-FINISHED", false,
+            ObjectSet("{winner}", winner.name),
+            ObjectSet("{loser}", getOpposingPlayer(winner).name))
     }
 
     private fun doWinner(winner: ArenaPlayer, loser: ArenaPlayer) {
@@ -79,6 +82,7 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
     }
 
     private fun equipGear(player: Player) {
+        player.inventory.helmet = ItemStack(Material.IRON_HELMET)
         player.inventory.chestplate = ItemStack(Material.IRON_CHESTPLATE)
         player.inventory.leggings = ItemStack(Material.IRON_LEGGINGS)
         player.inventory.boots = ItemStack(Material.IRON_BOOTS)
