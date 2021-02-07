@@ -44,7 +44,6 @@ UPGRADES-DEUCE-PROCED: "&d&l** DEUCE **"
 # Speedboat
 SPEEDBOAT-TOGGLE: "&bSpeedboat toggled to {toggle}"
 SPEEDBOAT-MUST-BE-IN-WATER: "&cYou must be in water to spawn a boat"
-SPEEDBOAT-NOT-YOUR-BOAT: "&cThis is not your boat, use /boat"
 
 # Crates
 CRATES-CANNOT-FIND-CRATE: "&cCannot find the specified crate"
@@ -84,6 +83,12 @@ DAILY-CLAIMED: "&aYou have claimed your daily rewards"
 DAILY-NOT-READY: "&cYour daily rewards are not ready"
 
 # Arena
+ARENA-HELP:
+  - "&d&l&m───── #de5757&lArena &d&l&m─────"
+  - "&e/duel send <player> &bSends a duel to the player"
+  - "&e/duel accept &bAccepts a duel"
+  - "&e/duel deny &bDenies a duel"
+  - "&e/duel cancel &bCancel your duel request"
 ARENA-ALREADY-QUEUED: "&cYou are already in the queue or have a request"
 ARENA-TARGET-ALREADY-QUEUED: "&cThe target is already in the queue"
 ARENA-CANNOT-DUEL-SELF: "&cYou cannot duel yourself"

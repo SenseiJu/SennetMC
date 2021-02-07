@@ -104,7 +104,7 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
     }
 
     private fun sendCountdownMessage(player: Player) {
-        player.sendTitle("$countdown", null, 0, 28, 0)
+        player.sendTitle("$countdown", null, 0, 20, 0)
         player.playSound(player.location, Sound.BLOCK_NOTE_BLOCK_SNARE, 1.0f, 1.0f)
     }
 }

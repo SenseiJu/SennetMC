@@ -2,6 +2,7 @@ package me.senseiju.sennetmc.arena.commands
 
 import me.mattstudios.mf.annotations.Command
 import me.mattstudios.mf.annotations.Completion
+import me.mattstudios.mf.annotations.Default
 import me.mattstudios.mf.annotations.SubCommand
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.SennetMC
@@ -15,6 +16,11 @@ import org.bukkit.entity.Player
 class DuelCommand(private val plugin: SennetMC, private val arenaManager: ArenaManager) : CommandBase() {
 
     private val requests = arenaManager.requests
+
+    @Default
+    fun onCommand(sender: Player) {
+        sender.sendConfigMessage("ARENA-HELP")
+    }
 
     @SubCommand("Send")
     fun onSendCommand(sender: Player, @Completion("#players") targetPlayer: Player?) {
