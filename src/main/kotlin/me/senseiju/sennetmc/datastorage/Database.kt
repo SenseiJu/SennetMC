@@ -98,6 +98,8 @@ class Database(plugin: SennetMC, configPath: String) {
 
     fun updateBatchQuery(q: String, vararg replacementSets: ReplacementSet = emptyArray()) {
         source.connection.use { conn ->
+            conn.autoCommit = false
+
             val s = conn.prepareStatement(q)
 
             var i = 1
@@ -114,6 +116,9 @@ class Database(plugin: SennetMC, configPath: String) {
 
             try {
                 s.executeBatch()
+
+                conn.commit()
+                conn.autoCommit = true
             } catch (ex: Exception) {
                 ex.printStackTrace()
             }
