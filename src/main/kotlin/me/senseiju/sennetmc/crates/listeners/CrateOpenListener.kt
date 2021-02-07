@@ -25,8 +25,7 @@ class CrateOpenListener(private val plugin: SennetMC, private val cratesManager:
         val reward = crate.selectRandomReward()
         reward.executeCommands(e.player)
 
-        plugin.server.dispatchCommand(plugin.server.consoleSender,
-            "collectables set ${e.player.name} ${crate.id}")
+        plugin.collectablesManager.addCollectable(e.player.uniqueId, crate.id)
 
         e.player.sendConfigMessage("CRATES-REWARD", false,
             ObjectSet("{crateName}", crate.name),

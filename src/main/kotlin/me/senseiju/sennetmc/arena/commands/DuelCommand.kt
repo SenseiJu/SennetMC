@@ -23,6 +23,11 @@ class DuelCommand(private val plugin: SennetMC, private val arenaManager: ArenaM
             return
         }
 
+        if (targetPlayer.uniqueId == sender.uniqueId) {
+            sender.sendConfigMessage("ARENA-CANNOT-DUEL-SELF")
+            return
+        }
+
         if (arenaManager.isPlayerInQueue(sender) || arenaManager.isPlayerInCurrentMatch(sender) || doesPlayerHaveRequest(sender)) {
             sender.sendConfigMessage("ARENA-ALREADY-QUEUED")
             return

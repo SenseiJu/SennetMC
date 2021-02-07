@@ -86,6 +86,7 @@ DAILY-NOT-READY: "&cYour daily rewards are not ready"
 # Arena
 ARENA-ALREADY-QUEUED: "&cYou are already in the queue or have a request"
 ARENA-TARGET-ALREADY-QUEUED: "&cThe target is already in the queue"
+ARENA-CANNOT-DUEL-SELF: "&cYou cannot duel yourself"
 ARENA-REQUEST-SENT: "&aDuel request sent"
 ARENA-REQUEST-RECEIVED: "&aDuel request from {player}, &e/duel accept &ato accept"
 ARENA-NO-REQUEST: "&cYour have no duel requests"
