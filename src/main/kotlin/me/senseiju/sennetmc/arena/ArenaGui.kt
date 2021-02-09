@@ -14,6 +14,7 @@ import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.inventory.InventoryCloseEvent
+import org.bukkit.event.inventory.InventoryDragEvent
 import org.bukkit.inventory.Inventory
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -42,6 +43,10 @@ fun showArenaWagerGui(player1: Player, player2: Player) {
 
                 handleCancelWager(it.inventory, player1, player2)
             }
+        }
+
+        gui.setDragAction { e ->
+            e.isCancelled = true
         }
 
         gui.setItem(12, createAcceptWagerGuiItem(gui, player1, player2, 14))
@@ -74,10 +79,18 @@ private fun defaultClickAction(e: InventoryClickEvent, gui: Gui, player1: Player
         }
     }
 
-    if (e.isShiftClick || e.hotbarButton != -1 || e.click == ClickType.SWAP_OFFHAND) {
-        e.isCancelled = true
-    } else if (!acceptedItems.contains(e.currentItem?.type) && !acceptedItems.contains(e.cursor?.type)) {
-        e.isCancelled = true
+    when (e.click) {
+        ClickType.LEFT, ClickType.RIGHT -> {
+            if (e.isShiftClick || e.hotbarButton != -1) {
+                e.isCancelled = true
+            } else if (!acceptedItems.contains(e.currentItem?.type) && !acceptedItems.contains(e.cursor?.type)) {
+                e.isCancelled = true
+            }
+        }
+        else -> {
+            e.isCancelled = true
+            return
+        }
     }
 }
 

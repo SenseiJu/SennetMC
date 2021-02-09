@@ -6,6 +6,8 @@ import me.senseiju.sennetmc.npcs.types.NpcType
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerPortalEvent
+import org.bukkit.event.player.PlayerTeleportEvent
 
 class NpcClickListener(plugin: SennetMC, private val npcManager: NpcManager) : Listener {
 

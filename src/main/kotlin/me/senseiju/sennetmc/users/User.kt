@@ -23,6 +23,9 @@ class User(val uuid: UUID,
     val currentFishCaughtCapacity
         get() = fishCaught.entries.sumBy { it.key.capacity() * it.value.current }
 
+    val totalFishCaught
+        get() = fishCaught.entries.sumBy { it.value.total }
+
     fun addToCurrentFish(fishType: FishType, amount: Int = 1) { fishCaught.computeIfAbsent(fishType) { FishCaughtData() }.plus(amount) }
 
     fun toggleSetting(setting: Setting) { settings[setting] = !getSetting(setting) }

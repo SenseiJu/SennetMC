@@ -1,10 +1,10 @@
 package me.senseiju.sennetmc.datastorage
 
-import me.senseiju.sennetmc.SennetMC
 import org.bukkit.configuration.file.YamlConfiguration
+import org.bukkit.plugin.java.JavaPlugin
 import java.io.File
 
-class DataFile(private val plugin: SennetMC, private val path: String, private val hasDefault: Boolean = false) {
+class DataFile(private val plugin: JavaPlugin, private val path: String, private val hasDefault: Boolean = false) {
     private lateinit var file: File
 
     lateinit var config: YamlConfiguration

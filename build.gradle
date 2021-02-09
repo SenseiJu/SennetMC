@@ -1,5 +1,6 @@
 plugins {
     id "org.jetbrains.kotlin.jvm" version "1.4.0"
+    id "org.jetbrains.kotlin.plugin.serialization" version "1.4.10"
     id "com.github.johnrengelman.shadow" version "6.0.0"
 }
 
@@ -25,6 +26,7 @@ dependencies {
     implementation "me.mattstudios.utils:matt-framework-gui:2.0.2"
     implementation "me.mattstudios.utils:matt-framework:1.4.6"
     implementation "de.tr7zw:item-nbt-api:2.7.1"
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
 
     compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
     compileOnly "net.citizensnpcs:citizens:2.0.27-SNAPSHOT"

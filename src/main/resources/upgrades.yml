@@ -1,4 +1,4 @@
-growth-rate: 1.3
+growth-rate: 1.25
 
 #
 # Fishmonger NPC
@@ -9,22 +9,26 @@ fishing-capacity-upgrade-increment: 15
 fishing-capacity-upgrade-max: 20
 
 feast-upgrade-random-player-chance: 0.8
-feast-upgrade-starting-cost: 500.0
+feast-upgrade-starting-cost: 300.0
 feast-upgrade-increment: 0.01
-feast-upgrade-max: 20
+feast-upgrade-max: 30
 
 # Default max time is 500 ticks (Minimum 100 on max ticks)
 bait-upgrade-starting-cost: 300.0
 bait-upgrade-increment: 20
 bait-upgrade-max: 20
 
-negotiate-upgrade-starting-cost: 450.0
+negotiate-upgrade-starting-cost: 250.0
 negotiate-upgrade-increment: 0.1
-negotiate-upgrade-max: 20
+negotiate-upgrade-max: 30
 
 deuce-upgrade-starting-cost: 500.0
 deuce-upgrade-increment: 0.025
 deuce-upgrade-max: 20
+
+lure-upgrade-starting-cost: 400
+lure-upgrade-increment: 1
+lure-upgrade-max: 25
 
 #
 # Looter NPC
@@ -48,3 +52,8 @@ crate-master-upgrade-starting-cost: 500
 speedboat-speed-upgrade-increment: 0.05
 speedboat-speed-upgrade-starting-cost: 200.0
 speedboat-speed-upgrade-max: 20
+
+#
+# Chef NPC
+#
+chef-fish-caught-minimum: 50

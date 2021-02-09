@@ -9,7 +9,8 @@ enum class NpcType(npcName: String) {
     SAILOR("&b&lSailor Sally"),
     LOOTER("&d&lLooter Lincoln"),
     DESIGNER("&e&lDesigner Darren"),
-    CAPTAIN("#3a3ae8&lCaptain Crunch");
+    CAPTAIN("#3a3ae8&lCaptain Crunch"),
+    CHEF("&7&lChef Ramsey");
 
     val npcName = npcName.color()
 

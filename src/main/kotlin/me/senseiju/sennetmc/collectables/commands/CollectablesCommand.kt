@@ -77,7 +77,7 @@ class CollectablesCommand(private val plugin: SennetMC, private val collectables
                 val user = plugin.userManager.userMap[player.uniqueId] ?: return emptyList()
 
                 collectablesManager.collectables.keys.minus(user.collectables).toList()
-                }
+            }
             else -> emptyList()
         }
     }

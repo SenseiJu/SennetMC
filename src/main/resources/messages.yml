@@ -34,6 +34,9 @@ CAPTAIN-TELEPORT-DESTINATION: "{captainName} &aWe have arrived at {destinationNa
 CAPTAIN-SPAWN-POINT-SET: "&aSpawn point has been set"
 CAPTAIN-INVALID-WARP-NAME: "&cInvalid warp name entered"
 
+# Chef NPC
+CHEF-NOT-ENOUGH-FISH-CAUGHT: "{chefName} &cYour need to catch at least &e{fishAmount} &cbefore speaking with me"
+
 # Fishing
 FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continue fishing"
 
@@ -84,7 +87,7 @@ DAILY-NOT-READY: "&cYour daily rewards are not ready"
 
 # Arena
 ARENA-HELP:
-  - "&d&l&m───── #de5757&lArena &d&l&m─────"
+  - "&d&l&m----------&r #de5757&lArena &d&l&m----------&r"
   - "&e/duel send <player> &bSends a duel to the player"
   - "&e/duel accept &bAccepts a duel"
   - "&e/duel deny &bDenies a duel"

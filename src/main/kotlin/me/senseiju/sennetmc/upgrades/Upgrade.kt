@@ -13,7 +13,8 @@ enum class Upgrade(val databaseField: String, private val databaseFieldType: Str
     BAIT("bait_upgrades", "INT"),
     DEUCE("deuce_upgrades", "INT"),
     PLAYER_SPEED("player_speed_upgrades", "INT"),
-    FEAST("feast_upgrades", "INT");
+    FEAST("feast_upgrades", "INT"),
+    LURE("lure_upgrades", "INT");
 
     companion object {
         private val queryValues = "?,".repeat(values().size).removeSuffix(",")

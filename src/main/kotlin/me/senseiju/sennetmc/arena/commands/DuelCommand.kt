@@ -19,7 +19,7 @@ class DuelCommand(private val plugin: SennetMC, private val arenaManager: ArenaM
 
     @Default
     fun onCommand(sender: Player) {
-        sender.sendConfigMessage("ARENA-HELP")
+        sender.sendConfigMessage("ARENA-HELP", false)
     }
 
     @SubCommand("Send")
