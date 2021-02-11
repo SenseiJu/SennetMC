@@ -38,7 +38,7 @@ treasure-finder-upgrade-max: 30
 treasure-finder-upgrade-starting-cost: 400.0
 
 discovery-upgrade-base-chance: 0.3
-discovery-upgrade-increment: 0.02
+discovery-upgrade-increment: 0.015
 discovery-upgrade-max: 25
 discovery-upgrade-starting-cost: 450.0
 

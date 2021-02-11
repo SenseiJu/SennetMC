@@ -4,7 +4,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.datastorage.DataFile
 import me.senseiju.sennetmc.datastorage.RawDataFile
 import me.senseiju.sennetmc.extensions.sendConfigMessage
 import me.senseiju.sennetmc.npcs.createBasicNpc
@@ -17,11 +16,8 @@ import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
 import org.bukkit.Location
 import org.bukkit.Material
-import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
-import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
-import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 private const val SKIN_TEXTURE = "ewogICJ0aW1lc3RhbXAiIDogMTYxMjk4NTYyMTk4OCwKICAicHJvZmlsZUlkIiA6ICIxNzhmMTJkYWMzNTQ0ZjRhYjExNzkyZDc1MDkzY2JmYyIsCiAgInByb2ZpbGVOYW1lIiA6ICJzaWxlbnRkZXRydWN0aW9uIiwKICAic2lnbmF0dXJlUmVxdWlyZWQiIDogdHJ1ZSwKICAidGV4dHVyZXMiIDogewogICAgIlNLSU4iIDogewogICAgICAidXJsIiA6ICJodHRwOi8vdGV4dHVyZXMubWluZWNyYWZ0Lm5ldC90ZXh0dXJlL2IzNDUxOWMyZjE4NTcyNDI1ZTdjMGMxZWQ4MDY2Yzg1MWExZDUzZjllNTU0MWQ0ZjczMGFhZjQ0NWRkYmZmMTciCiAgICB9CiAgfQp9"
