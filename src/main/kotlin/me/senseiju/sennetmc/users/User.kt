@@ -1,5 +1,6 @@
 package me.senseiju.sennetmc.users
 
+import me.senseiju.sennetmc.extensions.round
 import me.senseiju.sennetmc.fishes.FishCaughtData
 import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.models.ModelType
@@ -35,4 +36,17 @@ class User(val uuid: UUID,
     fun incrementUpgrade(upgrade: Upgrade, amount: Int = 1) { upgrades.merge(upgrade, amount, Int::plus) }
 
     fun getUpgrade(upgrade: Upgrade) : Int = upgrades.computeIfAbsent(upgrade) { 0 }
+
+    fun calculateSellPrice(multiplier: Double = 1.0) : Double {
+        return fishCaught.map { (type, data) -> type.selectRandomSellPrice() * data.current }
+            .sum()
+            .times(multiplier)
+            .round()
+    }
+
+    fun clearCurrentFishCaught() {
+        fishCaught.forEach { (_, data) ->
+            data.current = 0
+        }
+    }
 }

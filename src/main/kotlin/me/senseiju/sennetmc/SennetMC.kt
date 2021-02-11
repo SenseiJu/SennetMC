@@ -67,6 +67,8 @@ class SennetMC : JavaPlugin() {
     override fun onDisable() {
         arenaManager.cancelAllMatches()
 
+        npcManager.save()
+
         server.onlinePlayers.forEach {
             if (it.openInventory.topInventory.holder is BaseGui) {
                 it.closeInventory()

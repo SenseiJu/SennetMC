@@ -110,7 +110,7 @@ crates:
 
   t6:
     name: "&e&lTier VI"
-    probability-per-cast: -15
+    probability-per-cast: -100
     max-crates-per-cast: 1
     upgraded-crate-id: "t7"
     rewards:
@@ -131,7 +131,7 @@ crates:
 
   t7:
     name: "&e&lTier VII"
-    probability-per-cast: -20
+    probability-per-cast: -100
     max-crates-per-cast: 1
     upgraded-crate-id: "t8"
     rewards:
@@ -157,7 +157,7 @@ crates:
 
   t8:
     name: "&e&lTier VIII"
-    probability-per-cast: -25
+    probability-per-cast: -100
     max-crates-per-cast: 1
     upgraded-crate-id: "NULL"
     rewards:

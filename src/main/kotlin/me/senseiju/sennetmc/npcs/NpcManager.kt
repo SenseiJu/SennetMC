@@ -55,4 +55,8 @@ class NpcManager(private val plugin: SennetMC) : BaseManager {
 
     override fun reload() {
     }
+
+    fun save() {
+        (npcMap[CHEF] as Chef).saveChefSellRunnables()
+    }
 }

@@ -8,14 +8,15 @@ import java.util.*
 
 @Serializable
 data class ChefSellRunnableData(@Serializable(UUIDSerializer::class) private val uuid: UUID,
-                                private val timeRemaining: Int,
-                                private val initialSellPrice: Double) {
+                                private val timeToComplete: Int,
+                                private val initialSellPrice: Double,
+                                private val claimable: Boolean) {
 
     companion object {
         fun fromJson(s: String) : ChefSellRunnable {
             val data = Json.decodeFromString<ChefSellRunnableData>(s)
 
-            return ChefSellRunnable(data.uuid, data.timeRemaining, data.initialSellPrice)
+            return ChefSellRunnable(data.uuid, data.timeToComplete, data.initialSellPrice, data.claimable)
         }
     }
 }

@@ -30,6 +30,8 @@ class BoatCommand : CommandBase() {
 
             if (currentBlock.type.isAir) {
                 break
+            } else if (currentBlock.type.isSolid) {
+                return
             }
         }
 

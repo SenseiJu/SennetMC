@@ -35,7 +35,9 @@ CAPTAIN-SPAWN-POINT-SET: "&aSpawn point has been set"
 CAPTAIN-INVALID-WARP-NAME: "&cInvalid warp name entered"
 
 # Chef NPC
-CHEF-NOT-ENOUGH-FISH-CAUGHT: "{chefName} &cYour need to catch at least &e{fishAmount} &cbefore speaking with me"
+CHEF-NOT-ENOUGH-FISH-CAUGHT: "{chefName} &cYou need to catch at least &e{fishAmount} &cbefore speaking with me"
+CHEF-ALREADY-RUNNING: "{chefName} &cI already have some fish, wait until I have finished before giving me more"
+CHEF-STARTED-RUNNING: "{chefName} &aOk, I will sell this fish, come collect your money later"
 
 # Fishing
 FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continue fishing"

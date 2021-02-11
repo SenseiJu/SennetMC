@@ -4,17 +4,38 @@ import java.util.*
 import javax.sql.rowset.CachedRowSet
 
 enum class Upgrade(val databaseField: String, private val databaseFieldType: String) {
+    /**
+     * Fishmonger upgrades
+     */
     FISH_CAPACITY("fish_capacity_upgrades", "INT"),
-    SPEEDBOAT_SPEED("speedboat_speed_upgrades", "INT"),
-    TREASURE_FINDER("treasure_finder_upgrades", "INT"),
-    DISCOVERY("discovery_upgrades", "INT"),
-    CRATE_MASTER("crate_master_upgrades", "INT"),
+    FEAST("feast_upgrades", "INT"),
+    LURE("lure_upgrades", "INT"),
     NEGOTIATE("negotiate_upgrades", "INT"),
     BAIT("bait_upgrades", "INT"),
     DEUCE("deuce_upgrades", "INT"),
-    PLAYER_SPEED("player_speed_upgrades", "INT"),
-    FEAST("feast_upgrades", "INT"),
-    LURE("lure_upgrades", "INT");
+
+    /**
+     * Looter upgrades
+     */
+    TREASURE_FINDER("treasure_finder_upgrades", "INT"),
+    DISCOVERY("discovery_upgrades", "INT"),
+    CRATE_MASTER("crate_master_upgrades", "INT"),
+
+    /**
+     * Sailor upgrades
+     */
+    SPEEDBOAT_SPEED("speedboat_speed_upgrades", "INT"),
+
+    /**
+     * Chef upgrades
+     */
+    SEASONING("seasoning_upgrades", "INT"),
+    SERVING_SPEED("serving_speed_upgrades", "INT"),
+
+    /**
+     * Not assigned
+     */
+    PLAYER_SPEED("player_speed_upgrades", "INT");
 
     companion object {
         private val queryValues = "?,".repeat(values().size).removeSuffix(",")

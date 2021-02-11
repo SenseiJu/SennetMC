@@ -3,10 +3,9 @@ package me.senseiju.sennetmc.npcs.types.merchant
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.extensions.color
 import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
+import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
-import me.senseiju.sennetmc.npcs.types.fishmonger.commands.FishmongerCommand
 import me.senseiju.sennetmc.npcs.types.merchant.commands.SellCommand
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
@@ -49,32 +48,19 @@ class Merchant(private val plugin: SennetMC) : BaseNpc {
     fun sellPlayersFish(player: Player) {
         val user = plugin.userManager.userMap[player.uniqueId] ?: return
         val multiplier = 1 + getNegotiateMultiplier(user)
-        val totalSellPrice = calculateSellPrice(user, multiplier)
-
-        econ?.depositPlayer(player, totalSellPrice)
+        val totalSellPrice = user.calculateSellPrice(multiplier)
 
         if (totalSellPrice > 0) {
-            player.sendTitle("&b&lSold for $${totalSellPrice}".color(), "&6x$multiplier multiplier".color(), 20, 60, 20)
+            econ?.depositPlayer(player, totalSellPrice)
+
+            user.clearCurrentFishCaught()
+
+            player.sendTitle("&b&lSold for &e&l$${totalSellPrice}".color(), "&6x$multiplier multiplier".color(), 20, 60, 20)
             player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
         } else {
             player.sendConfigMessage("MERCHANT-NO-FISH-TO-SELL", false,
-                    ObjectSet("{merchantName}", NPC_TYPE.npcName)
-            )
+                    ObjectSet("{merchantName}", NPC_TYPE.npcName))
         }
-    }
-
-    private fun calculateSellPrice(user: User, multiplier: Double) : Double {
-        var totalSellPrice = 0.0
-        for ((fishType, fishCaughtData) in user.fishCaught) {
-            val sellPrice = fishType.selectRandomSellPrice() * fishCaughtData.current
-
-            totalSellPrice += sellPrice
-
-            fishCaughtData.current = 0
-        }
-        totalSellPrice *= multiplier
-
-        return "%.2f".format(totalSellPrice).toDouble()
     }
 
     private fun getNegotiateMultiplier(user: User) : Double {
