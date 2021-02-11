@@ -38,7 +38,7 @@ treasure-finder-upgrade-max: 30
 treasure-finder-upgrade-starting-cost: 400.0
 
 discovery-upgrade-base-chance: 0.3
-discovery-upgrade-increment: 0.02
+discovery-upgrade-increment: 0.015
 discovery-upgrade-max: 25
 discovery-upgrade-starting-cost: 450.0
 
@@ -56,10 +56,10 @@ speedboat-speed-upgrade-max: 20
 #
 # Chef NPC
 #
-chef-fish-caught-minimum: 50
+chef-fish-caught-minimum: 100
 
 chef-sell-time-per-capacity: 40
-chef-sell-base-multiplier: 6
+chef-sell-base-multiplier: 7
 
 serving-speed-upgrade-increment: 1
 serving-speed-upgrade-max: 15

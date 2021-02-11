@@ -10,7 +10,7 @@ description:
 crates:
   t1:
     name: "&e&lTier I"
-    probability-per-cast: 6
+    probability-per-cast: 30
     max-crates-per-cast: 5
     upgraded-crate-id: "t2"
     rewards:
@@ -26,7 +26,7 @@ crates:
 
   t2:
     name: "&e&lTier II"
-    probability-per-cast: 3
+    probability-per-cast: 20
     max-crates-per-cast: 4
     upgraded-crate-id: "t3"
     rewards:
@@ -47,7 +47,7 @@ crates:
 
   t3:
     name: "&e&lTier III"
-    probability-per-cast: 0
+    probability-per-cast: -5
     max-crates-per-cast: 3
     upgraded-crate-id: "t4"
     rewards:
@@ -68,7 +68,7 @@ crates:
 
   t4:
     name: "&e&lTier IV"
-    probability-per-cast: -5
+    probability-per-cast: -15
     max-crates-per-cast: 2
     upgraded-crate-id: "t5"
     rewards:
@@ -89,7 +89,7 @@ crates:
 
   t5:
     name: "&e&lTier V"
-    probability-per-cast: -10
+    probability-per-cast: -20
     max-crates-per-cast: 1
     upgraded-crate-id: "t6"
     rewards:

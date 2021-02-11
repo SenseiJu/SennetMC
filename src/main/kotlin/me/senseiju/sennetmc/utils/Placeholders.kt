@@ -1,7 +1,5 @@
 package me.senseiju.sennetmc.utils
 
-import org.bukkit.entity.Player
-
 fun applyPlaceholders(string: String, vararg replacements: ObjectSet = emptyArray()) : String {
     var replacedString = string
 

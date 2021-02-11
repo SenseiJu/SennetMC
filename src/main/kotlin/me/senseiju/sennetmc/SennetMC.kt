@@ -103,6 +103,5 @@ class SennetMC : JavaPlugin() {
         commandManager.register(ReloadCommand(this))
         commandManager.register(ResourcePackCommand())
         commandManager.register(DailyCommand(this))
-        //commandManager.register(BuyCommand())
     }
 }
