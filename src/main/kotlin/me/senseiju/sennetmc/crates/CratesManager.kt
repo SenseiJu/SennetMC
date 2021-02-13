@@ -36,14 +36,10 @@ class CratesManager(private val plugin: SennetMC) : BaseManager {
     }
 
     override fun registerCommands(cm: CommandManager) {
-        registerCommandCompletions(cm.completionHandler)
+        cm.completionHandler.register("#crateId") { cratesMap.keys.toList() }
 
         cm.register(CratesCommand(plugin, this))
         cm.register(CombineCratesCommand(this))
-    }
-
-    private fun registerCommandCompletions(ch: CompletionHandler) {
-        ch.register("#crateId") { cratesMap.keys.toList() }
     }
 
     override fun registerEvents() {
