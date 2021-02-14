@@ -3,7 +3,7 @@ package me.senseiju.sennetmc.settings
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.int
+import me.senseiju.sennetmc.utils.extensions.int
 import me.senseiju.sennetmc.settings.commands.SettingsCommand
 import java.util.*
 

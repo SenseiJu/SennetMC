@@ -5,8 +5,8 @@ import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_CRATES_GIVE
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.crates.CratesManager
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
@@ -41,6 +41,6 @@ class CratesCommand(private val plugin: SennetMC, private val cratesManager: Cra
         if (amount != null) cratesManager.cratesMap[crateId]?.giveCrate(player, amount)
         else cratesManager.cratesMap[crateId]?.giveCrate(player)
 
-        sender.sendConfigMessage("CRATES-GIVE-SUCCESS", ObjectSet("{player}", player.name))
+        sender.sendConfigMessage("CRATES-GIVE-SUCCESS", PlaceholderSet("{player}", player.name))
     }
 }

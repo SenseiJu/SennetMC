@@ -2,9 +2,6 @@ package me.senseiju.sennetmc.events.event
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.events.EventsManager
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.settings.Setting
-import me.senseiju.sennetmc.utils.ObjectSet
 import org.bukkit.scheduler.BukkitRunnable
 
 open class BaseEvent(private val plugin: SennetMC, private val eventsManager: EventsManager,

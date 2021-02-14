@@ -8,11 +8,11 @@ import me.senseiju.sennetmc.commands.DailyCommand
 import me.senseiju.sennetmc.commands.ReloadCommand
 import me.senseiju.sennetmc.commands.ResourcePackCommand
 import me.senseiju.sennetmc.crates.CratesManager
-import me.senseiju.sennetmc.datastorage.DataFile
-import me.senseiju.sennetmc.datastorage.Database
+import me.senseiju.sennetmc.utils.datastorage.DataFile
+import me.senseiju.sennetmc.utils.datastorage.Database
 import me.senseiju.sennetmc.events.EventsManager
-import me.senseiju.sennetmc.extensions.color
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishManager
 import me.senseiju.sennetmc.models.ModelsManager
 import me.senseiju.sennetmc.models.listeners.playerPassengers

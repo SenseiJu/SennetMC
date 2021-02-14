@@ -4,7 +4,7 @@ import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.defaultGuiTemplate
+import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
 import me.senseiju.sennetmc.npcs.calculateNextUpgradeCost
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.updateUpgradeGuiItem

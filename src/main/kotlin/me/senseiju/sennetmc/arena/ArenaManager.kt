@@ -8,8 +8,8 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.arena.commands.ArenaCommand
 import me.senseiju.sennetmc.arena.commands.DuelCommand
 import me.senseiju.sennetmc.arena.listeners.ArenaPlayerListener
-import me.senseiju.sennetmc.extensions.deserializeFullLocation
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.deserializeFullLocation
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.entity.Player
 import java.util.*
 

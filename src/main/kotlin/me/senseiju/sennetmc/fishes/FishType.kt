@@ -1,7 +1,7 @@
 package me.senseiju.sennetmc.fishes
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.datastorage.DataFile
+import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.probabilityChance
 import org.bukkit.plugin.java.JavaPlugin
 import kotlin.random.Random

@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc
 
-import me.senseiju.sennetmc.extensions.color
+import me.senseiju.sennetmc.utils.extensions.color
 
 enum class Rarity(private val string: String) {
     COMMON("&8Common"),

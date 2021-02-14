@@ -6,8 +6,8 @@ import me.mattstudios.mf.annotations.SubCommand
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_ARENA_SET_LOCATION
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.extensions.serializeFull
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.serializeFull
 import org.bukkit.entity.Player
 
 @Command("Arena")

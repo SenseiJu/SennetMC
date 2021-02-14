@@ -1,15 +1,15 @@
 package me.senseiju.sennetmc.npcs.types.merchant
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.color
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.merchant.commands.SellCommand
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
@@ -59,7 +59,7 @@ class Merchant(private val plugin: SennetMC) : BaseNpc {
             player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
         } else {
             player.sendConfigMessage("MERCHANT-NO-FISH-TO-SELL", false,
-                    ObjectSet("{merchantName}", NPC_TYPE.npcName))
+                    PlaceholderSet("{merchantName}", NPC_TYPE.npcName))
         }
     }
 

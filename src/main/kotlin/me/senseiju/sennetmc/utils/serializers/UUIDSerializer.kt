@@ -1,4 +1,4 @@
-package me.senseiju.sennetmc.serializers
+package me.senseiju.sennetmc.utils.serializers
 
 import kotlinx.serialization.KSerializer
 import kotlinx.serialization.descriptors.PrimitiveKind

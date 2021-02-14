@@ -4,9 +4,9 @@ import me.mattstudios.mf.annotations.Command
 import me.mattstudios.mf.annotations.Default
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.dispatchCommands
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.extensions.dispatchCommands
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import java.time.Instant
@@ -37,7 +37,7 @@ class DailyCommand(private val plugin: SennetMC) : CommandBase() {
 
         section.getKeys(false).forEach { key ->
             if (player.hasPermission("group.$key")) {
-                plugin.server.dispatchCommands(section.getStringList(key), ObjectSet("{player}", player.name))
+                plugin.server.dispatchCommands(section.getStringList(key), PlaceholderSet("{player}", player.name))
             }
         }
 

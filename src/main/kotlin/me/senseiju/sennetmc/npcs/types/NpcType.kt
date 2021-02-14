@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc.npcs.types
 
-import me.senseiju.sennetmc.extensions.color
+import me.senseiju.sennetmc.utils.extensions.color
 import net.citizensnpcs.api.npc.NPC
 
 enum class NpcType(npcName: String) {

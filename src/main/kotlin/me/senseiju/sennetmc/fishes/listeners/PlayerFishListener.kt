@@ -1,7 +1,7 @@
 package me.senseiju.sennetmc.fishes.listeners
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.fishes.events.PlayerCaughtFishEvent
 import me.senseiju.sennetmc.upgrades.Upgrade

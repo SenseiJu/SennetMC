@@ -6,7 +6,7 @@ import me.mattstudios.mf.annotations.SubCommand
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_RELOAD
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.command.CommandSender
 
 @Command("SennetMC")

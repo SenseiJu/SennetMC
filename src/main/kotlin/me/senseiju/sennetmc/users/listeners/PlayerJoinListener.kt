@@ -1,7 +1,7 @@
 package me.senseiju.sennetmc.users.listeners
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.color
+import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.users.UserManager
 import me.senseiju.sennetmc.users.giveFishingRod
 import org.bukkit.Material

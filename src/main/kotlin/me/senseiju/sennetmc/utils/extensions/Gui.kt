@@ -1,4 +1,4 @@
-package me.senseiju.sennetmc.extensions
+package me.senseiju.sennetmc.utils.extensions
 
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.Gui

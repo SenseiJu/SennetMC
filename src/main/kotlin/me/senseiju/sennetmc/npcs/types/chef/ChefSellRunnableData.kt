@@ -3,7 +3,7 @@ package me.senseiju.sennetmc.npcs.types.chef
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
-import me.senseiju.sennetmc.serializers.UUIDSerializer
+import me.senseiju.sennetmc.utils.serializers.UUIDSerializer
 import java.util.*
 
 @Serializable

@@ -2,7 +2,7 @@ package me.senseiju.sennetmc.arena.listeners
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.arena.ArenaManager
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.entity.PlayerDeathEvent

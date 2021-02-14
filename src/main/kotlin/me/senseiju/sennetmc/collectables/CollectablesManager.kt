@@ -8,10 +8,10 @@ import me.senseiju.sennetmc.Rarity
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.collectables.commands.CollectablesCommand
 import me.senseiju.sennetmc.collectables.listeners.PlayerJoinListener
-import me.senseiju.sennetmc.datastorage.DataFile
-import me.senseiju.sennetmc.datastorage.ReplacementSet
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.datastorage.DataFile
+import me.senseiju.sennetmc.utils.datastorage.Replacements
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
@@ -94,7 +94,7 @@ class CollectablesManager(private val plugin: SennetMC) : BaseManager {
 
             val targetPlayer = plugin.server.getPlayer(user.uuid) ?: return@launch
             targetPlayer.sendConfigMessage("COLLECTABLES-TARGET-COLLECTABLE-SET",
-                    ObjectSet("{collectableName}", collectables[collectableId]!!.name))
+                    PlaceholderSet("{collectableName}", collectables[collectableId]!!.name))
         }
     }
 
@@ -132,7 +132,7 @@ class CollectablesManager(private val plugin: SennetMC) : BaseManager {
         plugin.database.updateQuery(deleteQuery, uuid.toString())
 
         val insertQuery = "INSERT INTO `collectables`(`uuid`, `collectable_id`) VALUES(?,?);"
-        val replacementSets = collectables.map { ReplacementSet(uuid.toString(), it) }.toTypedArray()
+        val replacementSets = collectables.map { Replacements(uuid.toString(), it) }.toTypedArray()
 
         plugin.database.updateBatchQuery(insertQuery, *replacementSets)
     }

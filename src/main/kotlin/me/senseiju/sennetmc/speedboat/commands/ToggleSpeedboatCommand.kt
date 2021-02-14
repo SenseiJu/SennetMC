@@ -3,11 +3,11 @@ package me.senseiju.sennetmc.speedboat.commands
 import me.mattstudios.mf.annotations.*
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
-import me.senseiju.sennetmc.extensions.driver
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.extensions.string
+import me.senseiju.sennetmc.utils.extensions.driver
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.string
 import me.senseiju.sennetmc.speedboat.SpeedboatManager
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import org.bukkit.entity.Boat
 import org.bukkit.entity.Player
 
@@ -31,6 +31,6 @@ class ToggleSpeedboatCommand(speedboatManager: SpeedboatManager) : CommandBase()
         playerSpeedboatToggle[player.uniqueId] = !playerSpeedboatToggle[player.uniqueId]!!
 
         player.sendConfigMessage("SPEEDBOAT-TOGGLE",
-                ObjectSet("{toggle}", playerSpeedboatToggle[player.uniqueId]!!.string))
+                PlaceholderSet("{toggle}", playerSpeedboatToggle[player.uniqueId]!!.string))
     }
 }

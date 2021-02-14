@@ -7,15 +7,13 @@ import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketEvent
 import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.driver
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.driver
 import me.senseiju.sennetmc.speedboat.SpeedboatManager
 import me.senseiju.sennetmc.upgrades.Upgrade
 import org.bukkit.entity.Boat
 import org.bukkit.entity.EntityType
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.vehicle.VehicleEnterEvent
 import org.bukkit.event.vehicle.VehicleExitEvent
 import org.bukkit.util.Vector
 import java.util.*

@@ -3,7 +3,7 @@ package me.senseiju.sennetmc.upgrades
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.datastorage.DataFile
+import me.senseiju.sennetmc.utils.datastorage.DataFile
 import java.util.*
 
 private const val SELECT_QUERY = "SELECT * FROM `upgrades` WHERE `uuid`=?;"

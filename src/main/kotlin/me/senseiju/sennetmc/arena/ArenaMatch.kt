@@ -1,8 +1,8 @@
 package me.senseiju.sennetmc.arena
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound
@@ -41,8 +41,8 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
         }
 
         winner.server.sendConfigMessage("ARENA-MATCH-FINISHED", false,
-            ObjectSet("{winner}", winner.name),
-            ObjectSet("{loser}", getOpposingPlayer(winner).name))
+            PlaceholderSet("{winner}", winner.name),
+            PlaceholderSet("{loser}", getOpposingPlayer(winner).name))
     }
 
     private fun doWinner(winner: ArenaPlayer, loser: ArenaPlayer) {

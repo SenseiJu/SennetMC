@@ -1,4 +1,4 @@
-package me.senseiju.sennetmc.extensions
+package me.senseiju.sennetmc.utils.extensions
 
 import org.bukkit.entity.Boat
 import org.bukkit.entity.Entity

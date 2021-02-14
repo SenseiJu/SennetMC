@@ -9,7 +9,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.collectables.CollectablesManager
 import me.senseiju.sennetmc.collectables.showCollectablesGui
 import me.senseiju.sennetmc.collectables.showCollectablesListGui
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.defaultScope
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

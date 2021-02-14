@@ -1,7 +1,7 @@
 package me.senseiju.sennetmc.users.tasks
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.users.UserManager
 import org.bukkit.scheduler.BukkitRunnable
 

@@ -5,7 +5,7 @@ import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_EVENTS_START
 import me.senseiju.sennetmc.events.EventsManager
 import me.senseiju.sennetmc.events.event.EventType
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.command.CommandSender
 
 @Command("Events")

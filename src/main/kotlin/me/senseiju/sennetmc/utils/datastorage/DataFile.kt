@@ -1,4 +1,4 @@
-package me.senseiju.sennetmc.datastorage
+package me.senseiju.sennetmc.utils.datastorage
 
 import org.bukkit.configuration.file.YamlConfiguration
 import org.bukkit.plugin.java.JavaPlugin

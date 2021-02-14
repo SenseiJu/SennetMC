@@ -4,12 +4,12 @@ import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.color
-import me.senseiju.sennetmc.extensions.defaultGuiTemplate
-import me.senseiju.sennetmc.extensions.deserializeFullLocation
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
+import me.senseiju.sennetmc.utils.extensions.deserializeFullLocation
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.npcs.types.NpcType
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
 import org.bukkit.Location
 import org.bukkit.Material
@@ -47,15 +47,15 @@ private fun createWarpGuiItem(name: String, material: Material, spawnPoint: Loca
             .asGuiItem { e ->
                 if (isPlayerWarpingToSameWorld(e.whoClicked as Player, spawnPoint)) {
                     e.whoClicked.sendConfigMessage("CAPTAIN-FAILED-TELEPORT-SAME-LOCATION", false,
-                            ObjectSet("{captainName}", npcType.npcName))
+                            PlaceholderSet("{captainName}", npcType.npcName))
                     e.whoClicked.closeInventory()
                     return@asGuiItem
                 }
 
                 e.whoClicked.teleport(spawnPoint)
                 e.whoClicked.sendConfigMessage("CAPTAIN-TELEPORT-DESTINATION", false,
-                        ObjectSet("{destinationName}", name.color()),
-                        ObjectSet("{captainName}", npcType.npcName))
+                        PlaceholderSet("{destinationName}", name.color()),
+                        PlaceholderSet("{captainName}", npcType.npcName))
                 e.whoClicked.closeInventory()
             }
 }

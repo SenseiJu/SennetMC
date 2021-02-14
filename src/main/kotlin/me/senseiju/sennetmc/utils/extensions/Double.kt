@@ -1,4 +1,4 @@
-package me.senseiju.sennetmc.extensions
+package me.senseiju.sennetmc.utils.extensions
 
 /**
  * Rounds the double to some number of decimal places

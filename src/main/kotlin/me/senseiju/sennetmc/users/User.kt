@@ -1,15 +1,13 @@
 package me.senseiju.sennetmc.users
 
-import me.senseiju.sennetmc.extensions.round
+import me.senseiju.sennetmc.utils.extensions.round
 import me.senseiju.sennetmc.fishes.FishCaughtData
 import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.models.ModelType
 import me.senseiju.sennetmc.settings.Setting
 import me.senseiju.sennetmc.upgrades.Upgrade
-import java.text.DateFormat
 import java.time.Instant
 import java.util.*
-import java.util.concurrent.TimeUnit
 import kotlin.collections.ArrayList
 
 class User(val uuid: UUID,

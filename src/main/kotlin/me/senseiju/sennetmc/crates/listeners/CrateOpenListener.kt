@@ -2,9 +2,8 @@ package me.senseiju.sennetmc.crates.listeners
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.crates.CratesManager
-import me.senseiju.sennetmc.extensions.dispatchCommands
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
@@ -28,8 +27,8 @@ class CrateOpenListener(private val plugin: SennetMC, private val cratesManager:
         plugin.collectablesManager.addCollectable(e.player.uniqueId, crate.id)
 
         e.player.sendConfigMessage("CRATES-REWARD", false,
-            ObjectSet("{crateName}", crate.name),
-            ObjectSet("{rewardName}", reward.name))
+            PlaceholderSet("{crateName}", crate.name),
+            PlaceholderSet("{rewardName}", reward.name))
 
         e.player.inventory.itemInMainHand.amount = e.player.inventory.itemInMainHand.amount - 1
 

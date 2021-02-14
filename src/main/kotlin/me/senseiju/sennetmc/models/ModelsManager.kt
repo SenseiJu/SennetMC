@@ -7,14 +7,14 @@ import me.mattstudios.mf.base.components.TypeResult
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.datastorage.DataFile
-import me.senseiju.sennetmc.datastorage.ReplacementSet
-import me.senseiju.sennetmc.extensions.color
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.datastorage.DataFile
+import me.senseiju.sennetmc.utils.datastorage.Replacements
+import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.models.commands.HatCommand
 import me.senseiju.sennetmc.models.commands.ModelCommand
 import me.senseiju.sennetmc.models.listeners.*
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
 import org.bukkit.command.CommandSender
 import org.bukkit.inventory.ItemStack
@@ -91,7 +91,7 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
 
             val targetPlayer = plugin.server.getPlayer(user.uuid) ?: return@launch
             targetPlayer.sendConfigMessage("MODELS-TARGET-MODEL-SET",
-                    ObjectSet("{modelName}", models[modelData]!!.modelName.color()))
+                    PlaceholderSet("{modelName}", models[modelData]!!.modelName.color()))
         }
     }
 
@@ -146,11 +146,11 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
         plugin.database.updateQuery(deleteQuery, uuid.toString())
 
         val insertQuery = "INSERT INTO `models`(`uuid`, `model_type`, `model_data`) VALUES(?,?,?);"
-        val replacementSets = ArrayList<ReplacementSet>()
+        val replacementSets = ArrayList<Replacements>()
 
         models.forEach { (modelType, modelDataList) ->
             modelDataList.map { modelData ->
-                replacementSets.add(ReplacementSet(uuid.toString(), modelType.toString(), modelData))
+                replacementSets.add(Replacements(uuid.toString(), modelType.toString(), modelData))
             }
         }
 

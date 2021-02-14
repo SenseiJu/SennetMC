@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc.arena
 
-import me.senseiju.sennetmc.extensions.addItemOrDropNaturally
+import me.senseiju.sennetmc.utils.extensions.addItemOrDropNaturally
 import org.bukkit.Location
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack

@@ -1,4 +1,4 @@
-package me.senseiju.sennetmc.datastorage
+package me.senseiju.sennetmc.utils.datastorage
 
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
@@ -96,7 +96,7 @@ class Database(plugin: SennetMC, configPath: String) {
         }
     }
 
-    fun updateBatchQuery(q: String, vararg replacementSets: ReplacementSet = emptyArray()) {
+    fun updateBatchQuery(q: String, vararg replacements: Replacements = emptyArray()) {
         source.connection.use { conn ->
             conn.autoCommit = false
 
@@ -104,7 +104,7 @@ class Database(plugin: SennetMC, configPath: String) {
 
             var i = 1
 
-            replacementSets.forEach { set ->
+            replacements.forEach { set ->
                 set.replacements.forEach { replacement ->
                     s.setObject(i++, replacement)
                 }

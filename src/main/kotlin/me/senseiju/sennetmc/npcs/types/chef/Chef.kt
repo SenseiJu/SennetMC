@@ -4,13 +4,13 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.datastorage.RawDataFile
-import me.senseiju.sennetmc.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.datastorage.RawDataFile
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.designer.commands.CosmeticsCommand
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
@@ -54,8 +54,8 @@ class Chef(private val plugin: SennetMC) : BaseNpc {
 
         if (user.totalFishCaught < fishCaughtMinimum) {
             e.clicker.sendConfigMessage("CHEF-NOT-ENOUGH-FISH-CAUGHT", false,
-                ObjectSet("{chefName}", NPC_TYPE.npcName),
-                ObjectSet("{fishAmount}", fishCaughtMinimum))
+                PlaceholderSet("{chefName}", NPC_TYPE.npcName),
+                PlaceholderSet("{fishAmount}", fishCaughtMinimum))
             return
         }
 

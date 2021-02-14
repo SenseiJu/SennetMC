@@ -1,7 +1,7 @@
-package me.senseiju.sennetmc.extensions
+package me.senseiju.sennetmc.utils.extensions
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import org.bukkit.command.CommandSender
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -15,18 +15,18 @@ fun CommandSender.message(list: List<String>) {
     list.forEach{ this.message(it) }
 }
 
-fun CommandSender.sendConfigMessage(messageName: String, vararg replacements: ObjectSet = emptyArray()) {
+fun CommandSender.sendConfigMessage(messageName: String, vararg replacements: PlaceholderSet = emptyArray()) {
     this.sendConfigMessage(messageName, prefix = true, replacements = replacements)
 }
 
-fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true, vararg replacements: ObjectSet = emptyArray()) {
+fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true, vararg replacements: PlaceholderSet = emptyArray()) {
     val config = messagesFile.config
 
     if (config.isString(messageName)) {
         var message = config.getString(messageName, "Undefined message for '$messageName'")!!
 
         for (replacement in replacements) {
-            message = message.replace(replacement.any1.toString(), replacement.any2.toString())
+            message = message.replace(replacement.placeholder.toString(), replacement.value.toString())
         }
 
         if (prefix) {
@@ -41,7 +41,7 @@ fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true,
         for (message in messages) {
             var line = message
             for (replacement in replacements) {
-                line = line.replace(replacement.any1.toString(), replacement.any2.toString())
+                line = line.replace(replacement.placeholder.toString(), replacement.value.toString())
             }
 
             if (prefix) {

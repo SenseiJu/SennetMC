@@ -5,13 +5,13 @@ import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.*
+import me.senseiju.sennetmc.utils.extensions.*
 import me.senseiju.sennetmc.npcs.calculateNextUpgradeCost
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.updateUpgradeGuiItem
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
 import me.senseiju.sennetmc.utils.secondsToTimeFormat
 import net.milkbowl.vault.economy.Economy
@@ -76,7 +76,7 @@ private fun chefSellGuiItem(chef: Chef, player: Player) : GuiItem {
             } else {
                 player.sendConfigMessage(
                     "CHEF-ALREADY-RUNNING", false,
-                    ObjectSet("{chefName}", npc_type.npcName))
+                    PlaceholderSet("{chefName}", npc_type.npcName))
             }
 
             player.closeInventory()
@@ -100,7 +100,7 @@ private fun createChefSellRunnable(chef: Chef, player: Player) {
 
     if (user.currentFishCaughtCapacity <= 0) {
         player.sendConfigMessage("CHEF-NO-FISH", false,
-            ObjectSet("{chefName}", npc_type.npcName))
+            PlaceholderSet("{chefName}", npc_type.npcName))
         player.closeInventory()
         return
     }
@@ -115,7 +115,7 @@ private fun createChefSellRunnable(chef: Chef, player: Player) {
     chef.startChefSellRunnable(runnable)
 
     player.sendConfigMessage("CHEF-STARTED-RUNNING", false,
-        ObjectSet("{chefName}", npc_type.npcName))
+        PlaceholderSet("{chefName}", npc_type.npcName))
     player.closeInventory()
 }
 

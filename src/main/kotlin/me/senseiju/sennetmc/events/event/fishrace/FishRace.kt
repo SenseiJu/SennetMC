@@ -5,9 +5,9 @@ import me.senseiju.sennetmc.events.EventsManager
 import me.senseiju.sennetmc.events.event.BaseEvent
 import me.senseiju.sennetmc.events.event.EventType
 import me.senseiju.sennetmc.events.event.fishrace.listeners.PlayerCaughtFishListener
-import me.senseiju.sennetmc.extensions.dispatchCommands
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.extensions.dispatchCommands
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -44,13 +44,13 @@ class FishRace(private val plugin: SennetMC, eventsManager: EventsManager) : Bas
             }
 
             if (playersRewarded >= numberOfWinners && currentValue != value) {
-                player.sendConfigMessage("EVENTS-LOSER", false, ObjectSet("{eventName}", eventType.title))
+                player.sendConfigMessage("EVENTS-LOSER", false, PlaceholderSet("{eventName}", eventType.title))
                 return@forEach
             }
 
-            plugin.server.dispatchCommands(commands, ObjectSet("{player}", player.name))
+            plugin.server.dispatchCommands(commands, PlaceholderSet("{player}", player.name))
 
-            player.sendConfigMessage("EVENTS-WINNER", false, ObjectSet("{eventName}", eventType.title))
+            player.sendConfigMessage("EVENTS-WINNER", false, PlaceholderSet("{eventName}", eventType.title))
 
             currentValue = value
             playersRewarded++

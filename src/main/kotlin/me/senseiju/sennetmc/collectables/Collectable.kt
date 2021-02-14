@@ -2,7 +2,7 @@ package me.senseiju.sennetmc.collectables
 
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.Rarity
-import me.senseiju.sennetmc.extensions.color
+import me.senseiju.sennetmc.utils.extensions.color
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import java.util.*

@@ -6,8 +6,8 @@ import me.mattstudios.mf.annotations.SubCommand
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_NPC_CAPTAIN_SET_SPAWN_POINT
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.extensions.serializeFull
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.extensions.serializeFull
 import org.bukkit.entity.Player
 
 @Command("Captain")

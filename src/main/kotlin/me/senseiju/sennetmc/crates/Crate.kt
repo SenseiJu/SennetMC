@@ -2,8 +2,8 @@ package me.senseiju.sennetmc.crates
 
 import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mfgui.gui.components.ItemBuilder
-import me.senseiju.sennetmc.extensions.addItemOrDropNaturally
-import me.senseiju.sennetmc.extensions.color
+import me.senseiju.sennetmc.utils.extensions.addItemOrDropNaturally
+import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player

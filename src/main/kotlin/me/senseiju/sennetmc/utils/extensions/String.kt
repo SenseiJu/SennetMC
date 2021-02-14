@@ -1,4 +1,4 @@
-package me.senseiju.sennetmc.extensions
+package me.senseiju.sennetmc.utils.extensions
 
 import net.md_5.bungee.api.ChatColor
 import java.util.regex.Pattern

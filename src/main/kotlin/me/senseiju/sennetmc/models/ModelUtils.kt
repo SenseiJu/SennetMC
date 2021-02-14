@@ -1,7 +1,7 @@
 package me.senseiju.sennetmc.models
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.setCustomModelData
+import me.senseiju.sennetmc.utils.extensions.setCustomModelData
 import me.senseiju.sennetmc.models.listeners.playerPassengers
 import me.senseiju.sennetmc.models.packetwrappers.updateModelArmorStand
 import me.senseiju.sennetmc.users.User

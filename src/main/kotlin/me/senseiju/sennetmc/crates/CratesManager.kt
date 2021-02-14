@@ -2,16 +2,13 @@ package me.senseiju.sennetmc.crates
 
 import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mf.base.CommandManager
-import me.mattstudios.mf.base.CompletionHandler
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.crates.commands.CombineCratesCommand
 import me.senseiju.sennetmc.crates.commands.CratesCommand
 import me.senseiju.sennetmc.crates.listeners.CrateOpenListener
 import me.senseiju.sennetmc.crates.listeners.PlayerCaughtFishListener
-import me.senseiju.sennetmc.datastorage.DataFile
-import me.senseiju.sennetmc.fishes.events.PlayerCaughtFishEvent
-import me.senseiju.sennetmc.settings.Setting
+import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.percentChance

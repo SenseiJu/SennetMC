@@ -8,8 +8,8 @@ import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.arena.ArenaManager
 import me.senseiju.sennetmc.arena.showArenaWagerGui
-import me.senseiju.sennetmc.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import org.bukkit.entity.Player
 
 @Command("Duel")
@@ -47,7 +47,7 @@ class DuelCommand(private val plugin: SennetMC, private val arenaManager: ArenaM
         requests[sender.uniqueId] = targetPlayer.uniqueId
 
         sender.sendConfigMessage("ARENA-REQUEST-SENT")
-        targetPlayer.sendConfigMessage("ARENA-REQUEST-RECEIVED", ObjectSet("{player}", sender.name))
+        targetPlayer.sendConfigMessage("ARENA-REQUEST-RECEIVED", PlaceholderSet("{player}", sender.name))
     }
 
     @SubCommand("Accept")

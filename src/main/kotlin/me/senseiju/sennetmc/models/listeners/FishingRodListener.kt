@@ -1,13 +1,11 @@
 package me.senseiju.sennetmc.models.listeners
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.extensions.setCustomModelData
+import me.senseiju.sennetmc.utils.extensions.setCustomModelData
 import me.senseiju.sennetmc.models.ModelType
 import org.bukkit.Material
-import org.bukkit.entity.EntityType
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.entity.EntityDropItemEvent
 import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerFishEvent
 

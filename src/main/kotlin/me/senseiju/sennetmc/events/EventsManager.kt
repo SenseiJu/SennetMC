@@ -5,16 +5,16 @@ import me.mattstudios.mf.base.components.ParameterResolver
 import me.mattstudios.mf.base.components.TypeResult
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.datastorage.DataFile
+import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.events.commands.EventsCommand
 import me.senseiju.sennetmc.events.event.BaseEvent
 import me.senseiju.sennetmc.events.event.EventType
 import me.senseiju.sennetmc.events.event.fishrace.FishRace
 import me.senseiju.sennetmc.events.event.shipwreck.Shipwreck
 import me.senseiju.sennetmc.events.tasks.AutoEventScheduler
-import me.senseiju.sennetmc.extensions.message
+import me.senseiju.sennetmc.utils.extensions.message
 import me.senseiju.sennetmc.settings.Setting
-import me.senseiju.sennetmc.utils.ObjectSet
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.applyPlaceholders
 
 class EventsManager(private val plugin: SennetMC) : BaseManager {
@@ -58,8 +58,8 @@ class EventsManager(private val plugin: SennetMC) : BaseManager {
         }
 
         val message = applyPlaceholders(messagesFile.config.getStringList("EVENTS-STARTED"),
-                ObjectSet("{eventName}", eventType.title),
-                ObjectSet("{eventHowToPlay}", eventsFile.config.getStringList("${eventType}.how-to-play")))
+                PlaceholderSet("{eventName}", eventType.title),
+                PlaceholderSet("{eventHowToPlay}", eventsFile.config.getStringList("${eventType}.how-to-play")))
 
         plugin.server.onlinePlayers.forEach {
             val user = users[it.uniqueId] ?: return@forEach
