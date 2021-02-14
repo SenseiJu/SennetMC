@@ -7,10 +7,13 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.utils.extensions.dispatchCommands
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.secondsToTimeFormat
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import java.time.Instant
 import java.util.concurrent.TimeUnit
+
+const val COOLDOWN_IN_SECONDS = (23 * 60 * 60) + (30 * 60)
 
 @Command("Daily")
 class DailyCommand(private val plugin: SennetMC) : CommandBase() {
@@ -20,10 +23,12 @@ class DailyCommand(private val plugin: SennetMC) : CommandBase() {
     @Default
     fun onCommand(player: Player) {
         val user = users[player.uniqueId] ?: return
-        val timePassed = Instant.now().minusMillis(user.dailyRewardLastClaimed.toEpochMilli())
+        val timePassedInSeconds = TimeUnit.SECONDS.convert(
+            Instant.now().minusMillis(user.dailyRewardLastClaimed.toEpochMilli()).toEpochMilli(), TimeUnit.MILLISECONDS)
 
-        if (TimeUnit.HOURS.convert(timePassed.toEpochMilli(), TimeUnit.MILLISECONDS) < 23) {
-            player.sendConfigMessage("DAILY-NOT-READY")
+        if (timePassedInSeconds < COOLDOWN_IN_SECONDS) {
+            player.sendConfigMessage("DAILY-NOT-READY",
+                PlaceholderSet("{time}", secondsToTimeFormat(COOLDOWN_IN_SECONDS - timePassedInSeconds)))
             return
         }
 

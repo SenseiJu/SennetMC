@@ -8,10 +8,11 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.settings.Setting
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.UserTable
+import org.bukkit.plugin.java.JavaPlugin
 import javax.sql.rowset.CachedRowSet
 import javax.sql.rowset.RowSetProvider
 
-class Database(plugin: SennetMC, configPath: String) {
+class Database(plugin: JavaPlugin, configPath: String) {
     private var source: HikariDataSource
 
     init {

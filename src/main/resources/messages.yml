@@ -40,6 +40,9 @@ CHEF-NO-FISH: "{chefName} &cYou have no fish for me"
 CHEF-ALREADY-RUNNING: "{chefName} &cI already have some fish, wait until I have finished before giving me more"
 CHEF-STARTED-RUNNING: "{chefName} &aOk, I will sell this fish, come collect your money later"
 
+# Sailor NPC
+SAILOR-REQUIRES-RANK: "{sailorName} &cYou must have a rank to speak with me"
+
 # Fishing
 FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continue fishing"
 
@@ -86,7 +89,7 @@ EVENTS-WINNER: "{eventName} &8&l» &aYou won rewards from the event"
 
 # Daily
 DAILY-CLAIMED: "&aYou have claimed your daily rewards"
-DAILY-NOT-READY: "&cYour daily rewards are not ready"
+DAILY-NOT-READY: "&cYour daily rewards will be available in &e{time}"
 
 # Arena
 ARENA-HELP:

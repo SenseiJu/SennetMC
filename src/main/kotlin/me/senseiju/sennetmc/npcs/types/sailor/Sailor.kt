@@ -1,8 +1,11 @@
 package me.senseiju.sennetmc.npcs.types.sailor
 
+import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
+import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
 import net.citizensnpcs.trait.SkinTrait
@@ -24,5 +27,13 @@ class Sailor : BaseNpc {
         npc.spawn(location)
     }
 
-    override fun onNpcRightClick(e: NPCRightClickEvent) { showSailorGui(e.clicker) }
+    override fun onNpcRightClick(e: NPCRightClickEvent) {
+        if (!e.clicker.hasPermission(PERMISSION_SPEEDBOAT_USE)) {
+            e.clicker.sendConfigMessage("SAILOR-REQUIRES-RANK", false,
+                PlaceholderSet("{sailorName}", NPC_TYPE.npcName))
+            return
+        }
+
+        showSailorGui(e.clicker)
+    }
 }
