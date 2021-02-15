@@ -13,7 +13,7 @@ import org.bukkit.entity.Player
 import java.time.Instant
 import java.util.concurrent.TimeUnit
 
-const val COOLDOWN_IN_SECONDS = (23 * 60 * 60) + (30 * 60)
+private const val COOLDOWN_IN_SECONDS = (23 * 60 * 60) + (30 * 60)
 
 @Command("Daily")
 class DailyCommand(private val plugin: SennetMC) : CommandBase() {

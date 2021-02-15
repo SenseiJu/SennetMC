@@ -4,7 +4,7 @@ fun applyPlaceholders(string: String, vararg replacements: PlaceholderSet = empt
     var replacedString = string
 
     replacements.forEach {
-        replacedString = replacedString.replace(it.placeholder.toString(), it.value.toString())
+        replacedString = replacedString.replace(it.placeholder, it.value.toString())
     }
 
     return replacedString
@@ -16,7 +16,7 @@ fun applyPlaceholders(strings: List<String>, vararg replacements: PlaceholderSet
     strings.forEach string@{ string ->
 
         replacements.forEach { replacement ->
-            if (!string.contains(replacement.placeholder.toString())) {
+            if (!string.contains(replacement.placeholder)) {
                 return@forEach
             }
 
@@ -25,7 +25,7 @@ fun applyPlaceholders(strings: List<String>, vararg replacements: PlaceholderSet
                 return@string
             }
 
-            replacedStrings.add(string.replace(replacement.placeholder.toString(), replacement.value.toString()))
+            replacedStrings.add(string.replace(replacement.placeholder, replacement.value.toString()))
             return@string
         }
 
