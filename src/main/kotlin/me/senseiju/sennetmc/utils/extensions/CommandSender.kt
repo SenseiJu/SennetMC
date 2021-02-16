@@ -30,7 +30,7 @@ fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true,
         }
 
         if (prefix) {
-            message = "${config.getString("PREFIX", "#914ef5&lSennetMC »")} $message"
+            message = "${config.getString("PREFIX", "&#914ef5&lSennetMC »")} $message"
         }
 
         this.message(message)
@@ -45,7 +45,7 @@ fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true,
             }
 
             if (prefix) {
-                line = "${config.getString("PREFIX", "#914ef5&lSennetMC »")} $line"
+                line = "${config.getString("PREFIX", "&#914ef5&lSennetMC »")} $line"
             }
             messagesToSend.add(line)
         }

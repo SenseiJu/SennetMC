@@ -19,7 +19,7 @@ class PlayerJoinListener(plugin: SennetMC, private val userManager: UserManager)
     @EventHandler(priority = EventPriority.MONITOR)
     private fun onPlayerJoin(e: PlayerJoinEvent) {
         if (!userManager.userMap.containsKey(e.player.uniqueId)) {
-            e.player.kickPlayer(("#914ef5&lSennetMC \n\n&cYour player data was not loaded before you connected " +
+            e.player.kickPlayer(("&#914ef5&lSennetMC \n\n&cYour player data was not loaded before you connected " +
                     "\nplease try and reconnect or contact an admin if this continues").color())
         }
 

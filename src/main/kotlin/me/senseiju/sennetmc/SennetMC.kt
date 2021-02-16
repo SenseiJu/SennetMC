@@ -81,7 +81,7 @@ class SennetMC : JavaPlugin() {
 
             playerPassengers.forEach { (_, stand) -> stand.remove() }
 
-            it.kickPlayer(messagesFile.config.getString("RELOADING", "#914ef5&lSennetMC &bis currently reloading...")?.color())
+            it.kickPlayer(messagesFile.config.getString("RELOADING", "&#914ef5&lSennetMC &bis currently reloading...")?.color())
         }
 
         userManager.saveUsersTask.cancel()

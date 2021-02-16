@@ -171,7 +171,7 @@ crates:
         commands:
           - "model set {player} HAT 2300"
 
-      - name: "#3deb1a&lSub &6&lrank [1 Week]"
+      - name: "&#3deb1a&lSub &6&lrank [1 Week]"
         probability: 1
         commands:
           - "lp user {player} parent addtemp sub 1w server=fishing"

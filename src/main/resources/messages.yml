@@ -1,8 +1,8 @@
-PREFIX: "#914ef5&lSennetMC &8&l»"
+PREFIX: "&#914ef5&lSennetMC &8&l»"
 
 # Generic messages
 NO-PERMISSION: "&cYou do not have permission to perform this action"
-RELOADING: "#914ef5&lSennetMC &bis currently reloading..."
+RELOADING: "&#914ef5&lSennetMC &bis currently reloading..."
 RELOAD-COMPLETE: "&aReload complete"
 CANNOT-FIND-TARGET: "&cCannot find the specified player"
 DISCORD-LINK: "&b&ehttps://discord.sennetmc.com"
@@ -82,7 +82,7 @@ EVENTS-STARTED:
   - "{eventHowToPlay}"
   - "╚═"
 EVENTS-ENDED:
-  - "╠═ {eventName} #c313d6&levent ended"
+  - "╠═ {eventName} &#c313d6&levent ended"
 EVENTS-INVALID-EVENT-TYPE: "&cInvalid event type entered"
 EVENTS-CURRENTLY-ACTIVE: "&cAn event is already active"
 EVENTS-LOSER: "{eventName} &8&l» &cYou did not win any rewards from the event"
@@ -94,7 +94,7 @@ DAILY-NOT-READY: "&cYour daily rewards will be available in &e{time}"
 
 # Arena
 ARENA-HELP:
-  - "&d&l&m----------&r #de5757&lArena &d&l&m----------&r"
+  - "&d&l&m----------&r &#de5757&lArena &d&l&m----------&r"
   - "&e/duel send <player> &bSends a duel to the player"
   - "&e/duel accept &bAccepts a duel"
   - "&e/duel deny &bDenies a duel"
@@ -111,4 +111,4 @@ ARENA-LOCATION-SET: "&aArena location set"
 ARENA-REQUEST-DENIED: "&cDuel request denied"
 ARENA-WIN: "&aYou won the wager"
 ARENA-LOSE: "&cYou lost the wager"
-ARENA-MATCH-FINISHED: "#de5757&lArena &8&l» &a{winner} &bwon a wager against &c{loser}"
+ARENA-MATCH-FINISHED: "&#de5757&lArena &8&l» &a{winner} &bwon a wager against &c{loser}"

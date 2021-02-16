@@ -92,20 +92,20 @@ fishraceevent:
   description:
     - "&7Received by winning the fish race event"
 sub:
-  name: "#3deb1a&lSub rank"
+  name: "&#3deb1a&lSub rank"
   material: IRON_BLOCK
   rarity: LEGENDARY
   description:
-    - "&7Received by purchasing the #3deb1a&lSub &7rank"
+    - "&7Received by purchasing the &#3deb1a&lSub &7rank"
 sub+:
-  name: "#16f2e7&lSub+ rank"
+  name: "&#16f2e7&lSub+ rank"
   material: GOLD_BLOCK
   rarity: LEGENDARY
   description:
-    - "&7Received by purchasing the #16f2e7&lSub+ &7rank"
+    - "&7Received by purchasing the &#16f2e7&lSub+ &7rank"
 sub++:
-  name: "#f218e0&lSub++ rank"
+  name: "&#f218e0&lSub++ rank"
   material: DIAMOND_BLOCK
   rarity: LEGENDARY
   description:
-    - "&7Received by purchasing the #f218e0&lSub++ &7rank"
+    - "&7Received by purchasing the &#f218e0&lSub++ &7rank"
