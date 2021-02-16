@@ -27,7 +27,7 @@ deuce-upgrade-increment: 0.025
 deuce-upgrade-max: 20
 
 lure-upgrade-starting-cost: 400.0
-lure-upgrade-increment: 1
+lure-upgrade-increment: 0.25
 lure-upgrade-max: 25
 
 #

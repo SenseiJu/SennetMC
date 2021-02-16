@@ -17,8 +17,16 @@ import org.bukkit.plugin.java.JavaPlugin
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
 private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
 
-fun updateUpgradeGuiItem(gui: Gui, material: Material, name: String, user:User, upgradeCost: Double, upgradeMax: Int,
-                         lore: List<String>, upgrade: Upgrade, Callback: Callback) : GuiItem {
+fun updateUpgradeGuiItem(gui: Gui,
+                         material: Material,
+                         name: String,
+                         user:User,
+                         upgradeCost: Double,
+                         upgradeMax: Int,
+                         lore: List<String>,
+                         upgrade: Upgrade,
+                         callback: Callback) : GuiItem {
+
     return ItemBuilder.from(material)
             .setName(name.color())
             .setLore(lore.color())
@@ -35,7 +43,7 @@ fun updateUpgradeGuiItem(gui: Gui, material: Material, name: String, user:User, 
                 user.incrementUpgrade(upgrade)
                 player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
 
-                gui.updateItem(e.slot, Callback.invoke())
+                gui.updateItem(e.slot, callback.invoke())
         })
 }
 

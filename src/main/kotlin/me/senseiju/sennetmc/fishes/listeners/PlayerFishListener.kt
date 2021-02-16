@@ -7,6 +7,7 @@ import me.senseiju.sennetmc.fishes.events.PlayerCaughtFishEvent
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.users.calculateMaxFishCapacity
+import me.senseiju.sennetmc.utils.probabilityChance
 import org.bukkit.entity.FishHook
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -43,13 +44,20 @@ class PlayerFishListener(private val plugin: SennetMC) : Listener {
     }
 
     private fun onFishCaught(e: PlayerFishEvent, user: User) {
-        val fishType = FishType.selectRandomType()
+        val fishType = selectRandomFishType(getPlayerLureProbabilityIncrease(user))
         val event = PlayerCaughtFishEvent(e.player, user, fishType)
 
         plugin.server.pluginManager.callEvent(event)
 
         e.expToDrop = 0
         e.caught?.remove()
+    }
+
+    private fun selectRandomFishType(increasedProbability: Double = 0.0) : FishType =
+        probabilityChance(FishType.values().map { it to (it.probability() + increasedProbability) }.toMap())
+
+    private fun getPlayerLureProbabilityIncrease(user: User) : Double {
+        return user.getUpgrade(Upgrade.LURE) * upgradesFile.config.getDouble("lure-upgrade-increment", 0.3)
     }
 
     private fun applyBaitUpgrade(user: User, hook: FishHook) {

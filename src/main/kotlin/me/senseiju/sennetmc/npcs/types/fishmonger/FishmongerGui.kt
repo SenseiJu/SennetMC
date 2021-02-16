@@ -27,8 +27,9 @@ fun showFishmongerGui(player: Player) {
         gui.setItem(2, 3, createFishingCapacityUpgradeGuiItem(gui, user))
         gui.setItem(2, 5, createDeuceUpgradeGuiItem(gui, user))
         gui.setItem(2, 7, createFeastUpgradeGuiItem(gui, user))
-        gui.setItem(3, 4, createBaitUpgradeGuiItem(gui, user))
-        gui.setItem(3, 6, createNegotiateUpgradeGuiItem(gui, user))
+        gui.setItem(3, 3, createBaitUpgradeGuiItem(gui, user))
+        gui.setItem(3, 5, createNegotiateUpgradeGuiItem(gui, user))
+        gui.setItem(3, 7, createLureUpgradeGuiItem(gui, user))
 
         plugin.server.scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
@@ -125,4 +126,23 @@ private fun createFeastUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
 
     return updateUpgradeGuiItem(gui, Material.COOKED_COD, "&b&lFeast", user, upgradeCost, upgradeMax, lore,
             Upgrade.FEAST) { createFeastUpgradeGuiItem(gui, user) }
+}
+
+private fun createLureUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+    val currentUpgrades = user.getUpgrade(Upgrade.LURE)
+    val upgradeMax = upgradesFile.config.getInt("lure-upgrade-max", 25)
+    val upgradeCost = calculateNextUpgradeCost(
+        upgradesFile.config.getDouble("lure-upgrade-starting-cost", 400.0),
+            currentUpgrades)
+
+    val lore = ArrayList<String>()
+    lore.add("")
+    lore.add("&7Increase the chance to get a larger")
+    lore.add("&7fish more frequently")
+    lore.add("")
+    lore.add("&7Cost: &e$$upgradeCost")
+    lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
+
+    return updateUpgradeGuiItem(gui, Material.FISHING_ROD, "&b&lLure", user, upgradeCost, upgradeMax, lore,
+            Upgrade.LURE) { createLureUpgradeGuiItem(gui, user) }
 }

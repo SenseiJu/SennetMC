@@ -16,10 +16,6 @@ enum class FishType {
         val dataFile = DataFile(JavaPlugin.getPlugin(SennetMC::class.java), "fishes.yml", true)
 
         fun selectRandomType() : FishType {
-            var probabilityRange = 1.0
-            for (type in values()) {
-                probabilityRange += type.probability()
-            }
             return probabilityChance(values().associateWith { it.probability() })
         }
     }
