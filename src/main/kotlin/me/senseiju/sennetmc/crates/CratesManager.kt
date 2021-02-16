@@ -50,13 +50,13 @@ class CratesManager(private val plugin: SennetMC) : BaseManager {
         loadCrates()
     }
 
-    fun isItemCrate(itemStack: ItemStack): Boolean {
+    fun isItemCrate(itemStack: ItemStack) : Boolean {
         return itemStack.type == Material.CHEST && NBTItem(itemStack).hasKey("crate-id")
     }
 
-    fun getCrateFromItem(itemStack: ItemStack): Crate? = cratesMap[NBTItem(itemStack).getString("crate-id")]
+    fun getCrateFromItem(itemStack: ItemStack) : Crate? = cratesMap[NBTItem(itemStack).getString("crate-id")]
 
-    fun selectRandomCrate(increasedProbability: Double = 0.0): Crate =
+    private fun selectRandomCrate(increasedProbability: Double = 0.0) : Crate =
             probabilityChance(cratesMap.values.map { it to (it.probabilityPerCast + increasedProbability) }.toMap())
 
     fun combineCrates(player: Player) {
