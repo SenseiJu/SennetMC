@@ -107,7 +107,7 @@ private fun createChefSellRunnable(chef: Chef, player: Player) {
 
     val timePerCapacity = upgradesFile.config.getLong("chef-sell-time-per-capacity", 40)
     val timeToComplete = (timePerCapacity - getServingSpeedUpgrade(user)) * user.currentFishCaughtCapacity
-    val runnable = ChefSellRunnable(player.uniqueId, timeToComplete, user.calculateSellPrice())
+    val runnable = ChefSellRunnable(player.uniqueId, user.calculateSellPrice(), timeToComplete)
 
     user.clearCurrentFishCaught()
 

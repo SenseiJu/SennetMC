@@ -2,10 +2,18 @@ package me.senseiju.sennetmc.npcs.types.chef
 
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import me.senseiju.sennetmc.npcs.types.NpcType
+import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import org.bukkit.Bukkit
 import org.bukkit.scheduler.BukkitRunnable
 import java.util.*
 
-class ChefSellRunnable(val uuid: UUID, timeToComplete: Long, val initialSellPrice: Double,
+private val NPC_TYPE = NpcType.CHEF
+
+class ChefSellRunnable(val uuid: UUID,
+                       val initialSellPrice: Double,
+                       timeToComplete: Long,
                        finished: Boolean = false) : BukkitRunnable() {
 
     var timeToComplete = timeToComplete
@@ -20,6 +28,9 @@ class ChefSellRunnable(val uuid: UUID, timeToComplete: Long, val initialSellPric
 
             finished = true
 
+            Bukkit.getPlayer(uuid)?.sendConfigMessage("CHEF-FINISHED-RUNNING", false,
+                PlaceholderSet("{chefName}", NPC_TYPE.npcName))
+
             return
         }
 
@@ -27,7 +38,7 @@ class ChefSellRunnable(val uuid: UUID, timeToComplete: Long, val initialSellPric
     }
 
     fun toJson() : String {
-        val data = ChefSellRunnableData(uuid, timeToComplete, initialSellPrice, finished)
+        val data = SerializableChefSellRunnable(uuid, timeToComplete, initialSellPrice, finished)
 
         return Json.encodeToString(data)
     }

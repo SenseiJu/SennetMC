@@ -4,11 +4,8 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.settings.Setting
-import me.senseiju.sennetmc.upgrades.Upgrade
-import me.senseiju.sennetmc.users.UserTable
 import org.bukkit.plugin.java.JavaPlugin
+import java.sql.SQLException
 import javax.sql.rowset.CachedRowSet
 import javax.sql.rowset.RowSetProvider
 
@@ -28,28 +25,6 @@ class Database(plugin: JavaPlugin, configPath: String) {
         hikariConfig.addDataSourceProperty("cachePrepStmts", "true")
 
         source = HikariDataSource(hikariConfig)
-
-        createTables()
-    }
-
-    private fun createTables() {
-        updateQuery(UserTable.buildCreateTableQuery())
-
-        updateQuery("CREATE TABLE IF NOT EXISTS `models`(`uuid` CHAR(36) NOT NULL, `model_type` CHAR(255) NOT NULL, " +
-                "`model_data` INT NOT NULL, UNIQUE KEY `key_uuid_model`(`uuid`, `model_type`, `model_data`));")
-
-        updateQuery("CREATE TABLE IF NOT EXISTS `active_models`(`uuid` CHAR(36) NOT NULL, `model_type` CHAR(255) NOT NULL, " +
-                "`model_data` INT NOT NULL, UNIQUE KEY `key_uuid_model_type`(`uuid`, `model_type`));")
-
-        updateQuery(Setting.buildCreateTableQuery())
-
-        updateQuery(Upgrade.buildCreateTableQuery())
-
-        updateQuery("CREATE TABLE IF NOT EXISTS `fish_caught`(`uuid` CHAR(36) NOT NULL, `fish_type` CHAR(255) NOT NULL, " +
-                "`current` INT, `total` INT, UNIQUE KEY `key_uuid_fish_type`(`uuid`, `fish_type`));")
-
-        updateQuery("CREATE TABLE IF NOT EXISTS `collectables`(`uuid` CHAR(36) NOT NULL, `collectable_id` CHAR(255) NOT NULL, " +
-                "UNIQUE KEY `key_uuid_collectable_id`(`uuid`, `collectable_id`));")
     }
 
     suspend fun asyncQuery(q: String, vararg replacements: Any = emptyArray()): CachedRowSet {
@@ -117,12 +92,12 @@ class Database(plugin: JavaPlugin, configPath: String) {
 
             try {
                 s.executeBatch()
-
-                conn.commit()
-                conn.autoCommit = true
-            } catch (ex: Exception) {
+            } catch (ex: SQLException) {
                 ex.printStackTrace()
             }
+
+            conn.commit()
+            conn.autoCommit = true
         }
     }
 }

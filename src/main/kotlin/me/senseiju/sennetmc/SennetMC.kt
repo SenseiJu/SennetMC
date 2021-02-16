@@ -8,19 +8,22 @@ import me.senseiju.sennetmc.commands.DailyCommand
 import me.senseiju.sennetmc.commands.ReloadCommand
 import me.senseiju.sennetmc.commands.ResourcePackCommand
 import me.senseiju.sennetmc.crates.CratesManager
-import me.senseiju.sennetmc.utils.datastorage.DataFile
-import me.senseiju.sennetmc.utils.datastorage.Database
 import me.senseiju.sennetmc.events.EventsManager
-import me.senseiju.sennetmc.utils.extensions.color
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishManager
 import me.senseiju.sennetmc.models.ModelsManager
 import me.senseiju.sennetmc.models.listeners.playerPassengers
 import me.senseiju.sennetmc.npcs.NpcManager
+import me.senseiju.sennetmc.settings.Setting
 import me.senseiju.sennetmc.settings.SettingsManager
 import me.senseiju.sennetmc.speedboat.SpeedboatManager
+import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.upgrades.UpgradesManager
 import me.senseiju.sennetmc.users.UserManager
+import me.senseiju.sennetmc.users.UserTable
+import me.senseiju.sennetmc.utils.datastorage.DataFile
+import me.senseiju.sennetmc.utils.datastorage.Database
+import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.plugin.java.JavaPlugin
 
 class SennetMC : JavaPlugin() {
@@ -62,6 +65,8 @@ class SennetMC : JavaPlugin() {
         SennetMCPlaceholderExpansion(this)
 
         setupCommands()
+
+        createTables()
     }
 
     override fun onDisable() {
@@ -103,5 +108,25 @@ class SennetMC : JavaPlugin() {
         commandManager.register(ReloadCommand(this))
         commandManager.register(ResourcePackCommand())
         commandManager.register(DailyCommand(this))
+    }
+
+    private fun createTables() {
+        database.updateQuery(UserTable.buildCreateTableQuery())
+
+        database.updateQuery("CREATE TABLE IF NOT EXISTS `models`(`uuid` CHAR(36) NOT NULL, `model_type` CHAR(255) NOT NULL, " +
+                "`model_data` INT NOT NULL, UNIQUE KEY `key_uuid_model`(`uuid`, `model_type`, `model_data`));")
+
+        database.updateQuery("CREATE TABLE IF NOT EXISTS `active_models`(`uuid` CHAR(36) NOT NULL, `model_type` CHAR(255) NOT NULL, " +
+                "`model_data` INT NOT NULL, UNIQUE KEY `key_uuid_model_type`(`uuid`, `model_type`));")
+
+        database.updateQuery(Setting.buildCreateTableQuery())
+
+        database.updateQuery(Upgrade.buildCreateTableQuery())
+
+        database.updateQuery("CREATE TABLE IF NOT EXISTS `fish_caught`(`uuid` CHAR(36) NOT NULL, `fish_type` CHAR(255) NOT NULL, " +
+                "`current` INT, `total` INT, UNIQUE KEY `key_uuid_fish_type`(`uuid`, `fish_type`));")
+
+        database.updateQuery("CREATE TABLE IF NOT EXISTS `collectables`(`uuid` CHAR(36) NOT NULL, `collectable_id` CHAR(255) NOT NULL, " +
+                "UNIQUE KEY `key_uuid_collectable_id`(`uuid`, `collectable_id`));")
     }
 }

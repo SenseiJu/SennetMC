@@ -81,7 +81,7 @@ class Chef(private val plugin: SennetMC) : BaseNpc {
         }
 
         json.forEach {
-            val chefSellRunnable = ChefSellRunnableData.fromJson(it)
+            val chefSellRunnable = SerializableChefSellRunnable.fromJson(it)
 
             chefSellRunnables[chefSellRunnable.uuid] = chefSellRunnable
 
