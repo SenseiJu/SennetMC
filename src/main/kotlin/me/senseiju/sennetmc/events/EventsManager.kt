@@ -7,7 +7,7 @@ import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.events.commands.EventsCommand
-import me.senseiju.sennetmc.events.event.BaseEvent
+import me.senseiju.sennetmc.events.event.AbstractEvent
 import me.senseiju.sennetmc.events.event.EventType
 import me.senseiju.sennetmc.events.event.fishrace.FishRace
 import me.senseiju.sennetmc.events.event.shipwreck.Shipwreck
@@ -19,7 +19,7 @@ import me.senseiju.sennetmc.utils.applyPlaceholders
 
 class EventsManager(private val plugin: SennetMC) : BaseManager {
     val eventsFile = DataFile(plugin, "events.yml", true)
-    var currentEvent: BaseEvent? = null
+    var currentEvent: AbstractEvent? = null
 
     private val users = plugin.userManager.userMap
     private val messagesFile = plugin.messagesFile

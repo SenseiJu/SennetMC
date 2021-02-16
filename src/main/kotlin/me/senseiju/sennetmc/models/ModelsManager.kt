@@ -54,7 +54,6 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
         HelmetListener(plugin, this)
         SleeveListener(plugin)
         FishingRodListener(plugin)
-        //BackpackListener(plugin, this)
         BackpackPacketListener(plugin, this)
 
     }
