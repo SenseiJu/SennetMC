@@ -43,6 +43,7 @@ class Chef(private val plugin: SennetMC) : BaseNpc {
         val npc = createBasicNpc(NPC_TYPE)
 
         npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
+
         npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.HAND, ItemStack(Material.FURNACE))
 
         npc.spawn(location)
