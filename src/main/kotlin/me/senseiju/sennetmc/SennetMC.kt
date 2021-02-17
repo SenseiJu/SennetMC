@@ -13,6 +13,7 @@ import me.senseiju.sennetmc.fishes.FishManager
 import me.senseiju.sennetmc.models.ModelsManager
 import me.senseiju.sennetmc.models.listeners.playerPassengers
 import me.senseiju.sennetmc.npcs.NpcManager
+import me.senseiju.sennetmc.scrap.ScrapManager
 import me.senseiju.sennetmc.settings.Setting
 import me.senseiju.sennetmc.settings.SettingsManager
 import me.senseiju.sennetmc.speedboat.SpeedboatManager
@@ -24,6 +25,7 @@ import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.datastorage.Database
 import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
 class SennetMC : JavaPlugin() {
@@ -35,7 +37,6 @@ class SennetMC : JavaPlugin() {
 
     lateinit var commandManager: CommandManager
     lateinit var collectablesManager: CollectablesManager
-    lateinit var npcManager: NpcManager
     lateinit var userManager: UserManager
     lateinit var fishManager: FishManager
     lateinit var speedboatManager: SpeedboatManager
@@ -43,8 +44,10 @@ class SennetMC : JavaPlugin() {
     lateinit var upgradesManager: UpgradesManager
     lateinit var settingsManager: SettingsManager
     lateinit var modelsManager: ModelsManager
-    lateinit var eventsManager: EventsManager
     lateinit var arenaManager: ArenaManager
+    private lateinit var npcManager: NpcManager
+    private lateinit var eventsManager: EventsManager
+    private lateinit var scrapManager: ScrapManager
 
     override fun onEnable() {
         commandManager = CommandManager(this)
@@ -61,6 +64,7 @@ class SennetMC : JavaPlugin() {
         settingsManager = SettingsManager(this)
         eventsManager = EventsManager(this)
         arenaManager = ArenaManager(this)
+        scrapManager = ScrapManager(this)
 
         SennetMCPlaceholderExpansion(this)
 
@@ -102,6 +106,10 @@ class SennetMC : JavaPlugin() {
         modelsManager.reload()
         eventsManager.reload()
         arenaManager.reload()
+    }
+
+    fun registerEvents(vararg listeners: Listener) {
+        listeners.forEach { this.server.pluginManager.registerEvents(it, this) }
     }
 
     private fun setupCommands() {

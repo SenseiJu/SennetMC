@@ -2,24 +2,23 @@ package me.senseiju.sennetmc.collectables
 
 import kotlinx.coroutines.launch
 import me.mattstudios.mf.base.CommandManager
-import me.mattstudios.mf.base.CompletionHandler
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.Rarity
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.collectables.commands.CollectablesCommand
 import me.senseiju.sennetmc.collectables.listeners.PlayerJoinListener
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.datastorage.Replacements
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import java.util.*
 import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
-class CollectablesManager(private val plugin: SennetMC) : BaseManager {
+class CollectablesManager(private val plugin: SennetMC) : BaseManager() {
 
     private val collectablesFile = DataFile(plugin, "collectables.yml", true)
 
@@ -28,23 +27,19 @@ class CollectablesManager(private val plugin: SennetMC) : BaseManager {
 
     init {
         registerCommands(plugin.commandManager)
-        registerEvents()
+        registerEvents(plugin)
 
         loadCollectables()
     }
 
     override fun registerCommands(cm: CommandManager) {
-        registerCommandCompletions(cm.completionHandler)
+        cm.completionHandler.register("#collectableId") { collectables.keys.toList() }
 
         cm.register(CollectablesCommand(plugin, this))
     }
 
-    private fun registerCommandCompletions(ch: CompletionHandler) {
-        ch.register("#collectableId") { collectables.keys.toList() }
-    }
-
-    override fun registerEvents() {
-        PlayerJoinListener(plugin, this)
+    override fun registerEvents(plugin: SennetMC) {
+        plugin.registerEvents(PlayerJoinListener(this))
     }
 
     override fun reload() {

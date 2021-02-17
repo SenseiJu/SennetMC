@@ -1,6 +1,5 @@
 package me.senseiju.sennetmc.users
 
-import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.users.listeners.PlayerJoinListener
@@ -10,24 +9,21 @@ import java.time.Instant
 import java.util.*
 import kotlin.collections.HashMap
 
-class UserManager(private val plugin: SennetMC) : BaseManager {
+class UserManager(private val plugin: SennetMC) : BaseManager() {
     val saveUsersTask = SaveUsersTask(plugin, this)
 
     val userMap = HashMap<UUID, User>()
 
     init {
-        registerEvents()
+        registerEvents(plugin)
     }
 
-    override fun registerCommands(cm: CommandManager) {
+    override fun registerEvents(plugin: SennetMC) {
+        plugin.registerEvents(
+            PlayerPreLoginListener(this),
+            PlayerJoinListener(this)
+        )
     }
-
-    override fun registerEvents() {
-        PlayerPreLoginListener(plugin, this)
-        PlayerJoinListener(plugin, this)
-    }
-
-    override fun reload() {}
 
     suspend fun doesUserExist(uuid: UUID) : Boolean {
         val q = "SELECT * FROM `users` WHERE `uuid`=?;"

@@ -5,9 +5,9 @@ import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
+import me.senseiju.sennetmc.utils.extensions.color
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Material
 import org.bukkit.Sound

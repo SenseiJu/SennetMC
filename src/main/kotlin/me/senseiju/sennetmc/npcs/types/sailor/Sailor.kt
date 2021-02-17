@@ -1,8 +1,8 @@
 package me.senseiju.sennetmc.npcs.types.sailor
 
 import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
-import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
+import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage

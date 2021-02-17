@@ -9,26 +9,23 @@ import me.senseiju.sennetmc.speedboat.listeners.SpeedboatListener
 import java.util.*
 import kotlin.collections.HashMap
 
-class SpeedboatManager(private val plugin: SennetMC) : BaseManager {
+class SpeedboatManager(plugin: SennetMC) : BaseManager() {
 
     val playerSpeedboatToggle = HashMap<UUID, Boolean>()
 
     init {
-        registerEvents()
         registerCommands(plugin.commandManager)
+        registerEvents(plugin)
     }
 
     override fun registerCommands(cm: CommandManager) {
-        cm.register(ToggleSpeedboatCommand(this))
-        cm.register(BoatCommand())
+        cm.register(
+            ToggleSpeedboatCommand(this),
+            BoatCommand()
+        )
     }
 
-    override fun registerEvents() {
-        SpeedboatListener(plugin, this)
+    override fun registerEvents(plugin: SennetMC) {
+        plugin.registerEvents(SpeedboatListener(plugin, this))
     }
-
-    override fun reload() {
-
-    }
-
 }

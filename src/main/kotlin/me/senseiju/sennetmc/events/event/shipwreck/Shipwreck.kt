@@ -14,7 +14,7 @@ class Shipwreck(private val plugin: SennetMC, eventsManager: EventsManager) : Ab
     val participants = HashSet<UUID>()
 
     init {
-        PlayerCaughtFishListener(plugin, this)
+        plugin.registerEvents(PlayerCaughtFishListener(plugin, this))
 
         runTaskTimer(plugin, 20L, 20L)
     }

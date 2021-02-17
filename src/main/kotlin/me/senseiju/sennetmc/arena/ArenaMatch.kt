@@ -1,8 +1,8 @@
 package me.senseiju.sennetmc.arena
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.Sound

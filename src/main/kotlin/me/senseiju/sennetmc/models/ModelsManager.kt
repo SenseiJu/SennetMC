@@ -7,15 +7,15 @@ import me.mattstudios.mf.base.components.TypeResult
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.datastorage.DataFile
-import me.senseiju.sennetmc.utils.datastorage.Replacements
-import me.senseiju.sennetmc.utils.extensions.color
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.models.commands.HatCommand
 import me.senseiju.sennetmc.models.commands.ModelCommand
 import me.senseiju.sennetmc.models.listeners.*
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.datastorage.DataFile
+import me.senseiju.sennetmc.utils.datastorage.Replacements
 import me.senseiju.sennetmc.utils.defaultScope
+import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.command.CommandSender
 import org.bukkit.inventory.ItemStack
 import java.util.*
@@ -23,7 +23,7 @@ import kotlin.collections.ArrayList
 import kotlin.collections.HashMap
 
 @Suppress("DUPLICATES")
-class ModelsManager(private val plugin: SennetMC) : BaseManager {
+class ModelsManager(private val plugin: SennetMC) : BaseManager() {
 
     private val modelsFile = DataFile(plugin, "models.yml", true)
 
@@ -34,7 +34,7 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
         loadModels()
 
         registerCommands(plugin.commandManager)
-        registerEvents()
+        registerEvents(plugin)
     }
 
     override fun registerCommands(cm: CommandManager) {
@@ -46,16 +46,19 @@ class ModelsManager(private val plugin: SennetMC) : BaseManager {
             }
         })
 
-        cm.register(ModelCommand(plugin, this))
-        cm.register(HatCommand(plugin))
+        cm.register(
+            ModelCommand(plugin, this),
+            HatCommand(plugin)
+        )
     }
 
-    override fun registerEvents() {
-        HelmetListener(plugin, this)
-        SleeveListener(plugin)
-        FishingRodListener(plugin)
-        BackpackPacketListener(plugin, this)
-
+    override fun registerEvents(plugin: SennetMC) {
+        plugin.registerEvents(
+            HelmetListener(plugin, this),
+            SleeveListener(),
+            FishingRodListener(plugin),
+            BackpackPacketListener(plugin, this)
+        )
     }
 
     override fun reload() {

@@ -9,12 +9,7 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 
 class PlayerCaughtFishListener(plugin: SennetMC, private val cratesManager: CratesManager) : Listener {
-
     private val users = plugin.userManager.userMap
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
 
     @EventHandler
     private fun onPlayerFishEvent(e: PlayerCaughtFishEvent) {

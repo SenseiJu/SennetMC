@@ -1,13 +1,13 @@
 package me.senseiju.sennetmc.fishes.listeners
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.color
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.fishes.events.PlayerCaughtFishEvent
 import me.senseiju.sennetmc.settings.Setting
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
+import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.percentChance
 import org.bukkit.Sound
 import org.bukkit.entity.Player
@@ -18,10 +18,6 @@ class PlayerCaughtFishListener(plugin: SennetMC) : Listener {
 
     private val users = plugin.userManager.userMap
     private val upgradesFile = plugin.upgradesManager.upgradesFile
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
 
     @EventHandler
     private fun onPlayerCaughtFish(e: PlayerCaughtFishEvent) {

@@ -1,7 +1,6 @@
 package me.senseiju.sennetmc.npcs
 
 import me.mattstudios.mf.base.CommandManager
-import me.mattstudios.mf.base.ParameterHandler
 import me.mattstudios.mf.base.components.ParameterResolver
 import me.mattstudios.mf.base.components.TypeResult
 import me.senseiju.sennetmc.BaseManager
@@ -20,12 +19,12 @@ import me.senseiju.sennetmc.npcs.types.looter.Looter
 import me.senseiju.sennetmc.npcs.types.merchant.Merchant
 import me.senseiju.sennetmc.npcs.types.sailor.Sailor
 
-class NpcManager(private val plugin: SennetMC) : BaseManager {
+class NpcManager(private val plugin: SennetMC) : BaseManager() {
     val npcMap = HashMap<NpcType, BaseNpc>()
 
     init {
         registerCommands(plugin.commandManager)
-        registerEvents()
+        registerEvents(plugin)
 
         npcMap[FISHMONGER] = Fishmonger(plugin)
         npcMap[MERCHANT] = Merchant(plugin)
@@ -45,15 +44,14 @@ class NpcManager(private val plugin: SennetMC) : BaseManager {
             }
         })
 
-        cm.register(SpawnNpcCommand(plugin, this))
-        cm.register(RemoveNpcCommand())
+        cm.register(
+            SpawnNpcCommand(plugin, this),
+            RemoveNpcCommand()
+        )
     }
 
-    override fun registerEvents() {
-        NpcClickListener(plugin, this)
-    }
-
-    override fun reload() {
+    override fun registerEvents(plugin: SennetMC) {
+        plugin.registerEvents(NpcClickListener(this))
     }
 
     fun save() {

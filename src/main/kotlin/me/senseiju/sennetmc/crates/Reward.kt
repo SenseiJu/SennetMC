@@ -1,8 +1,8 @@
 package me.senseiju.sennetmc.crates
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.dispatchCommands
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.dispatchCommands
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 

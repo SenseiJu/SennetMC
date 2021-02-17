@@ -1,17 +1,12 @@
 package me.senseiju.sennetmc.models.listeners
 
-import me.senseiju.sennetmc.SennetMC
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.inventory.InventoryClickEvent
 import org.bukkit.event.player.PlayerSwapHandItemsEvent
 import org.bukkit.inventory.PlayerInventory
 
-class SleeveListener(plugin: SennetMC) : Listener {
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
+class SleeveListener : Listener {
 
     @EventHandler
     private fun onPlayerSwapHandItems(e: PlayerSwapHandItemsEvent) {

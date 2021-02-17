@@ -1,8 +1,8 @@
 package me.senseiju.sennetmc.npcs.types.designer
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
+import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.designer.commands.CosmeticsCommand
 import net.citizensnpcs.api.event.NPCRightClickEvent

@@ -11,10 +11,6 @@ import org.bukkit.event.player.PlayerQuitEvent
 
 class ArenaPlayerListener(private val plugin: SennetMC, private val arenaManager: ArenaManager) : Listener {
 
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
-
     @EventHandler
     private fun onPlayerDeath(e: PlayerDeathEvent) {
         val currentMatch = arenaManager.currentMatch ?: return

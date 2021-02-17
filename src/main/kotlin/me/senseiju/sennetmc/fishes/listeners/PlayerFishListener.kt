@@ -1,12 +1,12 @@
 package me.senseiju.sennetmc.fishes.listeners
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.fishes.events.PlayerCaughtFishEvent
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.users.calculateMaxFishCapacity
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.probabilityChance
 import org.bukkit.entity.FishHook
 import org.bukkit.event.EventHandler
@@ -17,10 +17,6 @@ class PlayerFishListener(private val plugin: SennetMC) : Listener {
 
     private val users = plugin.userManager.userMap
     private val upgradesFile = plugin.upgradesManager.upgradesFile
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
 
     @EventHandler
     private fun onPlayerFishEvent(e: PlayerFishEvent) {

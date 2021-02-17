@@ -13,7 +13,7 @@ import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.entity.Player
 import java.util.*
 
-class ArenaManager(private val plugin: SennetMC) : BaseManager {
+class ArenaManager(private val plugin: SennetMC) : BaseManager() {
 
     val requests: BiMap<UUID, UUID> = HashBiMap.create()
     val matchQueue = LinkedList<ArenaMatch>()
@@ -23,16 +23,18 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager {
 
     init {
         registerCommands(plugin.commandManager)
-        registerEvents()
+        registerEvents(plugin)
     }
 
     override fun registerCommands(cm: CommandManager) {
-        cm.register(DuelCommand(plugin, this))
-        cm.register(ArenaCommand(plugin))
+        cm.register(
+            DuelCommand(plugin, this),
+            ArenaCommand(plugin)
+        )
     }
 
-    override fun registerEvents() {
-        ArenaPlayerListener(plugin, this)
+    override fun registerEvents(plugin: SennetMC) {
+        plugin.registerEvents(ArenaPlayerListener(plugin, this))
     }
 
     override fun reload() {

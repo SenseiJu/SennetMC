@@ -1,7 +1,6 @@
 package me.senseiju.sennetmc.users.listeners
 
 import kotlinx.coroutines.launch
-import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.users.UserManager
 import me.senseiju.sennetmc.utils.defaultScope
 import org.bukkit.event.EventHandler
@@ -9,11 +8,7 @@ import org.bukkit.event.EventPriority
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 
-class PlayerPreLoginListener(plugin: SennetMC, private val userManager: UserManager) : Listener {
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
+class PlayerPreLoginListener(private val userManager: UserManager) : Listener {
 
     @EventHandler(priority = EventPriority.MONITOR)
     private fun onPlayerPreLogin(e: AsyncPlayerPreLoginEvent) {

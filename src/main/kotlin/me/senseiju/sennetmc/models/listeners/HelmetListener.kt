@@ -15,10 +15,6 @@ class HelmetListener(plugin: SennetMC, modelsManager: ModelsManager) : Listener 
     private val users = plugin.userManager.userMap
     private val models = modelsManager.models
 
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
-
     @EventHandler
     private fun onHelmetUnequip(e: InventoryClickEvent) {
         if (e.clickedInventory !is PlayerInventory) {

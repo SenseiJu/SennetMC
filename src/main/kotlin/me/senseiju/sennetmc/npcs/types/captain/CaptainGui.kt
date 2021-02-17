@@ -4,13 +4,13 @@ import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.sennetmc.SennetMC
+import me.senseiju.sennetmc.npcs.types.NpcType
+import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.defaultScope
 import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
 import me.senseiju.sennetmc.utils.extensions.deserializeFullLocation
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.npcs.types.NpcType
-import me.senseiju.sennetmc.utils.PlaceholderSet
-import me.senseiju.sennetmc.utils.defaultScope
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player

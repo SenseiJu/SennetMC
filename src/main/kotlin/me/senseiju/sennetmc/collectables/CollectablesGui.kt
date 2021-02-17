@@ -3,9 +3,9 @@ package me.senseiju.sennetmc.collectables
 import kotlinx.coroutines.launch
 import me.mattstudios.mfgui.gui.guis.GuiItem
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.defaultPaginatedGuiTemplate
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.defaultScope
+import me.senseiju.sennetmc.utils.extensions.defaultPaginatedGuiTemplate
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 

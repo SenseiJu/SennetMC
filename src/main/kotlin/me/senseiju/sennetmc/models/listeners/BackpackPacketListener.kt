@@ -24,10 +24,6 @@ class BackpackPacketListener(private val plugin: SennetMC, modelsManager: Models
     private val users = plugin.userManager.userMap
     private val models = modelsManager.models
 
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
-
     @EventHandler
     private fun onPlayerJoin(e: PlayerJoinEvent) {
         val user = users[e.player.uniqueId] ?: return

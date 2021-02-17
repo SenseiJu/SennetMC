@@ -3,27 +3,20 @@ package me.senseiju.sennetmc.settings
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.int
 import me.senseiju.sennetmc.settings.commands.SettingsCommand
+import me.senseiju.sennetmc.utils.extensions.int
 import java.util.*
 
 private const val SELECT_QUERY = "SELECT * FROM `settings` WHERE `uuid`=?;"
 
-class SettingsManager(private val plugin: SennetMC) : BaseManager {
+class SettingsManager(private val plugin: SennetMC) : BaseManager() {
 
     init {
         registerCommands(plugin.commandManager)
-        registerEvents()
     }
 
     override fun registerCommands(cm: CommandManager) {
         cm.register(SettingsCommand(plugin))
-    }
-
-    override fun registerEvents() {
-    }
-
-    override fun reload() {
     }
 
     suspend fun fetchSettings(uuid: UUID) : EnumMap<Setting, Boolean> {

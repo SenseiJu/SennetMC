@@ -4,10 +4,10 @@ import kotlinx.coroutines.launch
 import me.mattstudios.mf.annotations.*
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.*
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.models.ModelType
 import me.senseiju.sennetmc.models.ModelsManager
 import me.senseiju.sennetmc.utils.defaultScope
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

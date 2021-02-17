@@ -2,18 +2,14 @@ package me.senseiju.sennetmc.crates.listeners
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.crates.CratesManager
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerInteractEvent
 import org.bukkit.inventory.EquipmentSlot
 
 class CrateOpenListener(private val plugin: SennetMC, private val cratesManager: CratesManager) : Listener {
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
 
     @EventHandler
     private fun onPlayerRightClickCrate(e: PlayerInteractEvent) {

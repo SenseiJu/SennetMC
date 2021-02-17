@@ -8,16 +8,16 @@ import me.senseiju.sennetmc.crates.commands.CombineCratesCommand
 import me.senseiju.sennetmc.crates.commands.CratesCommand
 import me.senseiju.sennetmc.crates.listeners.CrateOpenListener
 import me.senseiju.sennetmc.crates.listeners.PlayerCaughtFishListener
-import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
+import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.percentChance
 import me.senseiju.sennetmc.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
-class CratesManager(private val plugin: SennetMC) : BaseManager {
+class CratesManager(private val plugin: SennetMC) : BaseManager() {
     private val cratesFile = DataFile(plugin, "crates.yml", true)
     var cratesMap = HashMap<String, Crate>()
         private set
@@ -29,19 +29,23 @@ class CratesManager(private val plugin: SennetMC) : BaseManager {
         loadCrates()
 
         registerCommands(plugin.commandManager)
-        registerEvents()
+        registerEvents(plugin)
     }
 
     override fun registerCommands(cm: CommandManager) {
         cm.completionHandler.register("#crateId") { cratesMap.keys.toList() }
 
-        cm.register(CratesCommand(plugin, this))
-        cm.register(CombineCratesCommand(this))
+        cm.register(
+            CratesCommand(plugin, this),
+            CombineCratesCommand(this)
+        )
     }
 
-    override fun registerEvents() {
-        CrateOpenListener(plugin, this)
-        PlayerCaughtFishListener(plugin, this)
+    override fun registerEvents(plugin: SennetMC) {
+        plugin.registerEvents(
+            CrateOpenListener(plugin, this),
+            PlayerCaughtFishListener(plugin, this)
+        )
     }
 
     override fun reload() {

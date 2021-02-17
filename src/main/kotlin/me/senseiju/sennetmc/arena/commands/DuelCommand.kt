@@ -8,8 +8,8 @@ import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.arena.ArenaManager
 import me.senseiju.sennetmc.arena.showArenaWagerGui
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.entity.Player
 
 @Command("Duel")

@@ -1,16 +1,11 @@
 package me.senseiju.sennetmc.collectables.listeners
 
-import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.collectables.CollectablesManager
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.PlayerJoinEvent
 
-class PlayerJoinListener(plugin: SennetMC, private val collectablesManager: CollectablesManager) : Listener {
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
+class PlayerJoinListener(private val collectablesManager: CollectablesManager) : Listener {
 
     @EventHandler
     private fun onPlayerJoin(e: PlayerJoinEvent) {

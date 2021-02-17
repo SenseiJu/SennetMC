@@ -1,8 +1,8 @@
 package me.senseiju.sennetmc.npcs.types.fishmonger
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
+import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.fishmonger.commands.FishmongerCommand
 import net.citizensnpcs.api.event.NPCRightClickEvent

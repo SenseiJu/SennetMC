@@ -7,10 +7,10 @@ import me.mattstudios.mf.annotations.Permission
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_NPC_SPAWN
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.npcs.NpcManager
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.entity.Player
 
 @Command("SpawnNpc")

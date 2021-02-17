@@ -1,8 +1,8 @@
 package me.senseiju.sennetmc.users.tasks
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.users.UserManager
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.scheduler.BukkitRunnable
 
 class SaveUsersTask(private val plugin: SennetMC, private val userManager: UserManager) : BukkitRunnable() {

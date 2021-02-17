@@ -5,9 +5,9 @@ import me.senseiju.sennetmc.events.EventsManager
 import me.senseiju.sennetmc.events.event.AbstractEvent
 import me.senseiju.sennetmc.events.event.EventType
 import me.senseiju.sennetmc.events.event.fishrace.listeners.PlayerCaughtFishListener
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.dispatchCommands
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.PlaceholderSet
 import java.util.*
 import kotlin.collections.HashMap
 
@@ -19,7 +19,7 @@ class FishRace(private val plugin: SennetMC, eventsManager: EventsManager) : Abs
     private val eventsFile = eventsManager.eventsFile
 
     init {
-        PlayerCaughtFishListener(plugin, this)
+        plugin.registerEvents(PlayerCaughtFishListener(this))
 
         runTaskTimer(plugin, 20L, 20L)
     }

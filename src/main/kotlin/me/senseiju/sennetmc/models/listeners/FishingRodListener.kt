@@ -1,8 +1,8 @@
 package me.senseiju.sennetmc.models.listeners
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.setCustomModelData
 import me.senseiju.sennetmc.models.ModelType
+import me.senseiju.sennetmc.utils.extensions.setCustomModelData
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -12,10 +12,6 @@ import org.bukkit.event.player.PlayerFishEvent
 class FishingRodListener(plugin: SennetMC) : Listener {
 
     private val users = plugin.userManager.userMap
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
 
     @EventHandler
     private fun onPlayerFishEvent(e: PlayerFishEvent) {

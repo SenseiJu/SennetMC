@@ -5,7 +5,6 @@ import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.captain.commands.CaptainCommand
-import me.senseiju.sennetmc.npcs.types.designer.showDesignerGui
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.trait.SkinTrait
 import org.bukkit.Location

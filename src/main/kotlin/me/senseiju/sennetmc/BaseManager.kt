@@ -2,11 +2,11 @@ package me.senseiju.sennetmc
 
 import me.mattstudios.mf.base.CommandManager
 
-interface BaseManager {
+abstract class BaseManager {
 
-    fun registerCommands(cm: CommandManager)
+    open fun registerCommands(cm: CommandManager) {}
 
-    fun registerEvents()
+    open fun registerEvents(plugin: SennetMC) {}
 
-    fun reload()
+    open fun reload() {}
 }

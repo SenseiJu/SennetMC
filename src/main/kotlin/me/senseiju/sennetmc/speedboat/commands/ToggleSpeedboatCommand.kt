@@ -1,13 +1,16 @@
 package me.senseiju.sennetmc.speedboat.commands
 
-import me.mattstudios.mf.annotations.*
+import me.mattstudios.mf.annotations.Alias
+import me.mattstudios.mf.annotations.Command
+import me.mattstudios.mf.annotations.Default
+import me.mattstudios.mf.annotations.Permission
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
+import me.senseiju.sennetmc.speedboat.SpeedboatManager
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.driver
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.extensions.string
-import me.senseiju.sennetmc.speedboat.SpeedboatManager
-import me.senseiju.sennetmc.utils.PlaceholderSet
 import org.bukkit.entity.Boat
 import org.bukkit.entity.Player
 

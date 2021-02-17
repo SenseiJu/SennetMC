@@ -1,10 +1,10 @@
 package me.senseiju.sennetmc.models
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.setCustomModelData
 import me.senseiju.sennetmc.models.listeners.playerPassengers
 import me.senseiju.sennetmc.models.packetwrappers.updateModelArmorStand
 import me.senseiju.sennetmc.users.User
+import me.senseiju.sennetmc.utils.extensions.setCustomModelData
 import org.bukkit.Material
 import org.bukkit.entity.ArmorStand
 import org.bukkit.entity.Entity

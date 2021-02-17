@@ -7,9 +7,9 @@ import com.comphenix.protocol.events.PacketAdapter
 import com.comphenix.protocol.events.PacketEvent
 import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.utils.extensions.driver
 import me.senseiju.sennetmc.speedboat.SpeedboatManager
 import me.senseiju.sennetmc.upgrades.Upgrade
+import me.senseiju.sennetmc.utils.extensions.driver
 import org.bukkit.entity.Boat
 import org.bukkit.entity.EntityType
 import org.bukkit.event.EventHandler
@@ -31,8 +31,6 @@ class SpeedboatListener(private val plugin: SennetMC, speedboatManager: Speedboa
     private var speedIncrement = plugin.configFile.config.getDouble("speedboat-speed-upgrade-increment", 0.01)
 
     init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-
         registerSpeedboatMovePacketListener()
     }
 

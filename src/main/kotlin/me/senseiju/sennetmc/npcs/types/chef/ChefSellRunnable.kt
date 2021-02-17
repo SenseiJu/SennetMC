@@ -1,7 +1,6 @@
 package me.senseiju.sennetmc.npcs.types.chef
 
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.Transient
 import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json

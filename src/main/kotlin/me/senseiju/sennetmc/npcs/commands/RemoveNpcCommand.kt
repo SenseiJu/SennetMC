@@ -5,8 +5,8 @@ import me.mattstudios.mf.annotations.Default
 import me.mattstudios.mf.annotations.Permission
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_NPC_REMOVE
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.npcs.types.NpcType
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import net.citizensnpcs.api.CitizensAPI
 import org.bukkit.entity.Player
 

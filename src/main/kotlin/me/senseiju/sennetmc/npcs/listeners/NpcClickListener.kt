@@ -1,19 +1,12 @@
 package me.senseiju.sennetmc.npcs.listeners
 
-import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.NpcManager
 import me.senseiju.sennetmc.npcs.types.NpcType
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerPortalEvent
-import org.bukkit.event.player.PlayerTeleportEvent
 
-class NpcClickListener(plugin: SennetMC, private val npcManager: NpcManager) : Listener {
-
-    init {
-        plugin.server.pluginManager.registerEvents(this, plugin)
-    }
+class NpcClickListener(private val npcManager: NpcManager) : Listener {
 
     @EventHandler
     private fun onNpcRightClick(e: NPCRightClickEvent) {

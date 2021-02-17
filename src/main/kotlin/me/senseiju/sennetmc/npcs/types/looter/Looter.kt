@@ -1,10 +1,9 @@
 package me.senseiju.sennetmc.npcs.types.looter
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.createBasicNpc
+import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
-import me.senseiju.sennetmc.npcs.types.fishmonger.commands.FishmongerCommand
 import me.senseiju.sennetmc.npcs.types.looter.commands.LooterCommand
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment

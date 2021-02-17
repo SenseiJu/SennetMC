@@ -23,13 +23,13 @@ class ArenaPlayer(val player: Player, val wager: List<ItemStack>) {
     fun refundInventoryAndWager() {
         refundInventory()
 
-        wager.forEach { player.inventory.addItemOrDropNaturally(player.location, it) }
+        wager.forEach { player.inventory.addItemOrDropNaturally(it, player.location) }
     }
 
     fun refundInventoryWithWinnings(winnings: List<ItemStack>) {
         refundInventoryAndWager()
 
-        winnings.forEach { player.inventory.addItemOrDropNaturally(player.location, it) }
+        winnings.forEach { player.inventory.addItemOrDropNaturally(it, player.location) }
     }
 
 }

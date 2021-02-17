@@ -5,8 +5,8 @@ import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_CRATES_GIVE
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.crates.CratesManager
-import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
