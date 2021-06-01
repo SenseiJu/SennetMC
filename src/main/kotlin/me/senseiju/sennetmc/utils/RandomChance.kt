@@ -6,7 +6,7 @@ fun percentChance(chance: Double): Boolean = Random.nextDouble() <= chance
 
 fun <T> probabilityChance(objectProbabilities: Map<T, Double>): T {
     val random = Random.nextDouble(1.0,
-        objectProbabilities.values.sumByDouble { it.coerceAtLeast(0.0) } + 1)
+        objectProbabilities.values.sumOf { it.coerceAtLeast(0.0) } + 1)
     var count = 0.0
 
     objectProbabilities.forEach { (obj, probability) ->

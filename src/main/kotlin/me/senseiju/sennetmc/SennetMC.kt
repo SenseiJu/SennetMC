@@ -23,6 +23,7 @@ import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.datastorage.Database
 import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import net.kyori.adventure.text.Component
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -79,8 +80,11 @@ class SennetMC : JavaPlugin() {
                 it.closeInventory()
             }
 
-            it.kickPlayer(
-                messagesFile.config.getString("RELOADING", "&#914ef5&lSennetMC &bis currently reloading...")?.color()
+            it.kick(
+                Component.text(
+                    messagesFile.config.getString("RELOADING", "&#914ef5&lSennetMC &bis currently reloading...")!!
+                        .color()
+                )
             )
         }
 
@@ -91,7 +95,6 @@ class SennetMC : JavaPlugin() {
         configFile.reload()
         messagesFile.reload()
         warpsFile.reload()
-
         upgradesManager.reload()
         collectablesManager.reload()
         npcManager.reload()

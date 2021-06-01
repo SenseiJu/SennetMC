@@ -71,7 +71,7 @@ class PlayerCaughtFishListener(plugin: SennetMC) : Listener {
     private fun sendCaughtFishMessage(user: User, player: Player, fishType: FishType) {
         if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_MESSAGE)) {
             player.sendTitle(
-                "&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
+                "&bYou caught a &5${fishType.toString().lowercase()} &bfish".color(),
                 "&6+${fishType.capacity()} capacity".color(), 10, 40, 10
             )
         }

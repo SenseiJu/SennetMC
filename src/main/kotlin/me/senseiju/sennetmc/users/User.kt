@@ -18,10 +18,10 @@ class User(
 ) {
 
     val currentFishCaughtCapacity
-        get() = fishCaught.entries.sumBy { it.key.capacity() * it.value.current }
+        get() = fishCaught.entries.sumOf { it.key.capacity() * it.value.current }
 
     val totalFishCaught
-        get() = fishCaught.entries.sumBy { it.value.total }
+        get() = fishCaught.entries.sumOf { it.value.total }
 
     fun addToCurrentFish(fishType: FishType, amount: Int = 1) {
         fishCaught.computeIfAbsent(fishType) { FishCaughtData() }.plus(amount)

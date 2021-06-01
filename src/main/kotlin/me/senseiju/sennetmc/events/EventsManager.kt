@@ -33,7 +33,7 @@ class EventsManager(private val plugin: SennetMC) : BaseManager() {
     override fun registerCommands(cm: CommandManager) {
         cm.parameterHandler.register(EventType::class.java, ParameterResolver { argument ->
             try {
-                return@ParameterResolver TypeResult(EventType.valueOf(argument.toString().toUpperCase()), argument)
+                return@ParameterResolver TypeResult(EventType.valueOf(argument.toString().uppercase()), argument)
             } catch (ex: IllegalArgumentException) {
                 return@ParameterResolver TypeResult(argument)
             }

@@ -38,7 +38,7 @@ class NpcManager(private val plugin: SennetMC) : BaseManager() {
     override fun registerCommands(cm: CommandManager) {
         cm.parameterHandler.register(NpcType::class.java, ParameterResolver { argument ->
             try {
-                return@ParameterResolver TypeResult(NpcType.valueOf(argument.toString().toUpperCase()), argument)
+                return@ParameterResolver TypeResult(NpcType.valueOf(argument.toString().uppercase()), argument)
             } catch (ex: IllegalArgumentException) {
                 return@ParameterResolver TypeResult(argument)
             }
