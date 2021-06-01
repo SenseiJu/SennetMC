@@ -15,7 +15,7 @@ class UpgradesManager(private val plugin: SennetMC) : BaseManager() {
         upgradesFile.reload()
     }
 
-    suspend fun fetchUpgrades(uuid: UUID) : EnumMap<Upgrade, Int> {
+    suspend fun fetchUpgrades(uuid: UUID): EnumMap<Upgrade, Int> {
         val set = plugin.database.asyncQuery(SELECT_QUERY, uuid.toString())
         return if (set.next()) Upgrade.mapFromSet(set)
         else EnumMap<Upgrade, Int>(Upgrade::class.java)

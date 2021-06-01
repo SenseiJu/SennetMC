@@ -14,7 +14,8 @@ class CrateOpenListener(private val plugin: SennetMC, private val cratesManager:
     @EventHandler
     private fun onPlayerRightClickCrate(e: PlayerInteractEvent) {
         if (e.item == null || !cratesManager.isItemCrate(e.item!!) || !e.action.name.contains("RIGHT_CLICK")
-                || e.hand == EquipmentSlot.OFF_HAND) return
+            || e.hand == EquipmentSlot.OFF_HAND
+        ) return
 
         val crate = cratesManager.getCrateFromItem(e.item!!) ?: return
         val reward = crate.selectRandomReward()
@@ -22,9 +23,11 @@ class CrateOpenListener(private val plugin: SennetMC, private val cratesManager:
 
         plugin.collectablesManager.addCollectable(e.player.uniqueId, crate.id)
 
-        e.player.sendConfigMessage("CRATES-REWARD", false,
+        e.player.sendConfigMessage(
+            "CRATES-REWARD", false,
             PlaceholderSet("{crateName}", crate.name),
-            PlaceholderSet("{rewardName}", reward.name))
+            PlaceholderSet("{rewardName}", reward.name)
+        )
 
         e.player.inventory.itemInMainHand.amount = e.player.inventory.itemInMainHand.amount - 1
 

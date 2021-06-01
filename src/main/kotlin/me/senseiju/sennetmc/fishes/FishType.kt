@@ -15,28 +15,28 @@ enum class FishType {
     companion object {
         val dataFile = DataFile(JavaPlugin.getPlugin(SennetMC::class.java), "fishes.yml", true)
 
-        fun selectRandomType() : FishType {
+        fun selectRandomType(): FishType {
             return probabilityChance(values().associateWith { it.probability() })
         }
     }
 
-    fun capacity() : Int {
+    fun capacity(): Int {
         return dataFile.config.getInt("${this}.capacity", 1)
     }
 
-    fun probability() : Double {
+    fun probability(): Double {
         return dataFile.config.getDouble("${this}.probability", 1.0)
     }
 
-    private fun lowSellPrice() : Double {
+    private fun lowSellPrice(): Double {
         return dataFile.config.getDouble("${this}.low-sell-price", 1.0)
     }
 
-    private fun maxSellPrice() : Double {
+    private fun maxSellPrice(): Double {
         return dataFile.config.getDouble("${this}.max-sell-price", 2.0)
     }
 
-    fun selectRandomSellPrice() : Double {
+    fun selectRandomSellPrice(): Double {
         return Random.nextDouble(this.lowSellPrice(), this.maxSellPrice())
     }
 }

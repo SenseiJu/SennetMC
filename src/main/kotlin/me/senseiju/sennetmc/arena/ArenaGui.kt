@@ -72,7 +72,8 @@ private fun defaultClickAction(e: InventoryClickEvent, gui: Gui, player1: Player
         val confirm2 = e.clickedInventory?.getItem(14)?.type
 
         if (confirm1 == Material.ORANGE_WOOL || confirm2 == Material.ORANGE_WOOL
-            || confirm1 == Material.GREEN_WOOL || confirm2 == Material.GREEN_WOOL) {
+            || confirm1 == Material.GREEN_WOOL || confirm2 == Material.GREEN_WOOL
+        ) {
             gui.updateItem(12, createAcceptWagerGuiItem(gui, player1, player2, 14))
             gui.updateItem(14, createAcceptWagerGuiItem(gui, player2, player1, 12))
         }
@@ -105,15 +106,22 @@ private fun handleCancelWager(inventory: Inventory, player1: Player, player2: Pl
     arenaManager.cancelRequest(player1)
 }
 
-private fun createFillerGuiItem() : GuiItem {
+private fun createFillerGuiItem(): GuiItem {
     return ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE)
-            .setName(" ")
-            .asGuiItem {
-                it.isCancelled = true
-            }
+        .setName(" ")
+        .asGuiItem {
+            it.isCancelled = true
+        }
 }
 
-private fun playerWagerSlotAction(gui: Gui, e: InventoryClickEvent, player1: Player, playerConfirmSlot: Int, player2: Player, player2ConfirmSlot: Int) {
+private fun playerWagerSlotAction(
+    gui: Gui,
+    e: InventoryClickEvent,
+    player1: Player,
+    playerConfirmSlot: Int,
+    player2: Player,
+    player2ConfirmSlot: Int
+) {
     if (e.whoClicked.uniqueId != player1.uniqueId) {
         e.isCancelled = true
         return
@@ -124,40 +132,45 @@ private fun playerWagerSlotAction(gui: Gui, e: InventoryClickEvent, player1: Pla
     }
 }
 
-private fun createAcceptWagerGuiItem(gui: Gui, player1: Player, player2: Player, player2ConfirmSlot: Int) : GuiItem {
+private fun createAcceptWagerGuiItem(gui: Gui, player1: Player, player2: Player, player2ConfirmSlot: Int): GuiItem {
     return ItemBuilder.from(Material.RED_WOOL)
-            .setName("&bClick to accept".color())
-            .asGuiItem {
-                it.isCancelled = true
+        .setName("&bClick to accept".color())
+        .asGuiItem {
+            it.isCancelled = true
 
-                if (it.whoClicked.uniqueId == player1.uniqueId) {
-                    gui.updateItem(it.slot, createConfirmAcceptWagerGuiItem(gui, player1, player2, player2ConfirmSlot))
-                }
+            if (it.whoClicked.uniqueId == player1.uniqueId) {
+                gui.updateItem(it.slot, createConfirmAcceptWagerGuiItem(gui, player1, player2, player2ConfirmSlot))
             }
+        }
 }
 
-private fun createConfirmAcceptWagerGuiItem(gui: Gui, player1: Player, player2: Player, player2ConfirmSlot: Int) : GuiItem {
+private fun createConfirmAcceptWagerGuiItem(
+    gui: Gui,
+    player1: Player,
+    player2: Player,
+    player2ConfirmSlot: Int
+): GuiItem {
     return ItemBuilder.from(Material.ORANGE_WOOL)
-            .setName("&bClick to confirm".color())
-            .asGuiItem {
-                it.isCancelled = true
+        .setName("&bClick to confirm".color())
+        .asGuiItem {
+            it.isCancelled = true
 
-                if (it.whoClicked.uniqueId == player1.uniqueId) {
-                    when (it.clickedInventory?.getItem(player2ConfirmSlot)?.type) {
-                        Material.ORANGE_WOOL -> gui.updateItem(it.slot, createConfirmedWagerGuiItem())
-                        Material.GREEN_WOOL -> confirmedWager(it.clickedInventory!!, player1, player2)
-                        else -> return@asGuiItem
-                    }
+            if (it.whoClicked.uniqueId == player1.uniqueId) {
+                when (it.clickedInventory?.getItem(player2ConfirmSlot)?.type) {
+                    Material.ORANGE_WOOL -> gui.updateItem(it.slot, createConfirmedWagerGuiItem())
+                    Material.GREEN_WOOL -> confirmedWager(it.clickedInventory!!, player1, player2)
+                    else -> return@asGuiItem
                 }
             }
+        }
 }
 
-private fun createConfirmedWagerGuiItem() : GuiItem {
+private fun createConfirmedWagerGuiItem(): GuiItem {
     return ItemBuilder.from(Material.GREEN_WOOL)
-            .setName("&c&lACCEPTED".color())
-            .asGuiItem { e ->
-                e.isCancelled = true
-            }
+        .setName("&c&lACCEPTED".color())
+        .asGuiItem { e ->
+            e.isCancelled = true
+        }
 }
 
 private fun confirmedWager(inventory: Inventory, player1: Player, player2: Player) {

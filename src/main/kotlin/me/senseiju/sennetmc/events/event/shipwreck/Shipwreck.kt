@@ -6,11 +6,11 @@ import me.senseiju.sennetmc.events.event.AbstractEvent
 import me.senseiju.sennetmc.events.event.EventType
 import me.senseiju.sennetmc.events.event.shipwreck.listeners.PlayerCaughtFishListener
 import java.util.*
-import kotlin.collections.HashSet
 
 private val eventType = EventType.SHIPWRECK
 
-class Shipwreck(private val plugin: SennetMC, eventsManager: EventsManager) : AbstractEvent(plugin, eventsManager, eventType) {
+class Shipwreck(private val plugin: SennetMC, eventsManager: EventsManager) :
+    AbstractEvent(plugin, eventsManager, eventType) {
     val participants = HashSet<UUID>()
 
     init {

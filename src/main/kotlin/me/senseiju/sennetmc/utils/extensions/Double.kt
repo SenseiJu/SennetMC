@@ -7,6 +7,6 @@ package me.senseiju.sennetmc.utils.extensions
  *
  * @return the rounded number
  */
-fun Double.round(dp: Int = 2) : Double {
+fun Double.round(dp: Int = 2): Double {
     return "%.${dp}f".format(this).toDouble()
 }

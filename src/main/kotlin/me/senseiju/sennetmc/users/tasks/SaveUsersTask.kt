@@ -33,6 +33,7 @@ class SaveUsersTask(private val plugin: SennetMC, private val userManager: UserM
     }
 
     private fun cleanupUsers() {
-        userManager.userMap.keys.toTypedArray().forEach { if (!plugin.server.getOfflinePlayer(it).isOnline) userManager.userMap.remove(it) }
+        userManager.userMap.keys.toTypedArray()
+            .forEach { if (!plugin.server.getOfflinePlayer(it).isOnline) userManager.userMap.remove(it) }
     }
 }

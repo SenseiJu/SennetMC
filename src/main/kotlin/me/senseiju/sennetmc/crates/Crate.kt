@@ -10,8 +10,10 @@ import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import kotlin.random.Random
 
-class Crate(val id: String, val name: String, description: List<String>, val upgradeId: String = "NULL",
-            private val rewards: List<Reward>, val probabilityPerCast: Double = 0.0, private val maxCratesPerCast: Int = 0) {
+class Crate(
+    val id: String, val name: String, description: List<String>, val upgradeId: String = "NULL",
+    private val rewards: List<Reward>, val probabilityPerCast: Double = 0.0, private val maxCratesPerCast: Int = 0
+) {
 
     private val item = createItemStack(description)
 
@@ -20,14 +22,14 @@ class Crate(val id: String, val name: String, description: List<String>, val upg
     }
 
 
-    fun generateRandomNumberOfCrates() : Int {
+    fun generateRandomNumberOfCrates(): Int {
         if (maxCratesPerCast <= 0) return 0
         return Random.nextInt(1, maxCratesPerCast + 1)
     }
 
-    fun selectRandomReward() : Reward = probabilityChance(rewards.map { it to it.probability }.toMap())
+    fun selectRandomReward(): Reward = probabilityChance(rewards.map { it to it.probability }.toMap())
 
-    private fun createItemStack(description: List<String>) : ItemStack {
+    private fun createItemStack(description: List<String>): ItemStack {
         val descriptionFormatted = ArrayList<String>()
         description.forEach { descriptionLine ->
             if (!descriptionLine.contains("{rewards}")) {
@@ -38,11 +40,13 @@ class Crate(val id: String, val name: String, description: List<String>, val upg
                 descriptionFormatted.add("&7- ${reward.name.color()}")
             }
         }
-        val nbtItem = NBTItem(ItemBuilder.from(Material.CHEST)
-            .glow(true)
-            .setName(name.color())
-            .setLore(descriptionFormatted.color())
-            .build())
+        val nbtItem = NBTItem(
+            ItemBuilder.from(Material.CHEST)
+                .glow(true)
+                .setName(name.color())
+                .setLore(descriptionFormatted.color())
+                .build()
+        )
         nbtItem.setString("crate-id", id)
 
         return nbtItem.item

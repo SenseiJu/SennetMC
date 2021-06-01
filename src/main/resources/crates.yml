@@ -19,11 +19,6 @@ crates:
         commands:
           - "eco give {player} 10"
 
-      - name: "&d&lFisherman's Hat"
-        probability: 4
-        commands:
-          - "model set {player} HAT 200"
-
   t2:
     name: "&e&lTier II"
     probability-per-cast: 20
@@ -34,16 +29,6 @@ crates:
         probability: 100
         commands:
           - "eco give {player} 50"
-
-      - name: "&d&lStick Fishing Rod"
-        probability: 4
-        commands:
-          - "model set {player} FISHING_ROD 100"
-
-      - name: "&d&lThug Life Glasses Hat"
-        probability: 4
-        commands:
-          - "model set {player} HAT 1700"
 
   t3:
     name: "&e&lTier III"
@@ -56,16 +41,6 @@ crates:
         commands:
           - "eco give {player} 300"
 
-      - name: "&d&lShark Fin Backpack"
-        probability: 4
-        commands:
-          - "model set {player} BACKPACK 700"
-
-      - name: "&d&lCat Ears Hat"
-        probability: 4
-        commands:
-          - "model set {player} HAT 1900"
-
   t4:
     name: "&e&lTier IV"
     probability-per-cast: -15
@@ -76,16 +51,6 @@ crates:
         probability: 100
         commands:
           - "eco give {player} 1500"
-
-      - name: "&d&lKasa Straw Hat"
-        probability: 4
-        commands:
-          - "model set {player} HAT 400"
-
-      - name: "&d&lHeadband Hat"
-        probability: 4
-        commands:
-          - "model set {player} HAT 2000"
 
   t5:
     name: "&e&lTier V"
@@ -98,16 +63,6 @@ crates:
         commands:
           - "eco give {player} 7500"
 
-      - name: "&d&lKatana Backpack"
-        probability: 4
-        commands:
-          - "model set {player} BACKPACK 200"
-
-      - name: "&d&lKatana Rod"
-        probability: 4
-        commands:
-          - "model set {player} FISHING_ROD 200"
-
   t6:
     name: "&e&lTier VI"
     probability-per-cast: -100
@@ -119,16 +74,6 @@ crates:
         commands:
           - "eco give {player} 50000"
 
-      - name: "&d&lBlack Briefcase Sleeve"
-        probability: 4
-        commands:
-          - "model set {player} SLEEVE 300"
-
-      - name: "&d&lBamboo Rod"
-        probability: 4
-        commands:
-          - "model set {player} FISHING_ROD 300"
-
   t7:
     name: "&e&lTier VII"
     probability-per-cast: -100
@@ -139,16 +84,6 @@ crates:
         probability: 100
         commands:
           - "eco give {player} 250000"
-
-      - name: "&d&lBrown Briefcase Sleeve"
-        probability: 4
-        commands:
-          - "model set {player} SLEEVE 301"
-
-      - name: "&d&lHalo Hat"
-        probability: 4
-        commands:
-          - "model set {player} HAT 2300"
 
       - name: "&6&lCommand /sell [1 Week]"
         probability: 1
@@ -165,11 +100,6 @@ crates:
         probability: 100
         commands:
           - "eco give {player} 1500000"
-
-      - name: "&d&lHalo Hat"
-        probability: 4
-        commands:
-          - "model set {player} HAT 2300"
 
       - name: "&#3deb1a&lSub &6&lrank [1 Week]"
         probability: 1

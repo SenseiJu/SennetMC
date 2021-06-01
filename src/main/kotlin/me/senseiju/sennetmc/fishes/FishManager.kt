@@ -23,7 +23,7 @@ class FishManager(private val plugin: SennetMC) : BaseManager() {
         FishType.dataFile.reload()
     }
 
-    suspend fun fetchFishCaught(uuid: UUID) : EnumMap<FishType, FishCaughtData> {
+    suspend fun fetchFishCaught(uuid: UUID): EnumMap<FishType, FishCaughtData> {
         val set = plugin.database.asyncQuery("SELECT * FROM `fish_caught` WHERE `uuid`=?;", uuid.toString())
 
         val fishCaught: EnumMap<FishType, FishCaughtData> = EnumMap(FishType::class.java)
@@ -39,9 +39,11 @@ class FishManager(private val plugin: SennetMC) : BaseManager() {
         for ((fishType, fishCaughtData) in fishCaughtMap) {
             val q = "INSERT INTO `fish_caught`(`uuid`, `fish_type`, `current`, `total`) VALUES(?,?,?,?) " +
                     "ON DUPLICATE KEY UPDATE `fish_type`=?, `current`=?, `total`=?;"
-            plugin.database.updateQuery(q,
+            plugin.database.updateQuery(
+                q,
                 uuid.toString(), fishType.toString(), 0, 0,
-                fishType.toString(), fishCaughtData.current, fishCaughtData.total)
+                fishType.toString(), fishCaughtData.current, fishCaughtData.total
+            )
         }
     }
 }

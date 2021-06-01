@@ -13,7 +13,7 @@ private val REGISTRY = CitizensAPI.getNPCRegistry()
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
 private val upgradesFile = plugin.upgradesManager.upgradesFile
 
-fun createBasicNpc(npcType: NpcType) : NPC {
+fun createBasicNpc(npcType: NpcType): NPC {
     val npc = REGISTRY.createNPC(EntityType.PLAYER, npcType.npcName)
     npc.data().setPersistent("npc-type", npcType.name)
     npc.name = npcType.npcName
@@ -23,7 +23,9 @@ fun createBasicNpc(npcType: NpcType) : NPC {
     return npc
 }
 
-fun calculateNextUpgradeCost(baseCost: Double, currentUpgrades: Int,
-                             growthRate: Double = upgradesFile.config.getDouble("growth-rate", 1.3)) : Double {
+fun calculateNextUpgradeCost(
+    baseCost: Double, currentUpgrades: Int,
+    growthRate: Double = upgradesFile.config.getDouble("growth-rate", 1.3)
+): Double {
     return "%.2f".format(baseCost * growthRate.pow(currentUpgrades)).toDouble()
 }

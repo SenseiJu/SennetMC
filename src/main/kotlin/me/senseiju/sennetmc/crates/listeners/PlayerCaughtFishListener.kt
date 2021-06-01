@@ -22,5 +22,5 @@ class PlayerCaughtFishListener(plugin: SennetMC, private val cratesManager: Crat
         }
     }
 
-    private fun shouldCratesAutoCombine(user: User) : Boolean = user.getSetting(Setting.TOGGLE_AUTO_CRATE_COMBINING)
+    private fun shouldCratesAutoCombine(user: User): Boolean = user.getSetting(Setting.TOGGLE_AUTO_CRATE_COMBINING)
 }

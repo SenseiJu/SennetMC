@@ -7,7 +7,6 @@ import me.senseiju.sennetmc.speedboat.commands.BoatCommand
 import me.senseiju.sennetmc.speedboat.commands.ToggleSpeedboatCommand
 import me.senseiju.sennetmc.speedboat.listeners.SpeedboatListener
 import java.util.*
-import kotlin.collections.HashMap
 
 class SpeedboatManager(plugin: SennetMC) : BaseManager() {
 

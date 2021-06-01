@@ -16,7 +16,8 @@ import org.bukkit.entity.Player
 
 @Suppress("DUPLICATES")
 @Command("Collectables")
-class CollectablesCommand(private val plugin: SennetMC, private val collectablesManager: CollectablesManager) : CommandBase() {
+class CollectablesCommand(private val plugin: SennetMC, private val collectablesManager: CollectablesManager) :
+    CommandBase() {
 
     @Default
     fun onCommand(player: Player) {
@@ -68,8 +69,8 @@ class CollectablesCommand(private val plugin: SennetMC, private val collectables
     }
 
     @CompleteFor("set")
-    fun completionForSetSubCommand(args: List<String>, sender: CommandSender) : List<String> {
-        return when(args.size) {
+    fun completionForSetSubCommand(args: List<String>, sender: CommandSender): List<String> {
+        return when (args.size) {
             0 -> plugin.server.onlinePlayers.map { it.name }
             1 -> plugin.server.onlinePlayers.map { it.name }.filter { it.startsWith(args[0], true) }
             2 -> {
@@ -83,8 +84,8 @@ class CollectablesCommand(private val plugin: SennetMC, private val collectables
     }
 
     @CompleteFor("remove")
-    fun completionForRemoveSubCommand(args: List<String>, sender: CommandSender) : List<String> {
-        return when(args.size) {
+    fun completionForRemoveSubCommand(args: List<String>, sender: CommandSender): List<String> {
+        return when (args.size) {
             0 -> plugin.server.onlinePlayers.map { it.name }
             1 -> plugin.server.onlinePlayers.map { it.name }.filter { it.startsWith(args[0], true) }
             2 -> {

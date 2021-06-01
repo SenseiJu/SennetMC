@@ -33,7 +33,9 @@ class ToggleSpeedboatCommand(speedboatManager: SpeedboatManager) : CommandBase()
 
         playerSpeedboatToggle[player.uniqueId] = !playerSpeedboatToggle[player.uniqueId]!!
 
-        player.sendConfigMessage("SPEEDBOAT-TOGGLE",
-                PlaceholderSet("{toggle}", playerSpeedboatToggle[player.uniqueId]!!.string))
+        player.sendConfigMessage(
+            "SPEEDBOAT-TOGGLE",
+            PlaceholderSet("{toggle}", playerSpeedboatToggle[player.uniqueId]!!.string)
+        )
     }
 }

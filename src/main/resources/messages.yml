@@ -44,6 +44,9 @@ CHEF-FINISHED-RUNNING: "{chefName} &aI have your money ready, come and collect i
 # Sailor NPC
 SAILOR-REQUIRES-RANK: "{sailorName} &cYou must have a rank to speak with me"
 
+# Scrapper NPC
+SCRAPPER-NOT-ENOUGH-FISH-CAUGHT: "{scrapperName} &cYou need to catch at least &e{fishAmount} &cbefore speaking with me"
+
 # Fishing
 FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continue fishing"
 
@@ -112,3 +115,8 @@ ARENA-REQUEST-DENIED: "&cDuel request denied"
 ARENA-WIN: "&aYou won the wager"
 ARENA-LOSE: "&cYou lost the wager"
 ARENA-MATCH-FINISHED: "&#de5757&lArena &8&l» &a{winner} &bwon a wager against &c{loser}"
+
+# Scrap
+SCRAP-INVALID-AMOUNT: "&cInvalid amount of scrap entered"
+SCRAP-INVALID-ITEM: "&cInvalid item, you must be holding scrap"
+SCRAP-TOO-MUCH-TO-SPLIT: "&cYou cannot split more than or equal to the amount you already have"

@@ -40,11 +40,11 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager() {
     override fun reload() {
     }
 
-    fun isPlayerInQueue(player: Player) : Boolean {
+    fun isPlayerInQueue(player: Player): Boolean {
         return getPlayersMatchInQueue(player) != null
     }
 
-    fun getPlayersMatchInQueue(player: Player) : ArenaMatch? {
+    fun getPlayersMatchInQueue(player: Player): ArenaMatch? {
         matchQueue.forEach {
             if (it.involvesPlayer(player.uniqueId)) {
                 return it
@@ -54,7 +54,7 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager() {
         return null
     }
 
-    fun isPlayerInCurrentMatch(player: Player) : Boolean = currentMatch?.involvesPlayer(player.uniqueId) ?: false
+    fun isPlayerInCurrentMatch(player: Player): Boolean = currentMatch?.involvesPlayer(player.uniqueId) ?: false
 
     fun createMatch(player1: ArenaPlayer, player2: ArenaPlayer) {
         val match = ArenaMatch(player1, player2)

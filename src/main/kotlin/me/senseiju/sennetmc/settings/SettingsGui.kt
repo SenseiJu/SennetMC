@@ -22,71 +22,85 @@ fun showSettingsGui(player: Player, user: User) {
     defaultScope.launch {
         val gui = defaultGuiTemplate(6, "&c&lSettings")
 
-        gui.filler.fillBorder(ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE)
+        gui.filler.fillBorder(
+            ItemBuilder.from(Material.BLACK_STAINED_GLASS_PANE)
                 .setName(" ")
-                .asGuiItem())
+                .asGuiItem()
+        )
 
-        gui.addItem(toggleAutoCombiningCrates(gui, user),
+        gui.addItem(
+            toggleAutoCombiningCrates(gui, user),
             toggleFishCaughtMessage(gui, user),
             toggleFishCaughtSound(gui, user),
-            toggleNotifyEventMessages(gui, user))
+            toggleNotifyEventMessages(gui, user)
+        )
 
         scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
 }
 
-private fun toggleAutoCombiningCrates(gui: Gui, user: User) : GuiItem {
+private fun toggleAutoCombiningCrates(gui: Gui, user: User): GuiItem {
     val lore = ArrayList<String>()
     lore.add("")
     lore.add("&7Toggle if crates should automatically")
     lore.add("&7be combined when successfully fished up")
 
-    return toggleableSettingGuiItem(gui, user, Material.CHEST, "&b&lAuto combining crates", lore,
-            Setting.TOGGLE_AUTO_CRATE_COMBINING) { toggleAutoCombiningCrates(gui, user) }
+    return toggleableSettingGuiItem(
+        gui, user, Material.CHEST, "&b&lAuto combining crates", lore,
+        Setting.TOGGLE_AUTO_CRATE_COMBINING
+    ) { toggleAutoCombiningCrates(gui, user) }
 }
 
-private fun toggleFishCaughtMessage(gui: Gui, user: User) : GuiItem {
+private fun toggleFishCaughtMessage(gui: Gui, user: User): GuiItem {
     val lore = ArrayList<String>()
     lore.add("")
     lore.add("&7Toggle if the title message when")
     lore.add("&7catching a fish should be shown")
 
-    return toggleableSettingGuiItem(gui, user, Material.FISHING_ROD, "&b&lFish caught message", lore,
-            Setting.TOGGLE_FISH_CAUGHT_MESSAGE) { toggleFishCaughtMessage(gui, user) }
+    return toggleableSettingGuiItem(
+        gui, user, Material.FISHING_ROD, "&b&lFish caught message", lore,
+        Setting.TOGGLE_FISH_CAUGHT_MESSAGE
+    ) { toggleFishCaughtMessage(gui, user) }
 }
 
-private fun toggleFishCaughtSound(gui: Gui, user: User) : GuiItem {
+private fun toggleFishCaughtSound(gui: Gui, user: User): GuiItem {
     val lore = ArrayList<String>()
     lore.add("")
     lore.add("&7Toggle if the sound when catching")
     lore.add("&7a fish should be played")
 
-    return toggleableSettingGuiItem(gui, user, Material.FISHING_ROD, "&b&lFish caught sound", lore,
-            Setting.TOGGLE_FISH_CAUGHT_SOUND) { toggleFishCaughtSound(gui, user) }
+    return toggleableSettingGuiItem(
+        gui, user, Material.FISHING_ROD, "&b&lFish caught sound", lore,
+        Setting.TOGGLE_FISH_CAUGHT_SOUND
+    ) { toggleFishCaughtSound(gui, user) }
 }
 
-private fun toggleNotifyEventMessages(gui: Gui, user: User) : GuiItem {
+private fun toggleNotifyEventMessages(gui: Gui, user: User): GuiItem {
     val lore = ArrayList<String>()
     lore.add("")
     lore.add("&7Toggle if a message should be displayed")
     lore.add("&7when an event starts or finishes")
 
-    return toggleableSettingGuiItem(gui, user, Material.DRAGON_EGG, "&b&lNotify event messages", lore,
-            Setting.TOGGLE_NOTIFY_EVENT_MESSAGES) { toggleNotifyEventMessages(gui, user) }
+    return toggleableSettingGuiItem(
+        gui, user, Material.DRAGON_EGG, "&b&lNotify event messages", lore,
+        Setting.TOGGLE_NOTIFY_EVENT_MESSAGES
+    ) { toggleNotifyEventMessages(gui, user) }
 }
 
-private fun toggleableSettingGuiItem(gui: Gui, user: User, material: Material, name: String, lore: List<String>,
-                                     setting: Setting, callback: Callback) : GuiItem {
+private fun toggleableSettingGuiItem(
+    gui: Gui, user: User, material: Material, name: String, lore: List<String>,
+    setting: Setting, callback: Callback
+): GuiItem {
     val loreWithToggle = ArrayList<String>(lore)
     loreWithToggle.add("")
     loreWithToggle.add("&b&oCurrent setting: ${user.getSetting(setting).string}")
 
     return ItemBuilder.from(material)
-            .setName(name.color())
-            .setLore(loreWithToggle.color())
-            .asGuiItem { e ->
-                user.toggleSetting(setting)
+        .setName(name.color())
+        .setLore(loreWithToggle.color())
+        .asGuiItem { e ->
+            user.toggleSetting(setting)
 
-                gui.updateItem(e.slot, callback.invoke())
-            }
+            gui.updateItem(e.slot, callback.invoke())
+        }
 }

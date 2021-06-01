@@ -41,25 +41,29 @@ fun showCaptainGui(player: Player) {
     }
 }
 
-private fun createWarpGuiItem(name: String, material: Material, spawnPoint: Location) : GuiItem {
+private fun createWarpGuiItem(name: String, material: Material, spawnPoint: Location): GuiItem {
     return ItemBuilder.from(material)
-            .setName(name.color())
-            .asGuiItem { e ->
-                if (isPlayerWarpingToSameWorld(e.whoClicked as Player, spawnPoint)) {
-                    e.whoClicked.sendConfigMessage("CAPTAIN-FAILED-TELEPORT-SAME-LOCATION", false,
-                            PlaceholderSet("{captainName}", npcType.npcName))
-                    e.whoClicked.closeInventory()
-                    return@asGuiItem
-                }
-
-                e.whoClicked.teleport(spawnPoint)
-                e.whoClicked.sendConfigMessage("CAPTAIN-TELEPORT-DESTINATION", false,
-                        PlaceholderSet("{destinationName}", name.color()),
-                        PlaceholderSet("{captainName}", npcType.npcName))
+        .setName(name.color())
+        .asGuiItem { e ->
+            if (isPlayerWarpingToSameWorld(e.whoClicked as Player, spawnPoint)) {
+                e.whoClicked.sendConfigMessage(
+                    "CAPTAIN-FAILED-TELEPORT-SAME-LOCATION", false,
+                    PlaceholderSet("{captainName}", npcType.npcName)
+                )
                 e.whoClicked.closeInventory()
+                return@asGuiItem
             }
+
+            e.whoClicked.teleport(spawnPoint)
+            e.whoClicked.sendConfigMessage(
+                "CAPTAIN-TELEPORT-DESTINATION", false,
+                PlaceholderSet("{destinationName}", name.color()),
+                PlaceholderSet("{captainName}", npcType.npcName)
+            )
+            e.whoClicked.closeInventory()
+        }
 }
 
-private fun isPlayerWarpingToSameWorld(player: Player, spawnPoint: Location) : Boolean {
-   return player.location.world.name == spawnPoint.world.name
+private fun isPlayerWarpingToSameWorld(player: Player, spawnPoint: Location): Boolean {
+    return player.location.world.name == spawnPoint.world.name
 }

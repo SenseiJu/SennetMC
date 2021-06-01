@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc.utils
 
-fun applyPlaceholders(string: String, vararg replacements: PlaceholderSet = emptyArray()) : String {
+fun applyPlaceholders(string: String, vararg replacements: PlaceholderSet = emptyArray()): String {
     var replacedString = string
 
     replacements.forEach {
@@ -10,7 +10,7 @@ fun applyPlaceholders(string: String, vararg replacements: PlaceholderSet = empt
     return replacedString
 }
 
-fun applyPlaceholders(strings: List<String>, vararg replacements: PlaceholderSet = emptyArray()) : List<String> {
+fun applyPlaceholders(strings: List<String>, vararg replacements: PlaceholderSet = emptyArray()): List<String> {
     val replacedStrings = ArrayList<String>()
 
     strings.forEach string@{ string ->

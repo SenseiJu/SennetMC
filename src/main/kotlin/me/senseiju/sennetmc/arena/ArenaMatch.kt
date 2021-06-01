@@ -40,9 +40,11 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
             doWinner(player2, player1)
         }
 
-        winner.server.sendConfigMessage("ARENA-MATCH-FINISHED", false,
+        winner.server.sendConfigMessage(
+            "ARENA-MATCH-FINISHED", false,
             PlaceholderSet("{winner}", winner.name),
-            PlaceholderSet("{loser}", getOpposingPlayer(winner).name))
+            PlaceholderSet("{loser}", getOpposingPlayer(winner).name)
+        )
     }
 
     private fun doWinner(winner: ArenaPlayer, loser: ArenaPlayer) {
@@ -56,7 +58,7 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
         loser.teleportToPreviousLocation()
     }
 
-    fun getOpposingPlayer(player: Player) : Player {
+    fun getOpposingPlayer(player: Player): Player {
         return if (player1.uuid == player.uniqueId) {
             player2.player
         } else {
@@ -75,7 +77,7 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
         arenaPlayer.previousInventory = arenaPlayer.player.inventory.contents
         arenaPlayer.previousLocation = arenaPlayer.player.location.clone()
         arenaPlayer.player.inventory.clear()
-        
+
         equipGear(arenaPlayer.player)
 
         arenaPlayer.player.teleport(location)

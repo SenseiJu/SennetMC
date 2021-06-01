@@ -10,9 +10,9 @@ enum class UserTable(val databaseField: String, private val databaseFieldType: S
         private val queryFieldsWithType = values().joinToString { "`${it.databaseField}` ${it.databaseFieldType}" }
 
         fun buildCreateTableQuery(): String =
-                "CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36) NOT NULL, $queryFieldsWithType, UNIQUE(`uuid`));"
+            "CREATE TABLE IF NOT EXISTS `users`(`uuid` CHAR(36) NOT NULL, $queryFieldsWithType, UNIQUE(`uuid`));"
 
-        fun buildUpdateTableQuery() : String =
-                "INSERT INTO `users`(`uuid`, $queryFields) VALUES(?, ${queryValues}) ON DUPLICATE KEY UPDATE $queryFieldsWithParameter;"
+        fun buildUpdateTableQuery(): String =
+            "INSERT INTO `users`(`uuid`, $queryFields) VALUES(?, ${queryValues}) ON DUPLICATE KEY UPDATE $queryFieldsWithParameter;"
     }
 }

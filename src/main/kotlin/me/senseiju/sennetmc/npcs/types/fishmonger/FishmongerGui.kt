@@ -35,12 +35,13 @@ fun showFishmongerGui(player: Player) {
     }
 }
 
-private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.FISH_CAPACITY)
     val upgradeMax = upgradesFile.config.getInt("fishing-capacity-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("fishing-capacity-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -49,16 +50,19 @@ private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User) : GuiItem 
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.CHEST, "&b&lFishing capacity", user, upgradeCost, upgradeMax, lore,
-            Upgrade.FISH_CAPACITY) { createFishingCapacityUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.CHEST, "&b&lFishing capacity", user, upgradeCost, upgradeMax, lore,
+        Upgrade.FISH_CAPACITY
+    ) { createFishingCapacityUpgradeGuiItem(gui, user) }
 }
 
-private fun createNegotiateUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createNegotiateUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.NEGOTIATE)
     val upgradeMax = upgradesFile.config.getInt("negotiate-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("negotiate-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -67,16 +71,19 @@ private fun createNegotiateUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.GOLD_BLOCK, "&b&lNegotiate", user, upgradeCost, upgradeMax, lore,
-            Upgrade.NEGOTIATE) { createNegotiateUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.GOLD_BLOCK, "&b&lNegotiate", user, upgradeCost, upgradeMax, lore,
+        Upgrade.NEGOTIATE
+    ) { createNegotiateUpgradeGuiItem(gui, user) }
 }
 
-private fun createBaitUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createBaitUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.BAIT)
     val upgradeMax = upgradesFile.config.getInt("bait-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("bait-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -85,16 +92,19 @@ private fun createBaitUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.APPLE, "&b&lBait", user, upgradeCost, upgradeMax, lore,
-            Upgrade.BAIT) { createBaitUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.APPLE, "&b&lBait", user, upgradeCost, upgradeMax, lore,
+        Upgrade.BAIT
+    ) { createBaitUpgradeGuiItem(gui, user) }
 }
 
-private fun createDeuceUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createDeuceUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.DEUCE)
     val upgradeMax = upgradesFile.config.getInt("deuce-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("deuce-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -104,16 +114,19 @@ private fun createDeuceUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.TROPICAL_FISH, "&b&lDeuce", user, upgradeCost, upgradeMax, lore,
-            Upgrade.DEUCE) { createDeuceUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.TROPICAL_FISH, "&b&lDeuce", user, upgradeCost, upgradeMax, lore,
+        Upgrade.DEUCE
+    ) { createDeuceUpgradeGuiItem(gui, user) }
 }
 
-private fun createFeastUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createFeastUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.FEAST)
     val upgradeMax = upgradesFile.config.getInt("feast-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("feast-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -124,16 +137,19 @@ private fun createFeastUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.COOKED_COD, "&b&lFeast", user, upgradeCost, upgradeMax, lore,
-            Upgrade.FEAST) { createFeastUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.COOKED_COD, "&b&lFeast", user, upgradeCost, upgradeMax, lore,
+        Upgrade.FEAST
+    ) { createFeastUpgradeGuiItem(gui, user) }
 }
 
-private fun createLureUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createLureUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.LURE)
     val upgradeMax = upgradesFile.config.getInt("lure-upgrade-max", 25)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("lure-upgrade-starting-cost", 400.0),
-            currentUpgrades)
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -143,6 +159,8 @@ private fun createLureUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.FISHING_ROD, "&b&lLure", user, upgradeCost, upgradeMax, lore,
-            Upgrade.LURE) { createLureUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.FISHING_ROD, "&b&lLure", user, upgradeCost, upgradeMax, lore,
+        Upgrade.LURE
+    ) { createLureUpgradeGuiItem(gui, user) }
 }

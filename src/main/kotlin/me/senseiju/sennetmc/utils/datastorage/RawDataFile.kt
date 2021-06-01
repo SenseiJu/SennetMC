@@ -28,7 +28,7 @@ class RawDataFile(private val plugin: JavaPlugin, private val path: String) {
         writer.close()
     }
 
-    fun read() : String {
+    fun read(): String {
         val reader = Scanner(file)
 
         return if (reader.hasNextLine()) {

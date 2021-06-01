@@ -39,15 +39,18 @@ fun openChefGui(chef: Chef, player: Player) {
     }
 }
 
-private fun chefSellGuiItem(chef: Chef, player: Player) : GuiItem {
+private fun chefSellGuiItem(chef: Chef, player: Player): GuiItem {
     val lore = arrayListOf("")
 
     val runnable = chef.chefSellRunnables[player.uniqueId]
     if (runnable != null) {
         lore.add("&a&l** ACTIVE **")
         lore.add("")
-        lore.add("&7Time remaining: &e${secondsToTimeFormat(runnable.timeToComplete)}")
-        lore.add("&7Finished: ${runnable.finished.string}")
+        if (runnable.finished) {
+            lore.add("&a&lReady to collect!")
+        } else {
+            lore.add("&7Time remaining: &e${secondsToTimeFormat(runnable.timeToComplete)}")
+        }
     } else {
         lore.add("&7Sell your fish to the chef who will resale")
         lore.add("&7for a higher price. You can come and collect")
@@ -76,7 +79,8 @@ private fun chefSellGuiItem(chef: Chef, player: Player) : GuiItem {
             } else {
                 player.sendConfigMessage(
                     "CHEF-ALREADY-RUNNING", false,
-                    PlaceholderSet("{chefName}", npc_type.npcName))
+                    PlaceholderSet("{chefName}", npc_type.npcName)
+                )
             }
 
             player.closeInventory()
@@ -99,8 +103,10 @@ private fun createChefSellRunnable(chef: Chef, player: Player) {
     val user = users[player.uniqueId] ?: return
 
     if (user.currentFishCaughtCapacity <= 0) {
-        player.sendConfigMessage("CHEF-NO-FISH", false,
-            PlaceholderSet("{chefName}", npc_type.npcName))
+        player.sendConfigMessage(
+            "CHEF-NO-FISH", false,
+            PlaceholderSet("{chefName}", npc_type.npcName)
+        )
         player.closeInventory()
         return
     }
@@ -114,12 +120,14 @@ private fun createChefSellRunnable(chef: Chef, player: Player) {
     chef.chefSellRunnables[player.uniqueId] = runnable
     chef.startChefSellRunnable(runnable)
 
-    player.sendConfigMessage("CHEF-STARTED-RUNNING", false,
-        PlaceholderSet("{chefName}", npc_type.npcName))
+    player.sendConfigMessage(
+        "CHEF-STARTED-RUNNING", false,
+        PlaceholderSet("{chefName}", npc_type.npcName)
+    )
     player.closeInventory()
 }
 
-private fun chefUpgradesGuiItem(chef: Chef, player: Player) : GuiItem {
+private fun chefUpgradesGuiItem(chef: Chef, player: Player): GuiItem {
     return ItemBuilder.from(Material.CHEST)
         .setName("&b&lChef upgrades".color())
         .asGuiItem {
@@ -143,12 +151,13 @@ private fun openChefUpgradesGui(chef: Chef, player: Player) {
     }
 }
 
-private fun createSeasoningUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createSeasoningUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.SEASONING)
     val upgradeMax = upgradesFile.config.getInt("seasoning-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("seasoning-upgrade-starting-cost", 400.0),
-        currentUpgrades)
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -158,16 +167,19 @@ private fun createSeasoningUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.SEAGRASS, "&b&lSeasoning", user, upgradeCost, upgradeMax, lore,
-        Upgrade.SEASONING) { createSeasoningUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.SEAGRASS, "&b&lSeasoning", user, upgradeCost, upgradeMax, lore,
+        Upgrade.SEASONING
+    ) { createSeasoningUpgradeGuiItem(gui, user) }
 }
 
-private fun createServingSpeedUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createServingSpeedUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.SERVING_SPEED)
     val upgradeMax = upgradesFile.config.getInt("serving-speed-upgrade-max", 15)
     val upgradeCost = calculateNextUpgradeCost(
         upgradesFile.config.getDouble("serving-speed-starting-cost", 800.0),
-        currentUpgrades)
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -177,16 +189,18 @@ private fun createServingSpeedUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.POTION, "&b&lServing speed", user, upgradeCost, upgradeMax, lore,
-        Upgrade.SERVING_SPEED) { createServingSpeedUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.POTION, "&b&lServing speed", user, upgradeCost, upgradeMax, lore,
+        Upgrade.SERVING_SPEED
+    ) { createServingSpeedUpgradeGuiItem(gui, user) }
 }
 
-private fun getSeasoningMultiplier(user: User) : Double {
+private fun getSeasoningMultiplier(user: User): Double {
     return user.getUpgrade(Upgrade.SEASONING)
         .times(upgradesFile.config.getDouble("seasoning-upgrade-increment", 0.2))
 }
 
-private fun getServingSpeedUpgrade(user: User) : Long {
+private fun getServingSpeedUpgrade(user: User): Long {
     return user.getUpgrade(Upgrade.SERVING_SPEED)
         .times(upgradesFile.config.getLong("serving-speed-upgrade-increment", 1))
 }

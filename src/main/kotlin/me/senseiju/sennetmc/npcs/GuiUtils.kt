@@ -17,36 +17,38 @@ import org.bukkit.plugin.java.JavaPlugin
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
 private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
 
-fun updateUpgradeGuiItem(gui: Gui,
-                         material: Material,
-                         name: String,
-                         user:User,
-                         upgradeCost: Double,
-                         upgradeMax: Int,
-                         lore: List<String>,
-                         upgrade: Upgrade,
-                         callback: Callback) : GuiItem {
+fun updateUpgradeGuiItem(
+    gui: Gui,
+    material: Material,
+    name: String,
+    user: User,
+    upgradeCost: Double,
+    upgradeMax: Int,
+    lore: List<String>,
+    upgrade: Upgrade,
+    callback: Callback
+): GuiItem {
 
     return ItemBuilder.from(material)
-            .setName(name.color())
-            .setLore(lore.color())
-            .asGuiItem(GuiAction { e ->
-                if (e.whoClicked !is Player || econ == null || user.upgrades[upgrade]!! >= upgradeMax) return@GuiAction
+        .setName(name.color())
+        .setLore(lore.color())
+        .asGuiItem(GuiAction { e ->
+            if (e.whoClicked !is Player || econ == null || user.upgrades[upgrade]!! >= upgradeMax) return@GuiAction
 
-                val player = e.whoClicked as Player
-                if (!econ.has(player, upgradeCost)) {
-                    player.playSound(player.location, Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f)
-                    return@GuiAction
-                }
+            val player = e.whoClicked as Player
+            if (!econ.has(player, upgradeCost)) {
+                player.playSound(player.location, Sound.ENTITY_VILLAGER_NO, 1.0f, 1.0f)
+                return@GuiAction
+            }
 
-                econ.withdrawPlayer(player, upgradeCost)
-                user.incrementUpgrade(upgrade)
-                player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
+            econ.withdrawPlayer(player, upgradeCost)
+            user.incrementUpgrade(upgrade)
+            player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
 
-                gui.updateItem(e.slot, callback.invoke())
+            gui.updateItem(e.slot, callback.invoke())
         })
 }
 
 fun interface Callback {
-    fun invoke() : GuiItem
+    fun invoke(): GuiItem
 }

@@ -9,11 +9,11 @@ import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.dispatchCommands
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import java.util.*
-import kotlin.collections.HashMap
 
 private val eventType = EventType.FISH_RACE
 
-class FishRace(private val plugin: SennetMC, eventsManager: EventsManager) : AbstractEvent(plugin, eventsManager, eventType){
+class FishRace(private val plugin: SennetMC, eventsManager: EventsManager) :
+    AbstractEvent(plugin, eventsManager, eventType) {
     val playersFishCaught = HashMap<UUID, Int>()
 
     private val eventsFile = eventsManager.eventsFile

@@ -14,7 +14,11 @@ fun Server.sendConfigMessage(messageName: String, vararg replacements: Placehold
     this.sendConfigMessage(messageName, prefix = false, replacements = replacements)
 }
 
-fun Server.sendConfigMessage(messageName: String, prefix: Boolean = true, vararg replacements: PlaceholderSet = emptyArray()) {
+fun Server.sendConfigMessage(
+    messageName: String,
+    prefix: Boolean = true,
+    vararg replacements: PlaceholderSet = emptyArray()
+) {
     this.onlinePlayers.forEach {
         it.sendConfigMessage(messageName, prefix = prefix, replacements = replacements)
     }

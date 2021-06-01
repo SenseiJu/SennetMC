@@ -17,7 +17,6 @@ import org.bukkit.event.Listener
 import org.bukkit.event.vehicle.VehicleExitEvent
 import org.bukkit.util.Vector
 import java.util.*
-import kotlin.collections.HashMap
 import kotlin.math.cos
 import kotlin.math.sin
 
@@ -36,9 +35,9 @@ class SpeedboatListener(private val plugin: SennetMC, speedboatManager: Speedboa
 
     private fun registerSpeedboatMovePacketListener() {
         protocolManager.addPacketListener(object : PacketAdapter(
-                plugin,
-                ListenerPriority.NORMAL,
-                PacketType.Play.Client.STEER_VEHICLE
+            plugin,
+            ListenerPriority.NORMAL,
+            PacketType.Play.Client.STEER_VEHICLE
         ) {
             override fun onPacketReceiving(e: PacketEvent) {
                 if (e.player.vehicle !is Boat || !e.player.hasPermission(PERMISSION_SPEEDBOAT_USE)) {
@@ -68,7 +67,8 @@ class SpeedboatListener(private val plugin: SennetMC, speedboatManager: Speedboa
 
                     val vector = Vector(x, 0.0, y)
 
-                    boatEntity.velocity = vector.multiply(0.3 + (user.getUpgrade(Upgrade.SPEEDBOAT_SPEED) * speedIncrement))
+                    boatEntity.velocity =
+                        vector.multiply(0.3 + (user.getUpgrade(Upgrade.SPEEDBOAT_SPEED) * speedIncrement))
 
                     playerSpeedboatCurrentVector[e.player.uniqueId] = vector
 
@@ -81,7 +81,8 @@ class SpeedboatListener(private val plugin: SennetMC, speedboatManager: Speedboa
                     return
                 }
 
-                playerSpeedboatCurrentVector[e.player.uniqueId] = playerSpeedboatCurrentVector[e.player.uniqueId]!!.multiply(0.9)
+                playerSpeedboatCurrentVector[e.player.uniqueId] =
+                    playerSpeedboatCurrentVector[e.player.uniqueId]!!.multiply(0.9)
 
                 boatEntity.velocity = playerSpeedboatCurrentVector[e.player.uniqueId]!!
             }

@@ -9,6 +9,6 @@ fun PlayerInventory.addItemOrDropNaturally(item: ItemStack, location: Location? 
 
     val remaining = this.addItem(item)
     if (remaining.isNotEmpty()) {
-        remaining.values.forEach {  location.world.dropItemNaturally(location, it) }
+        remaining.values.forEach { location.world.dropItemNaturally(location, it) }
     }
 }

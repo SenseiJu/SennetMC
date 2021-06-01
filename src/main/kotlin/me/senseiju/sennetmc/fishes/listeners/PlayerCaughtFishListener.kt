@@ -37,16 +37,16 @@ class PlayerCaughtFishListener(plugin: SennetMC) : Listener {
         sendCaughtFishMessage(e.user, e.player, e.fishType)
     }
 
-    private fun shouldPlayerReceiveDoubleFish(user: User) : Boolean {
+    private fun shouldPlayerReceiveDoubleFish(user: User): Boolean {
         val deuceChance = user.getUpgrade(Upgrade.DEUCE)
-                .times(upgradesFile.config.getDouble("deuce-upgrade-increment", 0.01))
+            .times(upgradesFile.config.getDouble("deuce-upgrade-increment", 0.01))
 
         return percentChance(deuceChance)
     }
 
-    private fun shouldNearbyPlayersReceiveFish(user: User) : Boolean {
+    private fun shouldNearbyPlayersReceiveFish(user: User): Boolean {
         val feastChance = user.getUpgrade(Upgrade.FEAST)
-                .times(upgradesFile.config.getDouble("feast-upgrade-increment", 0.01))
+            .times(upgradesFile.config.getDouble("feast-upgrade-increment", 0.01))
 
         return percentChance(feastChance)
     }
@@ -70,8 +70,10 @@ class PlayerCaughtFishListener(plugin: SennetMC) : Listener {
 
     private fun sendCaughtFishMessage(user: User, player: Player, fishType: FishType) {
         if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_MESSAGE)) {
-            player.sendTitle("&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
-                    "&6+${fishType.capacity()} capacity".color(), 10, 40, 10)
+            player.sendTitle(
+                "&bYou caught a &5${fishType.toString().toLowerCase()} &bfish".color(),
+                "&6+${fishType.capacity()} capacity".color(), 10, 40, 10
+            )
         }
 
         if (user.getSetting(Setting.TOGGLE_FISH_CAUGHT_SOUND)) {

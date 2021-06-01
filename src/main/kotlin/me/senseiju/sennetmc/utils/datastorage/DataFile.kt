@@ -10,7 +10,9 @@ class DataFile(private val plugin: JavaPlugin, private val path: String, private
     lateinit var config: YamlConfiguration
         private set
 
-    init { reload() }
+    init {
+        reload()
+    }
 
     fun reload() {
         file = File("${plugin.dataFolder}/${path}")

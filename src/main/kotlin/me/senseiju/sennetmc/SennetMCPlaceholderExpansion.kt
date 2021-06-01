@@ -46,7 +46,11 @@ class SennetMCPlaceholderExpansion(private val plugin: SennetMC) : PlaceholderEx
             "user_max_fish_capacity" ->
                 calculateMaxFishCapacity(user.getUpgrade(Upgrade.FISH_CAPACITY)).toString()
             "user_speedboat_current_toggle" ->
-                if (speedboatManager.playerSpeedboatToggle.getOrDefault(player.uniqueId, false)) "&a&lTrue" else "&c&lFalse"
+                if (speedboatManager.playerSpeedboatToggle.getOrDefault(
+                        player.uniqueId,
+                        false
+                    )
+                ) "&a&lTrue" else "&c&lFalse"
             "user_speedboat_speed_multiplier" ->
                 calculateSpeedboatSpeedMultiplier(user.getUpgrade(Upgrade.SPEEDBOAT_SPEED)).toString()
             "user_collectables_collected" ->

@@ -13,11 +13,11 @@ import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.NpcType.*
 import me.senseiju.sennetmc.npcs.types.captain.Captain
 import me.senseiju.sennetmc.npcs.types.chef.Chef
-import me.senseiju.sennetmc.npcs.types.designer.Designer
 import me.senseiju.sennetmc.npcs.types.fishmonger.Fishmonger
 import me.senseiju.sennetmc.npcs.types.looter.Looter
 import me.senseiju.sennetmc.npcs.types.merchant.Merchant
 import me.senseiju.sennetmc.npcs.types.sailor.Sailor
+import me.senseiju.sennetmc.npcs.types.scrapper.Scrapper
 
 class NpcManager(private val plugin: SennetMC) : BaseManager() {
     val npcMap = HashMap<NpcType, BaseNpc>()
@@ -30,9 +30,9 @@ class NpcManager(private val plugin: SennetMC) : BaseManager() {
         npcMap[MERCHANT] = Merchant(plugin)
         npcMap[SAILOR] = Sailor()
         npcMap[LOOTER] = Looter(plugin)
-        npcMap[DESIGNER] = Designer(plugin)
         npcMap[CAPTAIN] = Captain(plugin)
         npcMap[CHEF] = Chef(plugin)
+        npcMap[SCRAPPER] = Scrapper(plugin)
     }
 
     override fun registerCommands(cm: CommandManager) {

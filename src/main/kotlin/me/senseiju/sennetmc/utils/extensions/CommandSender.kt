@@ -12,14 +12,18 @@ fun CommandSender.message(s: String) {
 }
 
 fun CommandSender.message(list: List<String>) {
-    list.forEach{ this.message(it) }
+    list.forEach { this.message(it) }
 }
 
 fun CommandSender.sendConfigMessage(messageName: String, vararg replacements: PlaceholderSet = emptyArray()) {
     this.sendConfigMessage(messageName, prefix = true, replacements = replacements)
 }
 
-fun CommandSender.sendConfigMessage(messageName: String, prefix: Boolean = true, vararg replacements: PlaceholderSet = emptyArray()) {
+fun CommandSender.sendConfigMessage(
+    messageName: String,
+    prefix: Boolean = true,
+    vararg replacements: PlaceholderSet = emptyArray()
+) {
     val config = messagesFile.config
 
     if (config.isString(messageName)) {

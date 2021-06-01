@@ -15,8 +15,6 @@ import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import java.util.*
-import kotlin.collections.ArrayList
-import kotlin.collections.HashMap
 
 class CollectablesManager(private val plugin: SennetMC) : BaseManager() {
 
@@ -51,7 +49,7 @@ class CollectablesManager(private val plugin: SennetMC) : BaseManager() {
     private fun loadCollectables() {
         val newCollectables = HashMap<String, Collectable>()
 
-        collectablesFile.config.getKeys(false).forEach loop@ {
+        collectablesFile.config.getKeys(false).forEach loop@{
             val section = collectablesFile.config.getConfigurationSection(it)
             if (section == null) {
                 println("ERROR: Failed to parse a collectable with id: $it")
@@ -88,8 +86,10 @@ class CollectablesManager(private val plugin: SennetMC) : BaseManager() {
             sender?.sendConfigMessage("COLLECTABLES-COLLECTABLE-SET")
 
             val targetPlayer = plugin.server.getPlayer(user.uuid) ?: return@launch
-            targetPlayer.sendConfigMessage("COLLECTABLES-TARGET-COLLECTABLE-SET",
-                    PlaceholderSet("{collectableName}", collectables[collectableId]!!.name))
+            targetPlayer.sendConfigMessage(
+                "COLLECTABLES-TARGET-COLLECTABLE-SET",
+                PlaceholderSet("{collectableName}", collectables[collectableId]!!.name)
+            )
         }
     }
 
@@ -111,7 +111,7 @@ class CollectablesManager(private val plugin: SennetMC) : BaseManager() {
         }
     }
 
-    suspend fun fetchCollectables(uuid: UUID) : ArrayList<String> {
+    suspend fun fetchCollectables(uuid: UUID): ArrayList<String> {
         val set = plugin.database.asyncQuery("SELECT * FROM `collectables` WHERE `uuid`=?;", uuid.toString())
 
         val collectables = ArrayList<String>()

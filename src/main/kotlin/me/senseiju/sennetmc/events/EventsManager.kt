@@ -46,7 +46,7 @@ class EventsManager(private val plugin: SennetMC) : BaseManager() {
         eventsFile.reload()
     }
 
-    fun isEventActive() : Boolean = currentEvent != null
+    fun isEventActive(): Boolean = currentEvent != null
 
     fun startEvent(eventType: EventType) {
         currentEvent = when (eventType) {
@@ -54,9 +54,11 @@ class EventsManager(private val plugin: SennetMC) : BaseManager() {
             EventType.SHIPWRECK -> Shipwreck(plugin, this)
         }
 
-        val message = applyPlaceholders(messagesFile.config.getStringList("EVENTS-STARTED"),
-                PlaceholderSet("{eventName}", eventType.title),
-                PlaceholderSet("{eventHowToPlay}", eventsFile.config.getStringList("${eventType}.how-to-play")))
+        val message = applyPlaceholders(
+            messagesFile.config.getStringList("EVENTS-STARTED"),
+            PlaceholderSet("{eventName}", eventType.title),
+            PlaceholderSet("{eventHowToPlay}", eventsFile.config.getStringList("${eventType}.how-to-play"))
+        )
 
         plugin.server.onlinePlayers.forEach {
             val user = users[it.uniqueId] ?: return@forEach

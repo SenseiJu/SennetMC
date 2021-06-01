@@ -17,8 +17,8 @@ class Database(plugin: JavaPlugin, configPath: String) {
         val config = file.config
         val hikariConfig = HikariConfig()
         hikariConfig.jdbcUrl =
-                "jdbc:mysql://${config.getString("host")}:${config.getInt("port")}/${config.getString("database")}" +
-                        "?autoReconnect=true&allowMultiQueries=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false"
+            "jdbc:mysql://${config.getString("host")}:${config.getInt("port")}/${config.getString("database")}" +
+                    "?autoReconnect=true&allowMultiQueries=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false"
         hikariConfig.username = config.getString("username")
         hikariConfig.password = config.getString("password")
         hikariConfig.connectionTimeout = 8000

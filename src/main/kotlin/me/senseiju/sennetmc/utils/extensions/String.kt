@@ -5,7 +5,7 @@ import java.util.regex.Pattern
 
 private val pattern = Pattern.compile("&(#[a-fA-F0-9]{6})")
 
-fun String.color() : String {
+fun String.color(): String {
     var string = this
 
     var matcher = pattern.matcher(this)

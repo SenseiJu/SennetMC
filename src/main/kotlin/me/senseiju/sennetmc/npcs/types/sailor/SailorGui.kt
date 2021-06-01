@@ -30,11 +30,13 @@ fun showSailorGui(player: Player) {
     }
 }
 
-private fun createSpeedboatSpeedUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createSpeedboatSpeedUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.SPEEDBOAT_SPEED)
     val upgradeMax = upgradesFile.config.getInt("speedboat-speed-upgrade-max", 20)
-    val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("speedboat-speed-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+    val upgradeCost = calculateNextUpgradeCost(
+        upgradesFile.config.getDouble("speedboat-speed-upgrade-starting-cost", 300.0),
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -46,6 +48,8 @@ private fun createSpeedboatSpeedUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.OAK_BOAT, "&b&lSpeedboat speed", user, upgradeCost, upgradeMax, lore,
-            Upgrade.SPEEDBOAT_SPEED) { createSpeedboatSpeedUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.OAK_BOAT, "&b&lSpeedboat speed", user, upgradeCost, upgradeMax, lore,
+        Upgrade.SPEEDBOAT_SPEED
+    ) { createSpeedboatSpeedUpgradeGuiItem(gui, user) }
 }

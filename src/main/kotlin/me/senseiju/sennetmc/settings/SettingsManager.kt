@@ -19,7 +19,7 @@ class SettingsManager(private val plugin: SennetMC) : BaseManager() {
         cm.register(SettingsCommand(plugin))
     }
 
-    suspend fun fetchSettings(uuid: UUID) : EnumMap<Setting, Boolean> {
+    suspend fun fetchSettings(uuid: UUID): EnumMap<Setting, Boolean> {
         val set = plugin.database.asyncQuery(SELECT_QUERY, uuid.toString())
         return if (set.next()) Setting.mapFromSet(set)
         else EnumMap<Setting, Boolean>(Setting::class.java)

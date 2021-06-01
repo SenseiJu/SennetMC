@@ -10,6 +10,6 @@ enum class EventType(title: String) {
     val title = title.color()
 
     companion object {
-        fun selectRandom() : EventType = values()[Random.nextInt(values().size)]
+        fun selectRandom(): EventType = values()[Random.nextInt(values().size)]
     }
 }

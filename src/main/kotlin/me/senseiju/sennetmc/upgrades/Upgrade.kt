@@ -43,14 +43,15 @@ enum class Upgrade(val databaseField: String, private val databaseFieldType: Str
         private val queryFieldsWithParameter = values().joinToString { "`${it.databaseField}`=?" }
         private val queryFieldsWithType = values().joinToString { "`${it.databaseField}` ${it.databaseFieldType}" }
 
-        fun mapFromSet(set: CachedRowSet) : EnumMap<Upgrade, Int> {
-            return values().associateWith { set.getInt(it.databaseField) }.toMap(EnumMap<Upgrade, Int>(Upgrade::class.java))
+        fun mapFromSet(set: CachedRowSet): EnumMap<Upgrade, Int> {
+            return values().associateWith { set.getInt(it.databaseField) }
+                .toMap(EnumMap<Upgrade, Int>(Upgrade::class.java))
         }
 
         fun buildCreateTableQuery(): String =
-                "CREATE TABLE IF NOT EXISTS `upgrades`(`uuid` CHAR(36) NOT NULL, $queryFieldsWithType, UNIQUE(`uuid`));"
+            "CREATE TABLE IF NOT EXISTS `upgrades`(`uuid` CHAR(36) NOT NULL, $queryFieldsWithType, UNIQUE(`uuid`));"
 
-        fun buildUpdateQuery() : String =
-                "INSERT INTO `upgrades`(`uuid`, $queryFields) VALUES(?, ${queryValues}) ON DUPLICATE KEY UPDATE $queryFieldsWithParameter;"
+        fun buildUpdateQuery(): String =
+            "INSERT INTO `upgrades`(`uuid`, $queryFields) VALUES(?, ${queryValues}) ON DUPLICATE KEY UPDATE $queryFieldsWithParameter;"
     }
 }

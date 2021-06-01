@@ -10,7 +10,7 @@ import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 
 class PlayerPreLoginListener(private val userManager: UserManager) : Listener {
 
-    @EventHandler(priority = EventPriority.MONITOR)
+    @EventHandler(priority = EventPriority.HIGHEST)
     private fun onPlayerPreLogin(e: AsyncPlayerPreLoginEvent) {
         defaultScope.launch {
             if (e.loginResult != AsyncPlayerPreLoginEvent.Result.ALLOWED) return@launch

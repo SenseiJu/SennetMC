@@ -24,11 +24,14 @@ class DailyCommand(private val plugin: SennetMC) : CommandBase() {
     fun onCommand(player: Player) {
         val user = users[player.uniqueId] ?: return
         val timePassedInSeconds = TimeUnit.SECONDS.convert(
-            Instant.now().minusMillis(user.dailyRewardLastClaimed.toEpochMilli()).toEpochMilli(), TimeUnit.MILLISECONDS)
+            Instant.now().minusMillis(user.dailyRewardLastClaimed.toEpochMilli()).toEpochMilli(), TimeUnit.MILLISECONDS
+        )
 
         if (timePassedInSeconds < COOLDOWN_IN_SECONDS) {
-            player.sendConfigMessage("DAILY-NOT-READY",
-                PlaceholderSet("{time}", secondsToTimeFormat(COOLDOWN_IN_SECONDS - timePassedInSeconds)))
+            player.sendConfigMessage(
+                "DAILY-NOT-READY",
+                PlaceholderSet("{time}", secondsToTimeFormat(COOLDOWN_IN_SECONDS - timePassedInSeconds))
+            )
             return
         }
 

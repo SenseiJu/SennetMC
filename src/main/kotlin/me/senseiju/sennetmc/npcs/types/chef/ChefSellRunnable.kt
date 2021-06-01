@@ -14,10 +14,12 @@ import java.util.*
 
 private val NPC_TYPE = NpcType.CHEF
 
-class ChefSellRunnable(val uuid: UUID,
-                       val initialSellPrice: Double,
-                       timeToComplete: Long,
-                       finished: Boolean = false) : BukkitRunnable() {
+class ChefSellRunnable(
+    val uuid: UUID,
+    val initialSellPrice: Double,
+    timeToComplete: Long,
+    finished: Boolean = false
+) : BukkitRunnable() {
 
     var timeToComplete = timeToComplete
         private set
@@ -31,8 +33,10 @@ class ChefSellRunnable(val uuid: UUID,
 
             finished = true
 
-            Bukkit.getPlayer(uuid)?.sendConfigMessage("CHEF-FINISHED-RUNNING", false,
-                PlaceholderSet("{chefName}", NPC_TYPE.npcName))
+            Bukkit.getPlayer(uuid)?.sendConfigMessage(
+                "CHEF-FINISHED-RUNNING", false,
+                PlaceholderSet("{chefName}", NPC_TYPE.npcName)
+            )
 
             return
         }
@@ -40,7 +44,7 @@ class ChefSellRunnable(val uuid: UUID,
         timeToComplete--
     }
 
-    fun toJson() : String {
+    fun toJson(): String {
         val data = SerializableChefSellRunnable(uuid, timeToComplete, initialSellPrice, finished)
 
         return Json.encodeToString(data)
@@ -48,16 +52,18 @@ class ChefSellRunnable(val uuid: UUID,
 }
 
 @Serializable
-data class SerializableChefSellRunnable(@Serializable(UUIDSerializer::class) private val uuid: UUID,
-                                        private val timeToComplete: Long,
-                                        private val initialSellPrice: Double,
-                                        private val finished: Boolean) {
+data class SerializableChefSellRunnable(
+    @Serializable(UUIDSerializer::class) private val uuid: UUID,
+    private val timeToComplete: Long,
+    private val initialSellPrice: Double,
+    private val finished: Boolean
+) {
 
     companion object {
-        fun fromJson(s: String) : ChefSellRunnable {
+        fun fromJson(s: String): ChefSellRunnable {
             val data = Json.decodeFromString<SerializableChefSellRunnable>(s)
 
-            return ChefSellRunnable(data.uuid,  data.initialSellPrice, data.timeToComplete, data.finished)
+            return ChefSellRunnable(data.uuid, data.initialSellPrice, data.timeToComplete, data.finished)
         }
     }
 }

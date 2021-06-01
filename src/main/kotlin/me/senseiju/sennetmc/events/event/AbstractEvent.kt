@@ -4,15 +4,17 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.events.EventsManager
 import org.bukkit.scheduler.BukkitRunnable
 
-abstract class AbstractEvent(plugin: SennetMC,
-                             private val eventsManager: EventsManager,
-                             eventType: EventType) : BukkitRunnable() {
+abstract class AbstractEvent(
+    plugin: SennetMC,
+    private val eventsManager: EventsManager,
+    eventType: EventType
+) : BukkitRunnable() {
 
     var finished = false
         private set
 
     private val bossBar = EventBossBar(plugin, eventType)
-    private val length =  eventsManager.eventsFile.config.getInt("$eventType.length", 120)
+    private val length = eventsManager.eventsFile.config.getInt("$eventType.length", 120)
     private var timeRemaining = length
 
     override fun run() {

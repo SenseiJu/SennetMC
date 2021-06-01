@@ -32,11 +32,13 @@ fun showLooterGui(player: Player) {
     }
 }
 
-private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.TREASURE_FINDER)
     val upgradeMax = upgradesFile.config.getInt("treasure-finder-upgrade-max", 50)
-    val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("treasure-finder-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+    val upgradeCost = calculateNextUpgradeCost(
+        upgradesFile.config.getDouble("treasure-finder-upgrade-starting-cost", 300.0),
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -46,15 +48,19 @@ private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.CHEST, "&b&lTreasure finder", user, upgradeCost, upgradeMax, lore,
-            Upgrade.TREASURE_FINDER) { createTreasureFinderUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.CHEST, "&b&lTreasure finder", user, upgradeCost, upgradeMax, lore,
+        Upgrade.TREASURE_FINDER
+    ) { createTreasureFinderUpgradeGuiItem(gui, user) }
 }
 
-private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.DISCOVERY)
     val upgradeMax = upgradesFile.config.getInt("discovery-upgrade-max", 20)
-    val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("discovery-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+    val upgradeCost = calculateNextUpgradeCost(
+        upgradesFile.config.getDouble("discovery-upgrade-starting-cost", 300.0),
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -64,15 +70,19 @@ private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.CHEST, "&b&lDiscovery", user, upgradeCost, upgradeMax, lore,
-            Upgrade.DISCOVERY) { createDiscoveryUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.CHEST, "&b&lDiscovery", user, upgradeCost, upgradeMax, lore,
+        Upgrade.DISCOVERY
+    ) { createDiscoveryUpgradeGuiItem(gui, user) }
 }
 
-private fun createCrateMasterUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
+private fun createCrateMasterUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.CRATE_MASTER)
     val upgradeMax = upgradesFile.config.getInt("crate-master-upgrade-max", 20)
-    val upgradeCost = calculateNextUpgradeCost(upgradesFile.config.getDouble("crate-master-upgrade-starting-cost", 300.0),
-            currentUpgrades)
+    val upgradeCost = calculateNextUpgradeCost(
+        upgradesFile.config.getDouble("crate-master-upgrade-starting-cost", 300.0),
+        currentUpgrades
+    )
 
     val lore = ArrayList<String>()
     lore.add("")
@@ -82,6 +92,8 @@ private fun createCrateMasterUpgradeGuiItem(gui: Gui, user: User) : GuiItem {
     lore.add("&7Cost: &e$$upgradeCost")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
-    return updateUpgradeGuiItem(gui, Material.CHEST, "&b&lCrate master", user, upgradeCost, upgradeMax, lore,
-            Upgrade.CRATE_MASTER) { createCrateMasterUpgradeGuiItem(gui, user) }
+    return updateUpgradeGuiItem(
+        gui, Material.CHEST, "&b&lCrate master", user, upgradeCost, upgradeMax, lore,
+        Upgrade.CRATE_MASTER
+    ) { createCrateMasterUpgradeGuiItem(gui, user) }
 }

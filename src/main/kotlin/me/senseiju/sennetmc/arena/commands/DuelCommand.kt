@@ -34,12 +34,18 @@ class DuelCommand(private val plugin: SennetMC, private val arenaManager: ArenaM
             return
         }
 
-        if (arenaManager.isPlayerInQueue(sender) || arenaManager.isPlayerInCurrentMatch(sender) || doesPlayerHaveRequest(sender)) {
+        if (arenaManager.isPlayerInQueue(sender) || arenaManager.isPlayerInCurrentMatch(sender) || doesPlayerHaveRequest(
+                sender
+            )
+        ) {
             sender.sendConfigMessage("ARENA-ALREADY-QUEUED")
             return
         }
 
-        if (arenaManager.isPlayerInQueue(targetPlayer) || arenaManager.isPlayerInCurrentMatch(targetPlayer) || doesPlayerHaveRequest(targetPlayer)) {
+        if (arenaManager.isPlayerInQueue(targetPlayer) || arenaManager.isPlayerInCurrentMatch(targetPlayer) || doesPlayerHaveRequest(
+                targetPlayer
+            )
+        ) {
             sender.sendConfigMessage("ARENA-TARGET-ALREADY-QUEUED")
             return
         }
@@ -84,7 +90,7 @@ class DuelCommand(private val plugin: SennetMC, private val arenaManager: ArenaM
         }
     }
 
-    private fun doesPlayerHaveRequest(player: Player) : Boolean {
+    private fun doesPlayerHaveRequest(player: Player): Boolean {
         return requests[player.uniqueId] != null || requests.inverse()[player.uniqueId] != null
     }
 }
