@@ -1,20 +1,25 @@
 package me.senseiju.sennetmc.scrap.commands
 
+import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mf.annotations.Command
 import me.mattstudios.mf.annotations.Completion
 import me.mattstudios.mf.annotations.Permission
 import me.mattstudios.mf.annotations.SubCommand
 import me.mattstudios.mf.base.CommandBase
+import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.PERMISSION_SCRAP_GIVE
+import me.senseiju.sennetmc.equipment.fishing_net.NET_NBT_KEY
 import me.senseiju.sennetmc.scrap.createScrapItem
 import me.senseiju.sennetmc.scrap.getScrapAmountFromItem
 import me.senseiju.sennetmc.scrap.isItemScrap
 import me.senseiju.sennetmc.scrap.removeScrapAmountFromItem
 import me.senseiju.sennetmc.utils.extensions.addItemOrDropNaturally
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
+import org.bukkit.inventory.ItemStack
 
 @Command("Scrap")
 class ScrapCommand : CommandBase() {

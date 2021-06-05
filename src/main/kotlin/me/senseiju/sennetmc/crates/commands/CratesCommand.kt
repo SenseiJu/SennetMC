@@ -27,7 +27,7 @@ class CratesCommand(private val plugin: SennetMC, private val cratesManager: Cra
         }
 
         if (amount != null && amount <= 0) {
-            sender.sendConfigMessage("CRATES-INVALID-AMOUNT")
+            sender.sendConfigMessage("INVALID-AMOUNT")
             return
         }
 
@@ -36,8 +36,7 @@ class CratesCommand(private val plugin: SennetMC, private val cratesManager: Cra
             return
         }
 
-        if (amount != null) cratesManager.cratesMap[crateId]?.giveCrate(player, amount)
-        else cratesManager.cratesMap[crateId]?.giveCrate(player)
+        cratesManager.cratesMap[crateId]?.giveCrate(player, amount ?: 1)
 
         sender.sendConfigMessage("CRATES-GIVE-SUCCESS", PlaceholderSet("{player}", player.name))
     }
@@ -59,14 +58,8 @@ class CratesCommand(private val plugin: SennetMC, private val cratesManager: Cra
             return
         }
 
-        if (amount != null) {
-            plugin.server.onlinePlayers.forEach {
-                cratesManager.cratesMap[crateId]?.giveCrate(it, amount)
-            }
-        } else {
-            plugin.server.onlinePlayers.forEach {
-                cratesManager.cratesMap[crateId]?.giveCrate(it)
-            }
+        plugin.server.onlinePlayers.forEach {
+            cratesManager.cratesMap[crateId]?.giveCrate(it, amount ?: 1)
         }
 
         sender.sendConfigMessage("CRATES-GIVE-ALL-SUCCESS")

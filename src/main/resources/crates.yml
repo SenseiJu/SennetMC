@@ -1,4 +1,4 @@
-crates-required-before-upgrade: 4
+crates-required-before-upgrade: 5
 
 description:
   - ""
@@ -74,6 +74,11 @@ crates:
         commands:
           - "eco give {player} 50000"
 
+      - name: "&6&lCommand /cosmo [1 Week]"
+        probability: 2
+        commands:
+          - "lp user {player} permission settemp cosmo.command.use true 1w"
+
   t7:
     name: "&e&lTier VII"
     probability-per-cast: -100
@@ -88,7 +93,7 @@ crates:
       - name: "&6&lCommand /sell [1 Week]"
         probability: 1
         commands:
-          - "lp user {player} permission settemp sennetmc.commands.sell true 1w server=fishing"
+          - "lp user {player} permission settemp sennetmc.commands.sell true 1w"
 
   t8:
     name: "&e&lTier VIII"
@@ -104,4 +109,4 @@ crates:
       - name: "&#3deb1a&lSub &6&lrank [1 Week]"
         probability: 1
         commands:
-          - "lp user {player} parent addtemp sub 1w server=fishing"
+          - "lp user {player} parent addtemp sub 1w"

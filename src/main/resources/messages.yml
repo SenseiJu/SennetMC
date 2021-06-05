@@ -8,6 +8,7 @@ CANNOT-FIND-TARGET: "&cCannot find the specified player"
 DISCORD-LINK: "&b&ehttps://discord.sennetmc.com"
 BUYCRAFT-LINK: "&b&ehttps://shop.sennetmc.com"
 RESOURCE-PACK: "&dTo enable, edit the server in multiplayer at the main menu and enable the resource pack"
+INVALID-AMOUNT: "&cInvalid amount specified"
 
 # Collectables
 COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
@@ -16,6 +17,10 @@ COLLECTABLES-TARGET-DOES-NOT-HAVE-COLLECTABLE: "&cTarget does not have this coll
 COLLECTABLES-TARGET-COLLECTABLE-SET: "&aYou have just unlocked the &7'{collectableName}&7' &acollectable"
 COLLECTABLES-COLLECTABLE-SET: "&aCollectable has been set"
 COLLECTABLES-COLLECTABLE-REMOVED: "&aCollectable has been removed"
+
+# Equipment
+EQUIPMENT-CANNOT-FIND-EQUIPMENT: "&cCannot find specified equipment"
+EQUIPMENT-ON-COOLDOWN: "&7{equipment} &cis on cooldown for {cooldown} seconds"
 
 # NPC
 NPC-CANNOT-FIND-NPC-TYPE: "&cCannot find specified NPC type"
@@ -60,7 +65,6 @@ SPEEDBOAT-MUST-BE-IN-WATER: "&cYou must be in water to spawn a boat"
 
 # Crates
 CRATES-CANNOT-FIND-CRATE: "&cCannot find the specified crate"
-CRATES-INVALID-AMOUNT: "&cInvalid amount of crates specified"
 CRATES-REWARD: "{crateName} &8&l» {rewardName}"
 CRATES-GIVE-SUCCESS: "&aSuccessfully gave crates to {player}"
 

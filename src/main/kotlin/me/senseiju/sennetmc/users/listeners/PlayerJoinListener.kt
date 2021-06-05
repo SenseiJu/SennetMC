@@ -17,8 +17,12 @@ class PlayerJoinListener(private val userManager: UserManager) : Listener {
         if (!userManager.userMap.containsKey(e.player.uniqueId)) {
             e.player.kick(
                 Component.text(
-                    "&#914ef5&lSennetMC \n\n&cYour player data was not loaded before you connected " +
-                        "\nplease try and reconnect or contact an admin if this continues".color()
+                    """
+                        &#914ef5&lSennetMC 
+                        
+                        &cYour player data was not loaded before you connected 
+                        &cplease try and reconnect or contact an admin if this continues
+                    """.trimIndent().color()
                 )
             )
         }

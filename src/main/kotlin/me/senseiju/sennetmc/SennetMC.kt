@@ -8,6 +8,8 @@ import me.senseiju.sennetmc.commands.DailyCommand
 import me.senseiju.sennetmc.commands.ReloadCommand
 import me.senseiju.sennetmc.commands.ResourcePackCommand
 import me.senseiju.sennetmc.crates.CratesManager
+import me.senseiju.sennetmc.equipment.EquipmentManager
+import me.senseiju.sennetmc.equipment.fishing_net.FishingNetListener
 import me.senseiju.sennetmc.events.EventsManager
 import me.senseiju.sennetmc.fishes.FishManager
 import me.senseiju.sennetmc.npcs.NpcManager
@@ -46,6 +48,7 @@ class SennetMC : JavaPlugin() {
     private lateinit var npcManager: NpcManager
     private lateinit var eventsManager: EventsManager
     private lateinit var scrapManager: ScrapManager
+    private lateinit var equipmentManager: EquipmentManager
 
     override fun onEnable() {
         commandManager = CommandManager(this)
@@ -62,6 +65,7 @@ class SennetMC : JavaPlugin() {
         eventsManager = EventsManager(this)
         arenaManager = ArenaManager(this)
         scrapManager = ScrapManager(this)
+        equipmentManager = EquipmentManager(this)
 
         SennetMCPlaceholderExpansion(this)
 
@@ -82,8 +86,7 @@ class SennetMC : JavaPlugin() {
 
             it.kick(
                 Component.text(
-                    messagesFile.config.getString("RELOADING", "&#914ef5&lSennetMC &bis currently reloading...")!!
-                        .color()
+                    messagesFile.config.getString("RELOADING", "&#914ef5&lSennetMC &bis currently reloading...")!!.color()
                 )
             )
         }
