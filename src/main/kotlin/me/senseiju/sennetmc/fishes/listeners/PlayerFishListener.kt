@@ -8,15 +8,32 @@ import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.users.calculateMaxFishCapacity
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.probabilityChance
+import org.bukkit.Material
 import org.bukkit.entity.FishHook
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerDropItemEvent
 import org.bukkit.event.player.PlayerFishEvent
+import org.bukkit.event.player.PlayerItemDamageEvent
 
 class PlayerFishListener(private val plugin: SennetMC) : Listener {
 
     private val users = plugin.userManager.userMap
     private val upgradesFile = plugin.upgradesManager.upgradesFile
+
+    @EventHandler
+    private fun onFishingRodDamage(e: PlayerItemDamageEvent) {
+        if (e.item.type == Material.FISHING_ROD) {
+            e.isCancelled = true
+        }
+    }
+
+    @EventHandler
+    private fun onFishingRodDrop(e: PlayerDropItemEvent) {
+        if (e.itemDrop.itemStack.type == Material.FISHING_ROD) {
+            e.isCancelled = true
+        }
+    }
 
     @EventHandler
     private fun onPlayerFishEvent(e: PlayerFishEvent) {
@@ -50,7 +67,7 @@ class PlayerFishListener(private val plugin: SennetMC) : Listener {
     }
 
     private fun selectRandomFishType(increasedProbability: Double = 0.0): FishType =
-        probabilityChance(FishType.values().map { it to (it.probability() + increasedProbability) }.toMap())
+        probabilityChance(FishType.values().associate { it to (it.probability() + increasedProbability) })
 
     private fun getPlayerLureProbabilityIncrease(user: User): Double {
         return user.getUpgrade(Upgrade.LURE) * upgradesFile.config.getDouble("lure-upgrade-increment", 0.3)

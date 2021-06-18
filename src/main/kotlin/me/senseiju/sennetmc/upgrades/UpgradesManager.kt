@@ -1,7 +1,9 @@
 package me.senseiju.sennetmc.upgrades
 
+import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
+import me.senseiju.sennetmc.upgrades.commands.UpgradesCommand
 import me.senseiju.sennetmc.utils.datastorage.DataFile
 import java.util.*
 
@@ -11,8 +13,16 @@ class UpgradesManager(private val plugin: SennetMC) : BaseManager() {
 
     val upgradesFile = DataFile(plugin, "upgrades.yml", true)
 
+    init {
+        registerCommands(plugin.commandManager)
+    }
+
     override fun reload() {
         upgradesFile.reload()
+    }
+
+    override fun registerCommands(cm: CommandManager) {
+        cm.register(UpgradesCommand())
     }
 
     suspend fun fetchUpgrades(uuid: UUID): EnumMap<Upgrade, Int> {

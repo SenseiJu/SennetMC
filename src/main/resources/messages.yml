@@ -29,6 +29,7 @@ NPC-REMOVE-SUCCESS: "&aSuccessfully removed npc"
 NPC-NO-TARGET-FOUND: "&cNo NPC target found"
 NPC-INVALID-TARGET: "&cThis entity is not a valid NPC"
 NPC-NOT-SENNETMC: "&cThis NPC is not handled by SennetMC"
+NPC-MINIMUM-FISH-REQUIRED: "{npcName} &cYou need to catch at least &e{fishAmount} fish &cbefore speaking with me"
 
 # Merchant NPC
 MERCHANT-NO-FISH-TO-SELL: "{merchantName} &cYou have no fish to sell to me"
@@ -40,7 +41,6 @@ CAPTAIN-SPAWN-POINT-SET: "&aSpawn point has been set"
 CAPTAIN-INVALID-WARP-NAME: "&cInvalid warp name entered"
 
 # Chef NPC
-CHEF-NOT-ENOUGH-FISH-CAUGHT: "{chefName} &cYou need to catch at least &e{fishAmount} &cbefore speaking with me"
 CHEF-NO-FISH: "{chefName} &cYou have no fish for me"
 CHEF-ALREADY-RUNNING: "{chefName} &cI already have some fish, wait until I have finished before giving me more"
 CHEF-STARTED-RUNNING: "{chefName} &aOk, I will sell this fish, come collect your money later"
@@ -48,9 +48,6 @@ CHEF-FINISHED-RUNNING: "{chefName} &aI have your money ready, come and collect i
 
 # Sailor NPC
 SAILOR-REQUIRES-RANK: "{sailorName} &cYou must have a rank to speak with me"
-
-# Scrapper NPC
-SCRAPPER-NOT-ENOUGH-FISH-CAUGHT: "{scrapperName} &cYou need to catch at least &e{fishAmount} &cbefore speaking with me"
 
 # Fishing
 FISHING-MAX-FISH-CAPACITY-REACHED: "&cYou do not have enough capacity to continue fishing"

@@ -118,7 +118,7 @@ private fun createChefSellRunnable(chef: Chef, player: Player) {
     user.clearCurrentFishCaught()
 
     chef.chefSellRunnables[player.uniqueId] = runnable
-    chef.startChefSellRunnable(runnable)
+    runnable.start(plugin)
 
     player.sendConfigMessage(
         "CHEF-STARTED-RUNNING", false,

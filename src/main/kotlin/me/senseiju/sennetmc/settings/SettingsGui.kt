@@ -8,10 +8,9 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.Callback
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.defaultScope
-import me.senseiju.sennetmc.utils.extensions.color
-import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
-import me.senseiju.sennetmc.utils.extensions.string
+import me.senseiju.sennetmc.utils.extensions.*
 import org.bukkit.Material
+import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -88,8 +87,13 @@ private fun toggleNotifyEventMessages(gui: Gui, user: User): GuiItem {
 }
 
 private fun toggleableSettingGuiItem(
-    gui: Gui, user: User, material: Material, name: String, lore: List<String>,
-    setting: Setting, callback: Callback
+    gui: Gui,
+    user: User,
+    material: Material,
+    name: String,
+    lore: List<String>,
+    setting: Setting,
+    callback: Callback
 ): GuiItem {
     val loreWithToggle = ArrayList<String>(lore)
     loreWithToggle.add("")
@@ -100,7 +104,7 @@ private fun toggleableSettingGuiItem(
         .setLore(loreWithToggle.color())
         .asGuiItem { e ->
             user.toggleSetting(setting)
-
+            e.player.playSound(Sound.ENTITY_EXPERIENCE_ORB_PICKUP)
             gui.updateItem(e.slot, callback.invoke())
         }
 }

@@ -8,7 +8,6 @@ import me.senseiju.sennetmc.utils.CooldownManager
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.message
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import org.bukkit.entity.Zombie
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import java.util.*

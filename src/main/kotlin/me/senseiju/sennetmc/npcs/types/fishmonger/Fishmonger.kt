@@ -36,6 +36,6 @@ class Fishmonger(plugin: SennetMC) : BaseNpc {
     }
 
     override fun onNpcRightClick(e: NPCRightClickEvent) {
-        showFishmongerGui(e.clicker)
+        openFishmongerGui(e.clicker)
     }
 }

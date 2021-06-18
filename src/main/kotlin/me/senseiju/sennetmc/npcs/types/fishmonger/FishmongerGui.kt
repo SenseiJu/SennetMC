@@ -19,7 +19,7 @@ private val npcType = NpcType.FISHMONGER
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
 private val upgradesFile = plugin.upgradesManager.upgradesFile
 
-fun showFishmongerGui(player: Player) {
+fun openFishmongerGui(player: Player) {
     defaultScope.launch {
         val user = plugin.userManager.userMap[player.uniqueId] ?: return@launch
         val gui = defaultGuiTemplate(4, npcType.npcName)

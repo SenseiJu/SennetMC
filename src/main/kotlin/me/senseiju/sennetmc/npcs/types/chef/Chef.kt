@@ -53,18 +53,14 @@ class Chef(private val plugin: SennetMC) : BaseNpc {
 
         if (user.totalFishCaught < fishCaughtMinimum) {
             e.clicker.sendConfigMessage(
-                "CHEF-NOT-ENOUGH-FISH-CAUGHT", false,
-                PlaceholderSet("{chefName}", NPC_TYPE.npcName),
+                "NPC-MINIMUM-FISH-REQUIRED", false,
+                PlaceholderSet("{npcName}", NPC_TYPE.npcName),
                 PlaceholderSet("{fishAmount}", fishCaughtMinimum)
             )
             return
         }
 
         openChefGui(this, e.clicker)
-    }
-
-    fun startChefSellRunnable(runnable: ChefSellRunnable) {
-        runnable.runTaskTimerAsynchronously(plugin, 20L, 20L)
     }
 
     fun saveChefSellRunnables() {
@@ -86,7 +82,7 @@ class Chef(private val plugin: SennetMC) : BaseNpc {
 
             chefSellRunnables[chefSellRunnable.uuid] = chefSellRunnable
 
-            startChefSellRunnable(chefSellRunnable)
+            chefSellRunnable.start(plugin)
         }
     }
 }

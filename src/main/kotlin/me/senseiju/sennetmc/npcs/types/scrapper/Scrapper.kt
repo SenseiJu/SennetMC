@@ -40,8 +40,8 @@ class Scrapper(plugin: SennetMC) : BaseNpc {
 
         if (user.totalFishCaught < fishCaughtMinimum) {
             e.clicker.sendConfigMessage(
-                "SCRAPPER-NOT-ENOUGH-FISH-CAUGHT", false,
-                PlaceholderSet("{scrapperName}", NPC_TYPE.npcName),
+                "NPC-MINIMUM-FISH-REQUIRED", false,
+                PlaceholderSet("{npcName}", NPC_TYPE.npcName),
                 PlaceholderSet("{fishAmount}", fishCaughtMinimum)
             )
             return
