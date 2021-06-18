@@ -10,6 +10,7 @@ import me.senseiju.sennetmc.npcs.updateUpgradeGuiItem
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.defaultScope
+import me.senseiju.sennetmc.utils.extensions.decimalFormat
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -45,7 +46,7 @@ private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("&7Increase the chance of getting double crates")
     lore.add("&7during a successful cast")
     lore.add("")
-    lore.add("&7Cost: &e$$upgradeCost")
+    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(
@@ -67,7 +68,7 @@ private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("&7Increase the chance of successfully finding a")
     lore.add("&7crate when fishing")
     lore.add("")
-    lore.add("&7Cost: &e$$upgradeCost")
+    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(
@@ -89,7 +90,7 @@ private fun createCrateMasterUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("&7Increase the chance of getting higher tier")
     lore.add("&7crates on a successful cast")
     lore.add("")
-    lore.add("&7Cost: &e$$upgradeCost")
+    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(

@@ -4,6 +4,7 @@ import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sennetmc.utils.extensions.decimalFormat
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import java.util.*
@@ -52,5 +53,5 @@ fun getScrapAmountFromItem(item: ItemStack): Long {
 fun isItemScrap(item: ItemStack): Boolean = NBTItem(item).hasKey(SCRAP_KEY)
 
 private fun applyScrapAmountPlaceholder(scrapAmount: Long): String {
-    return NAME.replace("{amount}", scrapAmount.toString()).color()
+    return NAME.replace("{amount}", scrapAmount.decimalFormat()).color()
 }
