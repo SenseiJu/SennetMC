@@ -15,12 +15,19 @@ import java.util.*
 
 private val NPC_TYPE = NpcType.CHEF
 
+@Serializable
 class ChefSellRunnable(
-    val uuid: UUID,
+    @Serializable(UUIDSerializer::class) val uuid: UUID,
     val initialSellPrice: Double,
     override var timeToComplete: Long,
     override var finished: Boolean = false
 ) : CountdownBukkitRunnable() {
+
+    companion object {
+        fun fromJson(s: String): ChefSellRunnable {
+            return Json.decodeFromString(s)
+        }
+    }
 
     override fun onComplete() {
         Bukkit.getPlayer(uuid)?.sendConfigMessage(
@@ -30,25 +37,6 @@ class ChefSellRunnable(
     }
 
     fun toJson(): String {
-        val data = SerializableChefSellRunnable(uuid, timeToComplete, initialSellPrice, finished)
-
-        return Json.encodeToString(data)
-    }
-}
-
-@Serializable
-data class SerializableChefSellRunnable(
-    @Serializable(UUIDSerializer::class) private val uuid: UUID,
-    private val timeToComplete: Long,
-    private val initialSellPrice: Double,
-    private val finished: Boolean
-) {
-
-    companion object {
-        fun fromJson(s: String): ChefSellRunnable {
-            val data = Json.decodeFromString<SerializableChefSellRunnable>(s)
-
-            return ChefSellRunnable(data.uuid, data.initialSellPrice, data.timeToComplete, data.finished)
-        }
+        return Json.encodeToString(this)
     }
 }

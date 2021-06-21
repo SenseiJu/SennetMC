@@ -27,8 +27,8 @@ fun openUpgradeGui(player: Player) {
     defaultScope.launch {
         val gui = defaultGuiTemplate(3, "&b&lUpgrades")
 
-        gui.addItem(createUpgradeRedirectItem(player, NpcType.FISHMONGER, Material.FISHING_ROD, PERMISSION_COMMANDS_FISHMONGER))
-        gui.addItem(createUpgradeRedirectItem(player, NpcType.LOOTER, Material.CHEST, PERMISSION_COMMANDS_LOOTER))
+        gui.setItem(2, 4, createUpgradeRedirectItem(player, NpcType.FISHMONGER, Material.FISHING_ROD, PERMISSION_COMMANDS_FISHMONGER))
+        gui.setItem(2, 6, createUpgradeRedirectItem(player, NpcType.LOOTER, Material.CHEST, PERMISSION_COMMANDS_LOOTER))
 
         scheduler.runTask(plugin, Runnable { gui.open(player) })
     }

@@ -1,5 +1,9 @@
 package me.senseiju.sennetmc.equipment
 
-enum class Equipment {
-    FISHING_NET
+import me.senseiju.sennetmc.utils.extensions.color
+
+enum class Equipment(eqName: String) {
+    FISHING_NET("&e&lFishing net");
+
+    val eqName = eqName.color()
 }

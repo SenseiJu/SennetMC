@@ -46,6 +46,9 @@ CHEF-ALREADY-RUNNING: "{chefName} &cI already have some fish, wait until I have 
 CHEF-STARTED-RUNNING: "{chefName} &aOk, I will sell this fish, come collect your money later"
 CHEF-FINISHED-RUNNING: "{chefName} &aI have your money ready, come and collect it"
 
+# Scrapper NPC
+SCRAPPER-FINISHED-CRAFTING: "{npcName} &aYour &e{equipment} have finishing crafting, come and collect it"
+
 # Sailor NPC
 SAILOR-REQUIRES-RANK: "{sailorName} &cYou must have a rank to speak with me"
 

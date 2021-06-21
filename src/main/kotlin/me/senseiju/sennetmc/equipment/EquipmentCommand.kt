@@ -11,11 +11,6 @@ import org.bukkit.entity.Player
 @Command("equipment")
 class EquipmentCommand : CommandBase() {
 
-    @Default
-    fun onDefault(sender: Player) {
-
-    }
-
     @SubCommand("give")
     @Permission(PERMISSION_EQUIPMENT_GIVE)
     fun onGive(
