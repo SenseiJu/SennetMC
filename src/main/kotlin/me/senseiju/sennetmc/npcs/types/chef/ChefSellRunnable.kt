@@ -5,23 +5,22 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.senseiju.sennetmc.npcs.types.NpcType
-import me.senseiju.sennetmc.utils.CountdownBukkitRunnable
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.PlayerCountdownBukkitRunnable
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.serializers.UUIDSerializer
 import org.bukkit.Bukkit
-import org.bukkit.scheduler.BukkitRunnable
 import java.util.*
 
 private val NPC_TYPE = NpcType.CHEF
 
 @Serializable
 class ChefSellRunnable(
-    @Serializable(UUIDSerializer::class) val uuid: UUID,
     val initialSellPrice: Double,
+    @Serializable(UUIDSerializer::class) override val uuid: UUID,
     override var timeToComplete: Long,
     override var finished: Boolean = false
-) : CountdownBukkitRunnable() {
+) : PlayerCountdownBukkitRunnable() {
 
     companion object {
         fun fromJson(s: String): ChefSellRunnable {
@@ -30,8 +29,9 @@ class ChefSellRunnable(
     }
 
     override fun onComplete() {
-        Bukkit.getPlayer(uuid)?.sendConfigMessage(
-            "CHEF-FINISHED-RUNNING", false,
+        player?.sendConfigMessage(
+            "CHEF-FINISHED-RUNNING",
+            false,
             PlaceholderSet("{chefName}", NPC_TYPE.npcName)
         )
     }

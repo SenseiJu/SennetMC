@@ -66,7 +66,7 @@ private fun chefSellGuiItem(chef: Chef, player: Player): GuiItem {
         .setLore(lore.color())
         .asGuiItem {
             if (runnable == null) {
-                createChefSellRunnable(chef, player)
+                startChefSellRunnable(chef, player)
                 return@asGuiItem
             }
 
@@ -99,7 +99,7 @@ private fun collectMoneyFromRunnable(chefSellRunnable: ChefSellRunnable, player:
     player.playSound(player.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
 }
 
-private fun createChefSellRunnable(chef: Chef, player: Player) {
+private fun startChefSellRunnable(chef: Chef, player: Player) {
     val user = users[player.uniqueId] ?: return
 
     if (user.currentFishCaughtCapacity <= 0) {
@@ -113,7 +113,7 @@ private fun createChefSellRunnable(chef: Chef, player: Player) {
 
     val timePerCapacity = upgradesFile.config.getLong("chef-sell-time-per-capacity", 40)
     val timeToComplete = (timePerCapacity - getServingSpeedUpgrade(user)) * user.currentFishCaughtCapacity
-    val runnable = ChefSellRunnable(player.uniqueId, user.calculateSellPrice(), timeToComplete)
+    val runnable = ChefSellRunnable(initialSellPrice = user.calculateSellPrice(), player.uniqueId, timeToComplete)
 
     user.clearCurrentFishCaught()
 

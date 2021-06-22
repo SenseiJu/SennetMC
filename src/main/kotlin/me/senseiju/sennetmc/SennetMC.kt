@@ -26,6 +26,7 @@ import me.senseiju.sennetmc.utils.datastorage.Database
 import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import net.kyori.adventure.text.Component
+import net.milkbowl.vault.economy.Economy
 import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
@@ -48,7 +49,7 @@ class SennetMC : JavaPlugin() {
     private lateinit var npcManager: NpcManager
     private lateinit var eventsManager: EventsManager
     private lateinit var scrapManager: ScrapManager
-    private lateinit var equipmentManager: EquipmentManager
+    lateinit var equipmentManager: EquipmentManager
 
     override fun onEnable() {
         commandManager = CommandManager(this)
@@ -66,6 +67,11 @@ class SennetMC : JavaPlugin() {
         arenaManager = ArenaManager(this)
         scrapManager = ScrapManager(this)
         equipmentManager = EquipmentManager(this)
+
+        if (!validEconomy()) {
+            server.pluginManager.disablePlugin(this)
+            return
+        }
 
         SennetMCPlaceholderExpansion(this)
 
@@ -111,6 +117,16 @@ class SennetMC : JavaPlugin() {
 
     fun registerEvents(vararg listeners: Listener) {
         listeners.forEach { this.server.pluginManager.registerEvents(it, this) }
+    }
+
+    private fun validEconomy(): Boolean {
+        if (server.pluginManager.getPlugin("Vault") == null) {
+            return false
+        }
+
+        server.servicesManager.getRegistration(Economy::class.java) ?: return false
+
+        return true
     }
 
     private fun setupCommands() {

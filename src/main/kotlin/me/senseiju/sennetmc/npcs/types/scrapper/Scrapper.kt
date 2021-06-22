@@ -1,6 +1,7 @@
 package me.senseiju.sennetmc.npcs.types.scrapper
 
 import me.senseiju.sennetmc.SennetMC
+import me.senseiju.sennetmc.equipment.Equipment as SEquipment
 import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
@@ -12,6 +13,8 @@ import net.citizensnpcs.trait.SkinTrait
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
+import java.util.*
+import kotlin.collections.HashMap
 
 private const val SKIN_TEXTURE = ""
 private const val SKIN_SIGNATURE = ""
@@ -19,6 +22,8 @@ private const val SKIN_SIGNATURE = ""
 private val NPC_TYPE = NpcType.SCRAPPER
 
 class Scrapper(plugin: SennetMC) : BaseNpc {
+
+    val crafting = HashMap<UUID, EnumMap<SEquipment, CraftableEquipment>>()
 
     private val users = plugin.userManager.userMap
     private val upgradesFile = plugin.upgradesManager.upgradesFile
@@ -40,14 +45,15 @@ class Scrapper(plugin: SennetMC) : BaseNpc {
 
         if (user.totalFishCaught < fishCaughtMinimum) {
             e.clicker.sendConfigMessage(
-                "NPC-MINIMUM-FISH-REQUIRED", false,
+                "NPC-MINIMUM-FISH-REQUIRED",
+                false,
                 PlaceholderSet("{npcName}", NPC_TYPE.npcName),
                 PlaceholderSet("{fishAmount}", fishCaughtMinimum)
             )
             return
         }
 
-        showScrapperGui(e.clicker)
+        showScrapperGui(this, e.clicker)
     }
 
 }

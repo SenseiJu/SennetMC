@@ -2,12 +2,14 @@ package me.senseiju.sennetmc.equipment.fishing_net
 
 import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mfgui.gui.components.ItemBuilder
+import me.senseiju.sennetmc.equipment.Equipment
 import me.senseiju.sennetmc.utils.extensions.color
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
 const val NET_NBT_KEY = "COSMO_FISHING_NET"
 
+private val equipment = Equipment.FISHING_NET
 private val fishingNetName = "&e&lFishing net".color()
 private val fishingNetLore = listOf(
     "",
@@ -19,7 +21,7 @@ private val fishingNetLore = listOf(
 ).color()
 
 fun createFishingNetItem(amount: Int = 1): ItemStack {
-    val item = ItemBuilder.from(Material.SNOWBALL)
+    val item = ItemBuilder.from(equipment.material)
         .setAmount(amount)
         .setName(fishingNetName)
         .setLore(fishingNetLore)
@@ -33,7 +35,7 @@ fun createFishingNetItem(amount: Int = 1): ItemStack {
 }
 
 fun isItemFishingNet(item: ItemStack): Boolean {
-    if (item.type != Material.SNOWBALL) {
+    if (item.type != equipment.material) {
         return false
     }
 

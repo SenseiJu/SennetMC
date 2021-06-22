@@ -9,7 +9,6 @@ import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.serializers.UUIDSerializer
-import org.bukkit.Bukkit
 import java.util.*
 
 @Serializable
@@ -29,7 +28,7 @@ class CraftableEquipment(
     }
 
     override fun onComplete() {
-        Bukkit.getPlayer(uuid)?.sendConfigMessage(
+        player?.sendConfigMessage(
             "SCRAPPER-FINISHED-CRAFTING",
             false,
             PlaceholderSet("npcName", NpcType.SCRAPPER.npcName),

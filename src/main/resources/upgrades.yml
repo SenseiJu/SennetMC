@@ -68,3 +68,8 @@ serving-speed-upgrade-starting-cost: 800.0
 seasoning-upgrade-increment: 0.2
 seasoning-upgrade-starting-cost: 400.0
 seasoning-upgrade-max: 20
+
+#
+# Scrapper NPC
+#
+scrapper-fish-caught-minimum: 50
