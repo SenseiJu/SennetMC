@@ -31,13 +31,13 @@ class ScrapCommand : CommandBase() {
         }
 
         if (scrapAmount == null) {
-            sender.sendConfigMessage("SCRAP-INVALID-AMOUNT")
+            sender.sendConfigMessage("INVALID-AMOUNT")
             return
         }
 
         val scrap = parseScrapAmount(scrapAmount)
         if (scrap == null) {
-            sender.sendConfigMessage("SCRAP-INVALID-AMOUNT")
+            sender.sendConfigMessage("INVALID-AMOUNT")
             return
         }
 
@@ -47,7 +47,7 @@ class ScrapCommand : CommandBase() {
     @SubCommand("Split")
     fun split(sender: Player, amount: Long?) {
         if (amount == null || amount <= 0) {
-            sender.sendConfigMessage("SCRAP-INVALID-AMOUNT")
+            sender.sendConfigMessage("INVALID-AMOUNT")
             return
         }
 

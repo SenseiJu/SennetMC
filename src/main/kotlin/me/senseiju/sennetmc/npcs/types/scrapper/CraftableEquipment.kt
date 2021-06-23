@@ -7,6 +7,7 @@ import kotlinx.serialization.json.Json
 import me.senseiju.sennetmc.equipment.Equipment
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.PlayerCountdownBukkitRunnable
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.serializers.UUIDSerializer
 import java.util.*
@@ -14,12 +15,10 @@ import java.util.*
 @Serializable
 class CraftableEquipment(
     private val equipment: Equipment,
-    override val scrapCost: Long,
-    override val moneyCost: Long,
     @Serializable(UUIDSerializer::class) override val uuid: UUID,
     override var timeToComplete: Long,
     override var finished: Boolean,
-) : Craftable() {
+) : PlayerCountdownBukkitRunnable() {
 
     companion object {
         fun fromJson(s: String): CraftableEquipment {

@@ -16,6 +16,8 @@ import me.senseiju.sennetmc.utils.secondsToTimeFormat
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+import java.util.*
+import java.util.function.Function
 
 private val npcType = NpcType.SCRAPPER
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
@@ -80,17 +82,30 @@ private fun fishingNetGuiItem(scrapper: Scrapper, player: Player): GuiItem {
 private fun startCraftingEquipment(scrapper: Scrapper, player: Player, equipment: Equipment) {
     val scrapCost = equipmentFile.config.getLong("${equipment}.crafting-scrap-cost", 100)
     val moneyCost = equipmentFile.config.getDouble("${equipment}.crafting-money-cost", 2500.0)
-    val timeToComplete = equipmentFile.config.getInt("${equipment}.crafting-time", 3600)
+    val timeToComplete = equipmentFile.config.getLong("${equipment}.crafting-time", 3600)
 
     if (!player.inventory.hasScrap(scrapCost)) {
-        player.sendConfigMessage("")
+        player.sendConfigMessage("SCRAP-NOT-ENOUGH")
         return
     }
 
     if (econ?.has(player, moneyCost) == false) {
-        player.sendConfigMessage("")
+        player.sendConfigMessage("MONEY-NOT-ENOUGH")
         return
     }
 
-    println("success")
+    player.inventory.removeScrap(scrapCost)
+    econ?.withdrawPlayer(player, moneyCost)
+
+    val craftable = CraftableEquipment(equipment, player.uniqueId, timeToComplete, false)
+    scrapper.crafting.computeIfAbsent(player.uniqueId) { EnumMap(Equipment::class.java) }[equipment] = craftable
+    craftable.start(plugin)
+
+    player.sendConfigMessage(
+        "SCRAPPER-STARTED-CRAFTING",
+        false,
+        PlaceholderSet("{npcName}", NpcType.SCRAPPER.npcName)
+        )
+
+    player.closeInventory()
 }

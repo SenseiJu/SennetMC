@@ -25,7 +25,7 @@ private val lore = listOf(
     "&7dropping onto another scrap item"
 ).color()
 
-fun createScrapItem(scrapAmount: Long): ItemStack {
+private fun createScrapItem(scrapAmount: Long): ItemStack {
     val nbtItem = NBTItem(
         ItemBuilder.from(Material.RED_DYE)
             .setName(applyScrapAmountPlaceholder(scrapAmount))
@@ -37,6 +37,10 @@ fun createScrapItem(scrapAmount: Long): ItemStack {
     nbtItem.setUUID(UUID_KEY, UUID.randomUUID())
 
     return nbtItem.item
+}
+
+private fun applyScrapAmountPlaceholder(scrapAmount: Long): String {
+    return NAME.replace("{amount}", scrapAmount.decimalFormat()).color()
 }
 
 fun ItemStack.isScrap(): Boolean {
@@ -59,10 +63,13 @@ fun ItemStack.removeScrap(amount: Long): ItemStack {
     return createScrapItem(NBTItem(this).getLong(SCRAP_KEY) - amount)
 }
 
-private fun applyScrapAmountPlaceholder(scrapAmount: Long): String {
-    return NAME.replace("{amount}", scrapAmount.decimalFormat()).color()
-}
-
+/**
+ * Checks if the player has enough scrap
+ *
+ * @param amount the required amount
+ *
+ * @return true if the player has enough, false otherwise
+ */
 fun PlayerInventory.hasScrap(amount: Long): Boolean {
     storageContents.forEachNotNullOrAir { itemStack ->
         if (!itemStack.isScrap()) {
@@ -79,6 +86,12 @@ fun PlayerInventory.hasScrap(amount: Long): Boolean {
     return false
 }
 
+/**
+ * Adds scrap to the players inventory either as a new stack or to a previous item
+ *
+ * @param amount the amount to add
+ * @param newStack whether the scrap to add should make a new item
+ */
 fun PlayerInventory.addScrap(amount: Long, newStack: Boolean = false) {
     if (!newStack) {
         storageContents.forEachNotNullOrAir { itemStack ->

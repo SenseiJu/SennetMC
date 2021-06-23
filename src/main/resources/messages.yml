@@ -9,6 +9,7 @@ DISCORD-LINK: "&b&ehttps://discord.sennetmc.com"
 BUYCRAFT-LINK: "&b&ehttps://shop.sennetmc.com"
 RESOURCE-PACK: "&dTo enable, edit the server in multiplayer at the main menu and enable the resource pack"
 INVALID-AMOUNT: "&cInvalid amount specified"
+MONEY-NOT-ENOUGH: "&cYou do not have enough money"
 
 # Collectables
 COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
@@ -47,7 +48,8 @@ CHEF-STARTED-RUNNING: "{chefName} &aOk, I will sell this fish, come collect your
 CHEF-FINISHED-RUNNING: "{chefName} &aI have your money ready, come and collect it"
 
 # Scrapper NPC
-SCRAPPER-ALREADY-CRAFTING: "{npcName} &aI am already crafting this for you, just wait dude"
+SCRAPPER-ALREADY-CRAFTING: "{npcName} &cI am already crafting this for you, just wait dude"
+SCRAPPER-STARTED-CRAFTING: "{npcName} &aI'll take care of this, come back to me when its finished crafting"
 SCRAPPER-FINISHED-CRAFTING: "{npcName} &aYour &e{equipment} have finishing crafting, come and collect it"
 
 # Sailor NPC
@@ -122,6 +124,6 @@ ARENA-LOSE: "&cYou lost the wager"
 ARENA-MATCH-FINISHED: "&#de5757&lArena &8&l» &a{winner} &bwon a wager against &c{loser}"
 
 # Scrap
-SCRAP-INVALID-AMOUNT: "&cInvalid amount of scrap entered"
+SCRAP-NOT-ENOUGH: "&cYou do not have enough scrap"
 SCRAP-INVALID-ITEM: "&cInvalid item, you must be holding scrap"
 SCRAP-TOO-MUCH-TO-SPLIT: "&cYou cannot split more than or equal to the amount you already have"
