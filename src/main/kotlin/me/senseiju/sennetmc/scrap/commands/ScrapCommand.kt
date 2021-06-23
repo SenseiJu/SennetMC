@@ -6,7 +6,10 @@ import me.mattstudios.mf.annotations.Permission
 import me.mattstudios.mf.annotations.SubCommand
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_SCRAP_GIVE
-import me.senseiju.sennetmc.scrap.*
+import me.senseiju.sennetmc.scrap.addScrap
+import me.senseiju.sennetmc.scrap.getScrap
+import me.senseiju.sennetmc.scrap.isScrap
+import me.senseiju.sennetmc.scrap.removeScrap
 import me.senseiju.sennetmc.utils.extensions.isNullOrAir
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.Sound

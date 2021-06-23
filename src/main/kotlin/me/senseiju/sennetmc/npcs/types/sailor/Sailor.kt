@@ -1,7 +1,6 @@
 package me.senseiju.sennetmc.npcs.types.sailor
 
 import me.senseiju.sennetmc.PERMISSION_SPEEDBOAT_USE
-import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
@@ -23,7 +22,7 @@ private val NPC_TYPE = NpcType.SAILOR
 class Sailor : BaseNpc {
 
     override fun spawnNpc(location: Location) {
-        val npc = createBasicNpc(NPC_TYPE)
+        val npc = NPC_TYPE.createBasicNpc()
         npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
         npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.HAND, ItemStack(Material.OAK_BOAT))
         npc.spawn(location)

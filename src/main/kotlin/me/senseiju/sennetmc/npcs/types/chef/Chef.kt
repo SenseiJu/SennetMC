@@ -4,7 +4,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
@@ -38,7 +37,7 @@ class Chef(private val plugin: SennetMC) : BaseNpc {
     }
 
     override fun spawnNpc(location: Location) {
-        val npc = createBasicNpc(NPC_TYPE)
+        val npc = NPC_TYPE.createBasicNpc()
 
         npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
 

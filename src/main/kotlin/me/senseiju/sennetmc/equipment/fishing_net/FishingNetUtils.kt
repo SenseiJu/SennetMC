@@ -4,7 +4,6 @@ import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.equipment.Equipment
 import me.senseiju.sennetmc.utils.extensions.color
-import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
 const val NET_NBT_KEY = "COSMO_FISHING_NET"

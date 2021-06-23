@@ -1,7 +1,12 @@
 package me.senseiju.sennetmc.npcs.types
 
 import me.senseiju.sennetmc.utils.extensions.color
+import net.citizensnpcs.api.CitizensAPI
 import net.citizensnpcs.api.npc.NPC
+import net.citizensnpcs.trait.LookClose
+import org.bukkit.entity.EntityType
+
+private val REGISTRY = CitizensAPI.getNPCRegistry()
 
 enum class NpcType(npcName: String) {
     FISHMONGER("&3&lFishmonger Freddy"),
@@ -20,5 +25,15 @@ enum class NpcType(npcName: String) {
 
             return values().contains(valueOf(npc.data().get("npc-type")))
         }
+    }
+
+    fun createBasicNpc(): NPC {
+        val npc = REGISTRY.createNPC(EntityType.PLAYER, npcName)
+        npc.data().setPersistent("npc-type", name)
+        npc.name = npcName
+        npc.isProtected = true
+        npc.getOrAddTrait(LookClose::class.java).lookClose(true)
+
+        return npc
     }
 }

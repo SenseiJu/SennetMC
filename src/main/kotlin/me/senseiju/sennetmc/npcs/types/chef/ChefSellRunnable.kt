@@ -9,7 +9,6 @@ import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.PlayerCountdownBukkitRunnable
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.serializers.UUIDSerializer
-import org.bukkit.Bukkit
 import java.util.*
 
 private val NPC_TYPE = NpcType.CHEF

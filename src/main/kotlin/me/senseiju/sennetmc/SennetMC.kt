@@ -9,7 +9,6 @@ import me.senseiju.sennetmc.commands.ReloadCommand
 import me.senseiju.sennetmc.commands.ResourcePackCommand
 import me.senseiju.sennetmc.crates.CratesManager
 import me.senseiju.sennetmc.equipment.EquipmentManager
-import me.senseiju.sennetmc.equipment.fishing_net.FishingNetListener
 import me.senseiju.sennetmc.events.EventsManager
 import me.senseiju.sennetmc.fishes.FishManager
 import me.senseiju.sennetmc.npcs.NpcManager

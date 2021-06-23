@@ -17,7 +17,6 @@ import net.milkbowl.vault.economy.Economy
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
-import java.util.function.Function
 
 private val npcType = NpcType.SCRAPPER
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)

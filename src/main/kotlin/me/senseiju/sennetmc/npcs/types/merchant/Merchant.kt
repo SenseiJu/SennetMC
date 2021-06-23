@@ -1,7 +1,6 @@
 package me.senseiju.sennetmc.npcs.types.merchant
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.merchant.commands.SellCommand
@@ -37,7 +36,7 @@ class Merchant(private val plugin: SennetMC) : BaseNpc {
     private val upgradesFile = plugin.upgradesManager.upgradesFile
 
     override fun spawnNpc(location: Location) {
-        val npc = createBasicNpc(NPC_TYPE)
+        val npc = NPC_TYPE.createBasicNpc()
         npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
         npc.getOrAddTrait(Equipment::class.java).set(Equipment.EquipmentSlot.HAND, ItemStack(Material.EMERALD))
         npc.spawn(location)

@@ -13,8 +13,10 @@ import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
+import kotlin.math.pow
 
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
+private val upgradesFile = plugin.upgradesManager.upgradesFile
 private val econ = plugin.server.servicesManager.getRegistration(Economy::class.java)?.provider
 
 fun updateUpgradeGuiItem(
@@ -51,4 +53,12 @@ fun updateUpgradeGuiItem(
 
 fun interface Callback {
     fun invoke(): GuiItem
+}
+
+fun calculateNextUpgradeCost(
+    baseCost: Double,
+    currentUpgrades: Int,
+    growthRate: Double = upgradesFile.config.getDouble("growth-rate", 1.3)
+): Double {
+    return "%.2f".format(baseCost * growthRate.pow(currentUpgrades)).toDouble()
 }

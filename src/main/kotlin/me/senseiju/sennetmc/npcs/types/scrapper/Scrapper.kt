@@ -1,8 +1,6 @@
 package me.senseiju.sennetmc.npcs.types.scrapper
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.equipment.Equipment as SEquipment
-import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
@@ -14,7 +12,7 @@ import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import java.util.*
-import kotlin.collections.HashMap
+import me.senseiju.sennetmc.equipment.Equipment as SEquipment
 
 private const val SKIN_TEXTURE = ""
 private const val SKIN_SIGNATURE = ""
@@ -29,7 +27,7 @@ class Scrapper(plugin: SennetMC) : BaseNpc {
     private val upgradesFile = plugin.upgradesManager.upgradesFile
 
     override fun spawnNpc(location: Location) {
-        val npc = createBasicNpc(NPC_TYPE)
+        val npc = NPC_TYPE.createBasicNpc()
 
         npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
 

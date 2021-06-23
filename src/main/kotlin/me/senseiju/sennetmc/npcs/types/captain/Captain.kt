@@ -1,7 +1,6 @@
 package me.senseiju.sennetmc.npcs.types.captain
 
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.npcs.createBasicNpc
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.captain.commands.CaptainCommand
@@ -21,7 +20,7 @@ class Captain(plugin: SennetMC) : BaseNpc {
     }
 
     override fun spawnNpc(location: Location) {
-        val npc = createBasicNpc(NPC_TYPE)
+        val npc = NPC_TYPE.createBasicNpc()
 
         npc.getOrAddTrait(SkinTrait::class.java).setSkinPersistent(NPC_TYPE.name, SKIN_SIGNATURE, SKIN_TEXTURE)
 
