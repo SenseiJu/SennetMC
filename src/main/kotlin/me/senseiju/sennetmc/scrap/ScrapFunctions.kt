@@ -8,8 +8,6 @@ import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.decimalFormat
 import me.senseiju.sennetmc.utils.extensions.forEachNotNullOrAir
 import org.bukkit.Material
-import org.bukkit.entity.Item
-import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.PlayerInventory
 import java.util.*
@@ -41,25 +39,25 @@ fun createScrapItem(scrapAmount: Long): ItemStack {
     return nbtItem.item
 }
 
-fun addScrapAmountToItem(item: ItemStack, toAdd: ItemStack): ItemStack {
-    return createScrapItem(NBTItem(item).getLong(SCRAP_KEY) + NBTItem(toAdd).getLong(SCRAP_KEY))
+fun ItemStack.isScrap(): Boolean {
+    return NBTItem(this).hasKey(SCRAP_KEY)
 }
 
-fun addScrapAmountToItem(item: ItemStack, amount: Long): ItemStack {
-    return createScrapItem(NBTItem(item).getLong(SCRAP_KEY) + amount)
+fun ItemStack.getScrap(): Long {
+    return NBTItem(this).getLong(SCRAP_KEY)
 }
 
-fun removeScrapAmountFromItem(item: ItemStack, toRemove: Long): ItemStack {
-    return createScrapItem(NBTItem(item).getLong(SCRAP_KEY) - toRemove)
+fun ItemStack.addScrap(amount: Long): ItemStack {
+    return createScrapItem(NBTItem(this).getLong(SCRAP_KEY) + amount)
 }
 
-fun getScrapAmountFromItem(item: ItemStack): Long {
-    return with(NBTItem(item)) {
-        if (this.hasKey(SCRAP_KEY)) this.getLong(SCRAP_KEY) else 0
-    }
+fun ItemStack.addScrap(toAdd: ItemStack): ItemStack {
+    return addScrap(NBTItem(toAdd).getLong(SCRAP_KEY))
 }
 
-fun isItemScrap(item: ItemStack): Boolean = NBTItem(item).hasKey(SCRAP_KEY)
+fun ItemStack.removeScrap(amount: Long): ItemStack {
+    return createScrapItem(NBTItem(this).getLong(SCRAP_KEY) - amount)
+}
 
 private fun applyScrapAmountPlaceholder(scrapAmount: Long): String {
     return NAME.replace("{amount}", scrapAmount.decimalFormat()).color()
@@ -67,11 +65,11 @@ private fun applyScrapAmountPlaceholder(scrapAmount: Long): String {
 
 fun PlayerInventory.hasScrap(amount: Long): Boolean {
     storageContents.forEachNotNullOrAir { itemStack ->
-        if (!isItemScrap(itemStack)) {
+        if (!itemStack.isScrap()) {
             return@forEachNotNullOrAir
         }
 
-        if (getScrapAmountFromItem(itemStack) < amount) {
+        if (itemStack.getScrap() < amount) {
             return@forEachNotNullOrAir
         }
 
@@ -82,20 +80,17 @@ fun PlayerInventory.hasScrap(amount: Long): Boolean {
 }
 
 fun PlayerInventory.addScrap(amount: Long, newStack: Boolean = false) {
-    if (newStack) {
-        addItemOrDropNaturally(createScrapItem(amount))
-        return
-    }
+    if (!newStack) {
+        storageContents.forEachNotNullOrAir { itemStack ->
+            if (!itemStack.isScrap()) {
+                return@forEachNotNullOrAir
+            }
 
-    storageContents.forEachNotNullOrAir { itemStack ->
-        if (!isItemScrap(itemStack)) {
-            return@forEachNotNullOrAir
+            remove(itemStack)
+            addItemOrDropNaturally(itemStack.addScrap(amount))
+
+            return
         }
-
-        remove(itemStack)
-        addItemOrDropNaturally(addScrapAmountToItem(itemStack, amount))
-
-        return
     }
 
     addItemOrDropNaturally(createScrapItem(amount))
@@ -110,11 +105,11 @@ fun PlayerInventory.addScrap(amount: Long, newStack: Boolean = false) {
  */
 fun PlayerInventory.removeScrap(amount: Long): Boolean {
     storageContents.forEachNotNullOrAir { itemStack ->
-        if (!isItemScrap(itemStack)) {
+        if (!itemStack.isScrap()) {
             return@forEachNotNullOrAir
         }
 
-        val amountInItem = getScrapAmountFromItem(itemStack)
+        val amountInItem = itemStack.getScrap()
         if (amountInItem < amount) {
             return@forEachNotNullOrAir
         }
@@ -122,7 +117,7 @@ fun PlayerInventory.removeScrap(amount: Long): Boolean {
         remove(itemStack)
 
         if (amountInItem != amount) {
-            addItem(removeScrapAmountFromItem(itemStack, amount))
+            addItem(itemStack.removeScrap(amount))
         }
 
         return true

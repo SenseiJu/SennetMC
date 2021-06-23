@@ -7,15 +7,12 @@ import me.mattstudios.mf.annotations.SubCommand
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_SCRAP_GIVE
 import me.senseiju.sennetmc.scrap.*
-import me.senseiju.sennetmc.utils.extensions.addItemOrDropNaturally
 import me.senseiju.sennetmc.utils.extensions.isNullOrAir
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 import java.util.*
-import java.util.concurrent.ThreadLocalRandom
 
 @Command("Scrap")
 class ScrapCommand : CommandBase() {
@@ -48,25 +45,25 @@ class ScrapCommand : CommandBase() {
     }
 
     @SubCommand("Split")
-    fun split(sender: Player, scrapAmountToRemove: Long?) {
-        if (scrapAmountToRemove == null || scrapAmountToRemove <= 0) {
+    fun split(sender: Player, amount: Long?) {
+        if (amount == null || amount <= 0) {
             sender.sendConfigMessage("SCRAP-INVALID-AMOUNT")
             return
         }
 
         val item = sender.inventory.itemInMainHand
-        if (item.isNullOrAir() || !isItemScrap(item)) {
+        if (item.isNullOrAir() || !item.isScrap()) {
             sender.sendConfigMessage("SCRAP-INVALID-ITEM")
             return
         }
 
-        if (scrapAmountToRemove >= getScrapAmountFromItem(item)) {
+        if (amount >= item.getScrap()) {
             sender.sendConfigMessage("SCRAP-TOO-MUCH-TO-SPLIT")
             return
         }
 
-        sender.inventory.setItemInMainHand(removeScrapAmountFromItem(item, scrapAmountToRemove))
-        sender.inventory.addScrap(scrapAmountToRemove, true)
+        sender.inventory.setItemInMainHand(item.removeScrap(amount))
+        sender.inventory.addScrap(amount, true)
         sender.playSound(sender.location, Sound.ENTITY_EXPERIENCE_ORB_PICKUP, 1.0f, 1.0f)
     }
 
