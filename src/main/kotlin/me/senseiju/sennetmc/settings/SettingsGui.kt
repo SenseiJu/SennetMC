@@ -8,7 +8,12 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.Callback
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.defaultScope
-import me.senseiju.sennetmc.utils.extensions.*
+import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
+import me.senseiju.sennetmc.utils.extensions.string
+import me.senseiju.sentils.extensions.color
+import me.senseiju.sentils.extensions.entity.playSound
+import me.senseiju.sentils.extensions.events.player
+import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player

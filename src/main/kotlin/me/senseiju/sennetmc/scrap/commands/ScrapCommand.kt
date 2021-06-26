@@ -10,8 +10,8 @@ import me.senseiju.sennetmc.scrap.addScrap
 import me.senseiju.sennetmc.scrap.getScrap
 import me.senseiju.sennetmc.scrap.isScrap
 import me.senseiju.sennetmc.scrap.removeScrap
-import me.senseiju.sennetmc.utils.extensions.isNullOrAir
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.extensions.isNullOrAir
 import org.bukkit.Sound
 import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player

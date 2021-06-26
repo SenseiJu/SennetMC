@@ -22,8 +22,8 @@ import me.senseiju.sennetmc.users.UserManager
 import me.senseiju.sennetmc.users.UserTable
 import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.datastorage.Database
-import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.extensions.primitives.color
 import net.kyori.adventure.text.Component
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.event.Listener

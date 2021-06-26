@@ -4,8 +4,8 @@ import me.mattstudios.mf.annotations.*
 import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_EQUIPMENT_GIVE
 import me.senseiju.sennetmc.equipment.fishing_net.createFishingNetItem
-import me.senseiju.sennetmc.utils.extensions.addItemOrDropNaturally
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.extensions.entity.addItemOrDropNaturally
 import org.bukkit.entity.Player
 
 @Command("equipment")

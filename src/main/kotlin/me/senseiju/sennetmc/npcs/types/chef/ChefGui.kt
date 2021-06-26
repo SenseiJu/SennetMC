@@ -12,11 +12,12 @@ import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
-import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
 import me.senseiju.sennetmc.utils.extensions.round
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.secondsToTimeFormat
+import me.senseiju.sentils.extensions.color
+import me.senseiju.sentils.extensions.primitives.color
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Material
 import org.bukkit.Sound

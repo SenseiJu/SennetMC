@@ -7,10 +7,10 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
-import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
-import me.senseiju.sennetmc.utils.extensions.deserializeFullLocation
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.extensions.locationFromString
+import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.Location
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -32,7 +32,7 @@ fun showCaptainGui(player: Player) {
             val slot = warpSection.getInt("slot", 0)
             val name = warpSection.getString("name", "UNSET_NAME") ?: return@forEach
             val material = Material.matchMaterial(warpSection.getString("material", "BEDROCK")!!) ?: return@forEach
-            val spawnPoint = deserializeFullLocation(warpSection.getString("spawn-point", null) ?: return@forEach)
+            val spawnPoint = locationFromString(warpSection.getString("spawn-point", null) ?: return@forEach)
 
             gui.setItem(slot, createWarpGuiItem(name, material, spawnPoint))
         }

@@ -10,8 +10,8 @@ import me.senseiju.sennetmc.npcs.updateUpgradeGuiItem
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.defaultScope
-import me.senseiju.sennetmc.utils.extensions.decimalFormat
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
+import me.senseiju.sentils.extensions.primitives.asCurrencyFormat
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -48,7 +48,7 @@ private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("")
     lore.add("&7Increase your fishing capacity")
     lore.add("")
-    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
+    lore.add("&7Cost: &e${upgradeCost.asCurrencyFormat("$")}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(
@@ -69,7 +69,7 @@ private fun createNegotiateUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("")
     lore.add("&7Increase the amount your fish will sell")
     lore.add("")
-    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
+    lore.add("&7Cost: &e${upgradeCost.asCurrencyFormat("$")}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(
@@ -90,7 +90,7 @@ private fun createBaitUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("")
     lore.add("&7Increase the rate at which you catch fish")
     lore.add("")
-    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
+    lore.add("&7Cost: &e${upgradeCost.asCurrencyFormat("$")}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(
@@ -112,7 +112,7 @@ private fun createDeuceUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("&7Increase the chance of getting double fish")
     lore.add("&7during a successful cast")
     lore.add("")
-    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
+    lore.add("&7Cost: &e${upgradeCost.asCurrencyFormat("$")}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(
@@ -135,7 +135,7 @@ private fun createFeastUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("&7people near you a free fish of the")
     lore.add("&7same type on a successful cast")
     lore.add("")
-    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
+    lore.add("&7Cost: &e${upgradeCost.asCurrencyFormat("$")}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(
@@ -157,7 +157,7 @@ private fun createLureUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("&7Increase the chance to get a larger")
     lore.add("&7fish more frequently")
     lore.add("")
-    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
+    lore.add("&7Cost: &e${upgradeCost.asCurrencyFormat("$")}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(

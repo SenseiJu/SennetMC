@@ -10,8 +10,8 @@ import me.senseiju.sennetmc.npcs.updateUpgradeGuiItem
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.defaultScope
-import me.senseiju.sennetmc.utils.extensions.decimalFormat
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
+import me.senseiju.sentils.extensions.primitives.asCurrencyFormat
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -46,7 +46,7 @@ private fun createSpeedboatSpeedUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     lore.add("&7Increase your boats speed when toggling")
     lore.add("&7to speedboat mode")
     lore.add("")
-    lore.add("&7Cost: &e$${upgradeCost.decimalFormat()}")
+    lore.add("&7Cost: &e${upgradeCost.asCurrencyFormat("$")}")
     lore.add("&7Current upgrades/Max upgrades: &e$currentUpgrades/$upgradeMax")
 
     return updateUpgradeGuiItem(

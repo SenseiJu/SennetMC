@@ -6,9 +6,9 @@ import me.senseiju.sennetmc.fishes.events.PlayerCaughtFishEvent
 import me.senseiju.sennetmc.settings.Setting
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
-import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.percentChance
+import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.event.EventHandler

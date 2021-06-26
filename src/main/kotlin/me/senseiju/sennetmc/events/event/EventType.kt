@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc.events.event
 
-import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sentils.extensions.primitives.color
 import kotlin.random.Random
 
 enum class EventType(title: String) {

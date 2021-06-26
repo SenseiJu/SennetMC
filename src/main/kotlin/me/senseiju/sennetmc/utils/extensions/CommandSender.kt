@@ -2,6 +2,7 @@ package me.senseiju.sennetmc.utils.extensions
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.command.CommandSender
 import org.bukkit.plugin.java.JavaPlugin
 

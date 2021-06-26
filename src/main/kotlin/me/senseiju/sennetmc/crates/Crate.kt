@@ -2,9 +2,10 @@ package me.senseiju.sennetmc.crates
 
 import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mfgui.gui.components.ItemBuilder
-import me.senseiju.sennetmc.utils.extensions.addItemOrDropNaturally
-import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.probabilityChance
+import me.senseiju.sentils.extensions.color
+import me.senseiju.sentils.extensions.entity.addItemOrDropNaturally
+import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -18,7 +19,7 @@ class Crate(
     private val item = createItemStack(description)
 
     fun giveCrate(player: Player, amount: Int = 1) {
-        player.inventory.addItemOrDropNaturally(item.clone().asQuantity(amount), player.location)
+        player.inventory.addItemOrDropNaturally(item.clone().asQuantity(amount))
     }
 
 
@@ -27,7 +28,7 @@ class Crate(
         return Random.nextInt(1, maxCratesPerCast + 1)
     }
 
-    fun selectRandomReward(): Reward = probabilityChance(rewards.map { it to it.probability }.toMap())
+    fun selectRandomReward(): Reward = probabilityChance(rewards.associateWith { it.probability })
 
     private fun createItemStack(description: List<String>): ItemStack {
         val descriptionFormatted = ArrayList<String>()

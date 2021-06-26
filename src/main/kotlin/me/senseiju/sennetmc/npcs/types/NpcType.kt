@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc.npcs.types
 
-import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sentils.extensions.primitives.color
 import net.citizensnpcs.api.CitizensAPI
 import net.citizensnpcs.api.npc.NPC
 import net.citizensnpcs.trait.LookClose

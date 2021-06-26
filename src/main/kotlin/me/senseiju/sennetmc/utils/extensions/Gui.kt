@@ -3,6 +3,7 @@ package me.senseiju.sennetmc.utils.extensions
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.Gui
 import me.mattstudios.mfgui.gui.guis.PaginatedGui
+import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.Material
 
 fun defaultPaginatedGuiTemplate(row: Int, pageSize: Int, name: String): PaginatedGui {

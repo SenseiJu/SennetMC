@@ -1,6 +1,6 @@
 package me.senseiju.sennetmc.arena
 
-import me.senseiju.sennetmc.utils.extensions.addItemOrDropNaturally
+import me.senseiju.sentils.extensions.entity.addItemOrDropNaturally
 import org.bukkit.Location
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
@@ -23,13 +23,13 @@ class ArenaPlayer(val player: Player, val wager: List<ItemStack>) {
     fun refundInventoryAndWager() {
         refundInventory()
 
-        wager.forEach { player.inventory.addItemOrDropNaturally(it, player.location) }
+        wager.forEach { player.inventory.addItemOrDropNaturally(it) }
     }
 
     fun refundInventoryWithWinnings(winnings: List<ItemStack>) {
         refundInventoryAndWager()
 
-        winnings.forEach { player.inventory.addItemOrDropNaturally(it, player.location) }
+        winnings.forEach { player.inventory.addItemOrDropNaturally(it) }
     }
 
 }

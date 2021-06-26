@@ -11,8 +11,12 @@ import me.senseiju.sennetmc.scrap.hasScrap
 import me.senseiju.sennetmc.scrap.removeScrap
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
-import me.senseiju.sennetmc.utils.extensions.*
+import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sennetmc.utils.secondsToTimeFormat
+import me.senseiju.sentils.extensions.color
+import me.senseiju.sentils.extensions.entity.addItemOrDropNaturally
+import me.senseiju.sentils.extensions.events.player
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -96,7 +100,7 @@ private fun startCraftingEquipment(scrapper: Scrapper, player: Player, equipment
     player.inventory.removeScrap(scrapCost)
     econ?.withdrawPlayer(player, moneyCost)
 
-    val craftable = CraftableEquipment(equipment, player.uniqueId, timeToComplete, false)
+    val craftable = CraftableEquipment(equipment, player.uniqueId, timeToComplete)
     scrapper.crafting.computeIfAbsent(player.uniqueId) { EnumMap(Equipment::class.java) }[equipment] = craftable
     craftable.start(plugin)
 

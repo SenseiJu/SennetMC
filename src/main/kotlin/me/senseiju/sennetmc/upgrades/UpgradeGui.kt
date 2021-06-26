@@ -9,10 +9,11 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.fishmonger.openFishmongerGui
 import me.senseiju.sennetmc.utils.defaultScope
-import me.senseiju.sennetmc.utils.extensions.color
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
-import me.senseiju.sennetmc.utils.extensions.playSound
-import me.senseiju.sennetmc.utils.extensions.player
+import me.senseiju.sentils.extensions.color
+import me.senseiju.sentils.extensions.entity.playSound
+import me.senseiju.sentils.extensions.events.player
+import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.Material
 import org.bukkit.Sound
 import org.bukkit.entity.Player

@@ -7,7 +7,7 @@ import me.mattstudios.mf.base.CommandBase
 import me.senseiju.sennetmc.PERMISSION_ARENA_SET_LOCATION
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.extensions.serializeFull
+import me.senseiju.sentils.extensions.asString
 import org.bukkit.entity.Player
 
 @Command("Arena")
@@ -25,7 +25,7 @@ class ArenaCommand(plugin: SennetMC) : CommandBase() {
             return
         }
 
-        arena.set(locationName, sender.location.serializeFull())
+        arena.set(locationName, sender.location.asString())
         sender.sendConfigMessage("ARENA-LOCATION-SET")
 
         configFile.save()

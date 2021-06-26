@@ -74,7 +74,7 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
     }
 
     private fun handlePlayerStart(arenaPlayer: ArenaPlayer, location: Location) {
-        arenaPlayer.previousInventory = arenaPlayer.player.inventory.contents
+        arenaPlayer.previousInventory = arenaPlayer.player.inventory.contents.clone()
         arenaPlayer.previousLocation = arenaPlayer.player.location.clone()
         arenaPlayer.player.inventory.clear()
 

@@ -1,3 +1,3 @@
 package me.senseiju.sennetmc.utils
 
-class PlaceholderSet(val placeholder: String, val value: Any)
+data class PlaceholderSet(val placeholder: String, val value: Any)

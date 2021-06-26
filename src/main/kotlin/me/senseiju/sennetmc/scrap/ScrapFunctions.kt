@@ -3,10 +3,11 @@ package me.senseiju.sennetmc.scrap
 import de.tr7zw.changeme.nbtapi.NBTItem
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.senseiju.sennetmc.npcs.types.NpcType
-import me.senseiju.sennetmc.utils.extensions.addItemOrDropNaturally
-import me.senseiju.sennetmc.utils.extensions.color
-import me.senseiju.sennetmc.utils.extensions.decimalFormat
-import me.senseiju.sennetmc.utils.extensions.forEachNotNullOrAir
+import me.senseiju.sentils.extensions.color
+import me.senseiju.sentils.extensions.entity.addItemOrDropNaturally
+import me.senseiju.sentils.extensions.forEachNotNullOrAir
+import me.senseiju.sentils.extensions.primitives.asCurrencyFormat
+import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 import org.bukkit.inventory.PlayerInventory
@@ -40,7 +41,7 @@ private fun createScrapItem(scrapAmount: Long): ItemStack {
 }
 
 private fun applyScrapAmountPlaceholder(scrapAmount: Long): String {
-    return NAME.replace("{amount}", scrapAmount.decimalFormat()).color()
+    return NAME.replace("{amount}", scrapAmount.asCurrencyFormat()).color()
 }
 
 fun ItemStack.isScrap(): Boolean {

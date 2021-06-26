@@ -8,8 +8,8 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.arena.commands.ArenaCommand
 import me.senseiju.sennetmc.arena.commands.DuelCommand
 import me.senseiju.sennetmc.arena.listeners.ArenaPlayerListener
-import me.senseiju.sennetmc.utils.extensions.deserializeFullLocation
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.extensions.locationFromString
 import org.bukkit.entity.Player
 import java.util.*
 
@@ -103,8 +103,8 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager() {
             return
         }
 
-        val location1 = deserializeFullLocation(configFile.config.getString("arena.location-1", null) ?: return)
-        val location2 = deserializeFullLocation(configFile.config.getString("arena.location-2", null) ?: return)
+        val location1 = locationFromString(configFile.config.getString("arena.location-1", null) ?: return)
+        val location2 = locationFromString(configFile.config.getString("arena.location-2", null) ?: return)
 
         currentMatch = matchQueue.removeFirstOrNull()
 

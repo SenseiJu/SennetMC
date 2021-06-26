@@ -7,9 +7,9 @@ import kotlinx.serialization.json.Json
 import me.senseiju.sennetmc.equipment.Equipment
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
-import me.senseiju.sennetmc.utils.PlayerCountdownBukkitRunnable
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.serializers.UUIDSerializer
+import me.senseiju.sentils.runnables.PlayerCountdownRunnable
+import me.senseiju.sentils.serializers.UUIDSerializer
 import java.util.*
 
 @Serializable
@@ -17,8 +17,7 @@ class CraftableEquipment(
     private val equipment: Equipment,
     @Serializable(UUIDSerializer::class) override val uuid: UUID,
     override var timeToComplete: Long,
-    override var finished: Boolean,
-) : PlayerCountdownBukkitRunnable() {
+) : PlayerCountdownRunnable() {
 
     companion object {
         fun fromJson(s: String): CraftableEquipment {
@@ -27,7 +26,7 @@ class CraftableEquipment(
     }
 
     override fun onComplete() {
-        player?.sendConfigMessage(
+        getPlayer()?.sendConfigMessage(
             "SCRAPPER-FINISHED-CRAFTING",
             false,
             PlaceholderSet("npcName", NpcType.SCRAPPER.npcName),

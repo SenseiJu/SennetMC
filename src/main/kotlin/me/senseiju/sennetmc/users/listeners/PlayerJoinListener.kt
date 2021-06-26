@@ -2,7 +2,7 @@ package me.senseiju.sennetmc.users.listeners
 
 import me.senseiju.sennetmc.users.UserManager
 import me.senseiju.sennetmc.users.giveFishingRod
-import me.senseiju.sennetmc.utils.extensions.color
+import me.senseiju.sentils.extensions.primitives.color
 import net.kyori.adventure.text.Component
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
