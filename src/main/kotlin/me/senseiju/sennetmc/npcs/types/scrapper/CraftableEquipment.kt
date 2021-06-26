@@ -14,7 +14,7 @@ import java.util.*
 
 @Serializable
 class CraftableEquipment(
-    private val equipment: Equipment,
+    val equipment: Equipment,
     @Serializable(UUIDSerializer::class) override val uuid: UUID,
     override var timeToComplete: Long,
 ) : PlayerCountdownRunnable() {

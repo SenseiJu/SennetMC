@@ -56,5 +56,6 @@ class NpcManager(private val plugin: SennetMC) : BaseManager() {
 
     fun save() {
         (npcMap[CHEF] as Chef).saveChefSellRunnables()
+        (npcMap[SCRAPPER] as Scrapper).saveCrafting()
     }
 }

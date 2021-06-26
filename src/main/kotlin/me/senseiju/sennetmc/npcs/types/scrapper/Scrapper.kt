@@ -1,9 +1,13 @@
 package me.senseiju.sennetmc.npcs.types.scrapper
 
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.types.BaseNpc
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.datastorage.RawDataFile
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import net.citizensnpcs.api.event.NPCRightClickEvent
 import net.citizensnpcs.api.trait.trait.Equipment
@@ -19,12 +23,17 @@ private const val SKIN_SIGNATURE = ""
 
 private val NPC_TYPE = NpcType.SCRAPPER
 
-class Scrapper(plugin: SennetMC) : BaseNpc {
+class Scrapper(private val plugin: SennetMC) : BaseNpc {
 
     val crafting = HashMap<UUID, EnumMap<SEquipment, CraftableEquipment>>()
 
     private val users = plugin.userManager.userMap
     private val upgradesFile = plugin.upgradesManager.upgradesFile
+    private val craftingFile = RawDataFile(plugin, "scrapperCrafting.json")
+
+    init {
+        loadCrafting()
+    }
 
     override fun spawnNpc(location: Location) {
         val npc = NPC_TYPE.createBasicNpc()
@@ -52,6 +61,29 @@ class Scrapper(plugin: SennetMC) : BaseNpc {
         }
 
         showScrapperGui(this, e.clicker)
+    }
+
+    fun saveCrafting() {
+        craftingFile.write(Json.encodeToString(crafting.map { it.value.map { craftable -> craftable.value.toJson() } }.flatten()))
+    }
+
+    private fun loadCrafting() {
+        val json: List<String>
+
+        try {
+            json = Json.decodeFromString(craftingFile.read())
+        } catch (ex: Exception) {
+            println("Failed to parse 'scrapperCrafting.json'. Could be empty")
+            return
+        }
+
+        json.forEach {
+            val craftable = CraftableEquipment.fromJson(it)
+
+            crafting.computeIfAbsent(craftable.uuid) { EnumMap(SEquipment::class.java) }[craftable.equipment] = craftable
+
+            craftable.start(plugin)
+        }
     }
 
 }
