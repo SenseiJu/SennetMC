@@ -8,6 +8,7 @@ import me.senseiju.sennetmc.PERMISSION_COMMANDS_LOOTER
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.npcs.types.NpcType
 import me.senseiju.sennetmc.npcs.types.fishmonger.openFishmongerGui
+import me.senseiju.sennetmc.npcs.types.looter.openLooterGui
 import me.senseiju.sennetmc.utils.defaultScope
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
 import me.senseiju.sentils.extensions.color
@@ -28,20 +29,20 @@ fun openUpgradeGui(player: Player) {
     defaultScope.launch {
         val gui = defaultGuiTemplate(3, "&b&lUpgrades")
 
-        gui.setItem(2, 4, createUpgradeRedirectItem(player, NpcType.FISHMONGER, Material.FISHING_ROD, PERMISSION_COMMANDS_FISHMONGER))
-        gui.setItem(2, 6, createUpgradeRedirectItem(player, NpcType.LOOTER, Material.CHEST, PERMISSION_COMMANDS_LOOTER))
+        gui.setItem(2, 4, createUpgradeRedirectItem(player, NpcType.FISHMONGER, Material.FISHING_ROD, PERMISSION_COMMANDS_FISHMONGER) { openFishmongerGui(player) })
+        gui.setItem(2, 6, createUpgradeRedirectItem(player, NpcType.LOOTER, Material.CHEST, PERMISSION_COMMANDS_LOOTER) { openLooterGui(player) })
 
         scheduler.runTask(plugin, Runnable { gui.open(player) })
     }
 }
 
-private fun createUpgradeRedirectItem(player: Player, npcType: NpcType, material: Material, permission: String): GuiItem {
+private fun createUpgradeRedirectItem(player: Player, npcType: NpcType, material: Material, permission: String, onSuccess: () -> Unit): GuiItem {
     return ItemBuilder.from(material)
         .setName(npcType.npcName)
         .setLore(createLore(player, permission))
         .asGuiItem {
             if (it.player.hasPermission(permission)) {
-                openFishmongerGui(it.player)
+                onSuccess()
             } else {
                 it.player.playSound(Sound.ENTITY_VILLAGER_NO)
             }

@@ -20,7 +20,7 @@ private val npcType = NpcType.LOOTER
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
 private val upgradesFile = plugin.upgradesManager.upgradesFile
 
-fun showLooterGui(player: Player) {
+fun openLooterGui(player: Player) {
     defaultScope.launch {
         val user = plugin.userManager.userMap[player.uniqueId]!!
         val gui = defaultGuiTemplate(3, npcType.npcName)

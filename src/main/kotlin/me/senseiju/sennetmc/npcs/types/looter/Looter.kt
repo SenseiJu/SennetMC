@@ -32,6 +32,6 @@ class Looter(plugin: SennetMC) : BaseNpc {
     }
 
     override fun onNpcRightClick(e: NPCRightClickEvent) {
-        showLooterGui(e.clicker)
+        openLooterGui(e.clicker)
     }
 }
