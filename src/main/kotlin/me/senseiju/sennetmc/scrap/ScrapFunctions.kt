@@ -19,8 +19,8 @@ private const val NAME = "&e&l{amount} &d&lScrap"
 
 private val lore = listOf(
     "",
-    "&fYou can use your scrap at ${NpcType.SCRAPPER.npcName}",
-    "&fto craft cool rewards",
+    "&7You can use your scrap at ${NpcType.SCRAPPER.npcName}",
+    "&7to craft cool rewards",
     "",
     "&7Tip: Combine scrap together by dragging and",
     "&7dropping onto another scrap item"

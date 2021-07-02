@@ -15,8 +15,8 @@ enum class FishType {
     companion object {
         val dataFile = DataFile(JavaPlugin.getPlugin(SennetMC::class.java), "fishes.yml", true)
 
-        fun selectRandomType(): FishType {
-            return probabilityChance(values().associateWith { it.probability() })
+        fun selectRandomType(increasedProbability: Double = 0.0): FishType {
+            return probabilityChance(values().associate { it to (it.probability() + increasedProbability) })
         }
     }
 

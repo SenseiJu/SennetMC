@@ -57,7 +57,7 @@ class PlayerFishListener(private val plugin: SennetMC) : Listener {
     }
 
     private fun onFishCaught(e: PlayerFishEvent, user: User) {
-        val fishType = selectRandomFishType(getPlayerLureProbabilityIncrease(user))
+        val fishType = FishType.selectRandomType(getPlayerLureProbabilityIncrease(user))
         val event = PlayerCaughtFishEvent(e.player, user, fishType)
 
         plugin.server.pluginManager.callEvent(event)
@@ -65,9 +65,6 @@ class PlayerFishListener(private val plugin: SennetMC) : Listener {
         e.expToDrop = 0
         e.caught?.remove()
     }
-
-    private fun selectRandomFishType(increasedProbability: Double = 0.0): FishType =
-        probabilityChance(FishType.values().associate { it to (it.probability() + increasedProbability) })
 
     private fun getPlayerLureProbabilityIncrease(user: User): Double {
         return user.getUpgrade(Upgrade.LURE) * upgradesFile.config.getDouble("lure-upgrade-increment", 0.3)

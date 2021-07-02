@@ -1,12 +1,15 @@
 package me.senseiju.sennetmc.equipment.fishing_net
 
 import me.senseiju.sennetmc.SennetMC
+import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.extensions.message
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.entity.Projectile
 import org.bukkit.scheduler.BukkitRunnable
+import java.util.*
+import kotlin.random.Random
 
 class FishingNetRunnable(
     plugin: SennetMC,
@@ -30,8 +33,15 @@ class FishingNetRunnable(
             thrower.message("Fish caught")
             thrower.world.playSound(thrower.location, Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1f, 0f)
             net.remove()
+            givePlayerFish()
             cancel()
             return
+        }
+    }
+
+    private fun givePlayerFish() {
+        for (i in 0..Random.nextInt(3, 6)) {
+            user.addToCurrentFish(FishType.selectRandomType())
         }
     }
 }
