@@ -1,9 +1,13 @@
 package me.senseiju.sennetmc.equipment.fishing_net
 
 import me.senseiju.sennetmc.SennetMC
+import me.senseiju.sennetmc.equipment.Equipment
 import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.users.User
+import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.message
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.extensions.entity.playSound
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.entity.Projectile
@@ -24,14 +28,20 @@ class FishingNetRunnable(
 
     override fun run() {
         if (net.isDead) {
-            thrower.message("Net didn't catch shit")
+            thrower.sendConfigMessage(
+                "EQUIPMENT-FAILED",
+                PlaceholderSet("{equipment}", Equipment.FISHING_NET.eqName)
+            )
             cancel()
             return
         }
 
         if (net.isInWater) {
-            thrower.message("Fish caught")
-            thrower.world.playSound(thrower.location, Sound.ENTITY_FISHING_BOBBER_RETRIEVE, 1f, 0f)
+            thrower.sendConfigMessage(
+                "EQUIPMENT-SUCCESS",
+                PlaceholderSet("{equipment}", Equipment.FISHING_NET.eqName)
+            )
+            thrower.playSound(Sound.ENTITY_FISHING_BOBBER_RETRIEVE)
             net.remove()
             givePlayerFish()
             cancel()

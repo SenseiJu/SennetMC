@@ -41,7 +41,7 @@ class FishingNetListener(private val plugin: SennetMC, equipmentManager: Equipme
 
         e.player.sendConfigMessage(
             "EQUIPMENT-ON-COOLDOWN",
-            PlaceholderSet("{equipment}", "${Equipment.FISHING_NET}"),
+            PlaceholderSet("{equipment}", Equipment.FISHING_NET.eqName),
             PlaceholderSet("{cooldown}", cooldowns.timeRemaining(e.player.uniqueId))
         )
         e.isCancelled = true
