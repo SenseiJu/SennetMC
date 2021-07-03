@@ -37,6 +37,7 @@ class Crate(
                 descriptionFormatted.add(descriptionLine)
                 return@forEach
             }
+
             rewards.forEach { reward ->
                 descriptionFormatted.add("&7- ${reward.name.color()}")
             }

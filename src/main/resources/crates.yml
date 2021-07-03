@@ -1,6 +1,8 @@
 crates-required-before-upgrade: 4
 
 description:
+  - "&7Collect &e4 &7crates to upgrade them to next tier."
+  - "&7You can use &e/combinecrates &7or fish to upgrade them automatically"
   - ""
   - "&7Right-click to open the crate"
   - ""
