@@ -17,6 +17,7 @@ import me.senseiju.sennetmc.utils.secondsToTimeFormat
 import me.senseiju.sentils.extensions.color
 import me.senseiju.sentils.extensions.entity.addItemOrDropNaturally
 import me.senseiju.sentils.extensions.events.player
+import me.senseiju.sentils.extensions.primitives.asCurrencyFormat
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -54,8 +55,8 @@ private fun fishingNetGuiItem(scrapper: Scrapper, player: Player): GuiItem {
         val scrapCost = equipmentFile.config.getLong("${Equipment.FISHING_NET}.crafting-scrap-cost", 75)
         val moneyCost = equipmentFile.config.getDouble("${Equipment.FISHING_NET}.crafting-money-cost", 2250.0)
 
-        lore.add("&7Scrap cost: &e$scrapCost")
-        lore.add("&7Money cost: &e$moneyCost")
+        lore.add("&7Scrap cost: &e${scrapCost.asCurrencyFormat()}")
+        lore.add("&7Money cost: &e${moneyCost.asCurrencyFormat("$")}")
         lore.add("")
         lore.add("&7Throw the fishing net in the water to cast it")
         lore.add("&7and reap the large amount of rewards!")
