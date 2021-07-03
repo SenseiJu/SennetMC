@@ -4,9 +4,7 @@ import me.mattstudios.mf.base.CommandManager
 import me.mattstudios.mfgui.gui.guis.BaseGui
 import me.senseiju.sennetmc.arena.ArenaManager
 import me.senseiju.sennetmc.collectables.CollectablesManager
-import me.senseiju.sennetmc.commands.DailyCommand
-import me.senseiju.sennetmc.commands.ReloadCommand
-import me.senseiju.sennetmc.commands.ResourcePackCommand
+import me.senseiju.sennetmc.commands.*
 import me.senseiju.sennetmc.crates.CratesManager
 import me.senseiju.sennetmc.equipment.EquipmentManager
 import me.senseiju.sennetmc.events.EventsManager
@@ -132,6 +130,8 @@ class SennetMC : JavaPlugin() {
         commandManager.register(ReloadCommand(this))
         commandManager.register(ResourcePackCommand())
         commandManager.register(DailyCommand(this))
+        commandManager.register(BuycraftCommand())
+        commandManager.register(DiscordCommand())
     }
 
     private fun createTables() {
