@@ -51,6 +51,12 @@ private fun fishingNetGuiItem(scrapper: Scrapper, player: Player): GuiItem {
             lore.add("&7Time remaining: &e${secondsToTimeFormat(currentCrafting.timeToComplete)}")
         }
     } else {
+        val scrapCost = equipmentFile.config.getLong("${Equipment.FISHING_NET}.crafting-scrap-cost", 75)
+        val moneyCost = equipmentFile.config.getDouble("${Equipment.FISHING_NET}.crafting-money-cost", 2250.0)
+
+        lore.add("&7Scrap cost: &e$scrapCost")
+        lore.add("&7Money cost: &e$moneyCost")
+        lore.add("")
         lore.add("&7Throw the fishing net in the water to cast it")
         lore.add("&7and reap the large amount of rewards!")
     }
@@ -83,9 +89,9 @@ private fun fishingNetGuiItem(scrapper: Scrapper, player: Player): GuiItem {
 }
 
 private fun startCraftingEquipment(scrapper: Scrapper, player: Player, equipment: Equipment) {
-    val scrapCost = equipmentFile.config.getLong("${equipment}.crafting-scrap-cost", 100)
-    val moneyCost = equipmentFile.config.getDouble("${equipment}.crafting-money-cost", 2500.0)
-    val timeToComplete = equipmentFile.config.getLong("${equipment}.crafting-time", 3600)
+    val scrapCost = equipmentFile.config.getLong("${equipment}.crafting-scrap-cost", 75)
+    val moneyCost = equipmentFile.config.getDouble("${equipment}.crafting-money-cost", 2250.0)
+    val timeToComplete = equipmentFile.config.getLong("${equipment}.crafting-time", 900)
 
     if (!player.inventory.hasScrap(scrapCost)) {
         player.sendConfigMessage("SCRAP-NOT-ENOUGH")

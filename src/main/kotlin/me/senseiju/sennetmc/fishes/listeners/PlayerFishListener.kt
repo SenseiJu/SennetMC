@@ -7,7 +7,6 @@ import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.users.calculateMaxFishCapacity
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.probabilityChance
 import org.bukkit.Material
 import org.bukkit.entity.FishHook
 import org.bukkit.event.EventHandler

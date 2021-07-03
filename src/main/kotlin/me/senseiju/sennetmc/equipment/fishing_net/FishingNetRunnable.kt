@@ -5,14 +5,12 @@ import me.senseiju.sennetmc.equipment.Equipment
 import me.senseiju.sennetmc.fishes.FishType
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.PlaceholderSet
-import me.senseiju.sennetmc.utils.extensions.message
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sentils.extensions.entity.playSound
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import org.bukkit.entity.Projectile
 import org.bukkit.scheduler.BukkitRunnable
-import java.util.*
 import kotlin.random.Random
 
 class FishingNetRunnable(
