@@ -6,6 +6,7 @@ import me.senseiju.sennetmc.PERMISSION_EQUIPMENT_GIVE
 import me.senseiju.sennetmc.equipment.fishing_net.createFishingNetItem
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sentils.extensions.entity.addItemOrDropNaturally
+import org.bukkit.command.CommandSender
 import org.bukkit.entity.Player
 
 @Command("equipment")
@@ -14,7 +15,7 @@ class EquipmentCommand : CommandBase() {
     @SubCommand("give")
     @Permission(PERMISSION_EQUIPMENT_GIVE)
     fun onGive(
-        sender: Player,
+        sender: CommandSender,
         @Completion("#players") player: Player?,
         @Completion("#enum") equipment: Equipment?,
         @Optional amount: Int?
