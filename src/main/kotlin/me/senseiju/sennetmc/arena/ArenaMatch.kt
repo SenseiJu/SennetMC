@@ -77,6 +77,7 @@ class ArenaMatch(val player1: ArenaPlayer, val player2: ArenaPlayer) : BukkitRun
         arenaPlayer.previousInventory = arenaPlayer.player.inventory.contents.clone()
         arenaPlayer.previousLocation = arenaPlayer.player.location.clone()
         arenaPlayer.player.inventory.clear()
+        arenaPlayer.player.isFlying = false
 
         equipGear(arenaPlayer.player)
 
