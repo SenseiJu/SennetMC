@@ -1,6 +1,8 @@
 FISHING_NET:
   cooldown: 300
-  crafting-scrap-cost: 100
-  crafting-money-cost: 2500
-  crafting-time: 3600
+  crafting-scrap-cost: 75
+  crafting-money-cost: 2250
+  crafting-time: 900
   crafting-amount: 3
+  fish-catch-minimum: 8
+  fish-catch-maximum: 12
