@@ -18,6 +18,7 @@ import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.upgrades.UpgradesManager
 import me.senseiju.sennetmc.users.UserManager
 import me.senseiju.sennetmc.users.UserTable
+import me.senseiju.sennetmc.users.commands.StatsCommand
 import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.datastorage.Database
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
@@ -132,6 +133,7 @@ class SennetMC : JavaPlugin() {
         commandManager.register(DailyCommand(this))
         commandManager.register(BuycraftCommand())
         commandManager.register(DiscordCommand())
+        commandManager.register(StatsCommand(this.userManager))
     }
 
     private fun createTables() {
