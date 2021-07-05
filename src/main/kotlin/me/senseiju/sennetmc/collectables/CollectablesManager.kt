@@ -12,13 +12,14 @@ import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.datastorage.Replacements
 import me.senseiju.sennetmc.utils.defaultScope
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.storage.ConfigFile
 import org.bukkit.Material
 import org.bukkit.command.CommandSender
 import java.util.*
 
 class CollectablesManager(private val plugin: SennetMC) : BaseManager() {
 
-    private val collectablesFile = DataFile(plugin, "collectables.yml", true)
+    private val collectablesFile = ConfigFile(plugin, "collectables.yml", true)
 
     var collectables = HashMap<String, Collectable>()
         private set
@@ -49,8 +50,8 @@ class CollectablesManager(private val plugin: SennetMC) : BaseManager() {
     private fun loadCollectables() {
         val newCollectables = HashMap<String, Collectable>()
 
-        collectablesFile.config.getKeys(false).forEach loop@{
-            val section = collectablesFile.config.getConfigurationSection(it)
+        collectablesFile.getKeys(false).forEach loop@{
+            val section = collectablesFile.getConfigurationSection(it)
             if (section == null) {
                 println("ERROR: Failed to parse a collectable with id: $it")
                 return@loop

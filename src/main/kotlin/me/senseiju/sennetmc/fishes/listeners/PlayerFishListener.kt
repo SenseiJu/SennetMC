@@ -66,11 +66,11 @@ class PlayerFishListener(private val plugin: SennetMC) : Listener {
     }
 
     private fun getPlayerLureProbabilityIncrease(user: User): Double {
-        return user.getUpgrade(Upgrade.LURE) * upgradesFile.config.getDouble("lure-upgrade-increment", 0.3)
+        return user.getUpgrade(Upgrade.LURE) * upgradesFile.getDouble("lure-upgrade-increment", 0.3)
     }
 
     private fun applyBaitUpgrade(user: User, hook: FishHook) {
-        val baitUpgrade = user.getUpgrade(Upgrade.BAIT) * upgradesFile.config.getInt("bait-upgrade-increment", 10)
+        val baitUpgrade = user.getUpgrade(Upgrade.BAIT) * upgradesFile.getInt("bait-upgrade-increment", 10)
 
         if (hook.minWaitTime - baitUpgrade <= 0) {
             hook.minWaitTime = 0

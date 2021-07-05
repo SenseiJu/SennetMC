@@ -12,12 +12,12 @@ import org.bukkit.entity.Player
 
 @Command("Captain")
 class CaptainCommand(plugin: SennetMC) : CommandBase() {
-    private val warpsFile = plugin.warpsFile
+    private val warps = plugin.warpsFile
 
     @SubCommand("setSpawnPoint")
     @Permission(PERMISSION_NPC_CAPTAIN_SET_SPAWN_POINT)
     fun onSetSpawnPointSubCommand(player: Player, warpName: String) {
-        val warps = warpsFile.config.getConfigurationSection("captain-warps") ?: return
+        val warps = warps.getConfigurationSection("captain-warps") ?: return
 
         if (!warps.contains(warpName)) {
             player.sendConfigMessage("CAPTAIN-INVALID-WARP-NAME")
@@ -27,7 +27,7 @@ class CaptainCommand(plugin: SennetMC) : CommandBase() {
         warps.set("$warpName.spawn-point", player.location.asString())
         player.sendConfigMessage("CAPTAIN-SPAWN-POINT-SET")
 
-        warpsFile.save()
+        this.warps.save()
     }
 
 }

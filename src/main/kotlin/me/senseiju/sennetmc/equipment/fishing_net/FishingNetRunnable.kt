@@ -19,7 +19,7 @@ class FishingNetRunnable(
     private val user: User,
     private val net: Projectile
 ) : BukkitRunnable() {
-    private val config = plugin.equipmentManager.equipmentFile.config
+    private val equipmentFile = plugin.equipmentManager.equipmentFile
 
     init {
         runTaskTimer(plugin, 0, 1)
@@ -50,8 +50,8 @@ class FishingNetRunnable(
 
     private fun givePlayerFish() {
         val max = Random.nextInt(
-            config.getInt("${Equipment.FISHING_NET}.fish-catch-minimum", 8),
-            config.getInt("${Equipment.FISHING_NET}.fish-catch-maximum", 12)
+            equipmentFile.getInt("${Equipment.FISHING_NET}.fish-catch-minimum", 8),
+            equipmentFile.getInt("${Equipment.FISHING_NET}.fish-catch-maximum", 12)
         )
         for (i in 0..max) {
             user.addToCurrentFish(FishType.selectRandomType())

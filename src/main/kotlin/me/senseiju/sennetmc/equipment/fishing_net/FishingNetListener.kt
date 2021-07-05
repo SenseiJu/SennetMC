@@ -15,7 +15,7 @@ import java.util.*
 class FishingNetListener(private val plugin: SennetMC, equipmentManager: EquipmentManager) : Listener {
     private val users = plugin.userManager.userMap
     private val cooldowns = CooldownManager<UUID>(
-        equipmentManager.equipmentFile.config.getInt("${Equipment.FISHING_NET}.cooldown", 300) * 1000L
+        equipmentManager.equipmentFile.getInt("${Equipment.FISHING_NET}.cooldown", 300) * 1000L
     )
 
     @EventHandler

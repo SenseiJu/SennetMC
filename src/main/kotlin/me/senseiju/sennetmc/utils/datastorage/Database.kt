@@ -4,6 +4,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import me.senseiju.sentils.storage.ConfigFile
 import org.bukkit.plugin.java.JavaPlugin
 import java.sql.SQLException
 import javax.sql.rowset.CachedRowSet
@@ -13,14 +14,13 @@ class Database(plugin: JavaPlugin, configPath: String) {
     private var source: HikariDataSource
 
     init {
-        val file = DataFile(plugin, configPath, true)
-        val config = file.config
+        val dbConfigFile = ConfigFile(plugin, configPath, true)
         val hikariConfig = HikariConfig()
         hikariConfig.jdbcUrl =
-            "jdbc:mysql://${config.getString("host")}:${config.getInt("port")}/${config.getString("database")}" +
+            "jdbc:mysql://${dbConfigFile.getString("host", "localhost")}:${dbConfigFile.getInt("port", 3306)}/${dbConfigFile.getString("database", "{NO_DATABASE_SPECIFIED}")}" +
                     "?autoReconnect=true&allowMultiQueries=true&characterEncoding=utf-8&serverTimezone=UTC&useSSL=false"
-        hikariConfig.username = config.getString("username")
-        hikariConfig.password = config.getString("password")
+        hikariConfig.username = dbConfigFile.getString("username", "root")
+        hikariConfig.password = dbConfigFile.getString("password", "root")
         hikariConfig.connectionTimeout = 8000
         hikariConfig.addDataSourceProperty("cachePrepStmts", "true")
 

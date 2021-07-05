@@ -6,7 +6,7 @@ import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import org.bukkit.scheduler.BukkitRunnable
 
 class SaveUsersTask(private val plugin: SennetMC, private val userManager: UserManager) : BukkitRunnable() {
-    private val interval = plugin.configFile.config.getLong("user-save-interval", 120) * 20
+    private val interval = plugin.configFile.getLong("user-save-interval", 120) * 20
 
     init {
         this.runTaskTimerAsynchronously(plugin, interval, interval)

@@ -74,6 +74,6 @@ class Merchant(private val plugin: SennetMC) : BaseNpc {
 
     private fun getNegotiateMultiplier(user: User): Double {
         return user.getUpgrade(Upgrade.NEGOTIATE)
-            .times(upgradesFile.config.getDouble("negotiate-upgrade-increment", 0.05))
+            .times(upgradesFile.getDouble("negotiate-upgrade-increment", 0.05))
     }
 }

@@ -9,7 +9,7 @@ class AutoEventScheduler(plugin: SennetMC, private val eventsManager: EventsMana
     private val eventsFile = eventsManager.eventsFile
 
     init {
-        val periodInSeconds = eventsFile.config.getInt("event-period", 1800)
+        val periodInSeconds = eventsFile.getInt("event-period", 1800)
 
         runTaskTimer(plugin, (periodInSeconds * 20).toLong(), (periodInSeconds * 20).toLong())
     }

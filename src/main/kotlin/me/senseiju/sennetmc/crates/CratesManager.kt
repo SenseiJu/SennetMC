@@ -13,12 +13,13 @@ import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.percentChance
 import me.senseiju.sennetmc.utils.probabilityChance
+import me.senseiju.sentils.storage.ConfigFile
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 class CratesManager(private val plugin: SennetMC) : BaseManager() {
-    private val cratesFile = DataFile(plugin, "crates.yml", true)
+    private val cratesFile = ConfigFile(plugin, "crates.yml", true)
     var cratesMap = HashMap<String, Crate>()
         private set
 
@@ -88,16 +89,16 @@ class CratesManager(private val plugin: SennetMC) : BaseManager() {
             val crate = cratesMap[it.key]
             val upgradedCrate = cratesMap[crate?.upgradeId]
 
-            crate?.giveCrate(player, it.value % cratesFile.config.getInt("crates-required-before-upgrade", 4))
-            upgradedCrate?.giveCrate(player, it.value / cratesFile.config.getInt("crates-required-before-upgrade", 4))
+            crate?.giveCrate(player, it.value % cratesFile.getInt("crates-required-before-upgrade", 4))
+            upgradedCrate?.giveCrate(player, it.value / cratesFile.getInt("crates-required-before-upgrade", 4))
         }
     }
 
     private fun loadCrates() {
         val newCratesMap = HashMap<String, Crate>()
 
-        val description = cratesFile.config.getStringList("description")
-        val cratesSection = cratesFile.config.getConfigurationSection("crates")
+        val description = cratesFile.getStringList("description")
+        val cratesSection = cratesFile.getConfigurationSection("crates")
         cratesSection?.getKeys(false)?.forEach {
             val section = cratesSection.getConfigurationSection(it)
             if (section == null) {
@@ -147,23 +148,23 @@ class CratesManager(private val plugin: SennetMC) : BaseManager() {
     }
 
     private fun getPlayerCrateMasterProbabilityIncrease(user: User): Double {
-        return user.getUpgrade(Upgrade.CRATE_MASTER) * upgradesFile.config.getDouble(
+        return user.getUpgrade(Upgrade.CRATE_MASTER) * upgradesFile.getDouble(
             "crate-master-upgrade-increment",
             0.4
         )
     }
 
     private fun shouldPlayerReceiveCrates(user: User): Boolean {
-        val baseChance = upgradesFile.config.getDouble("discovery-upgrade-base-chance", 0.3)
+        val baseChance = upgradesFile.getDouble("discovery-upgrade-base-chance", 0.3)
         val discoveryChance = user.getUpgrade(Upgrade.DISCOVERY)
-            .times(upgradesFile.config.getDouble("discovery-upgrade-increment", 0.02))
+            .times(upgradesFile.getDouble("discovery-upgrade-increment", 0.02))
 
         return percentChance(baseChance + discoveryChance)
     }
 
     private fun shouldPlayerReceiveDoubleCrates(user: User): Boolean {
         val treasureFinderChance = user.getUpgrade(Upgrade.TREASURE_FINDER)
-            .times(upgradesFile.config.getDouble("treasure-finder-upgrade-increment", 0.01))
+            .times(upgradesFile.getDouble("treasure-finder-upgrade-increment", 0.01))
 
         return percentChance(treasureFinderChance)
     }

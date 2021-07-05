@@ -6,7 +6,7 @@ import me.senseiju.sentils.extensions.primitives.color
 import org.bukkit.command.CommandSender
 import org.bukkit.plugin.java.JavaPlugin
 
-private val messagesFile = JavaPlugin.getPlugin(SennetMC::class.java).messagesFile
+private val messages = JavaPlugin.getPlugin(SennetMC::class.java).messagesFile
 
 fun CommandSender.message(s: String) {
     this.sendMessage(s.color())
@@ -25,32 +25,30 @@ fun CommandSender.sendConfigMessage(
     prefix: Boolean = true,
     vararg replacements: PlaceholderSet = emptyArray()
 ) {
-    val config = messagesFile.config
-
-    if (config.isString(messageName)) {
-        var message = config.getString(messageName, "Undefined message for '$messageName'")!!
+    if (messages.isString(messageName)) {
+        var message = messages.getString(messageName, "Undefined message for '$messageName'")
 
         for (replacement in replacements) {
-            message = message.replace(replacement.placeholder.toString(), replacement.value.toString())
+            message = message.replace(replacement.placeholder, replacement.value.toString())
         }
 
         if (prefix) {
-            message = "${config.getString("PREFIX", "&#914ef5&lSennetMC »")} $message"
+            message = "${messages.getString("PREFIX", "&#914ef5&lSennetMC »")} $message"
         }
 
         this.message(message)
     } else {
-        val messages = config.getStringList(messageName)
+        val msgs = messages.getStringList(messageName)
         val messagesToSend = ArrayList<String>()
 
-        for (message in messages) {
+        for (message in msgs) {
             var line = message
             for (replacement in replacements) {
-                line = line.replace(replacement.placeholder.toString(), replacement.value.toString())
+                line = line.replace(replacement.placeholder, replacement.value.toString())
             }
 
             if (prefix) {
-                line = "${config.getString("PREFIX", "&#914ef5&lSennetMC »")} $line"
+                line = "${messages.getString("PREFIX", "&#914ef5&lSennetMC »")} $line"
             }
             messagesToSend.add(line)
         }

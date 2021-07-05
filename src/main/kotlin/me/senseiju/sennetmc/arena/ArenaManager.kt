@@ -19,7 +19,7 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager() {
     val matchQueue = LinkedList<ArenaMatch>()
     var currentMatch: ArenaMatch? = null
 
-    private val configFile = plugin.configFile
+    private val config = plugin.configFile
 
     init {
         registerCommands(plugin.commandManager)
@@ -103,8 +103,8 @@ class ArenaManager(private val plugin: SennetMC) : BaseManager() {
             return
         }
 
-        val location1 = locationFromString(configFile.config.getString("arena.location-1", null) ?: return)
-        val location2 = locationFromString(configFile.config.getString("arena.location-2", null) ?: return)
+        val location1 = locationFromString(config.getString("arena.location-1", "NO_LOCATION_SET"))
+        val location2 = locationFromString(config.getString("arena.location-2", "NO_LOCATION_SET"))
 
         currentMatch = matchQueue.removeFirstOrNull()
 

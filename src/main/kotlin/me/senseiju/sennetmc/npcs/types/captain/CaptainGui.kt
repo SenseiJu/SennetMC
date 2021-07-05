@@ -18,14 +18,14 @@ import org.bukkit.plugin.java.JavaPlugin
 
 private val npcType = NpcType.CAPTAIN
 private val plugin = JavaPlugin.getPlugin(SennetMC::class.java)
-private val warpsFile = plugin.warpsFile
+private val warps = plugin.warpsFile
 private val scheduler = plugin.server.scheduler
 
 fun showCaptainGui(player: Player) {
     defaultScope.launch {
         val gui = defaultGuiTemplate(3, npcType.npcName)
 
-        val warpsSection = warpsFile.config.getConfigurationSection("captain-warps") ?: return@launch
+        val warpsSection = warps.getConfigurationSection("captain-warps") ?: return@launch
         warpsSection.getKeys(false).forEach { warpName ->
             val warpSection = warpsSection.getConfigurationSection(warpName) ?: return@forEach
 

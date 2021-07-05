@@ -59,7 +59,7 @@ fun interface Callback {
 fun calculateNextUpgradeCost(
     baseCost: Double,
     currentUpgrades: Int,
-    growthRate: Double = upgradesFile.config.getDouble("growth-rate", 1.3)
+    growthRate: Double = upgradesFile.getDouble("growth-rate", 1.3)
 ): Double {
     return "%.2f".format(baseCost * growthRate.pow(currentUpgrades)).toDouble()
 }

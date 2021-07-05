@@ -13,12 +13,12 @@ import org.bukkit.entity.Player
 @Command("Arena")
 class ArenaCommand(plugin: SennetMC) : CommandBase() {
 
-    private val configFile = plugin.configFile
+    private val config = plugin.configFile
 
     @SubCommand("SetLocation")
     @Permission(PERMISSION_ARENA_SET_LOCATION)
     fun onSetLocationSubCommand(sender: Player, locationName: String) {
-        val arena = configFile.config.getConfigurationSection("arena") ?: return
+        val arena = config.getConfigurationSection("arena") ?: return
 
         if (!arena.contains(locationName)) {
             sender.sendConfigMessage("ARENA-INVALID-LOCATION")
@@ -28,6 +28,6 @@ class ArenaCommand(plugin: SennetMC) : CommandBase() {
         arena.set(locationName, sender.location.asString())
         sender.sendConfigMessage("ARENA-LOCATION-SET")
 
-        configFile.save()
+        config.save()
     }
 }

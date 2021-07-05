@@ -19,10 +19,10 @@ import me.senseiju.sennetmc.upgrades.UpgradesManager
 import me.senseiju.sennetmc.users.UserManager
 import me.senseiju.sennetmc.users.UserTable
 import me.senseiju.sennetmc.users.commands.StatsCommand
-import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.datastorage.Database
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sentils.extensions.primitives.color
+import me.senseiju.sentils.storage.ConfigFile
 import net.kyori.adventure.text.Component
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.event.Listener
@@ -31,9 +31,9 @@ import org.bukkit.plugin.java.JavaPlugin
 class SennetMC : JavaPlugin() {
     val database = Database(this, "database.yml")
 
-    val configFile = DataFile(this, "config.yml", true)
-    val messagesFile = DataFile(this, "messages.yml", true)
-    val warpsFile = DataFile(this, "warps.yml", true)
+    val configFile = ConfigFile(this, "config.yml", true)
+    val messagesFile = ConfigFile(this, "messages.yml", true)
+    val warpsFile = ConfigFile(this, "warps.yml", true)
 
     lateinit var commandManager: CommandManager
     lateinit var collectablesManager: CollectablesManager
@@ -90,7 +90,7 @@ class SennetMC : JavaPlugin() {
 
             it.kick(
                 Component.text(
-                    messagesFile.config.getString("RELOADING", "&#914ef5&lSennetMC &bis currently reloading...")!!.color()
+                    messagesFile.getString("RELOADING", "&#914ef5&lSennetMC &bis currently reloading...").color()
                 )
             )
         }

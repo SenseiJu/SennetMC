@@ -39,14 +39,14 @@ class PlayerCaughtFishListener(plugin: SennetMC) : Listener {
 
     private fun shouldPlayerReceiveDoubleFish(user: User): Boolean {
         val deuceChance = user.getUpgrade(Upgrade.DEUCE)
-            .times(upgradesFile.config.getDouble("deuce-upgrade-increment", 0.01))
+            .times(upgradesFile.getDouble("deuce-upgrade-increment", 0.01))
 
         return percentChance(deuceChance)
     }
 
     private fun shouldNearbyPlayersReceiveFish(user: User): Boolean {
         val feastChance = user.getUpgrade(Upgrade.FEAST)
-            .times(upgradesFile.config.getDouble("feast-upgrade-increment", 0.01))
+            .times(upgradesFile.getDouble("feast-upgrade-increment", 0.01))
 
         return percentChance(feastChance)
     }
@@ -57,7 +57,7 @@ class PlayerCaughtFishListener(plugin: SennetMC) : Listener {
                 return@forEach
             }
 
-            if (!percentChance(upgradesFile.config.getDouble("feast-upgrade-random-player-chance", 0.8))) {
+            if (!percentChance(upgradesFile.getDouble("feast-upgrade-random-player-chance", 0.8))) {
                 return@forEach
             }
 

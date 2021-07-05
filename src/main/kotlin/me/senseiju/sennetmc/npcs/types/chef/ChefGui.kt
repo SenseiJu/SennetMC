@@ -15,9 +15,9 @@ import me.senseiju.sennetmc.utils.defaultScope
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
 import me.senseiju.sennetmc.utils.extensions.round
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.secondsToTimeFormat
 import me.senseiju.sentils.extensions.color
 import me.senseiju.sentils.extensions.primitives.color
+import me.senseiju.sentils.extensions.primitives.toTimeFormat
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.Material
 import org.bukkit.Sound
@@ -53,7 +53,7 @@ private fun chefSellGuiItem(chef: Chef, player: Player): GuiItem {
         if (runnable.finished) {
             lore.add("&a&lReady to collect!")
         } else {
-            lore.add("&7Time remaining: &e${secondsToTimeFormat(runnable.timeToComplete)}")
+            lore.add("&7Time remaining: &e${runnable.timeToComplete.toTimeFormat()}")
         }
     } else {
         lore.add("&7Sell your fish to the chef who will resale")
@@ -94,7 +94,7 @@ private fun chefSellGuiItem(chef: Chef, player: Player): GuiItem {
 
 private fun collectMoneyFromRunnable(chefSellRunnable: ChefSellRunnable, player: Player) {
     val user = users[player.uniqueId] ?: return
-    val multiplier = upgradesFile.config.getDouble("chef-sell-base-multiplier", 6.0) + getSeasoningMultiplier(user)
+    val multiplier = upgradesFile.getDouble("chef-sell-base-multiplier", 6.0) + getSeasoningMultiplier(user)
     val sellPrice = (chefSellRunnable.initialSellPrice * multiplier).round()
 
     econ?.depositPlayer(player, sellPrice)
@@ -115,7 +115,7 @@ private fun startChefSellRunnable(chef: Chef, player: Player) {
         return
     }
 
-    val timePerCapacity = upgradesFile.config.getLong("chef-sell-time-per-capacity", 40)
+    val timePerCapacity = upgradesFile.getLong("chef-sell-time-per-capacity", 40)
     val timeToComplete = (timePerCapacity - getServingSpeedUpgrade(user)) * user.currentFishCaughtCapacity
     val runnable = ChefSellRunnable(initialSellPrice = user.calculateSellPrice(), player.uniqueId, timeToComplete)
 
@@ -157,9 +157,9 @@ private fun openChefUpgradesGui(chef: Chef, player: Player) {
 
 private fun createSeasoningUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.SEASONING)
-    val upgradeMax = upgradesFile.config.getInt("seasoning-upgrade-max", 20)
+    val upgradeMax = upgradesFile.getInt("seasoning-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("seasoning-upgrade-starting-cost", 400.0),
+        upgradesFile.getDouble("seasoning-upgrade-starting-cost", 400.0),
         currentUpgrades
     )
 
@@ -179,9 +179,9 @@ private fun createSeasoningUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun createServingSpeedUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.SERVING_SPEED)
-    val upgradeMax = upgradesFile.config.getInt("serving-speed-upgrade-max", 15)
+    val upgradeMax = upgradesFile.getInt("serving-speed-upgrade-max", 15)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("serving-speed-starting-cost", 800.0),
+        upgradesFile.getDouble("serving-speed-starting-cost", 800.0),
         currentUpgrades
     )
 
@@ -201,10 +201,10 @@ private fun createServingSpeedUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun getSeasoningMultiplier(user: User): Double {
     return user.getUpgrade(Upgrade.SEASONING)
-        .times(upgradesFile.config.getDouble("seasoning-upgrade-increment", 0.2))
+        .times(upgradesFile.getDouble("seasoning-upgrade-increment", 0.2))
 }
 
 private fun getServingSpeedUpgrade(user: User): Long {
     return user.getUpgrade(Upgrade.SERVING_SPEED)
-        .times(upgradesFile.config.getLong("serving-speed-upgrade-increment", 1))
+        .times(upgradesFile.getLong("serving-speed-upgrade-increment", 1))
 }

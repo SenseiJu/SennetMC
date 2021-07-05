@@ -21,13 +21,12 @@ import kotlin.math.cos
 import kotlin.math.sin
 
 class SpeedboatListener(private val plugin: SennetMC, speedboatManager: SpeedboatManager) : Listener {
+    private val config = plugin.configFile
     private val protocolManager = ProtocolLibrary.getProtocolManager()
-
     private val playerSpeedboatToggle = speedboatManager.playerSpeedboatToggle
     private val playerSpeedboatCurrentVector = HashMap<UUID, Vector>()
-
     private val userManager = plugin.userManager
-    private var speedIncrement = plugin.configFile.config.getDouble("speedboat-speed-upgrade-increment", 0.01)
+    private var speedIncrement = config.getDouble("speedboat-speed-upgrade-increment", 0.01)
 
     init {
         registerSpeedboatMovePacketListener()
@@ -75,7 +74,7 @@ class SpeedboatListener(private val plugin: SennetMC, speedboatManager: Speedboa
                     return
                 }
 
-                if (playerSpeedboatCurrentVector.getOrPut(e.player.uniqueId, { Vector() }).length() < 0.01) {
+                if (playerSpeedboatCurrentVector.getOrPut(e.player.uniqueId) { Vector() }.length() < 0.01) {
                     playerSpeedboatCurrentVector[e.player.uniqueId] = Vector()
                     boatEntity.velocity = Vector()
                     return
@@ -101,6 +100,6 @@ class SpeedboatListener(private val plugin: SennetMC, speedboatManager: Speedboa
     }
 
     fun reload() {
-        speedIncrement = plugin.configFile.config.getDouble("speedboat-speed-upgrade-increment", 0.01)
+        speedIncrement = config.getDouble("speedboat-speed-upgrade-increment", 0.01)
     }
 }

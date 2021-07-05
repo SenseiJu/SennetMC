@@ -7,7 +7,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.dispatchCommands
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.secondsToTimeFormat
+import me.senseiju.sentils.extensions.primitives.toTimeFormat
 import org.bukkit.Sound
 import org.bukkit.entity.Player
 import java.time.Instant
@@ -17,7 +17,7 @@ private const val COOLDOWN_IN_SECONDS = (23 * 60 * 60) + (30 * 60)
 
 @Command("Daily")
 class DailyCommand(private val plugin: SennetMC) : CommandBase() {
-    private val configFile = plugin.configFile
+    private val config = plugin.configFile
     private val users = plugin.userManager.userMap
 
     @Default
@@ -30,7 +30,7 @@ class DailyCommand(private val plugin: SennetMC) : CommandBase() {
         if (timePassedInSeconds < COOLDOWN_IN_SECONDS) {
             player.sendConfigMessage(
                 "DAILY-NOT-READY",
-                PlaceholderSet("{time}", secondsToTimeFormat(COOLDOWN_IN_SECONDS - timePassedInSeconds))
+                PlaceholderSet("{time}", (COOLDOWN_IN_SECONDS - timePassedInSeconds).toTimeFormat())
             )
             return
         }
@@ -41,7 +41,7 @@ class DailyCommand(private val plugin: SennetMC) : CommandBase() {
     }
 
     private fun giveDailyRewards(player: Player) {
-        val section = configFile.config.getConfigurationSection("daily-rewards") ?: return
+        val section = config.getConfigurationSection("daily-rewards") ?: return
 
         section.getKeys(false).forEach { key ->
             if (player.hasPermission("group.$key")) {

@@ -13,11 +13,11 @@ import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.defaultScope
 import me.senseiju.sennetmc.utils.extensions.defaultGuiTemplate
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
-import me.senseiju.sennetmc.utils.secondsToTimeFormat
 import me.senseiju.sentils.extensions.color
 import me.senseiju.sentils.extensions.entity.addItemOrDropNaturally
 import me.senseiju.sentils.extensions.events.player
 import me.senseiju.sentils.extensions.primitives.asCurrencyFormat
+import me.senseiju.sentils.extensions.primitives.toTimeFormat
 import net.milkbowl.vault.economy.Economy
 import org.bukkit.entity.Player
 import org.bukkit.plugin.java.JavaPlugin
@@ -49,11 +49,11 @@ private fun fishingNetGuiItem(scrapper: Scrapper, player: Player): GuiItem {
         if (currentCrafting.finished) {
             lore.add("&a&lReady to collect!")
         } else {
-            lore.add("&7Time remaining: &e${secondsToTimeFormat(currentCrafting.timeToComplete)}")
+            lore.add("&7Time remaining: &e${currentCrafting.timeToComplete.toTimeFormat()}")
         }
     } else {
-        val scrapCost = equipmentFile.config.getLong("${Equipment.FISHING_NET}.crafting-scrap-cost", 75)
-        val moneyCost = equipmentFile.config.getDouble("${Equipment.FISHING_NET}.crafting-money-cost", 2250.0)
+        val scrapCost = equipmentFile.getLong("${Equipment.FISHING_NET}.crafting-scrap-cost", 75)
+        val moneyCost = equipmentFile.getDouble("${Equipment.FISHING_NET}.crafting-money-cost", 2250.0)
 
         lore.add("&7Scrap cost: &e${scrapCost.asCurrencyFormat()}")
         lore.add("&7Money cost: &e${moneyCost.asCurrencyFormat("$")}")
@@ -74,7 +74,7 @@ private fun fishingNetGuiItem(scrapper: Scrapper, player: Player): GuiItem {
             if (currentCrafting.finished) {
                 scrapper.crafting[player.uniqueId]?.remove(Equipment.FISHING_NET)
 
-                val amount = equipmentFile.config.getInt("${Equipment.FISHING_NET}.crafting-amount", 3)
+                val amount = equipmentFile.getInt("${Equipment.FISHING_NET}.crafting-amount", 3)
                 it.player.inventory.addItemOrDropNaturally(createFishingNetItem(amount))
             } else {
                 player.sendConfigMessage(
@@ -90,9 +90,9 @@ private fun fishingNetGuiItem(scrapper: Scrapper, player: Player): GuiItem {
 }
 
 private fun startCraftingEquipment(scrapper: Scrapper, player: Player, equipment: Equipment) {
-    val scrapCost = equipmentFile.config.getLong("${equipment}.crafting-scrap-cost", 75)
-    val moneyCost = equipmentFile.config.getDouble("${equipment}.crafting-money-cost", 2250.0)
-    val timeToComplete = equipmentFile.config.getLong("${equipment}.crafting-time", 900)
+    val scrapCost = equipmentFile.getLong("${equipment}.crafting-scrap-cost", 75)
+    val moneyCost = equipmentFile.getDouble("${equipment}.crafting-money-cost", 2250.0)
+    val timeToComplete = equipmentFile.getLong("${equipment}.crafting-time", 900)
 
     if (!player.inventory.hasScrap(scrapCost)) {
         player.sendConfigMessage("SCRAP-NOT-ENOUGH")

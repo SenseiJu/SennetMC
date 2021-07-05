@@ -38,9 +38,9 @@ fun openFishmongerGui(player: Player) {
 
 private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.FISH_CAPACITY)
-    val upgradeMax = upgradesFile.config.getInt("fishing-capacity-upgrade-max", 20)
+    val upgradeMax = upgradesFile.getInt("fishing-capacity-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("fishing-capacity-upgrade-starting-cost", 300.0),
+        upgradesFile.getDouble("fishing-capacity-upgrade-starting-cost", 300.0),
         currentUpgrades
     )
 
@@ -59,9 +59,9 @@ private fun createFishingCapacityUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun createNegotiateUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.NEGOTIATE)
-    val upgradeMax = upgradesFile.config.getInt("negotiate-upgrade-max", 20)
+    val upgradeMax = upgradesFile.getInt("negotiate-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("negotiate-upgrade-starting-cost", 300.0),
+        upgradesFile.getDouble("negotiate-upgrade-starting-cost", 300.0),
         currentUpgrades
     )
 
@@ -80,9 +80,9 @@ private fun createNegotiateUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun createBaitUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.BAIT)
-    val upgradeMax = upgradesFile.config.getInt("bait-upgrade-max", 20)
+    val upgradeMax = upgradesFile.getInt("bait-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("bait-upgrade-starting-cost", 300.0),
+        upgradesFile.getDouble("bait-upgrade-starting-cost", 300.0),
         currentUpgrades
     )
 
@@ -101,9 +101,9 @@ private fun createBaitUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun createDeuceUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.DEUCE)
-    val upgradeMax = upgradesFile.config.getInt("deuce-upgrade-max", 20)
+    val upgradeMax = upgradesFile.getInt("deuce-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("deuce-upgrade-starting-cost", 300.0),
+        upgradesFile.getDouble("deuce-upgrade-starting-cost", 300.0),
         currentUpgrades
     )
 
@@ -123,9 +123,9 @@ private fun createDeuceUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun createFeastUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.FEAST)
-    val upgradeMax = upgradesFile.config.getInt("feast-upgrade-max", 20)
+    val upgradeMax = upgradesFile.getInt("feast-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("feast-upgrade-starting-cost", 300.0),
+        upgradesFile.getDouble("feast-upgrade-starting-cost", 300.0),
         currentUpgrades
     )
 
@@ -146,9 +146,9 @@ private fun createFeastUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun createLureUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.LURE)
-    val upgradeMax = upgradesFile.config.getInt("lure-upgrade-max", 25)
+    val upgradeMax = upgradesFile.getInt("lure-upgrade-max", 25)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("lure-upgrade-starting-cost", 400.0),
+        upgradesFile.getDouble("lure-upgrade-starting-cost", 400.0),
         currentUpgrades
     )
 

@@ -6,10 +6,10 @@ import me.mattstudios.mf.base.components.TypeResult
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.equipment.fishing_net.FishingNetListener
-import me.senseiju.sennetmc.utils.datastorage.DataFile
+import me.senseiju.sentils.storage.ConfigFile
 
 class EquipmentManager(plugin: SennetMC) : BaseManager() {
-    val equipmentFile = DataFile(plugin, "equipment.yml", true)
+    val equipmentFile = ConfigFile(plugin, "equipment.yml", true)
 
     init {
         registerCommands(plugin.commandManager)

@@ -35,9 +35,9 @@ fun openLooterGui(player: Player) {
 
 private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.TREASURE_FINDER)
-    val upgradeMax = upgradesFile.config.getInt("treasure-finder-upgrade-max", 50)
+    val upgradeMax = upgradesFile.getInt("treasure-finder-upgrade-max", 50)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("treasure-finder-upgrade-starting-cost", 300.0),
+        upgradesFile.getDouble("treasure-finder-upgrade-starting-cost", 300.0),
         currentUpgrades
     )
 
@@ -57,9 +57,9 @@ private fun createTreasureFinderUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.DISCOVERY)
-    val upgradeMax = upgradesFile.config.getInt("discovery-upgrade-max", 20)
+    val upgradeMax = upgradesFile.getInt("discovery-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("discovery-upgrade-starting-cost", 300.0),
+        upgradesFile.getDouble("discovery-upgrade-starting-cost", 300.0),
         currentUpgrades
     )
 
@@ -79,9 +79,9 @@ private fun createDiscoveryUpgradeGuiItem(gui: Gui, user: User): GuiItem {
 
 private fun createCrateMasterUpgradeGuiItem(gui: Gui, user: User): GuiItem {
     val currentUpgrades = user.getUpgrade(Upgrade.CRATE_MASTER)
-    val upgradeMax = upgradesFile.config.getInt("crate-master-upgrade-max", 20)
+    val upgradeMax = upgradesFile.getInt("crate-master-upgrade-max", 20)
     val upgradeCost = calculateNextUpgradeCost(
-        upgradesFile.config.getDouble("crate-master-upgrade-starting-cost", 300.0),
+        upgradesFile.getDouble("crate-master-upgrade-starting-cost", 300.0),
         currentUpgrades
     )
 

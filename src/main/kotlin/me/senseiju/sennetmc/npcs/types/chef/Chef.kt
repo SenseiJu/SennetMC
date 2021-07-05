@@ -48,7 +48,7 @@ class Chef(private val plugin: SennetMC) : BaseNpc {
 
     override fun onNpcRightClick(e: NPCRightClickEvent) {
         val user = users[e.clicker.uniqueId] ?: return
-        val fishCaughtMinimum = upgradesFile.config.getInt("chef-fish-caught-minimum", 50)
+        val fishCaughtMinimum = upgradesFile.getInt("chef-fish-caught-minimum", 50)
 
         if (user.totalFishCaught < fishCaughtMinimum) {
             e.clicker.sendConfigMessage(

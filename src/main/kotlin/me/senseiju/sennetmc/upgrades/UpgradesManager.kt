@@ -4,14 +4,14 @@ import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.upgrades.commands.UpgradesCommand
-import me.senseiju.sennetmc.utils.datastorage.DataFile
+import me.senseiju.sentils.storage.ConfigFile
 import java.util.*
 
 private const val SELECT_QUERY = "SELECT * FROM `upgrades` WHERE `uuid`=?;"
 
 class UpgradesManager(private val plugin: SennetMC) : BaseManager() {
 
-    val upgradesFile = DataFile(plugin, "upgrades.yml", true)
+    val upgradesFile = ConfigFile(plugin, "upgrades.yml", true)
 
     init {
         registerCommands(plugin.commandManager)

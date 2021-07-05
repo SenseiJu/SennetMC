@@ -2,26 +2,26 @@ package me.senseiju.sennetmc.events.event.shipwreck
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.events.EventsManager
-import me.senseiju.sennetmc.events.event.AbstractEvent
 import me.senseiju.sennetmc.events.event.EventType
-import me.senseiju.sennetmc.events.event.shipwreck.listeners.PlayerCaughtFishListener
+import me.senseiju.sennetmc.events.event.GlobalEvent
 import java.util.*
 
-private val eventType = EventType.SHIPWRECK
+class Shipwreck(
+    override val plugin: SennetMC,
+    override val eventsManager: EventsManager,
+) : GlobalEvent() {
+    override val eventType = EventType.SHIPWRECK
 
-class Shipwreck(private val plugin: SennetMC, eventsManager: EventsManager) :
-    AbstractEvent(plugin, eventsManager, eventType) {
     val participants = HashSet<UUID>()
 
     init {
-        plugin.registerEvents(PlayerCaughtFishListener(plugin, this))
-
-        runTaskTimer(plugin, 20L, 20L)
+        registerEvents(ShipwreckListener(plugin, this))
     }
 
-    override fun finish() {
+    override fun onEventFinished() {
         participants.forEach {
             plugin.collectablesManager.addCollectable(it, "shipwreckevent")
         }
     }
+
 }

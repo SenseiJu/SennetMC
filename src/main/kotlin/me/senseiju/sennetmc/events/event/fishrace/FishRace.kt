@@ -2,37 +2,36 @@ package me.senseiju.sennetmc.events.event.fishrace
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.events.EventsManager
-import me.senseiju.sennetmc.events.event.AbstractEvent
 import me.senseiju.sennetmc.events.event.EventType
-import me.senseiju.sennetmc.events.event.fishrace.listeners.PlayerCaughtFishListener
+import me.senseiju.sennetmc.events.event.GlobalEvent
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.dispatchCommands
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import java.util.*
 
-private val eventType = EventType.FISH_RACE
+class FishRace(
+    override val plugin: SennetMC,
+    override val eventsManager: EventsManager,
+) : GlobalEvent() {
+    override val eventType = EventType.FISH_RACE
 
-class FishRace(private val plugin: SennetMC, eventsManager: EventsManager) :
-    AbstractEvent(plugin, eventsManager, eventType) {
     val playersFishCaught = HashMap<UUID, Int>()
 
     private val eventsFile = eventsManager.eventsFile
 
     init {
-        plugin.registerEvents(PlayerCaughtFishListener(this))
-
-        runTaskTimer(plugin, 20L, 20L)
+        registerEvents(FishRaceListener(this))
     }
 
-    override fun finish() {
+    override fun onEventFinished() {
         if (playersFishCaught.isEmpty()) {
             return
         }
 
         val sortedPlayersFishCaught = playersFishCaught.toList().sortedByDescending { (_, value) -> value }.toMap()
 
-        val commands = eventsFile.config.getStringList("$eventType.winner-commands")
-        val numberOfWinners = eventsFile.config.getInt("$eventType.number-of-winners", 5)
+        val commands = eventsFile.getStringList("$eventType.winner-commands")
+        val numberOfWinners = eventsFile.getInt("$eventType.number-of-winners", 5)
 
         var currentValue = sortedPlayersFishCaught.values.first()
         var playersRewarded = 0
