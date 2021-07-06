@@ -11,10 +11,8 @@ class ShipwreckListener(plugin: SennetMC, shipwreck: Shipwreck) : Listener {
 
     @EventHandler
     private fun onPlayerCaughtFish(e: PlayerCaughtFishEvent) {
-        cratesManager.handleCratesOnFish(e.player)
+        participants.add(e.player.uniqueId)
 
-        if (!participants.contains(e.player.uniqueId)) {
-            participants.add(e.player.uniqueId)
-        }
+        cratesManager.handleCratesOnFish(e.player)
     }
 }

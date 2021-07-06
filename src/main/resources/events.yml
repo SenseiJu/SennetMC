@@ -9,8 +9,26 @@ FISH_RACE:
   winner-commands:
     - "collectables set {player} fishraceevent"
     - "crates give {player} t2 5"
+
 SHIPWRECK:
   length: 120
   how-to-play:
     - "║ &eCatching fish will increase the amount"
     - "║ &eof crates you will earn"
+
+FISHY_COLLAB:
+  length: 120
+  how-to-play:
+    - "║ &eCollectively catch fish to hit a target"
+    - "║ &ewith other players for rewards"
+  fish-caught-per-player: 10
+  minimum-for-reward: 7
+
+RECYCLE:
+  length: 120
+  how-to-play:
+    - "║ &eClean the waters by fishing to collect"
+    - "║ &ethe scrap at the bottom"
+  collect-chance: 65%
+  scrap-minimum: 3
+  scrap-maximum: 10

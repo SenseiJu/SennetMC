@@ -23,5 +23,4 @@ class Shipwreck(
             plugin.collectablesManager.addCollectable(it, "shipwreckevent")
         }
     }
-
 }

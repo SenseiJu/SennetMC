@@ -7,6 +7,7 @@ import me.senseiju.sennetmc.events.event.GlobalEvent
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.dispatchCommands
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.functions.getOnlinePlayer
 import java.util.*
 
 class FishRace(
@@ -15,7 +16,7 @@ class FishRace(
 ) : GlobalEvent() {
     override val eventType = EventType.FISH_RACE
 
-    val playersFishCaught = HashMap<UUID, Int>()
+    val participants = hashMapOf<UUID, Int>()
 
     private val eventsFile = eventsManager.eventsFile
 
@@ -24,11 +25,11 @@ class FishRace(
     }
 
     override fun onEventFinished() {
-        if (playersFishCaught.isEmpty()) {
+        if (participants.isEmpty()) {
             return
         }
 
-        val sortedPlayersFishCaught = playersFishCaught.toList().sortedByDescending { (_, value) -> value }.toMap()
+        val sortedPlayersFishCaught = participants.toList().sortedByDescending { (_, value) -> value }.toMap()
 
         val commands = eventsFile.getStringList("$eventType.winner-commands")
         val numberOfWinners = eventsFile.getInt("$eventType.number-of-winners", 5)
@@ -37,10 +38,9 @@ class FishRace(
         var playersRewarded = 0
 
         sortedPlayersFishCaught.forEach { (uuid, value) ->
-            val player = plugin.server.getPlayer(uuid) ?: return@forEach
-            if (!player.isOnline) {
-                return@forEach
-            }
+            val player = getOnlinePlayer(uuid) ?: return@forEach
+
+            plugin.collectablesManager.addCollectable(uuid, "shipwreckevent")
 
             if (playersRewarded >= numberOfWinners && currentValue != value) {
                 player.sendConfigMessage("EVENTS-LOSER", false, PlaceholderSet("{eventName}", eventType.title))
