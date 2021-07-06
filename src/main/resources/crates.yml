@@ -98,11 +98,15 @@ crates:
       - name: "&d&l230-250 Scrap"
         probability: 25
         commands:
-          - "scrap give {player} 1-5"
+          - "scrap give {player} 230-250"
       - name: "&6&lCommand /cosmo [1 Week]"
         probability: 1
         commands:
           - "lp user {player} permission settemp cosmo.command.use true 1w"
+      - name: "&#3deb1a&lSub &6&lrank [1 Week]"
+        probability: 1
+        commands:
+          - "lp user {player} parent addtemp sub 1w"
 
   t7:
     name: "&e&lTier VII"
@@ -124,33 +128,6 @@ crates:
           - "lp user {player} permission settemp cosmo.command.use true 1w"
       - name: "&6&lCommand /sell [1 Week]"
         probability: 1
-        commands:
-          - "lp user {player} permission settemp sennetmc.commands.sell true 1w"
-      - name: "&#3deb1a&lSub &6&lrank [1 Week]"
-        probability: 1
-        commands:
-          - "lp user {player} parent addtemp sub 1w"
-
-  t8:
-    name: "&e&lTier VIII"
-    probability-per-cast: -100
-    max-crates-per-cast: 1
-    upgraded-crate-id: "NULL"
-    rewards:
-      - name: "&a&l$1500000"
-        probability: 200
-        commands:
-          - "eco give {player} 1500000"
-      - name: "&d&l3600-3700 Scrap"
-        probability: 50
-        commands:
-          - "scrap give {player} 3600-3700"
-      - name: "&6&lCommand /cosmo [1 Week]"
-        probability: 25
-        commands:
-          - "lp user {player} permission settemp cosmo.command.use true 1w"
-      - name: "&6&lCommand /sell [1 Week]"
-        probability: 5
         commands:
           - "lp user {player} permission settemp sennetmc.commands.sell true 1w"
       - name: "&#16f2e7&lSub+ &6&lrank [1 Week]"
