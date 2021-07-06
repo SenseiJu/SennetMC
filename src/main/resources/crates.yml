@@ -112,7 +112,7 @@ crates:
     name: "&e&lTier VII"
     probability-per-cast: -100
     max-crates-per-cast: 1
-    upgraded-crate-id: "t8"
+    upgraded-crate-id: "NULL"
     rewards:
       - name: "&a&l$250000"
         probability: 100
