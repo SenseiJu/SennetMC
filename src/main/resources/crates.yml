@@ -46,12 +46,8 @@ crates:
         probability: 100
         commands:
           - "eco give {player} 300"
-      - name: "&d&l1-3 Scrap"
-        probability: 25
-        commands:
-          - "scrap give {player} 1-3"
       - name: "&6&lx2 Fishing Net's"
-        probability: 3
+        probability: 1
         commands:
           - "equipment give {player} fishing_net 2"
 
@@ -69,6 +65,10 @@ crates:
         probability: 25
         commands:
           - "scrap give {player} 10-15"
+      - name: "&6&lx3 Fishing Net's"
+        probability: 5
+        commands:
+          - "equipment give {player} fishing_net 3"
 
   t5:
     name: "&e&lTier V"
