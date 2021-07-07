@@ -43,7 +43,7 @@ abstract class GlobalEvent(
 
     fun sendWinnerMessage(player: Player) {
         player.sendConfigMessage(
-            "EVENT-WINNER",
+            "EVENTS-WINNER",
             false,
             PlaceholderSet("{eventName}", eventType.title)
         )
@@ -51,7 +51,7 @@ abstract class GlobalEvent(
 
     fun sendLoserMessage(player: Player) {
         player.sendConfigMessage(
-            "EVENT-LOSER",
+            "EVENTS-LOSER",
             false,
             PlaceholderSet("{eventName}", eventType.title)
         )

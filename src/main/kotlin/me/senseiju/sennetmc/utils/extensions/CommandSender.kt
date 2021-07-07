@@ -25,7 +25,9 @@ fun CommandSender.sendConfigMessage(
     prefix: Boolean = true,
     vararg replacements: PlaceholderSet = emptyArray()
 ) {
-    if (messages.isString(messageName)) {
+    if (!messages.isSet(messageName)) {
+        this.message("&c&lERROR: &cNo message found at path '$messageName'")
+    } else if (messages.isString(messageName)) {
         var message = messages.getString(messageName, "Undefined message for '$messageName'")
 
         for (replacement in replacements) {

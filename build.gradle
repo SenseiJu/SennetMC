@@ -27,7 +27,7 @@ dependencies {
     implementation "me.mattstudios.utils:matt-framework:1.4.6"
     implementation "de.tr7zw:item-nbt-api:2.8.0"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
-    implementation "com.github.SenseiJu:Sentils:5cb3d9b3fd"
+    implementation "com.github.SenseiJu:Sentils:bedec771a2"
 
     compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
     compileOnly "net.citizensnpcs:citizens:2.0.27-SNAPSHOT"
