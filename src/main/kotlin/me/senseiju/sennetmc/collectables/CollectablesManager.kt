@@ -8,7 +8,6 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.collectables.commands.CollectablesCommand
 import me.senseiju.sennetmc.collectables.listeners.PlayerJoinListener
 import me.senseiju.sennetmc.utils.PlaceholderSet
-import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.datastorage.Replacements
 import me.senseiju.sennetmc.utils.defaultScope
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage

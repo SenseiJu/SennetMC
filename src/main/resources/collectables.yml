@@ -91,6 +91,18 @@ fishraceevent:
   rarity: UNCOMMON
   description:
     - "&7Received by winning the fish race event"
+recycleevent:
+  name: "&b&lRecycle Event"
+  material: RED_DYE
+  rarity: UNCOMMON
+  description:
+    - "&7Received by winning the fish race event"
+fishycollabevent:
+  name: "&b&lFishy Collab Event"
+  material: COOKED_SALMON
+  rarity: UNCOMMON
+  description:
+    - "&7Received by winning the fish race event"
 sub:
   name: "&#3deb1a&lSub rank"
   material: IRON_BLOCK

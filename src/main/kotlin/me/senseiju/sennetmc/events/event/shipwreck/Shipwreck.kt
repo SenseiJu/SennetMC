@@ -19,8 +19,6 @@ class Shipwreck(
     }
 
     override fun onEventFinished() {
-        participants.forEach {
-            plugin.collectablesManager.addCollectable(it, "shipwreckevent")
-        }
+        addCollectable(participants, "shipwreckevent")
     }
 }

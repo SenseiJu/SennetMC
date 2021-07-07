@@ -2,7 +2,6 @@ package me.senseiju.sennetmc.users.commands
 
 import me.mattstudios.mf.annotations.Command
 import me.mattstudios.mf.annotations.Default
-import me.mattstudios.mf.annotations.Optional
 import me.mattstudios.mf.base.CommandBase
 import me.mattstudios.mfgui.gui.components.ItemBuilder
 import me.mattstudios.mfgui.gui.guis.GuiItem

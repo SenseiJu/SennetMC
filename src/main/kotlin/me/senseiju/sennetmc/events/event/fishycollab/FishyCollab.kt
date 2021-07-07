@@ -4,6 +4,8 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.events.EventsManager
 import me.senseiju.sennetmc.events.event.EventType
 import me.senseiju.sennetmc.events.event.GlobalEvent
+import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sentils.functions.getOnlinePlayer
 import java.util.*
 
@@ -15,28 +17,36 @@ class FishyCollab(
 
     val participants = hashMapOf<UUID, Int>()
 
-    private val minimumLimit = eventsManager.eventsFile.getInt("minimum-for-reward", 7)
-    private var fishCaughtTarget = plugin.server.onlinePlayers.size * eventsManager.eventsFile.getInt("fish-caught-per-player", 10)
+    private val commands: List<String>
+    private val minimumLimit: Int
+    private val fishCaughtTarget: Int
 
     init {
         registerEvents(FishyListener(this))
+
+        val config = eventsManager.eventsFile
+        commands = config.getStringList("winner-commands")
+        minimumLimit = config.getInt("minimum-for-reward", 7)
+        fishCaughtTarget = plugin.server.onlinePlayers.size * config.getInt("fish-caught-per-player", 10)
+
     }
 
     override fun onEventFinished() {
         if (participants.map { it.value }.sum() < fishCaughtTarget) {
-            // TODO send message "not enough fish caught"
+            participants.keys.forEach { uuid ->
+                sendLoserMessage(getOnlinePlayer(uuid) ?: return@forEach)
+            }
             return
         }
 
         participants.forEach { (uuid, fishCaught) ->
-            plugin.collectablesManager.addCollectable(uuid, "shipwreckevent")
-
             val player = getOnlinePlayer(uuid) ?: return@forEach
 
             if (fishCaught >= minimumLimit) {
-                // TODO reward
+                addCollectable(uuid, "fishycollabevent")
+                sendWinnerMessage(player)
             } else {
-                // TODO did not qualify message
+                sendLoserMessage(player)
             }
         }
     }

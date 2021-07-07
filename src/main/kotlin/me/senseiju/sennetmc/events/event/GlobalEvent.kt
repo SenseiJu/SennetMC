@@ -2,10 +2,14 @@ package me.senseiju.sennetmc.events.event
 
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.events.EventsManager
+import me.senseiju.sennetmc.utils.PlaceholderSet
+import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.functions.getOnlinePlayer
 import me.senseiju.sentils.runnables.CountdownRunnable
+import org.bukkit.entity.Player
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
-import org.bukkit.scheduler.BukkitRunnable
+import java.util.*
 
 abstract class GlobalEvent : CountdownRunnable() {
     abstract val plugin: SennetMC
@@ -21,6 +25,32 @@ abstract class GlobalEvent : CountdownRunnable() {
     fun registerEvents(vararg listeners: Listener) {
         plugin.registerEvents(*listeners)
         this.listeners.addAll(listeners.asList())
+    }
+
+    fun addCollectable(uuids: Set<UUID>, collectable: String) {
+        uuids.forEach { uuid ->
+            getOnlinePlayer(uuid)?.let { plugin.collectablesManager.addCollectable(uuid, collectable) }
+        }
+    }
+
+    fun addCollectable(uuid: UUID, collectable: String) {
+        getOnlinePlayer(uuid)?.let { plugin.collectablesManager.addCollectable(uuid, collectable) }
+    }
+
+    fun sendWinnerMessage(player: Player) {
+        player.sendConfigMessage(
+            "EVENT-WINNER",
+            false,
+            PlaceholderSet("{eventName}", eventType.title)
+        )
+    }
+
+    fun sendLoserMessage(player: Player) {
+        player.sendConfigMessage(
+            "EVENT-LOSER",
+            false,
+            PlaceholderSet("{eventName}", eventType.title)
+        )
     }
 
     override fun onComplete() {

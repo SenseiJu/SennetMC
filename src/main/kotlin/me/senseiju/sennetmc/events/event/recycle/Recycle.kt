@@ -19,8 +19,6 @@ class Recycle(
     }
 
     override fun onEventFinished() {
-        participants.forEach {
-            plugin.collectablesManager.addCollectable(it, "recycleevent")
-        }
+        addCollectable(participants, "recycleevent")
     }
 }

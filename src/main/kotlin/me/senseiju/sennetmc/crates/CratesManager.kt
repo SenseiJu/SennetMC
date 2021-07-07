@@ -10,7 +10,6 @@ import me.senseiju.sennetmc.crates.listeners.CrateOpenListener
 import me.senseiju.sennetmc.crates.listeners.PlayerCaughtFishListener
 import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
-import me.senseiju.sennetmc.utils.datastorage.DataFile
 import me.senseiju.sennetmc.utils.percentChance
 import me.senseiju.sennetmc.utils.probabilityChance
 import me.senseiju.sentils.storage.ConfigFile
