@@ -7,11 +7,13 @@ import me.senseiju.sennetmc.events.event.GlobalEvent
 import java.util.*
 
 class Shipwreck(
-    override val plugin: SennetMC,
-    override val eventsManager: EventsManager,
-) : GlobalEvent() {
-    override val eventType = EventType.SHIPWRECK
-
+    plugin: SennetMC,
+    eventsManager: EventsManager,
+) : GlobalEvent(
+    plugin,
+    eventsManager,
+    EventType.SHIPWRECK
+) {
     val participants = HashSet<UUID>()
 
     init {

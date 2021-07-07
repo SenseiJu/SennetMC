@@ -11,11 +11,13 @@ import me.senseiju.sentils.functions.getOnlinePlayer
 import java.util.*
 
 class FishRace(
-    override val plugin: SennetMC,
-    override val eventsManager: EventsManager,
-) : GlobalEvent() {
-    override val eventType = EventType.FISH_RACE
-
+    plugin: SennetMC,
+    eventsManager: EventsManager,
+) : GlobalEvent(
+    plugin,
+    eventsManager,
+    EventType.FISH_RACE
+) {
     val participants = hashMapOf<UUID, Int>()
 
     private val commands: List<String>
@@ -46,22 +48,13 @@ class FishRace(
             val player = getOnlinePlayer(uuid) ?: return@forEach
 
             if (playersRewarded >= numberOfWinners && currentValue != value) {
-                player.sendConfigMessage(
-                    "EVENTS-LOSER",
-                    false,
-                    PlaceholderSet("{eventName}", eventType.title)
-                )
+                sendLoserMessage(player)
                 return@forEach
             }
             addCollectable(uuid, "fishraceevent")
+            sendWinnerMessage(player)
 
             plugin.server.dispatchCommands(commands, PlaceholderSet("{player}", player.name))
-
-            player.sendConfigMessage(
-                "EVENTS-WINNER",
-                false,
-                PlaceholderSet("{eventName}", eventType.title)
-            )
 
             currentValue = value
             playersRewarded++

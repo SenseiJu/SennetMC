@@ -10,6 +10,7 @@ import me.senseiju.sennetmc.events.event.EventType
 import me.senseiju.sennetmc.events.event.GlobalEvent
 import me.senseiju.sennetmc.events.event.fishrace.FishRace
 import me.senseiju.sennetmc.events.event.fishycollab.FishyCollab
+import me.senseiju.sennetmc.events.event.recycle.Recycle
 import me.senseiju.sennetmc.events.event.shipwreck.Shipwreck
 import me.senseiju.sennetmc.events.tasks.AutoEventScheduler
 import me.senseiju.sennetmc.settings.Setting
@@ -54,7 +55,7 @@ class EventsManager(private val plugin: SennetMC) : BaseManager() {
             EventType.FISH_RACE -> FishRace(plugin, this)
             EventType.SHIPWRECK -> Shipwreck(plugin, this)
             EventType.FISHY_COLLAB -> FishyCollab(plugin, this)
-            EventType.RECYCLE -> TODO()
+            EventType.RECYCLE -> Recycle(plugin, this)
         }
 
         val message = applyPlaceholders(

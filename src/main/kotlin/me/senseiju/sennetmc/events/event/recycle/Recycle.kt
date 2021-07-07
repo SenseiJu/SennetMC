@@ -7,11 +7,13 @@ import me.senseiju.sennetmc.events.event.GlobalEvent
 import java.util.*
 
 class Recycle(
-    override val plugin: SennetMC,
-    override val eventsManager: EventsManager
-) : GlobalEvent() {
-    override val eventType = EventType.RECYCLE
-
+    plugin: SennetMC,
+    eventsManager: EventsManager,
+) : GlobalEvent(
+    plugin,
+    eventsManager,
+    EventType.RECYCLE
+) {
     val participants = HashSet<UUID>()
 
     init {

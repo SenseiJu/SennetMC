@@ -10,11 +10,13 @@ import me.senseiju.sentils.functions.getOnlinePlayer
 import java.util.*
 
 class FishyCollab(
-    override val plugin: SennetMC,
-    override val eventsManager: EventsManager
-) : GlobalEvent() {
-    override val eventType = EventType.FISHY_COLLAB
-
+    plugin: SennetMC,
+    eventsManager: EventsManager,
+) : GlobalEvent(
+    plugin,
+    eventsManager,
+    EventType.FISHY_COLLAB
+) {
     val participants = hashMapOf<UUID, Int>()
 
     private val commands: List<String>
