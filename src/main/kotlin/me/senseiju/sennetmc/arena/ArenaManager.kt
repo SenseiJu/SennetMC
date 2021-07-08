@@ -10,6 +10,7 @@ import me.senseiju.sennetmc.arena.commands.DuelCommand
 import me.senseiju.sennetmc.arena.listeners.ArenaPlayerListener
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sentils.extensions.locationFromString
+import me.senseiju.sentils.registerEvents
 import org.bukkit.entity.Player
 import java.util.*
 

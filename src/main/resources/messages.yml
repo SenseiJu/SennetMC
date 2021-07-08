@@ -11,6 +11,12 @@ RESOURCE-PACK: "&7To enable, edit the server in multiplayer at the main menu and
 INVALID-AMOUNT: "&cInvalid amount specified"
 MONEY-NOT-ENOUGH: "&cYou do not have enough money"
 
+# Vote
+VOTE-RECEIVED: "&aThank you for voting at &e{serviceName}"
+VOTE-LINKS:
+  - "&ehttps://minecraft-server-list.com/server/478871/"
+  - "&ehttps://minecraftservers.org/server/618845"
+
 # Collectables
 COLLECTABLES-CANNOT-FIND-COLLECTABLE: "&cCannot find the specified collectable"
 COLLECTABLES-TARGET-HAS-COLLECTABLE: "&cTarget already has this collectable"

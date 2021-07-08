@@ -1,13 +1,11 @@
-package me.senseiju.sennetmc.scrap
+package me.senseiju.sennetmc.voting
 
 import me.mattstudios.mf.base.CommandManager
 import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
-import me.senseiju.sennetmc.scrap.commands.ScrapCommand
-import me.senseiju.sennetmc.scrap.listeners.CombineScrapListener
 import me.senseiju.sentils.registerEvents
 
-class ScrapManager(plugin: SennetMC) : BaseManager() {
+class VoteManager(plugin: SennetMC) : BaseManager() {
 
     init {
         registerCommands(plugin.commandManager)
@@ -15,12 +13,10 @@ class ScrapManager(plugin: SennetMC) : BaseManager() {
     }
 
     override fun registerCommands(cm: CommandManager) {
-        cm.register(ScrapCommand())
+        cm.register(VoteCommand())
     }
 
     override fun registerEvents(plugin: SennetMC) {
-        plugin.registerEvents(
-            CombineScrapListener()
-        )
+        plugin.registerEvents(VotifierListener(plugin))
     }
 }

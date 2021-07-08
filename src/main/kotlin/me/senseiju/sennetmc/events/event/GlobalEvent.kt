@@ -5,6 +5,7 @@ import me.senseiju.sennetmc.events.EventsManager
 import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
 import me.senseiju.sentils.functions.getOnlinePlayer
+import me.senseiju.sentils.registerEvents
 import me.senseiju.sentils.runnables.CountdownRunnable
 import org.bukkit.entity.Player
 import org.bukkit.event.HandlerList

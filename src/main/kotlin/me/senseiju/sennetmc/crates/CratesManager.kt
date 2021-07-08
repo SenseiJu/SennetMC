@@ -12,6 +12,7 @@ import me.senseiju.sennetmc.upgrades.Upgrade
 import me.senseiju.sennetmc.users.User
 import me.senseiju.sennetmc.utils.percentChance
 import me.senseiju.sennetmc.utils.probabilityChance
+import me.senseiju.sentils.registerEvents
 import me.senseiju.sentils.storage.ConfigFile
 import org.bukkit.Material
 import org.bukkit.entity.Player

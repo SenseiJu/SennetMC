@@ -27,7 +27,7 @@ dependencies {
     implementation "me.mattstudios.utils:matt-framework:1.4.6"
     implementation "de.tr7zw:item-nbt-api:2.8.0"
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.0.1"
-    implementation "com.github.SenseiJu:Sentils:bedec771a2"
+    implementation "com.github.SenseiJu:Sentils:a3fbc3187f"
 
     compileOnly "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
     compileOnly "net.citizensnpcs:citizens:2.0.27-SNAPSHOT"
@@ -35,6 +35,7 @@ dependencies {
     compileOnly "com.github.MilkBowl:VaultAPI:1.7"
     compileOnly "me.clip:placeholderapi:2.10.9"
     compileOnly "com.comphenix.protocol:ProtocolLib:4.5.0"
+    compileOnly "com.github.nuvotifier:nuvotifier:2.7.2"
 
     testImplementation "com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT"
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'

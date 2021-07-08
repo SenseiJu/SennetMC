@@ -18,6 +18,7 @@ import me.senseiju.sennetmc.npcs.types.looter.Looter
 import me.senseiju.sennetmc.npcs.types.merchant.Merchant
 import me.senseiju.sennetmc.npcs.types.sailor.Sailor
 import me.senseiju.sennetmc.npcs.types.scrapper.Scrapper
+import me.senseiju.sentils.registerEvents
 
 class NpcManager(private val plugin: SennetMC) : BaseManager() {
     val npcMap = HashMap<NpcType, BaseNpc>()

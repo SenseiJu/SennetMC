@@ -11,6 +11,10 @@ daily-rewards:
   sub++:
     - crates give {player} t5 1
     - collectables set {player} sub++
+vote-rewards:
+  - "crates give {player} t3"
+  - "scrap give {player} 5"
+  - "eco give {player} 400"
 arena:
   location-1: world:55.4826641635477:43.0:74.30000001192093:0.47856668:0.65433353
   location-2: world:55.479276022092385:43.0:91.50752758444403:-179.94942:-0.63551664

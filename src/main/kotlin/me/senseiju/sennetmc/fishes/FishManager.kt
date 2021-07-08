@@ -4,6 +4,7 @@ import me.senseiju.sennetmc.BaseManager
 import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.fishes.listeners.PlayerCaughtFishListener
 import me.senseiju.sennetmc.fishes.listeners.PlayerFishListener
+import me.senseiju.sentils.registerEvents
 import java.util.*
 
 class FishManager(private val plugin: SennetMC) : BaseManager() {

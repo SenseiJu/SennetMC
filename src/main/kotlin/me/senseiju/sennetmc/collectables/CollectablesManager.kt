@@ -11,6 +11,7 @@ import me.senseiju.sennetmc.utils.PlaceholderSet
 import me.senseiju.sennetmc.utils.datastorage.Replacements
 import me.senseiju.sennetmc.utils.defaultScope
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sentils.registerEvents
 import me.senseiju.sentils.storage.ConfigFile
 import org.bukkit.Material
 import org.bukkit.command.CommandSender

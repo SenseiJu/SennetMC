@@ -6,6 +6,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.speedboat.commands.BoatCommand
 import me.senseiju.sennetmc.speedboat.commands.ToggleSpeedboatCommand
 import me.senseiju.sennetmc.speedboat.listeners.SpeedboatListener
+import me.senseiju.sentils.registerEvents
 import java.util.*
 
 class SpeedboatManager(plugin: SennetMC) : BaseManager() {

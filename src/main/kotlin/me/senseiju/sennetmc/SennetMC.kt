@@ -21,11 +21,11 @@ import me.senseiju.sennetmc.users.UserTable
 import me.senseiju.sennetmc.users.commands.StatsCommand
 import me.senseiju.sennetmc.utils.datastorage.Database
 import me.senseiju.sennetmc.utils.extensions.sendConfigMessage
+import me.senseiju.sennetmc.voting.VoteManager
 import me.senseiju.sentils.extensions.primitives.color
 import me.senseiju.sentils.storage.ConfigFile
 import net.kyori.adventure.text.Component
 import net.milkbowl.vault.economy.Economy
-import org.bukkit.event.Listener
 import org.bukkit.plugin.java.JavaPlugin
 
 class SennetMC : JavaPlugin() {
@@ -47,6 +47,7 @@ class SennetMC : JavaPlugin() {
     private lateinit var npcManager: NpcManager
     private lateinit var eventsManager: EventsManager
     private lateinit var scrapManager: ScrapManager
+    private lateinit var voteManager: VoteManager
     lateinit var equipmentManager: EquipmentManager
 
     override fun onEnable() {
@@ -64,6 +65,7 @@ class SennetMC : JavaPlugin() {
         eventsManager = EventsManager(this)
         arenaManager = ArenaManager(this)
         scrapManager = ScrapManager(this)
+        voteManager = VoteManager(this)
         equipmentManager = EquipmentManager(this)
 
         if (!validEconomy()) {
@@ -111,10 +113,6 @@ class SennetMC : JavaPlugin() {
         settingsManager.reload()
         eventsManager.reload()
         arenaManager.reload()
-    }
-
-    fun registerEvents(vararg listeners: Listener) {
-        listeners.forEach { this.server.pluginManager.registerEvents(it, this) }
     }
 
     private fun validEconomy(): Boolean {

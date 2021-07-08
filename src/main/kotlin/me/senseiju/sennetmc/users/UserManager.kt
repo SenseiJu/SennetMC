@@ -5,6 +5,7 @@ import me.senseiju.sennetmc.SennetMC
 import me.senseiju.sennetmc.users.listeners.PlayerJoinListener
 import me.senseiju.sennetmc.users.listeners.PlayerPreLoginListener
 import me.senseiju.sennetmc.users.tasks.SaveUsersTask
+import me.senseiju.sentils.registerEvents
 import java.time.Instant
 import java.util.*
 
